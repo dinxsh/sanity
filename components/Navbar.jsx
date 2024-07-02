@@ -51,17 +51,19 @@ const navLinks = [
     href: "/",
   },
   {
-    title: "About",
-    href: "/about",
+    title: "Games",
+    href: "/games",
   },
+
   {
     title: "Blogs",
     href: "/blogs",
   },
   {
-    title: "News",
-    href: "/news",
+    title: "About",
+    href: "/about",
   },
+
   {
     title: "Contact",
     href: "/contact",
