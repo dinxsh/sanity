@@ -30,9 +30,9 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <div className="grid mt-40 px-[20%] pt-10 shadow-sm border-t">
-      <div className="flex justify-between">
-        {/*  */}
+    <div className="grid grid-cols-1 px-[5%] mt-40 pt-10 md:px-[10%] lg:px-[20%] shadow-sm border-t transition-all">
+      <div className="flex flex-col md:flex-row gap-20 justify-between transition-all">
+        {/* main sec */}
         <div className="flex flex-col">
           {/* logo */}
           <div>

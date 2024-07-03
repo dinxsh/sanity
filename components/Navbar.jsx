@@ -1,14 +1,24 @@
 import Link from "next/link";
 import React from "react";
-import { ModeToggle } from "./ModeToggle";
-import { Button } from "./ui/button";
 import Image from "next/image";
+import { ModeToggle } from "./ModeToggle";
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { AlignJustify } from "lucide-react";
 
 const Navbar = () => {
   return (
-    <div className="relative mt-5 mx-[10%] flex items-center justify-between">
+    <div className="relative mt-5 mx-5 md:mx-[5%] xl:mx-[10%] flex items-center justify-between transition-all">
       {/* Logo */}
-      <div className="">
+      <div className="flex items-center">
         <Link href="/" className="flex items-center gap-2">
           <Image
             src="https://sanityesports.live/sanity_esports_logo.jpeg"
@@ -22,22 +32,61 @@ const Navbar = () => {
       </div>
 
       {/* links */}
-      <nav className="flex flex-row items-center gap-10">
+      <nav className="hidden lg:flex flex-row items-center mt-2 gap-8 transition-all">
         {navLinks.map((item, index) => (
-          <Link key={index} href={item.href} className=" font-semibold">
+          <Link key={index} href={item.href} className="font-medium">
             {item.title}
           </Link>
         ))}
       </nav>
 
-      {/*  */}
-      <div className="flex items-center gap-5">
+      {/* buttons */}
+      <div className="hidden lg:flex items-center gap-5 transition-all">
         <Link href="https://discord.gg/AB2vCdyw">
           <Button variant="outline" className="px-5 rounded-xl">
             Join Community
           </Button>
         </Link>
         <ModeToggle />
+      </div>
+
+      {/* ham menu */}
+      <div className="lg:hidden transition-all">
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="outline">
+              <AlignJustify />
+            </Button>
+          </SheetTrigger>
+          <SheetContent className="flex flex-col items-start justify-start">
+            <SheetHeader>
+              <SheetTitle>
+                <ModeToggle />
+              </SheetTitle>
+              <SheetDescription></SheetDescription>
+            </SheetHeader>
+            <div className="grid gap-4 mt-10">
+              <nav className="flex flex-col gap-4">
+                {navLinks.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    className="font-medium text-lg"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+            <SheetFooter className="mt-10">
+              <Link href="https://discord.gg/AB2vCdyw">
+                <Button variant="link" className="px-5 -ml-5 text-lg underline">
+                  Join Community
+                </Button>
+              </Link>
+            </SheetFooter>
+          </SheetContent>
+        </Sheet>
       </div>
     </div>
   );
