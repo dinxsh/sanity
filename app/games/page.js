@@ -3,9 +3,9 @@ import Link from "next/link";
 
 export default function page() {
   return (
-    <section className="px-40 pt-20 pb-20">
-      <div className="text-4xl font-semibold mb-10 text-white">Games</div>
-      <div className="grid grid-cols-6 gap-5">
+    <section className="px-[5%] xl:px-[12%] pt-20 pb-20 transition-all">
+      <div className="text-4xl font-semibold mb-10 ">Games</div>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5 transition-all">
         {games.map((game, index) => (
           <div key={index} className="grid ">
             <Link

@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export default function TournamentSection() {
   return (
-    <div className="mt-20 pb-20">
-      <div className="grid grid-cols-4 gap-2">
+    <div className="mt-20 pb-20 flex items-center justify-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2 transition-all">
         {tournamentsData.map((tournament, index) => (
           <Link
             key={index}
@@ -24,7 +24,6 @@ function TournamentCard({
   title,
   date,
   time,
-  description,
   entryFee,
   mode,
   participants,
