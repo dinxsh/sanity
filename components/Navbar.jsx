@@ -100,6 +100,10 @@ const navLinks = [
     href: "/",
   },
   {
+    title: "Tournaments",
+    href: "/tournaments",
+  },
+  {
     title: "Games",
     href: "/games",
   },
