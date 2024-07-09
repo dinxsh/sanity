@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import TournamentSection from "@/components/TournamentSection";
+import TournamentSection from "../../components/TournamentSection";
 import { ListFilter } from "lucide-react";
 
 const TournamentPage = () => {

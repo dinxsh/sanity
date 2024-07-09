@@ -1,10 +1,10 @@
 'use client'
-import { zodResolver } from "../../../node_modules/@hookform/resolvers"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
-import Link from "next/link"
-import React,{ useEffect, useState } from "react"
-import { useDebounce, useDebounceCallback } from "usehooks-ts"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import { useDebounceCallback } from "usehooks-ts";
 import { Button } from '../../../@/components/ui/button';
 import { Input } from '../../../@/components/ui/input';
 import {
@@ -16,22 +16,23 @@ import {
 } from '../../../@/components/ui/form';
 
 import { useToast } from '../../../@/components/ui/use-toast';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { signUpSchema } from '../../../model/Schema/signUpSchema';
 
 const Page = () => {
-    const [username, setUsername] = useState('')
-    const [usernameMessage,setUsernameMessage]= useState('')
-    const [isCheckingUsername, setIsCheckingUsername] = useState(false)
-    const [isSubmitting, setIsSubmitting] = useState(false)
-    const debouncedUsername = useDebounceCallback(setUsername, 300);
+  const [username, setUsername] = useState('');
+  const [usernameMessage, setUsernameMessage] = useState('');
+  const [isCheckingUsername, setIsCheckingUsername] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const debouncedUsername = useDebounceCallback((value) => setUsername(value), 300);
 
   const router = useRouter();
   const { toast } = useToast();
 
   const form = useForm({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
       username: '',
       email: '',
@@ -39,28 +40,23 @@ const Page = () => {
     },
   });
 
-  useEffect(() => {
-    const checkUsernameUnique = async () => {
-      if (debouncedUsername) {
-        setIsCheckingUsername(true);
-        setUsernameMessage(''); // Reset message
-        try {
-          const response = await axios.get(
-            `/api/check-username-unique?username=${debouncedUsername}`
-          );
-          setUsernameMessage(response.data.message);
-        } catch (error) {
-          const axiosError =AxiosError;
-          setUsernameMessage(
-            axiosError.response?.data.message ?? 'Error checking username'
-          );
-        } finally {
-          setIsCheckingUsername(false);
-        }
-      }
-    };
-    checkUsernameUnique();
-  }, [debouncedUsername]);
+  // useEffect(() => {
+  //   const checkUsernameUnique = async () => {
+  //     if (username) {
+  //       setIsCheckingUsername(true);
+  //       setUsernameMessage(''); // Reset message
+  //       try {
+  //         const response = await axios.get(`/api/check-username-unique?username=${username}`);
+  //         setUsernameMessage(response.data.message);
+  //       } catch (error) {
+  //         setUsernameMessage(error.response?.data.message ?? 'Error checking username');
+  //       } finally {
+  //         setIsCheckingUsername(false);
+  //       }
+  //     }
+  //   };
+  //   checkUsernameUnique();
+  // }, [username]);
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
@@ -72,17 +68,13 @@ const Page = () => {
         description: response.data.message,
       });
 
-      router.replace(`/verify/${username}`);
+      router.replace(`/verify/${data.username}`);
 
       setIsSubmitting(false);
     } catch (error) {
       console.error('Error during sign-up:', error);
 
-      const axiosError = AxiosError;
-
-      // Default error message
-      let errorMessage = axiosError.response?.data.message;
-      ('There was a problem with your sign-up. Please try again.');
+      let errorMessage = error.response?.data.message ?? 'There was a problem with your sign-up. Please try again.';
 
       toast({
         title: 'Sign Up Failed',
@@ -96,7 +88,7 @@ const Page = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-800">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+      <div className="w-full max-w-md p-8 space-y-8 bg-blackn rounded-lg shadow-md">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
             Sanity Gaming
@@ -115,7 +107,7 @@ const Page = () => {
                     {...field}
                     onChange={(e) => {
                       field.onChange(e);
-                      setUsername(e.target.value);
+                      debouncedUsername(e.target.value);
                     }}
                   />
                   {isCheckingUsername && <Loader2 className="animate-spin" />}
