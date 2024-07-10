@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import { ModeToggle } from "./ModeToggle";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import {
   Sheet,
   SheetContent,
@@ -11,7 +11,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from "../components/ui/sheet";
 import { AlignJustify } from "lucide-react";
 
 const Navbar = () => {

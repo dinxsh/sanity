@@ -6,10 +6,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from '../../components/ui/card';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { client, urlFor } from '@/lib/sanity';
+import { Button } from '../../components/ui/button';
+import { client, urlFor } from '../../lib/sanity';
 import Image from 'next/image';
 import BlogBanner from '../../components/BlogBanner';
 import BlogOffer from '../../components/BlogOffer';
