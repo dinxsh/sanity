@@ -1,19 +1,6 @@
-import React from 'react'
+'use client';
 
-<<<<<<< Updated upstream
-function SignIn(){
-    return (
-        <div>
-            Hiii
-        </div>
-    )
-}
-
-export default SignIn
-=======
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 import { signIn } from 'next-auth/react';
 import {
   Form,
@@ -22,19 +9,18 @@ import {
   FormLabel,
   FormMessage,
 } from '../../../@/components/ui/form';
-import { Button } from '../../../@/components/ui/button';
+import {Button} from '../../../@/components/ui/button'
 import { Input } from '../../../@/components/ui/input';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useToast } from '../../../@/components/ui/use-toast';
-import { signInSchema } from '../../../model/Schema/signInSchema';
 import React from 'react';
 
 export default function SignInForm() {
   const router = useRouter();
 
   const form = useForm({
-    resolver: zodResolver(signInSchema),
+    resolver: undefined, // Removed zodResolver and its schema
     defaultValues: {
       identifier: '',
       password: '',
@@ -42,43 +28,31 @@ export default function SignInForm() {
   });
 
   const { toast } = useToast();
-
   const onSubmit = async (data) => {
-    try {
-      const result = await signIn('credentials', {
-        redirect: false,
-        identifier: data.identifier,
-        password: data.password,
-      });
+    const result = await signIn('credentials', {
+      redirect: false,
+      identifier: data.identifier,
+      password: data.password,
+    });
 
-      if (result?.error) {
-        console.log(result.error);
+    if (result?.error) {
+      if (result.error === 'CredentialsSignin') {
         toast({
           title: 'Login Failed',
-          description: result.error === 'CredentialsSignin' ? 'Incorrect username or password' : result.error,
+          description: 'Incorrect username or password',
           variant: 'destructive',
         });
-      } else if (result?.url) {
-        router.replace(result.url);
+      } else {
+        toast({
+          title: 'Error',
+          description: result.error,
+          variant: 'destructive',
+        });
       }
-    } catch (error) {
-      toast({
-        title: 'Error',
-        description: 'An unexpected error occurred',
-        variant: 'destructive',
-      });
     }
-  };
 
-  const handleGoogleSignIn = async () => {
-    try {
-      await signIn('google', { callbackUrl: '/' });
-    } catch (error) {
-      toast({
-        title: 'Error',
-        description: 'An unexpected error occurred',
-        variant: 'destructive',
-      });
+    if (result?.url) {
+      router.replace('/dashboard');
     }
   };
 
@@ -98,8 +72,8 @@ export default function SignInForm() {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="identifier">Email/Username</FormLabel>
-                  <Input id="identifier" {...field} aria-label="Email or Username" />
+                  <FormLabel>Email/Username</FormLabel>
+                  <Input {...field} />
                   <FormMessage />
                 </FormItem>
               )}
@@ -109,8 +83,8 @@ export default function SignInForm() {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="password">Password</FormLabel>
-                  <Input id="password" type="password" {...field} aria-label="Password" />
+                  <FormLabel>Password</FormLabel>
+                  <Input type="password" {...field} />
                   <FormMessage />
                 </FormItem>
               )}
@@ -119,11 +93,7 @@ export default function SignInForm() {
           </form>
         </Form>
         <div className="text-center mt-4">
-          <p>Or</p>
-          <Button className='w-full mt-2' onClick={handleGoogleSignIn}>
-            Sign in with Google
-          </Button>
-          <p className="mt-4">
+          <p>
             Not a member yet?{' '}
             <Link href="/sign-up" className="text-blue-600 hover:text-blue-800">
               Sign up
@@ -134,4 +104,3 @@ export default function SignInForm() {
     </div>
   );
 }
->>>>>>> Stashed changes

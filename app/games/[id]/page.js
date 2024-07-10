@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { games } from "../page";
+import { games } from "../data/index";
 import { useState } from "react";
 import { HeartFilledIcon, HeartIcon } from "@radix-ui/react-icons";
 import TournamentSection from "../../../components/TournamentSection";
