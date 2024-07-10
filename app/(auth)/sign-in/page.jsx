@@ -1,8 +1,6 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 import { signIn } from 'next-auth/react';
 import {
   Form,
@@ -16,14 +14,13 @@ import { Input } from '../../../@/components/ui/input';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useToast } from '../../../@/components/ui/use-toast';
-import { signInSchema } from '../../../model/Schema/signInSchema';
 import React from 'react';
 
 export default function SignInForm() {
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof signInSchema>>({
-    resolver: zodResolver(signInSchema),
+  const form = useForm({
+    resolver: undefined, // Removed zodResolver and its schema
     defaultValues: {
       identifier: '',
       password: '',
