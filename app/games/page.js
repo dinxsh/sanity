@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import games from './data'
+import { games } from './data/index'
 
 export default function page() {
   return (
