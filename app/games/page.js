@@ -26,7 +26,7 @@ export default function page() {
   );
 }
 
-export const games = [
+const games = [
   {
     name: "BGMI",
     description:
