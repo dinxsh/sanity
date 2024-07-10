@@ -20,13 +20,13 @@ async function main() {
       name: 'BGMI',
       category: 'Battle Royale',
       profile: 'Battlegrounds Mobile India',
-      gameBannerPhoto: 'https://example.com/bgmi-banner.jpg',
+      gameBannerPhoto: 'https://media.battlexo.com/tournament/668292838ab430dcee21f257/banner/icon/29fd717a-2be9-4c19-8394-865ff112a15a.webp',
     },
     {
       name: 'Call of Duty Mobile',
       category: 'FPS',
       profile: 'Mobile version of the popular Call of Duty franchise',
-      gameBannerPhoto: 'https://example.com/codm-banner.jpg',
+      gameBannerPhoto: 'https://media.battlexo.com/tournament/668292838ab430dcee21f257/banner/icon/29fd717a-2be9-4c19-8394-865ff112a15a.webp',
     },
   ];
 
@@ -82,13 +82,13 @@ async function main() {
       orgName: 'Epic Gaming',
       orgEmail: 'epic@gaming.com',
       description: 'Professional esports organization',
-      bannerPhoto: 'https://example.com/epic-gaming-banner.jpg',
+      bannerPhoto: 'https://media.battlexo.com/tournament/668292838ab430dcee21f257/banner/icon/29fd717a-2be9-4c19-8394-865ff112a15a.webp',
     },
     {
       orgName: 'Pro Tournaments',
       orgEmail: 'info@protournaments.com',
       description: 'Leading tournament organizer',
-      bannerPhoto: 'https://example.com/pro-tournaments-banner.jpg',
+      bannerPhoto: 'https://media.battlexo.com/tournament/668292838ab430dcee21f257/banner/icon/29fd717a-2be9-4c19-8394-865ff112a15a.webp',
     },
   ];
 
