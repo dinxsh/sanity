@@ -4,7 +4,7 @@ import Image from "next/image";
 import { games } from "../page";
 import { useState } from "react";
 import { HeartFilledIcon, HeartIcon } from "@radix-ui/react-icons";
-import TournamentSection from "@/components/TournamentSection";
+import TournamentSection from "../../../components/TournamentSection";
 import { ListFilter } from "lucide-react";
 
 export default function GamePage({ params }) {
