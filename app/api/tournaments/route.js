@@ -17,6 +17,7 @@ export async function GET(request) {
     if (organizerId) where.organizerId = organizerId;
 
     try {
+        console.log('Fetching tournaments with params:', { page, limit, gameType, organizerId });
         const [tournaments, total] = await Promise.all([
             prisma.tournament.findMany({
                 where,
@@ -30,12 +31,15 @@ export async function GET(request) {
             prisma.tournament.count({ where }),
         ]);
 
+        console.log(`Found ${tournaments.length} tournaments out of ${total} total`);
+
         return NextResponse.json({
             tournaments,
             totalPages: Math.ceil(total / limit),
             currentPage: page,
         });
     } catch (error) {
-        return NextResponse.json({ error: 'Error fetching tournaments' }, { status: 500 });
+        console.error('Error fetching tournaments:', error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }

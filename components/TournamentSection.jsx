@@ -15,11 +15,17 @@ export default function TournamentSection({ filters }) {
       try {
         const response = await fetch("/api/tournaments");
         if (!response.ok) {
-          throw new Error("Failed to fetch tournaments");
+          const errorData = await response.json();
+          console.error("Error in fetchTournaments:", errorData.error);
+          throw new Error(
+            `Failed to fetch tournaments: ${response.status}. ${errorData.error}`
+          );
         }
         const data = await response.json();
+        console.log("Fetched tournaments:", data);
         setTournaments(data.tournaments);
       } catch (err) {
+        console.error("Error in fetchTournaments:", err);
         setError(err.message);
       } finally {
         setIsLoading(false);
