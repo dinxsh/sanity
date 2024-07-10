@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
-import prisma from '../../../../lib/db';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 export async function GET(request, { params }) {
-    const id = params.id;
-
     try {
+        const id = params.id;
         const tournament = await prisma.tournament.findUnique({
             where: { id },
             include: {
@@ -19,6 +20,7 @@ export async function GET(request, { params }) {
             return NextResponse.json({ error: 'Tournament not found' }, { status: 404 });
         }
     } catch (error) {
+        console.error('Error fetching tournament:', error);
         return NextResponse.json({ error: 'Error fetching tournament' }, { status: 500 });
     }
 }
