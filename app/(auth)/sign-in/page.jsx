@@ -1,6 +1,8 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 import { signIn } from 'next-auth/react';
 import {
   Form,
@@ -9,11 +11,12 @@ import {
   FormLabel,
   FormMessage,
 } from '../../../@/components/ui/form';
-import {Button} from '../../../@/components/ui/button'
+import { Button } from '../../../@/components/ui/button';
 import { Input } from '../../../@/components/ui/input';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useToast } from '../../../@/components/ui/use-toast';
+import { signInSchema } from '../../../model/Schema/signInSchema';
 import React from 'react';
 
 export default function SignInForm() {
@@ -52,8 +55,12 @@ export default function SignInForm() {
     }
 
     if (result?.url) {
-      router.replace('/dashboard');
+      router.replace('/');
     }
+  };
+
+  const handleGoogleSignIn = async () => {
+    await signIn('google', { callbackUrl: '/' });
   };
 
   return (
@@ -93,7 +100,11 @@ export default function SignInForm() {
           </form>
         </Form>
         <div className="text-center mt-4">
-          <p>
+          <p>Or</p>
+          <Button className='w-full mt-2' onClick={handleGoogleSignIn}>
+            Sign in with Google
+          </Button>
+          <p className="mt-4">
             Not a member yet?{' '}
             <Link href="/sign-up" className="text-blue-600 hover:text-blue-800">
               Sign up
