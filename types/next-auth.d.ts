@@ -6,6 +6,13 @@ declare module 'next-auth' {
         twoFactorActivated?: boolean;
         username?: string
     }
+
+    interface Profile {
+        id?: string; 
+        sub?: string;
+    }
+
+
     interface Session{
         user: {
             _id?: string;

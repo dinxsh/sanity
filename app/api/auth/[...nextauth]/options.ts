@@ -1,5 +1,6 @@
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import DiscordProvider from "next-auth/providers/discord";
 import bcrypt from "bcryptjs";
 import UserModel from "../../../../model/User";
 import dbConnect from "../../../../lib/dbConnect";
@@ -10,6 +11,11 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
+    DiscordProvider({
+      clientId: process.env.DISCORD_CLIENT_ID,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET,
+      authorization: { params: { scope: 'identify email' } },
     }),
     CredentialsProvider({
       id: "credentials",
@@ -60,32 +66,34 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     async signIn({ user, account, profile }) {
-      if (account.provider === 'google') {
-        await dbConnect();
-        try {
-          let existingUser = await UserModel.findOne({ email: user.email });
-          if (!existingUser) {
-            const newUser = new UserModel({
-              email: user.email,
-              username: user.name,
-              password: null,
-              googleId: profile.sub,
-              twoFactorActivated: false,
-              createdAt: Date.now(),
-              eventsRegistered: [],
-            });
-            await newUser.save();
-          } else if (!existingUser.googleId) {
+      await dbConnect();
+      try {
+        let existingUser = await UserModel.findOne({ email: user.email });
+        if (!existingUser) {
+          const newUser = new UserModel({
+            email: user.email,
+            username: user.name,
+            password: null,
+            googleId: account.provider === 'google' ? profile.sub : null,
+            discordId: account.provider === 'discord' ? profile.id : null,
+            twoFactorActivated: false,
+            createdAt: Date.now(),
+            eventsRegistered: [],
+          });
+          await newUser.save();
+        } else {
+          if (account.provider === 'google' && !existingUser.googleId) {
             existingUser.googleId = profile.sub;
-            await existingUser.save();
+          } else if (account.provider === 'discord' && !existingUser.discordId) {
+            existingUser.discordId = profile.id;
           }
-          return true;
-        } catch (error) {
-          console.error('Error signing in with Google:', error);
-          return false;
+          await existingUser.save();
         }
+        return true;
+      } catch (error) {
+        console.error(`Error signing in with ${account.provider}:`, error);
+        return false;
       }
-      return true;
     },
   },
   pages: {

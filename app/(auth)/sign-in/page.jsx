@@ -63,6 +63,10 @@ export default function SignInForm() {
     await signIn('google', { callbackUrl: '/' });
   };
 
+  const handleDiscordSignIn = async () => {
+    await signIn('discord', { callbackUrl: '/' });
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-800">
       <div className="w-full max-w-md p-8 space-y-8 bg-gray-600 rounded-lg shadow-md">
@@ -103,6 +107,9 @@ export default function SignInForm() {
           <p>Or</p>
           <Button className='w-full mt-2' onClick={handleGoogleSignIn}>
             Sign in with Google
+          </Button>
+          <Button className='w-full mt-2' onClick={handleDiscordSignIn}>
+            Sign in with Discord
           </Button>
           <p className="mt-4">
             Not a member yet?{' '}
