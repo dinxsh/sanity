@@ -25,6 +25,14 @@ const userSchema = new Schema({
     type: String,
     default: '',
   },
+  discordId: {
+    type: String,
+    default: '',
+  },
+  googleId: {
+    type: String,
+    default: '',
+  },
   twoFactorActivated: {
     type: Boolean,
     default: false,
