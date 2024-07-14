@@ -4,8 +4,8 @@ import ProfileComp from '../../components/ProfileComp';
 const Page = () => {
   return (
     <><div className='p-5'>
-    <div className='grid grid-cols-10'>
-      <div className='col-span-4 flex justify-center'>
+    <div className='grid xl:grid-cols-10'>
+      <div className='xl:col-span-4 flex justify-center'>
       <div className='rounded-lg max-w-96 min-w-96 h-svh text-red-500 bg-[#16182a]'>
         <div className='flex justify-center'>
           <div className='text-slate-300'>
@@ -51,7 +51,7 @@ const Page = () => {
         
       </div>
       </div> 
-      <div className='col-span-6'>
+      <div className='col-span-6 hidden xl:block'>
         <ProfileComp/>
       </div>
     </div>
