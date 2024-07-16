@@ -24,6 +24,7 @@
     "**/*.ts",
     "**/*.tsx",
     "middleware.ts",
+    "app/(auth)/sign-in/page.jsx",
     "prisma/seed.js"
   ],
   "exclude": ["node_modules"]
