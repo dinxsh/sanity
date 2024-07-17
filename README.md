@@ -110,7 +110,7 @@ We welcome contributions from the community! To get started, please read our [Co
 2. Clone your fork locally:
 
    ```sh
-   git clone https://github.com/yourusername/sanity-esports.git
+   git clone https://github.com/dinxsh/sanity-esports.git
    cd sanity-esports
    ```
 
@@ -135,8 +135,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-- **Project Maintainer:** Your Name - [your.email@example.com](mailto:your.email@example.com)
-- **GitHub Repository:** [Sanity Esports](https://github.com/yourusername/sanity-esports)
+- **Project Maintainer:** Your Name - [dineshtalwadker@gmail.com](mailto:dineshtalwadker@gmail.com)
+- **GitHub Repository:** [Sanity Esports - Dinesh](https://github.com/dinxsh/sanity)
 
 ---
 
