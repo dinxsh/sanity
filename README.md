@@ -53,7 +53,7 @@ To get a local copy up and running follow these simple steps.
    Create a `.env` file in the root directory and add the following variables:
 
    ```env
-    DATABASE_URL
+    DATABASE_URL=
     MONGODB_URL=
     RESEND_API_KEY=
     NEXTAUTH_SECRET=
@@ -135,7 +135,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-- **Project Maintainer:** Your Name - [dineshtalwadker@gmail.com](mailto:dineshtalwadker@gmail.com)
+- **Project Maintainer:** Dinesh Talwadker - [dineshtalwadker@gmail.com](mailto:dineshtalwadker@gmail.com)
 - **GitHub Repository:** [Sanity Esports - Dinesh](https://github.com/dinxsh/sanity)
 
 ---
