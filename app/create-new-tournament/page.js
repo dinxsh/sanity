@@ -1,7 +1,8 @@
 "use client"
 import { useState } from 'react';
 import axios from 'axios';
-import { platforms, timezones, games } from './data';
+import { platforms, timezones } from './data';
+import { games } from '../../app/games/data/index'
 
 export default function Page() {
     const [selectedPlatform, setSelectedPlatform] = useState("");
@@ -97,7 +98,7 @@ export default function Page() {
                     <div className="p-5">
                         <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
                             {games.map((game, index) => (
-                                <img key={index} src={game.img} alt={`Game ${index + 1}`} className="rounded-md shadow-md" />
+                                <img key={game.name} src={game.image} alt={`Game ${game.name + 1}`} className="rounded-md shadow-md" />
                             ))}
                         </div>
                         <div className="mt-6">
