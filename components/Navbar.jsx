@@ -121,4 +121,8 @@ const navLinks = [
     title: "Contact",
     href: "/contact",
   },
+  {
+    title: "Bracket",
+    href: "/bracket",
+  },
 ];
