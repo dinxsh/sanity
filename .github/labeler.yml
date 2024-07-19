@@ -1,0 +1,36 @@
+Documentation (.MD):
+- changed-files:
+  - any-glob-to-any-file: docs/**
+
+Blogs (Frontend):
+- changed-files:
+  - any-glob-to-any-file: app/blogs/**
+
+Assets (Frontend):
+- changed-files:
+  - any-glob-to-any-file: app/assets/**
+
+Games (Frontend):
+- changed-files:
+  - any-glob-to-any-file: 'app/games/*'
+
+Tournaments (Frontend):
+- changed-files:
+  - any-glob-to-any-file: 'app/tournaments/*'
+
+API (Backend):
+- changed-files:
+  - any-glob-to-any-file: 'app/api/*'
+
+Components (Frontend):
+- changed-files:
+  - any-glob-to-any-file: 'components/*'
+
+Next-Auth Types (Auth):
+- changed-files:
+  - any-glob-to-any-file: 'types/*'
+
+Model (Backend):
+- changed-files:
+  - any-glob-to-any-file: 'model/*'
+
