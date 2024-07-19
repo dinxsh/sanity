@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const TeamSchema = new mongoose.Schema({
-  image: { type: String, required: true },
-  name: { type: String, required: true },
+  image: { type: String },
+  teamname: { type: String, required: true },
   game: { type: String, required: true },
   role: { type: String, required: true },
   rank: { type: String, required: true },
@@ -12,4 +12,19 @@ const TeamSchema = new mongoose.Schema({
   requests: [{ type: String }]
 });
 
-module.exports = mongoose.models.TeamModel || mongoose.model('TeamModel', TeamSchema)
+
+const TeamModel = mongoose.models.TeamModel || mongoose.model('TeamModel', TeamSchema);
+
+module.exports = {
+  TeamModel
+};
+
+
+
+
+
+// const TeamModel = mongoose.model('TeamModel', TeamSchema);
+
+// module.exports = {
+//   TeamModel
+// }
