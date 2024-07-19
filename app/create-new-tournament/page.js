@@ -1,8 +1,7 @@
 "use client"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { platforms, timezones } from './data';
-import { games } from '../../app/games/data/index'
 
 export default function Page() {
     const [selectedPlatform, setSelectedPlatform] = useState("");
@@ -13,6 +12,19 @@ export default function Page() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [games, setGames] = useState([]);
+
+    useEffect(() => {
+        const fetchGames = async () => {
+            try {
+                const response = await axios.get('/api/games');
+                setGames(response.data);
+            } catch (error) {
+                console.error("Error while fetching game data: ", error);
+            }
+        };
+        fetchGames();
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -86,7 +98,7 @@ export default function Page() {
                                     onChange={(e) => setTournamentName(e.target.value)}
                                 />
                             </div>
-                            <div className="box-content h-28 w-48 p-4 rounded-md border-4  border-blue-300 shadow-lg">
+                            <div className="box-content h-28 w-48 p-4 rounded-md border-4 border-blue-300 shadow-lg">
                                 <h3 className="text-blue-800 font-medium font-sans mb-2">Need help?</h3>
                                 <p className="text-sm text-blue-700">Check out our organizer Starter Guide</p>
                             </div>
@@ -97,8 +109,8 @@ export default function Page() {
                     <h3 className="text-xl font-semibold">Discipline</h3>
                     <div className="p-5">
                         <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-                            {games.map((game, index) => (
-                                <img key={game.name} src={game.image} alt={`Game ${game.name + 1}`} className="rounded-md shadow-md" />
+                            {games.map((game) => (
+                                <img key={game.name} src={game.image} alt={`Game ${game.name}`} className="rounded-md shadow-md" />
                             ))}
                         </div>
                         <div className="mt-6">
@@ -189,7 +201,7 @@ export default function Page() {
                         <div className="mt-6 flex space-x-4">
                             <button
                                 type="submit"
-                                className={`px-6 py-2 rounded-md  ${isSubmitting ? "bg-blue-300" : "bg-blue-600 hover:bg-blue-700"} transition-colors duration-300`}
+                                className={`px-6 py-2 rounded-md ${isSubmitting ? "bg-blue-300" : "bg-blue-600 hover:bg-blue-700"} transition-colors duration-300`}
                                 disabled={isSubmitting}
                             >
                                 {isSubmitting ? "Creating..." : "Create Tournament"}
