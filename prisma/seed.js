@@ -6,6 +6,7 @@ const prisma = new PrismaClient();
 
 // Import the Mongoose User model
 const UserModel = require('../model/User');
+const { TeamModel } = require('../model/Team');
 
 async function connectToMongoDB() {
   await mongoose.connect(process.env.DATABASE_URL);
@@ -43,7 +44,7 @@ async function main() {
     }
   }
 
-  // Seed Users (using Mongoose)
+  // Seed Users (Mongoose)
   const userData = [
     {
       username: 'player1',
@@ -76,7 +77,7 @@ async function main() {
     }
   }
 
-  // Seed Organizers
+  // Seed Organizers (prisma)
   const organizerData = [
     {
       orgName: 'Epic Gaming',
@@ -105,7 +106,7 @@ async function main() {
     }
   }
 
-  // Seed Tournaments
+  // Seed Tournaments (prisma)
   const tournamentData = [
     {
       tournamentName: 'BGMI Pro League',
@@ -164,6 +165,46 @@ async function main() {
       console.log(`Tournament ${tournament.tournamentName} already exists`);
     }
   }
+
+
+  // seed Team (mongoose)
+  const teamData = [
+    {
+      image: 'https://example.com/image1.jpg',
+      teamname: 'Epic Warriors',
+      game: 'League of Legends',
+      role: 'ADC',
+      rank: 'Diamond',
+      server: 'NA',
+      language: 'English',
+      players: ['Player1', 'Player2'],
+      requests: ['No toxic behavior', 'Must have a mic']
+    },
+    {
+      image: 'https://example.com/image2.jpg',
+      teamname: 'Pro Gamers',
+      game: 'CS:GO',
+      role: 'In-Game Leader',
+      rank: 'Global Elite',
+      server: 'EU',
+      language: 'English',
+      players: ['Player3', 'Player4'],
+      requests: ['Good communication skills', 'Must be punctual']
+    }
+  ];
+
+  for (const team of teamData) {
+    const existingTeam = await TeamModel.findOne({ teamname: team.teamname });
+
+    if (!existingTeam) {
+      await TeamModel.create(team);
+      console.log(`Team ${team.teamname} inserted successfully`);
+    } else {
+      console.log(`Team ${team.teamname} already exists`);
+    }
+  }
+
+
 }
 
 main()
