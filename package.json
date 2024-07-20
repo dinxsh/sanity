@@ -31,6 +31,7 @@
     "brackets-viewer": "^1.6.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.5",
     "framer-motion": "^11.2.12",
     "lucide-react": "^0.399.0",
     "mongoose": "^8.4.4",
