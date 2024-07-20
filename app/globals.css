@@ -74,3 +74,16 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Add arrow styles */
+.arrow-line-vertical {
+  position: absolute;
+  width: 2px;
+  background-color: white;
+}
+
+.arrow-line-horizontal {
+  position: absolute;
+  height: 2px;
+  background-color: white;
+}
