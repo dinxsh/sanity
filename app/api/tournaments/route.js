@@ -18,18 +18,18 @@ export async function GET(request) {
 
     try {
         console.log('Fetching tournaments with params:', { page, limit, gameType, organizerId });
-        const [tournaments, total] = await Promise.all([
-            prisma.tournament.findMany({
-                where,
-                include: {
-                    game: true,
-                    organizer: true,
-                },
-                skip,
-                take: limit,
-            }),
-            prisma.tournament.count({ where }),
-        ]);
+
+        const tournaments = await prisma.tournament.findMany({
+            where,
+            include: {
+                game: true,
+                organizer: true,
+            },
+            skip,
+            take: limit,
+        });
+
+        const total = await prisma.tournament.count({ where });
 
         console.log(`Found ${tournaments.length} tournaments out of ${total} total`);
 
@@ -40,6 +40,9 @@ export async function GET(request) {
         });
     } catch (error) {
         console.error('Error fetching tournaments:', error);
-        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+        return NextResponse.json({
+            error: 'Internal Server Error',
+            details: error.message
+        }, { status: 500 });
     }
 }

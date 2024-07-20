@@ -26,54 +26,60 @@ export default function Page() {
         fetchGames();
     }, []);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        setSuccessMessage("");
-        setErrorMessage("");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSuccessMessage("");
+    setErrorMessage("");
 
-        if (!tournamentName || !selectedPlatform || !participantType || !selectedTimezone || !size) {
-            setErrorMessage("Please fill out all fields.");
-            setIsSubmitting(false);
-            return;
-        }
+    if (
+      !tournamentName ||
+      !selectedPlatform ||
+      !participantType ||
+      !selectedTimezone ||
+      !size
+    ) {
+      setErrorMessage("Please fill out all fields.");
+      setIsSubmitting(false);
+      return;
+    }
 
-        const formData = {
-            tournamentName,
-            selectedPlatform,
-            participantType,
-            selectedTimezone,
-            size
-        };
-
-        try {
-            const response = await axios.post('/api/tournaments', formData);
-            setSuccessMessage(response.data.message);
-            setTournamentName("");
-            setSelectedPlatform("");
-            setParticipantType("");
-            setSelectedTimezone("");
-            setSize("");
-        } catch (error) {
-            if (error.response) {
-                setErrorMessage(error.response.data.message);
-            } else {
-                setErrorMessage("An error occurred. Please try again.");
-            }
-        } finally {
-            setIsSubmitting(false);
-        }
+    const formData = {
+      tournamentName,
+      selectedPlatform,
+      participantType,
+      selectedTimezone,
+      size,
     };
 
-    const handleReset = () => {
-        setTournamentName("");
-        setSelectedPlatform("");
-        setParticipantType("");
-        setSelectedTimezone("");
-        setSize("");
-        setSuccessMessage("");
-        setErrorMessage("");
-    };
+    try {
+      const response = await axios.post("/api/tournaments", formData);
+      setSuccessMessage(response.data.message);
+      setTournamentName("");
+      setSelectedPlatform("");
+      setParticipantType("");
+      setSelectedTimezone("");
+      setSize("");
+    } catch (error) {
+      if (error.response) {
+        setErrorMessage(error.response.data.message);
+      } else {
+        setErrorMessage("An error occurred. Please try again.");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleReset = () => {
+    setTournamentName("");
+    setSelectedPlatform("");
+    setParticipantType("");
+    setSelectedTimezone("");
+    setSize("");
+    setSuccessMessage("");
+    setErrorMessage("");
+  };
 
     return (
         <div className="px-[5%] xl:px-[18%] pt-20 pb-20 transition-all">

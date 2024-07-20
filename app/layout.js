@@ -14,21 +14,21 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-        <AuthProvider>
-    <html lang="en">
-      <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Navbar />
-          <main className="mx-auto mt-10">{children}</main>
-          <Footer />
-        </ThemeProvider>
-      </body>
-    </html>
-        </AuthProvider>
+    <AuthProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Navbar />
+            <main className="mx-auto mt-10">{children}</main>
+            <Footer />
+          </ThemeProvider>
+        </body>
+      </html>
+    </AuthProvider>
   );
 }
