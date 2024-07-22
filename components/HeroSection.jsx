@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function HeroSection() {
   return (
     <section>
-      <div className="max-w-screen-xl mx-auto px-4 py-28 gap-20 md:px-8">
+      <div className="px-10 mx-auto md:px-[8%] xl:px-[15%] mt-28 md:mt-36 gap-20 transition-all">
         <div className="space-y-5 max-w-4xl mx-auto text-center">
           <h4 className="text-sm text-indigo-600 font-medium">
             Discover new heights
@@ -23,16 +23,18 @@ export default function HeroSection() {
             well-being
           </h6>
 
-          <div className="p-5 items-center justify-center gap-x-4 space-y-4 sm:flex sm:space-y-0">
+          <div className="flex items-center justify-center gap-4">
             <Link href="/">
               <Button>Get Started</Button>
             </Link>
+
             <Link href="/">
               <Button variant="outline">Learn More</Button>
             </Link>
           </div>
         </div>
-        <div className="mt-20">
+
+        <div className="hidden md:block mt-20">
           <Image
             src="https://sanityesports.live/demo.png"
             height={1000}

@@ -32,7 +32,7 @@ const Navbar = () => {
       </div>
 
       {/* links */}
-      <nav className="hidden lg:flex flex-row items-center mt-2 gap-8 transition-all">
+      <nav className="hidden lg:flex flex-row items-center mt-2 gap-4 lg:gap-6 transition-all">
         {navLinks.map((item, index) => (
           <Link key={index} href={item.href} className="font-medium">
             {item.title}
@@ -43,14 +43,14 @@ const Navbar = () => {
       {/* buttons */}
       <div className="hidden lg:flex items-center gap-5 transition-all">
         <Link href="https://discord.gg/AB2vCdyw">
-          <Button variant="outline" className="px-5 rounded-xl">
+          <Button variant="outline" className="px-5 rounded-md">
             Join Community
           </Button>
         </Link>
         <ModeToggle />
       </div>
 
-      {/* ham menu */}
+      {/* mobile nav menu */}
       <div className="lg:hidden transition-all">
         <Sheet>
           <SheetTrigger asChild>
