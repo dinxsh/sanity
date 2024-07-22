@@ -16,7 +16,7 @@ import { AlignJustify } from "lucide-react";
 
 const Navbar = () => {
   return (
-    <div className="relative mt-5 mx-5 md:mx-[5%] xl:mx-[10%] flex items-center justify-between transition-all">
+    <div className="sticky top-0 z-50 py-4 px-5 md:px-[5%] xl:px-[10%] flex items-center justify-between bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all">
       {/* Logo */}
       <div className="flex items-center">
         <Link href="/" className="flex items-center gap-2">
