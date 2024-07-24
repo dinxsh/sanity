@@ -1,101 +1,41 @@
+'use client'
+
 import React from 'react';
 import FiltersSidebar from '../../components/FiltersSidebar';
 import TeamCard from '../../components/TeamCard';
+import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const teams = [
-  {
-    name: 'PLX Esports',
-    game: 'BGMI',
-    role: 'Scout, Support, Fragger',
-    rank: 'Ace',
-    server: 'India',
-    language: 'English',
-    description: 'Tamil Players Only For Our ESports Organizational',
-  },
-  {
-    name: 'HMF - YouTube',
-    game: 'Free Fire Max',
-    role: 'IGL',
-    rank: 'Diamond',
-    server: 'India',
-    language: 'Hindi',
-    description: 'No Requirement',
-  },
-  {
-    name: 'PLX Esports',
-    game: 'BGMI',
-    role: 'Scout, Support, Fragger',
-    rank: 'Ace',
-    server: 'India',
-    language: 'English',
-    description: 'Tamil Players Only For Our ESports Organizational',
-  },
-  {
-    name: 'HMF - YouTube',
-    game: 'Free Fire Max',
-    role: 'IGL',
-    rank: 'Diamond',
-    server: 'India',
-    language: 'Hindi',
-    description: 'No Requirement',
-  },
-  {
-    name: 'PLX Esports',
-    game: 'BGMI',
-    role: 'Scout, Support, Fragger',
-    rank: 'Ace',
-    server: 'India',
-    language: 'English',
-    description: 'Tamil Players Only For Our ESports Organizational',
-  },
-  {
-    name: 'HMF - YouTube',
-    game: 'Free Fire Max',
-    role: 'IGL',
-    rank: 'Diamond',
-    server: 'India',
-    language: 'Hindi',
-    description: 'No Requirement',
-  },
-  {
-    name: 'PLX Esports',
-    game: 'BGMI',
-    role: 'Scout, Support, Fragger',
-    rank: 'Ace',
-    server: 'India',
-    language: 'English',
-    description: 'Tamil Players Only For Our ESports Organizational',
-  },
-  {
-    name: 'HMF - YouTube',
-    game: 'Free Fire Max',
-    role: 'IGL',
-    rank: 'Diamond',
-    server: 'India',
-    language: 'Hindi',
-    description: 'No Requirement',
-  },
-  {
-    name: 'PLX Esports',
-    game: 'BGMI',
-    role: 'Scout, Support, Fragger',
-    rank: 'Ace',
-    server: 'India',
-    language: 'English',
-    description: 'Tamil Players Only For Our ESports Organizational',
-  },
-  {
-    name: 'HMF - YouTube',
-    game: 'Free Fire Max',
-    role: 'IGL',
-    rank: 'Diamond',
-    server: 'India',
-    language: 'Hindi',
-    description: 'No Requirement',
-  },
-];
 
 const TeamFinder = () => {
+
+  const router = useRouter();
+  const [teams, setTeams] = useState([]);
+
+  useEffect(() => {
+    const fetchTeams = async () => {
+      try {
+        const response = await axios.get('/api/teams/get-teams');
+        if (response.data.success) {
+          setTeams(response.data.teams);
+        } else {
+          console.error('Failed to fetch teams:', response.data.message);
+        }
+      } catch (error) {
+        console.error('Error fetching teams:', error);
+      }
+    };
+
+    fetchTeams();
+  }, []);
+
+
+  const NavigateToCreateTeam = () => {
+    router.push('/create-team');
+  };
+
+
   return (
     <div className="p-4">
       <p className="text-2xl ml-4 mb-4 font-semibold tracking-wide">TEAM FINDER</p>
@@ -105,6 +45,7 @@ const TeamFinder = () => {
           <div className="border-b-4 mb-4">
             <div className="flex justify-between mb-4">
               <h2 className="text-2xl">Find Team</h2>
+              <button className="bg-orange-500 px-4 py-2 rounded" onClick={NavigateToCreateTeam}>Create Team</button>
             </div>
             <div className="mb-4 flex flex-wrap gap-2 justify-between">
               <button className="bg-indigo-400 px-4 py-2 rounded text-sm">Request Raised</button>

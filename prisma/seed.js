@@ -170,7 +170,7 @@ async function main() {
   // seed Team (mongoose)
   const teamData = [
     {
-      image: 'https://example.com/image1.jpg',
+      image: 'https://placehold.co/60',
       teamname: 'Epic Warriors',
       game: 'League of Legends',
       role: 'ADC',
@@ -178,10 +178,10 @@ async function main() {
       server: 'NA',
       language: 'English',
       players: ['Player1', 'Player2'],
-      requests: ['No toxic behavior', 'Must have a mic']
+      requests: 'No toxic behavior'
     },
     {
-      image: 'https://example.com/image2.jpg',
+      image: 'https://placehold.co/60',
       teamname: 'Pro Gamers',
       game: 'CS:GO',
       role: 'In-Game Leader',
@@ -189,7 +189,7 @@ async function main() {
       server: 'EU',
       language: 'English',
       players: ['Player3', 'Player4'],
-      requests: ['Good communication skills', 'Must be punctual']
+      requests: 'Good communication skills and has to be punctual'
     }
   ];
 

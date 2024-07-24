@@ -49,6 +49,7 @@ export default function CreateTeamForm() {
             players: '',
             requests: ''
         },
+        shouldFocusError: false,
     });
 
     const { reset } = form;
@@ -56,7 +57,14 @@ export default function CreateTeamForm() {
     const onSubmit = async (data) => {
         try {
             if (teamname !== '' && game !== '' && role !== '' && rank !== '' && server !== '' && language !== '' && players !== '' && requests !== '') {
-                const response = await axios.post('/api/teams/create-team', data);
+
+                const playersArray = players.split(',').map(player => player.trim());
+                const dataWithPlayersArray = {
+                    ...data,
+                    players: playersArray,
+                };
+
+                const response = await axios.post('/api/teams/create-team', dataWithPlayersArray);
 
                 toast({
                     title: 'Success',
@@ -110,7 +118,7 @@ export default function CreateTeamForm() {
                                         <FormControl>
                                             <Input type="file" {...field} />
                                         </FormControl>
-                                        <FormMessage />
+                                        <FormMessage className="text-red-500"/>
                                     </FormItem>
                                 )}
                             />
@@ -119,7 +127,7 @@ export default function CreateTeamForm() {
                                 name="teamname"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Name</FormLabel>
+                                        <FormLabel>Team Name</FormLabel>
                                         <FormControl>
                                             <Input
                                                 placeholder="Name of your team"
@@ -131,7 +139,7 @@ export default function CreateTeamForm() {
                                                 }}
                                             />
                                         </FormControl>
-                                        <FormMessage />
+                                        <FormMessage className="text-red-500"/>
                                     </FormItem>
                                 )}
                             />
@@ -152,7 +160,7 @@ export default function CreateTeamForm() {
                                                 }}
                                             />
                                         </FormControl>
-                                        <FormMessage />
+                                        <FormMessage className="text-red-500"/>
                                     </FormItem>
                                 )}
                             />
@@ -173,7 +181,7 @@ export default function CreateTeamForm() {
                                                 }}
                                             />
                                         </FormControl>
-                                        <FormMessage />
+                                        <FormMessage className="text-red-500"/>
                                     </FormItem>
                                 )}
                             />
@@ -194,7 +202,7 @@ export default function CreateTeamForm() {
                                                 }}
                                             />
                                         </FormControl>
-                                        <FormMessage />
+                                        <FormMessage className="text-red-500"/>
                                     </FormItem>
                                 )}
                             />
@@ -215,7 +223,7 @@ export default function CreateTeamForm() {
                                                 }}
                                             />
                                         </FormControl>
-                                        <FormMessage />
+                                        <FormMessage className="text-red-500"/>
                                     </FormItem>
                                 )}
                             />
@@ -236,7 +244,7 @@ export default function CreateTeamForm() {
                                                 }}
                                             />
                                         </FormControl>
-                                        <FormMessage />
+                                        <FormMessage className="text-red-500"/>
                                     </FormItem>
                                 )}
                             />
@@ -248,7 +256,7 @@ export default function CreateTeamForm() {
                                         <FormLabel>Players</FormLabel>
                                         <FormControl>
                                             <Input
-                                                placeholder="Players in your team"
+                                                placeholder="player_1 , player_2 , ..."
                                                 {...field}
                                                 value={players}
                                                 onChange={(e) => {
@@ -257,7 +265,7 @@ export default function CreateTeamForm() {
                                                 }}
                                             />
                                         </FormControl>
-                                        <FormMessage />
+                                        <FormMessage className="text-red-500"/>
                                     </FormItem>
                                 )}
                             />
@@ -278,7 +286,7 @@ export default function CreateTeamForm() {
                                                 }}
                                             />
                                         </FormControl>
-                                        <FormMessage />
+                                        <FormMessage className="text-red-500"/>
                                     </FormItem>
                                 )}
                             />
