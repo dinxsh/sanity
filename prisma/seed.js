@@ -1,11 +1,12 @@
-const { PrismaClient, GameType } = require('@prisma/client');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+require('dotenv').config();
 
-const prisma = new PrismaClient();
-
-// Import the Mongoose User model
+// Import the Mongoose models
+const GamesModel = require('../model/Games');
 const UserModel = require('../model/User');
+const OrganizerModel = require('../model/Organizer');
+const TournamentModel = require('../model/Tournament');
 const { TeamModel } = require('../model/Team');
 
 async function connectToMongoDB() {
@@ -32,19 +33,17 @@ async function main() {
   ];
 
   for (const game of gameData) {
-    const existingGame = await prisma.games.findUnique({
-      where: { name: game.name },
-    });
+    const existingGame = await GamesModel.findOne({ name: game.name });
 
     if (!existingGame) {
-      await prisma.games.create({ data: game });
+      await GamesModel.create(game);
       console.log(`Game ${game.name} inserted successfully`);
     } else {
       console.log(`Game ${game.name} already exists`);
     }
   }
 
-  // Seed Users (Mongoose)
+  // Seed Users
   const userData = [
     {
       username: 'player1',
@@ -77,7 +76,7 @@ async function main() {
     }
   }
 
-  // Seed Organizers (prisma)
+  // Seed Organizers
   const organizerData = [
     {
       orgName: 'Epic Gaming',
@@ -94,19 +93,17 @@ async function main() {
   ];
 
   for (const organizer of organizerData) {
-    const existingOrganizer = await prisma.organizer.findUnique({
-      where: { orgEmail: organizer.orgEmail },
-    });
+    const existingOrganizer = await OrganizerModel.findOne({ orgEmail: organizer.orgEmail });
 
     if (!existingOrganizer) {
-      await prisma.organizer.create({ data: organizer });
+      await OrganizerModel.create(organizer);
       console.log(`Organizer ${organizer.orgName} inserted successfully`);
     } else {
       console.log(`Organizer ${organizer.orgName} already exists`);
     }
   }
 
-  // Seed Tournaments (prisma)
+  // Seed Tournaments
   const tournamentData = [
     {
       tournamentName: 'BGMI Pro League',
@@ -114,7 +111,7 @@ async function main() {
         started: new Date('2024-08-01'),
         ended: new Date('2024-08-15'),
       },
-      gameType: GameType.SQUAD,
+      gameType: 'SQUAD',
       teamSize: 4,
       slots: 16,
       prize: [{ rank: 1, amount: 10000 }, { rank: 2, amount: 5000 }, { rank: 3, amount: 2500 }],
@@ -127,7 +124,7 @@ async function main() {
         started: new Date('2024-09-01'),
         ended: new Date('2024-09-10'),
       },
-      gameType: GameType.SOLO,
+      gameType: 'SOLO',
       teamSize: 1,
       slots: 32,
       prize: [{ rank: 1, amount: 5000 }, { rank: 2, amount: 2500 }, { rank: 3, amount: 1000 }],
@@ -137,25 +134,21 @@ async function main() {
   ];
 
   for (const tournament of tournamentData) {
-    const existingTournament = await prisma.tournament.findFirst({
-      where: { tournamentName: tournament.tournamentName },
-    });
+    const existingTournament = await TournamentModel.findOne({ tournamentName: tournament.tournamentName });
 
     if (!existingTournament) {
-      const game = await prisma.games.findFirst({
-        where: { name: tournament.tournamentName.includes('BGMI') ? 'BGMI' : 'Call of Duty Mobile' },
+      const game = await GamesModel.findOne({
+        name: tournament.tournamentName.includes('BGMI') ? 'BGMI' : 'Call of Duty Mobile'
       });
-      const organizer = await prisma.organizer.findFirst({
-        where: { orgName: tournament.email.includes('protournaments') ? 'Pro Tournaments' : 'Epic Gaming' },
+      const organizer = await OrganizerModel.findOne({
+        orgName: tournament.email.includes('protournaments') ? 'Pro Tournaments' : 'Epic Gaming'
       });
 
       if (game && organizer) {
-        await prisma.tournament.create({
-          data: {
-            ...tournament,
-            gameId: game.id,
-            organizerId: organizer.id,
-          },
+        await TournamentModel.create({
+          ...tournament,
+          gameId: game._id,
+          organizerId: organizer._id,
         });
         console.log(`Tournament ${tournament.tournamentName} inserted successfully`);
       } else {
@@ -166,8 +159,7 @@ async function main() {
     }
   }
 
-
-  // seed Team (mongoose)
+  // Seed Teams
   const teamData = [
     {
       image: 'https://example.com/image1.jpg',
@@ -203,8 +195,6 @@ async function main() {
       console.log(`Team ${team.teamname} already exists`);
     }
   }
-
-
 }
 
 main()
@@ -213,6 +203,5 @@ main()
     process.exit(1);
   })
   .finally(async () => {
-    await prisma.$disconnect();
     await mongoose.disconnect();
   });

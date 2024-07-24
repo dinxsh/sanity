@@ -41,17 +41,17 @@ const userSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  verifyCode:{
+  verifyCode: {
     type: String,
     required: [true, "Verification Code is required"]
   },
-  verifyCodeExpiry:{
-      type: Date,
-      required: [true, "Verify code expiry is a must"]
+  verifyCodeExpiry: {
+    type: Date,
+    required: [true, "Verify code expiry is a must"]
   },
-  password:{
-      type: String || '',
-      required: [true, "Password is required"]
+  password: {
+    type: String || '',
+    required: [true, "Password is required"]
   },
   eventsRegistered: [
     {
