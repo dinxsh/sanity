@@ -16,7 +16,7 @@ import { AlignJustify } from "lucide-react";
 
 const Navbar = () => {
   return (
-    <div className="relative mt-5 mx-5 md:mx-[5%] xl:mx-[10%] flex items-center justify-between transition-all">
+    <div className="sticky top-0 z-50 py-4 px-5 md:px-[5%] xl:px-[10%] flex items-center justify-between bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all">
       {/* Logo */}
       <div className="flex items-center">
         <Link href="/" className="flex items-center gap-2">
@@ -32,7 +32,7 @@ const Navbar = () => {
       </div>
 
       {/* links */}
-      <nav className="hidden lg:flex flex-row items-center mt-2 gap-8 transition-all">
+      <nav className="hidden lg:flex flex-row items-center mt-2 gap-4 lg:gap-6 transition-all">
         {navLinks.map((item, index) => (
           <Link key={index} href={item.href} className="font-medium">
             {item.title}
@@ -43,14 +43,14 @@ const Navbar = () => {
       {/* buttons */}
       <div className="hidden lg:flex items-center gap-5 transition-all">
         <Link href="https://discord.gg/AB2vCdyw">
-          <Button variant="outline" className="px-5 rounded-xl">
+          <Button variant="outline" className="px-5 rounded-md">
             Join Community
           </Button>
         </Link>
         <ModeToggle />
       </div>
 
-      {/* ham menu */}
+      {/* mobile nav menu */}
       <div className="lg:hidden transition-all">
         <Sheet>
           <SheetTrigger asChild>
@@ -107,7 +107,10 @@ const navLinks = [
     title: "Games",
     href: "/games",
   },
-
+  {
+    title: "Teams",
+    href: "/teams",
+  },
   {
     title: "Blogs",
     href: "/blogs",
