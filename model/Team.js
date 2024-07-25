@@ -8,8 +8,8 @@ const TeamSchema = new mongoose.Schema({
   rank: { type: String, required: true },
   server: { type: String, required: true },
   language: { type: String, required: true },
-  players: [{ type: String }],
-  requests: [{ type: String }]
+  players: [{ type: String, required: true }],
+  requests: { type: String, required: true }
 });
 
 
