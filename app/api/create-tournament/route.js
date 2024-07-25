@@ -1,39 +1,38 @@
-import { PrismaClient } from '@prisma/client';
+import { NextResponse } from 'next/server';
 import dbConnect from '../../../lib/dbConnect';
+import Tournament from '../../../model/Tournament';
 
-const prisma = new PrismaClient();
+export async function POST(req) {
+    try {
+        await dbConnect();
 
-export async function POST(req, res) {
-    {
-        const { tournamentName, selectedPlatform, participantType, selectedTimezone, size } = req.body;
+        const { tournamentName, selectedPlatform, participantType, selectedTimezone, size } = await req.json();
 
-        try {
-            await dbConnect();
+        const existingTournament = await Tournament.findOne({ tournamentName });
 
-            const existingTournament = await prisma.tournament.findFirst({
-                where: { tournamentName },
-            });
-
-            if (existingTournament) {
-                return res.status(409).json({ message: 'Tournament already exists' });
-            }
-
-            const newTournament = await prisma.tournament.create({
-                data: {
-                    tournamentName,
-                    platform: selectedPlatform,
-                    participantType,
-                    timezone: selectedTimezone,
-                    size: parseInt(size, 10),
-                },
-            });
-
-            res.status(200).json({ message: 'Tournament created successfully', tournament: newTournament });
-        } catch (error) {
-            console.error('Error creating tournament:', error);
-            res.status(500).json({ message: 'An error occurred while creating the tournament' });
-        } finally {
-            await prisma.$disconnect();
+        if (existingTournament) {
+            return NextResponse.json({ message: 'Tournament already exists' }, { status: 409 });
         }
+
+        const newTournament = new Tournament({
+            tournamentName,
+            platform: selectedPlatform,
+            participantType,
+            timezone: selectedTimezone,
+            size: parseInt(size, 10),
+        });
+
+        await newTournament.save();
+
+        return NextResponse.json(
+            { message: 'Tournament created successfully', tournament: newTournament },
+            { status: 201 }
+        );
+    } catch (error) {
+        console.error('Error creating tournament:', error);
+        return NextResponse.json(
+            { message: 'An error occurred while creating the tournament' },
+            { status: 500 }
+        );
     }
 }

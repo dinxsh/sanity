@@ -2,20 +2,32 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { CalendarIcon, ClockIcon, PersonIcon, CrossCircledIcon, LockClosedIcon } from '@radix-ui/react-icons';
 import { Trophy, DollarSign, Users, Shield } from 'lucide-react';
-import prisma from '../../../lib/db';
+import dbConnect from '../../../lib/dbConnect';
+import Tournament from '../../../model/Tournament';
 
 async function getTournament(id) {
-    const tournament = await prisma.tournament.findUnique({
-        where: { id },
-        include: {
-            game: true,
-            organizer: true,
-        },
-    });
-    return tournament;
+    await dbConnect();
+    if (!id) {
+        console.error('Tournament ID is undefined');
+        return null;
+    }
+    try {
+        const tournament = await Tournament.findById(id)
+            .populate('gameId')
+            .populate('organizerId')
+            .lean();
+        return tournament ? JSON.parse(JSON.stringify(tournament)) : null;
+    } catch (error) {
+        console.error('Error fetching tournament:', error);
+        return null;
+    }
 }
 
 export default async function TournamentPage({ params }) {
+    if (!params || !params.id) {
+        return <div>Invalid tournament ID</div>;
+    }
+
     const tournament = await getTournament(params.id);
 
     if (!tournament) {
@@ -27,7 +39,7 @@ export default async function TournamentPage({ params }) {
             <div className="bg-gray-800 rounded-lg overflow-hidden shadow-xl">
                 <div className="relative h-64 sm:h-80 lg:h-96">
                     <Image
-                        src={tournament.game.gameBannerPhoto || "/placeholder-tournament.jpg"}
+                        src={tournament.gameId?.gameBannerPhoto || "/placeholder-tournament.jpg"}
                         alt={tournament.tournamentName}
                         layout="fill"
                         objectFit="cover"
@@ -84,20 +96,20 @@ export default async function TournamentPage({ params }) {
                             <h2 className="text-xl font-semibold mb-4">Host</h2>
                             <div className="flex items-center">
                                 <Image
-                                    src={tournament.organizer.bannerPhoto || "/placeholder-organizer.jpg"}
-                                    alt={tournament.organizer.orgName}
+                                    src={tournament.organizerId?.bannerPhoto || "/placeholder-organizer.jpg"}
+                                    alt={tournament.organizerId?.orgName || "Organizer"}
                                     width={50}
                                     height={50}
                                     className="rounded-full"
                                 />
-                                <span className="ml-4 text-lg">{tournament.organizer.orgName}</span>
+                                <span className="ml-4 text-lg">{tournament.organizerId?.orgName || "Unknown Organizer"}</span>
                             </div>
                         </div>
                     </div>
 
                     <div className="mt-8">
                         <h2 className="text-xl font-semibold mb-4">Description</h2>
-                        <p>{tournament.game.profile}</p>
+                        <p>{tournament.gameId?.profile || "No description available"}</p>
                     </div>
 
                     <div className="mt-8">
@@ -120,7 +132,7 @@ export default async function TournamentPage({ params }) {
                     </div>
 
                     <div className="mt-8 flex justify-center">
-                        <Link href={`/register/${tournament.id}`} className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                        <Link href={`/register/${tournament._id}`} className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
                             Register for Tournament
                         </Link>
                     </div>
