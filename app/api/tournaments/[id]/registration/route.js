@@ -1,27 +1,30 @@
-import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
+import dbConnect from "../../../../../lib/dbConnect";
+import Tournament from "../../../../../models/Tournament";
 
-const prisma = new PrismaClient();
+export default async function POST(request, { params }) {
+    await dbConnect();
 
-export default async function POST(request, {params}){
-    
     const id = params.id;
+    const { registrationData } = await request.json();
 
-    const {registrationData } =request.body
-    
     try {
-        const updatedTournament = await prisma.tournament.update({
-            where: {id},
-            data:  {registrations: registrationData}
+        const updatedTournament = await Tournament.findByIdAndUpdate(
+            id,
+            { registrations: registrationData },
+            { new: true }
+        );
+
+        if (!updatedTournament) {
+            return NextResponse.status(404).json({ message: "Tournament not found" });
+        }
+
+        return NextResponse.status(200).json({
+            message: "Registration updated successfully",
+            tournament: updatedTournament
         });
-
-        return NextResponse.status(200).json({message: "Registration updated successfully", tournament: updatedTournament});
-
     } catch (error) {
-        console.log(("error while updating tournament", error))
-        return NextResponse.status(500).json({message: "Error while updating the registration"})
-    }
-    finally{
-        await prisma.$disconnect();
+        console.error("Error while updating tournament", error);
+        return NextResponse.status(500).json({ message: "Error while updating the registration" });
     }
 }
