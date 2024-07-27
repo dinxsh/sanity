@@ -1,9 +1,12 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import dbConnect from "../../../lib/dbConnect";
+import Tournament from '../../../model/Tournament';
+import Games from '../../../model/Games';
+import Organizer from '../../../model/Organizer';
 
 export async function GET(request) {
+    await dbConnect();
+
     const { searchParams } = new URL(request.url);
     const page = parseInt(searchParams.get('page') || '1');
     const limit = parseInt(searchParams.get('limit') || '10');
@@ -12,24 +15,25 @@ export async function GET(request) {
 
     const skip = (page - 1) * limit;
 
-    const where = {};
-    if (gameType) where.gameType = gameType;
-    if (organizerId) where.organizerId = organizerId;
+    const query = {};
+    if (gameType) query.gameType = gameType;
+    if (organizerId) query.organizerId = organizerId;
 
     try {
         console.log('Fetching tournaments with params:', { page, limit, gameType, organizerId });
 
-        const tournaments = await prisma.tournament.findMany({
-            where,
-            include: {
-                game: true,
-                organizer: true,
-            },
-            skip,
-            take: limit,
-        });
+        // Ensure models are registered
+        Games;
+        Organizer;
 
-        const total = await prisma.tournament.count({ where });
+        const tournaments = await Tournament.find(query)
+            .populate('gameId', 'name category gameBannerPhoto')
+            .populate('organizerId', 'orgName bannerPhoto')
+            .skip(skip)
+            .limit(limit)
+            .lean();
+
+        const total = await Tournament.countDocuments(query);
 
         console.log(`Found ${tournaments.length} tournaments out of ${total} total`);
 

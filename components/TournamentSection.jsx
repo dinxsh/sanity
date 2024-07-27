@@ -73,8 +73,8 @@ export default function TournamentSection({ filters }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2 transition-all">
           {filteredTournaments.map((tournament) => (
             <Link
-              key={tournament.id}
-              href={`/tournaments/${tournament.id}`}
+              key={tournament._id}
+              href={`/tournaments/${tournament._id}`}
               className="hover:scale-105 transition-all"
             >
               <TournamentCard {...tournament} />
@@ -93,8 +93,8 @@ function TournamentCard({
   prize,
   slots,
   registeredNumber,
-  game,
-  organizer,
+  gameId,
+  organizerId,
 }) {
   const getStatus = () => {
     const now = new Date();
@@ -132,7 +132,9 @@ function TournamentCard({
           {status}
         </span>
         <Image
-          src={game.gameBannerPhoto || "/placeholder-tournament.jpg"}
+          src={
+            (gameId && gameId.gameBannerPhoto) || "/placeholder-tournament.jpg"
+          }
           alt={tournamentName}
           width={500}
           height={200}
@@ -155,14 +157,17 @@ function TournamentCard({
         <div className="mt-4 p-2 flex items-center justify-between text-sm bg-gray-700 rounded">
           <div className="flex items-center">
             <Image
-              src={organizer.bannerPhoto || "/placeholder-organizer.jpg"}
-              alt={organizer.orgName}
+              src={
+                (organizerId && organizerId.bannerPhoto) ||
+                "/placeholder-organizer.jpg"
+              }
+              alt={organizerId ? organizerId.orgName : "Organizer"}
               width={20}
               height={20}
               className="rounded-full"
             />
             <span className="ml-2 text-sm text-gray-300">
-              {organizer.orgName}
+              {organizerId ? organizerId.orgName : "Unknown Organizer"}
             </span>
           </div>
           <div className="text-xs text-gray-300">Host</div>

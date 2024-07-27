@@ -133,7 +133,10 @@ const navLinks = [
     title: "Games",
     href: "/games",
   },
-
+  {
+    title: "Teams",
+    href: "/teams",
+  },
   {
     title: "Blogs",
     href: "/blogs",

@@ -1,18 +1,23 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import dbConnect from "../../../../lib/dbConnect";
+import Tournament from '../../../../model/Tournament';
+import Games from '../../../../model/Games';
+import Organizer from '../../../../model/Organizer';
 
 export async function GET(request, { params }) {
+    await dbConnect();
+
     try {
         const id = params.id;
-        const tournament = await prisma.tournament.findUnique({
-            where: { id },
-            include: {
-                game: true,
-                organizer: true,
-            },
-        });
+
+        // Ensure all models are registered
+        Games;
+        Organizer;
+
+        const tournament = await Tournament.findById(id)
+            .populate('gameId')
+            .populate('organizerId')
+            .lean();
 
         if (tournament) {
             return NextResponse.json(tournament);
@@ -21,6 +26,6 @@ export async function GET(request, { params }) {
         }
     } catch (error) {
         console.error('Error fetching tournament:', error);
-        return NextResponse.json({ error: 'Error fetching tournament' }, { status: 500 });
+        return NextResponse.json({ error: 'Error fetching tournament', details: error.message }, { status: 500 });
     }
 }
