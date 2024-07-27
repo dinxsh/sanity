@@ -7,8 +7,8 @@ export default function HeroSection() {
     <section>
       <div className="px-10 mx-auto md:px-[8%] xl:px-[15%] mt-28 md:mt-36 gap-20 transition-all">
         <div className="space-y-5 max-w-4xl mx-auto text-center">
-          <h4 className="text-sm text-indigo-600 font-medium">
-            Discover new heights
+          <h4 className="scroll-m-20 text-2xl text-indigo-400 font-semibold tracking-tight ">
+            Discover New Heights
           </h4>
 
           <h1 className="text-4xl font-extrabold mx-auto md:text-5xl max-w-3xl">

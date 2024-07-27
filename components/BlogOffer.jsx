@@ -16,7 +16,7 @@ const BlogOffer = () => {
         />
       </div>
       <div className="flex-1 flex flex-col h-[400px] gap-5">
-        <h1 className="text-2xl font-bold">What we offer</h1>
+        <h1 className="text-2xl font-bold text-indigo-500">What we offer</h1>
         <div className="flex flex-row gap-3">
           <div className="pt-1">
             <Figma />
