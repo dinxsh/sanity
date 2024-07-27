@@ -1,5 +1,7 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { ModeToggle } from "./ModeToggle";
 import { Button } from "../components/ui/button";
@@ -15,8 +17,32 @@ import {
 import { AlignJustify } from "lucide-react";
 
 const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      if (offset > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  if (scrolled) console.log("scroll triggered");
+
   return (
-    <div className="sticky top-0 z-50 py-4 px-5 md:px-[5%] xl:px-[10%] flex items-center justify-between bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all">
+    <div
+      className={`sticky top-0 z-50 py-4 px-5 md:px-[5%] xl:px-[10%] flex items-center justify-between bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all
+      ${scrolled ? "border-b" : ""}
+    `}
+    >
       {/* Logo */}
       <div className="flex items-center">
         <Link href="/" className="flex items-center gap-2">
