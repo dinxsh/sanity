@@ -1,26 +1,16 @@
-import { PrismaClient } from '@prisma/client';
+import { NextResponse } from 'next/server';
 import dbConnect from '../../../lib/dbConnect';
+import Games from '../../../model/Games';
 
-const prisma = new PrismaClient();
-
-export async function GET(req, res) {
+export async function GET(req) {
     await dbConnect();
 
     try {
-        const gameData = await prisma.games.findMany();
-        const existingGames = [];
+        const gameData = await Games.find().lean();
 
-        for (const game of gameData) {
-            const existingGame = await prisma.games.findUnique({
-                where: { name: game.name },
-            });
-            existingGames.push(existingGame);
-        }
-
-        res.status(200).json(existingGames);
+        return NextResponse.json(gameData, { status: 200 });
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
-    } finally {
-        await prisma.$disconnect();
+        console.error('Error fetching games:', error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }

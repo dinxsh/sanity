@@ -17,7 +17,7 @@ export default function CompleteProfilePage() {
     bio: "",
   });
 
-  const [selectedButton, setSelectedButton] = useState("Beginner");
+  const [selectedExpLevel, setSelectedExpLevel] = useState("Beginner");
 
   const expLevelButtons = ["Beginner", "Intermediate", "Expert", "Ninja"];
   const genderOptions = ["Male", "Female", "Other", "Prefer not to say"];
@@ -25,7 +25,7 @@ export default function CompleteProfilePage() {
   const router = useRouter();
 
   const handleExpLevelButtonClick = (button) => {
-    setSelectedButton(button);
+    setSelectedExpLevel(button);
   };
 
   const handleChange = (e) => {
@@ -64,7 +64,7 @@ export default function CompleteProfilePage() {
                   type="button"
                   className={`px-2 py-2 text-sm md:px-4 md:text-base rounded-xl transition-all
                     ${
-                      selectedButton === button
+                      selectedExpLevel === button
                         ? "bg-blue-500 text-white"
                         : "bg-gray-200 dark:bg-gray-800"
                     }  
