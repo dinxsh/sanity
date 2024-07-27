@@ -10,7 +10,7 @@ const TournamentModel = require('../model/Tournament');
 const { TeamModel } = require('../model/Team');
 
 async function connectToMongoDB() {
-  await mongoose.connect("mongodb+srv://test:test@main.c56lphq.mongodb.net/?retryWrites=true&w=majority&appName=main");
+  await mongoose.connect(process.env.DATABASE_URL);
 }
 
 async function main() {
