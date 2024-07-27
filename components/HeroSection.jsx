@@ -7,14 +7,6 @@ import { motion } from "framer-motion";
 
 export default function HeroSection() {
   return (
-<<<<<<< HEAD
-    <section>
-      <div className="px-10 mx-auto md:px-[8%] xl:px-[15%] mt-28 md:mt-36 gap-20 transition-all">
-        <div className="space-y-5 max-w-4xl mx-auto text-center">
-          <h4 className="scroll-m-20 text-2xl text-indigo-400 font-semibold tracking-tight ">
-            Discover New Heights
-          </h4>
-=======
     <motion.section
       className="px-10 mx-auto md:px-[8%] xl:px-[15%] my-20 md:my-32 gap-20"
       initial={{ opacity: 0, y: 50 }}
@@ -28,7 +20,6 @@ export default function HeroSection() {
         <h4 className="text-sm text-indigo-600 font-medium">
           Discover new heights
         </h4>
->>>>>>> fdbcc0acf7a3ed4619f12909f89dbea383a50cd0
 
         <h1 className="text-4xl font-extrabold mx-auto md:text-5xl max-w-3xl">
           Level Up Your Esports Journey with{" "}
