@@ -127,7 +127,7 @@ export const SkeletonThree = () => {
 
   return (
     <Link
-      href="https://www.youtube.com/watch?v=RPa3_AD1_Vs"
+      href="https://discord.com/invite/AB2vCdyw"
       target="__blank"
       className="relative flex gap-10  h-full group/image border-b"
     >
