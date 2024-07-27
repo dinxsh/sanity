@@ -5,7 +5,7 @@ import { Figma } from 'lucide-react';
 
 const BlogOffer = () => {
   return (
-    <div className="flex flex-row items-center gap-4 px-8">
+    <div className="sm:flex flex-row items-center gap-4 px-8">
       <div className="flex-1">
         <Image
           src={capa}
@@ -16,7 +16,7 @@ const BlogOffer = () => {
         />
       </div>
       <div className="flex-1 flex flex-col h-[400px] gap-5">
-        <h1 className="text-2xl font-bold">What we offer</h1>
+        <h1 className="text-2xl font-bold text-indigo-500">What we offer</h1>
         <div className="flex flex-row gap-3">
           <div className="pt-1">
             <Figma />
