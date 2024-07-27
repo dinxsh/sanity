@@ -2,10 +2,17 @@
 
 import React, { useRef, useState } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa6";
+import { motion } from "framer-motion";
 
 export default function FaqSection() {
   return (
-    <div className="mt-20 lg:mt-40 px-10 mx-auto max-w-5xl flex flex-col items-center">
+    <motion.div
+      className="mt-20 lg:mt-40 px-10 mx-auto max-w-5xl flex flex-col items-center"
+      viewport={{ once: true }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ type: "easIn", duration: 0.5, delay: 0.6 }}
+    >
       <div className="flex flex-col items-center justify-center text-center">
         <h1 className="text-3xl lg:text-5xl font-medium tracking-tight transition-all">
           Frequently Asked Questions
@@ -21,7 +28,7 @@ export default function FaqSection() {
           <FaqsCard idx={idx} faqsList={item} />
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
