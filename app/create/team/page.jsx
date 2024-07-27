@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
-import { Button } from "../../@/components/ui/button"
+import { Button } from "../../../@/components/ui/button"
 import {
     Form,
     FormControl,
@@ -12,13 +12,12 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "../../@/components/ui/form"
-import { Input } from "../../@/components/ui/input"
+} from "../../../@/components/ui/form"
+import { Input } from "../../../@/components/ui/input"
 import { useState } from 'react';
 import axios from 'axios';
-import { teamSchema } from '../../model/Schema/teamSchema';
-import { ToastAction } from "../../@/components/ui/toast"
-import { useToast } from '../../@/components/ui/use-toast';
+import { teamSchema } from '../../../model/Schema/teamSchema';
+import { useToast } from '../../../@/components/ui/use-toast';
 
 
 

@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { platforms, timezones } from './data';
+import { platforms, timezones } from './tournament/data';
 
 export default function Page() {
     const [selectedPlatform, setSelectedPlatform] = useState("");
