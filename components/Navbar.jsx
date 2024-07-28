@@ -69,7 +69,7 @@ const Navbar = () => {
       {/* buttons */}
       <div className="hidden lg:flex items-center gap-5 transition-all">
         <Link href="https://discord.gg/AB2vCdyw">
-          <Button variant="outline" className="px-5 rounded-md border-indigo-800">
+          <Button variant="outline" className="px-5 rounded-md">
             Join Community
           </Button>
         </Link>
