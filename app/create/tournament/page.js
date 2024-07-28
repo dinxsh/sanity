@@ -209,7 +209,6 @@ export default function Page() {
                             onChange={(e) => setTournamentFormat(e.target.value)}
                         >
                             <option value="">Select Tournament Format</option>
-                            {/* Add format options */}
                         </select>
                     </div>
 
