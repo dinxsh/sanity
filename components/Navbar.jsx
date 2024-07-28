@@ -36,8 +36,6 @@ const Navbar = () => {
     };
   }, []);
 
-  if (scrolled) console.log("scroll triggered");
-
   const pathname = usePathname();
 
   const isActive = (pathname, href) => {
