@@ -11,7 +11,7 @@ import { IconBrandDiscordFilled } from "@tabler/icons-react";
 export default function FeaturesSectionGrid() {
   const features = [
     {
-      title: "Create Tournaments effortlessly",
+      title: "Create Tournaments Effortlessly",
       description:
         "Organize and manage your own esports tournaments with ease using our intuitive interface.",
       skeleton: <SkeletonOne />,
