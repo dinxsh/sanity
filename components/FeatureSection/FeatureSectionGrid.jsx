@@ -112,6 +112,7 @@ export const SkeletonOne = () => {
             width={1000}
             height={1000}
             className="full rounded-sm"
+            draggable="false"
           />
         </div>
       </div>
@@ -149,6 +150,7 @@ export const SkeletonThree = () => {
             width={800}
             height={800}
             className="mt-2 object-cover object-center rounded-sm blur-none group-hover/image:blur-md transition-all duration-200"
+            draggable="false"
           />
         </div>
       </div>
@@ -202,10 +204,11 @@ export const SkeletonTwo = () => {
           >
             <Image
               src={image}
-              alt="bali images"
+              alt=""
               width="500"
               height="500"
               className="rounded-lg h-20 w-20 md:h-40 md:w-40 object-cover flex-shrink-0"
+              draggable="false"
             />
           </motion.div>
         ))}
@@ -224,10 +227,11 @@ export const SkeletonTwo = () => {
           >
             <Image
               src={image}
-              alt="bali images"
+              alt=""
               width="500"
               height="500"
               className="rounded-lg h-20 w-20 md:h-40 md:w-40 object-cover flex-shrink-0"
+              draggable="false"
             />
           </motion.div>
         ))}
