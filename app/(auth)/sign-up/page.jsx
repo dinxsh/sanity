@@ -181,11 +181,11 @@ const Page = () => {
                 )}
               </Button>
 
-              <div className="text-center mt-4">
+              <div className="text-center mt-4 text-foreground/70 transition-all">
                 Already a member?{" "}
                 <Link
                   href="/sign-in"
-                  className="text-blue-600 hover:text-blue-800 hover:underline transition-all"
+                  className="hover:text-foreground underline transition-all"
                 >
                   Sign in
                 </Link>
