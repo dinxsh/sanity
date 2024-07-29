@@ -18,7 +18,7 @@ export default function FeaturesSectionGrid() {
       className:
         "col-span-1 lg:col-span-4 border-b lg:border-r dark:border-neutral-800",
     },
-    {
+    { 
       title: "Most Games Included",
       description:
         "Join tournaments and play across a wide range of popular games.",
