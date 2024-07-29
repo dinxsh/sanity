@@ -51,6 +51,7 @@ export default function HeroSection() {
           width={1200}
           className="mx-auto shadow-lg rounded-2xl"
           alt=""
+          draggable={false}
         />
       </div>
     </motion.section>

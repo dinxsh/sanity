@@ -42,6 +42,7 @@
     "next-auth": "^4.24.7",
     "next-sanity": "^9.4.2",
     "next-themes": "^0.3.0",
+    "nextjs-toploader": "^1.6.12",
     "prisma": "^5.16.1",
     "react": "^18",
     "react-dom": "^18",
