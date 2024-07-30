@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { games } from './data/index'
+import { games } from "./data/index";
 
 export default function page() {
   return (
-    <section className="px-[5%] xl:px-[12%] pt-20 pb-20 transition-all">
+    <section className="px-[5%] xl:px-[12%] pt-10 pb-20 transition-all">
       <div className="text-4xl font-semibold mb-10 ">Games</div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5 transition-all">
         {games.map((game, index) => (
@@ -18,6 +18,7 @@ export default function page() {
                 alt={game.name}
                 fill
                 className="rounded-xl object-cover"
+                draggable="false"
               />
             </Link>
           </div>
