@@ -11,23 +11,17 @@ export default function TournamentSection({ filters }) {
 
   useEffect(() => {
     async function fetchTournaments() {
-      setIsLoading(true);
       try {
         const response = await fetch("/api/tournaments");
         if (!response.ok) {
-          const errorData = await response.json();
-          console.error("Error in fetchTournaments:", errorData);
-          throw new Error(
-            `Failed to fetch tournaments: ${response.status}. ${errorData.error} - ${errorData.details}`
-          );
+          throw new Error("Failed to fetch tournaments");
         }
         const data = await response.json();
-        console.log("Fetched tournaments:", data);
         setTournaments(data.tournaments);
+        setIsLoading(false);
       } catch (err) {
         console.error("Error in fetchTournaments:", err);
         setError(err.message);
-      } finally {
         setIsLoading(false);
       }
     }
@@ -76,6 +70,7 @@ export default function TournamentSection({ filters }) {
               key={tournament._id}
               href={`/tournaments/${tournament._id}`}
               className="hover:scale-105 transition-all"
+              prefetch={true}
             >
               <TournamentCard {...tournament} />
             </Link>
@@ -176,133 +171,3 @@ function TournamentCard({
     </div>
   );
 }
-
-// Example data for tournaments
-// const tournamentsData = [
-//   {
-//     image:
-//       "https://media.battlexo.com/tournament/668292838ab430dcee21f257/banner/icon/29fd717a-2be9-4c19-8394-865ff112a15a.webp",
-//     title: "KINGS ESPORTS PRO SCRIMS (12PM)",
-//     date: "JUL 1, 2024",
-//     time: "11:00 PM",
-//     entryFee: 500,
-//     mode: "Squad",
-//     participants: "16/21",
-//     host: {
-//       image:
-//         "https://media.battlexo.com/space/262/icon/43ed1dc5-1493-4932-ab9c-c7bedbdfe584.webp",
-//       name: "KINGS ESPORTS",
-//     },
-//   },
-//   {
-//     image:
-//       "https://media.battlexo.com/tournament/668292838ab430dcee21f257/banner/icon/29fd717a-2be9-4c19-8394-865ff112a15a.webp",
-//     title: "KINGS ESPORTS PRO SCRIMS (12PM)",
-//     date: "JUL 1, 2024",
-//     time: "11:00 PM",
-//     entryFee: 500,
-//     mode: "Duo",
-//     participants: "16/21",
-//     host: {
-//       image:
-//         "https://media.battlexo.com/space/262/icon/43ed1dc5-1493-4932-ab9c-c7bedbdfe584.webp",
-//       name: "KINGS ESPORTS",
-//     },
-//   },
-//   {
-//     image:
-//       "https://media.battlexo.com/tournament/668292838ab430dcee21f257/banner/icon/29fd717a-2be9-4c19-8394-865ff112a15a.webp",
-//     title: "KINGS ESPORTS PRO SCRIMS (12PM)",
-//     date: "JUL 1, 2024",
-//     time: "11:00 PM",
-//     entryFee: 500,
-//     mode: "Squad",
-//     participants: "16/21",
-//     host: {
-//       image:
-//         "https://media.battlexo.com/space/262/icon/43ed1dc5-1493-4932-ab9c-c7bedbdfe584.webp",
-//       name: "KINGS ESPORTS",
-//     },
-//   },
-//   {
-//     image:
-//       "https://media.battlexo.com/tournament/668292838ab430dcee21f257/banner/icon/29fd717a-2be9-4c19-8394-865ff112a15a.webp",
-//     title: "KINGS ESPORTS PRO SCRIMS (12PM)",
-//     date: "JUL 1, 2024",
-//     time: "11:00 PM",
-//     entryFee: 500,
-//     mode: "Squad",
-//     participants: "16/21",
-//     host: {
-//       image:
-//         "https://media.battlexo.com/space/262/icon/43ed1dc5-1493-4932-ab9c-c7bedbdfe584.webp",
-//       name: "KINGS ESPORTS",
-//     },
-//   },
-//   {
-//     image:
-//       "https://media.battlexo.com/tournament/668292838ab430dcee21f257/banner/icon/29fd717a-2be9-4c19-8394-865ff112a15a.webp",
-//     title: "KINGS ESPORTS PRO SCRIMS (12PM)",
-//     date: "JUL 1, 2024",
-//     time: "11:00 PM",
-//     entryFee: 500,
-//     mode: "Squad",
-//     participants: "16/21",
-//     status: "Completed",
-//     host: {
-//       image:
-//         "https://media.battlexo.com/space/262/icon/43ed1dc5-1493-4932-ab9c-c7bedbdfe584.webp",
-//       name: "KINGS ESPORTS",
-//     },
-//   },
-//   {
-//     image:
-//       "https://media.battlexo.com/tournament/668292838ab430dcee21f257/banner/icon/29fd717a-2be9-4c19-8394-865ff112a15a.webp",
-//     title: "KINGS ESPORTS PRO SCRIMS (12PM)",
-//     date: "JUL 1, 2024",
-//     time: "11:00 PM",
-//     entryFee: 500,
-//     mode: "Squad",
-//     participants: "16/21",
-//     host: {
-//       image:
-//         "https://media.battlexo.com/space/262/icon/43ed1dc5-1493-4932-ab9c-c7bedbdfe584.webp",
-//       name: "KINGS ESPORTS",
-//     },
-//   },
-//   {
-//     image:
-//       "https://media.battlexo.com/tournament/668292838ab430dcee21f257/banner/icon/29fd717a-2be9-4c19-8394-865ff112a15a.webp",
-//     title: "KINGS ESPORTS PRO SCRIMS (12PM)",
-//     date: "JUL 1, 2024",
-//     time: "11:00 PM",
-//     entryFee: 500,
-//     mode: "Squad",
-//     participants: "16/21",
-//     status: "Live",
-//     host: {
-//       image:
-//         "https://media.battlexo.com/space/262/icon/43ed1dc5-1493-4932-ab9c-c7bedbdfe584.webp",
-//       name: "KINGS ESPORTS",
-//     },
-//   },
-//   {
-//     image:
-//       "https://media.battlexo.com/tournament/668292838ab430dcee21f257/banner/icon/29fd717a-2be9-4c19-8394-865ff112a15a.webp",
-//     title: "KINGS ESPORTS PRO SCRIMS (12PM)",
-//     date: "JUL 1, 2024",
-//     time: "11:00 PM",
-//     entryFee: 500,
-//     mode: "Solo",
-//     participants: "16/21",
-//     host: {
-//       image:
-//         "https://media.battlexo.com/space/262/icon/43ed1dc5-1493-4932-ab9c-c7bedbdfe584.webp",
-//       name: "KINGS ESPORTS",
-//     },
-//   },
-// ].map((tournament, index) => ({
-//   ...tournament,
-//   id: index + 1,
-//   status: tournament.status || "Open",
-// }));

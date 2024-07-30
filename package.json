@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -12,7 +12,6 @@
     "seed": "node prisma/seed.js"
   },
   "dependencies": {
-    "@ewanmellor/brackets-viewer": "^1.6.911",
     "@hookform/resolvers": "^3.7.0",
     "@portabletext/react": "^3.0.18",
     "@prisma/client": "^5.16.1",
@@ -28,8 +27,6 @@
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
-    "brackets-manager": "^1.6.4",
-    "brackets-viewer": "^1.6.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cobe": "^0.6.3",
@@ -48,6 +45,7 @@
     "react-hook-form": "^7.52.1",
     "react-icons": "^5.2.1",
     "resend": "^3.4.0",
+    "swr": "^2.2.5",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
     "usehooks-ts": "^3.1.0",
