@@ -70,7 +70,7 @@ export default function TournamentSection({ filters }) {
               key={tournament._id}
               href={`/tournaments/${tournament._id}`}
               className="hover:scale-105 transition-all"
-              prefetch={true}
+              prefetch={true} // prefetch the tournament page
             >
               <TournamentCard {...tournament} />
             </Link>
