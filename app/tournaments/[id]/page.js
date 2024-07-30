@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { CalendarIcon, ClockIcon, PersonIcon, CrossCircledIcon, LockClosedIcon } from '@radix-ui/react-icons';
+import { CalendarIcon, ClockIcon } from '@radix-ui/react-icons';
 import { Trophy, DollarSign, Users, Shield } from 'lucide-react';
 import dbConnect from '../../../lib/dbConnect';
 import Tournament from '../../../model/Tournament';
@@ -141,6 +141,9 @@ export default async function TournamentPage({ params }) {
         </div>
     );
 }
+
+// Add caching and revalidation
+export const revalidate = 60; // Revalidate this page every 60 seconds
 
 // Static tournament data for UI demonstration
 // const tournament = {

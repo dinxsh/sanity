@@ -56,6 +56,19 @@ const TournamentSchema = new Schema({
     size: String
 });
 
+// Add indexes
+TournamentSchema.index({ organizerId: 1 });
+TournamentSchema.index({ gameId: 1 });
+TournamentSchema.index({ gameType: 1 });
+TournamentSchema.index({ tournamentVisibility: 1 });
+TournamentSchema.index({ tournamentStartDate: 1 });
+TournamentSchema.index({ registrationEndDate: 1 });
+
+// Compound indexes for common query patterns
+TournamentSchema.index({ organizerId: 1, gameType: 1 });
+TournamentSchema.index({ gameId: 1, tournamentStartDate: 1 });
+TournamentSchema.index({ tournamentVisibility: 1, registrationEndDate: 1 });
+
 const Tournament = mongoose.models.Tournament || mongoose.model('Tournament', TournamentSchema);
 
 module.exports = Tournament;
