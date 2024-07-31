@@ -15,8 +15,9 @@ export async function GET(request, { params }) {
         Organizer;
 
         const tournament = await Tournament.findById(id)
-            .populate('gameId')
-            .populate('organizerId')
+            .select('tournamentName tournamentDates gameType prize slots registeredNumber gameId organizerId')
+            .populate('gameId', 'name gameBannerPhoto')
+            .populate('organizerId', 'orgName bannerPhoto')
             .lean();
 
         if (tournament) {
