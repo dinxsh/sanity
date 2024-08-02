@@ -1,23 +1,33 @@
-'use client';
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
-import { signIn } from 'next-auth/react';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { signIn } from "next-auth/react";
 import {
   Form,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../@/components/ui/form';
-import { Button } from '../../../@/components/ui/button';
-import { Input } from '../../../@/components/ui/input';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useToast } from '../../../@/components/ui/use-toast';
-import { signInSchema } from '../../../model/Schema/signInSchema';
-import React from 'react';
+} from "../../../@/components/ui/form";
+import { Button } from "../../../@/components/ui/button";
+import { Input } from "../../../@/components/ui/input";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useToast } from "../../../@/components/ui/use-toast";
+import { signInSchema } from "../../../model/Schema/signInSchema";
+import React, { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../../../@/components/ui/card";
+import { FaDiscord, FaGoogle } from "react-icons/fa";
+import { Loader2 } from "lucide-react";
 
 export default function SignInForm() {
   const router = useRouter();
@@ -25,100 +35,133 @@ export default function SignInForm() {
   const form = useForm({
     resolver: undefined, // Removed zodResolver and its schema
     defaultValues: {
-      identifier: '',
-      password: '',
+      identifier: "",
+      password: "",
     },
   });
 
   const { toast } = useToast();
+
   const onSubmit = async (data) => {
-    const result = await signIn('credentials', {
+    const result = await signIn("credentials", {
       redirect: false,
       identifier: data.identifier,
       password: data.password,
     });
 
     if (result?.error) {
-      if (result.error === 'CredentialsSignin') {
+      if (result.error === "CredentialsSignin") {
         toast({
-          title: 'Login Failed',
-          description: 'Incorrect username or password',
-          variant: 'destructive',
+          title: "Login Failed",
+          description: "Incorrect username or password",
+          variant: "destructive",
         });
       } else {
         toast({
-          title: 'Error',
+          title: "Error",
           description: result.error,
-          variant: 'destructive',
+          variant: "destructive",
         });
       }
     }
 
     if (result?.url) {
-      router.replace('/');
+      router.replace("/");
     }
   };
 
   const handleGoogleSignIn = async () => {
-    await signIn('google', { callbackUrl: '/' });
+    await signIn("google", { callbackUrl: "/" });
   };
 
   const handleDiscordSignIn = async () => {
-    await signIn('discord', { callbackUrl: '/' });
+    await signIn("discord", { callbackUrl: "/" });
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-800">
-      <div className="w-full max-w-md p-8 space-y-8 bg-gray-600 rounded-lg shadow-md">
-        <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
-            Welcome to Sanity Gaming
-          </h1>
-          <p className="mb-4">Sign in to continue your gaming adventure</p>
-        </div>
+    <div className="flex justify-center items-center min-h-[70vh] pt-10">
+      <Card className="w-96">
+        <CardHeader>
+          <CardTitle className="text-2xl md:text-3xl tracking-tight">
+            Welcome to Sanity
+          </CardTitle>
+
+          <CardDescription>
+            Sign in to continue your gaming adventure
+          </CardDescription>
+        </CardHeader>
+
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              name="identifier"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email/Username</FormLabel>
-                  <Input {...field} />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              name="password"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <Input type="password" {...field} />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button className='w-full' type="submit">Sign In</Button>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <CardContent className="space-y-5">
+              <FormField
+                name="identifier"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email or Username</FormLabel>
+                    <Input {...field} />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                name="password"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <Input type="password" {...field} />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </CardContent>
           </form>
         </Form>
-        <div className="text-center mt-4">
-          <p>Or</p>
-          <Button className='w-full mt-2' onClick={handleGoogleSignIn}>
-            Sign in with Google
+
+        <CardFooter className="grid mt-4">
+          <Button className="w-full" type="submit">
+            Sign In
           </Button>
-          <Button className='w-full mt-2' onClick={handleDiscordSignIn}>
-            Sign in with Discord
-          </Button>
-          <p className="mt-4">
-            Not a member yet?{' '}
-            <Link href="/sign-up" className="text-blue-600 hover:text-blue-800">
-              Sign up
-            </Link>
-          </p>
-        </div>
-      </div>
+
+          <div className="text-center">
+            <div className="my-5 flex items-center">
+              <div className="h-[1px] bg-foreground/20 w-1/2"></div>
+              <div className="mx-2 text-foreground/60">OR</div>
+              <div className="h-[1px] bg-foreground/20 w-1/2"></div>
+            </div>
+
+            <Button
+              variant="outline"
+              className="w-full flex gap-4"
+              onClick={handleGoogleSignIn}
+            >
+              <FaGoogle className="h-4 w-4" /> Sign in with Google
+            </Button>
+
+            <Button
+              variant="outline"
+              className="w-full mt-2 flex gap-4"
+              onClick={handleDiscordSignIn}
+            >
+              <FaDiscord className="h-4 w-4" />
+              Sign in with Discord
+            </Button>
+
+            <div className="mt-10 text-foreground/80">
+              Not a member yet?{" "}
+              <Link
+                href="/sign-up"
+                className="hover:text-foreground underline transition-all"
+              >
+                Sign up
+              </Link>
+            </div>
+          </div>
+        </CardFooter>
+      </Card>
     </div>
   );
 }
