@@ -59,7 +59,9 @@ const Navbar = () => {
               width={30}
               className="rounded"
             />
-            <h1 className="text-2xl font-semibold mt-1">Sanity Gaming</h1>
+            <h1 className="text-2xl font-semibold tracking-tight mt-1">
+              Sanity Gaming
+            </h1>
           </Link>
         </div>
 
@@ -69,8 +71,8 @@ const Navbar = () => {
             <Link
               key={index}
               href={item.href}
-              className={`font-medium hover:text-foreground/80 transition-all
-                ${isActive(pathname, item.href) ? "text-foreground" : "text-foreground/60"}
+              className={`font-medium hover:text-foreground/90 transition-all
+                ${isActive(pathname, item.href) ? "text-foreground" : "text-foreground/70"}
               `}
             >
               {item.title}
