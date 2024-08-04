@@ -1,62 +1,85 @@
-'use client'
+"use client";
 
-import React from 'react';
-import FiltersSidebar from '../../components/FiltersSidebar';
-import TeamCard from '../../components/TeamCard';
-import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-
+import React from "react";
+import FiltersSidebar from "../../components/FiltersSidebar";
+import TeamCard from "../../components/TeamCard";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../../@/components/ui/card";
+import { Button } from "../../@/components/ui/button";
 
 const TeamFinder = () => {
-
   const router = useRouter();
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
     const fetchTeams = async () => {
       try {
-        const response = await axios.get('/api/teams/get-teams');
+        const response = await axios.get("/api/teams/get-teams");
         if (response.data.success) {
           setTeams(response.data.teams);
         } else {
-          console.error('Failed to fetch teams:', response.data.message);
+          console.error("Failed to fetch teams:", response.data.message);
         }
       } catch (error) {
-        console.error('Error fetching teams:', error);
+        console.error("Error fetching teams:", error);
       }
     };
 
     fetchTeams();
   }, []);
 
-
   const NavigateToCreateTeam = () => {
-    router.push('/create-team');
+    router.push("/create-team");
   };
 
-
   return (
-    <div className="md:p-4 md:mx-14 mx-7">
-      <p className="text-2xl ml-4 mb-4 font-semibold tracking-wide">TEAM FINDER</p>
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-x-4 overflow-hidden mx-4">
-        <FiltersSidebar className="rounded-lg mb-20px" />
-        <div className="overflow-y-auto p-4 bg-gray-900 text-white col-span-1 md:col-span-4 rounded-lg">
-          <div className="border-b-4 m mb-4">
-            <div className="flex justify-between mb-4">
+    <div className="mt-20 px-10 xl:px-[12%] min-h-[70vh]">
+      <h1 className="text-3xl ml-4 mb-14 font-semibold tracking-tight">
+        Team Finder
+      </h1>
+
+      <div className="mx-5 p-2 grid grid-cols-1 lg:grid-cols-10 overflow-hidden">
+        <FiltersSidebar className="" />
+
+        <Card className="mt-5 lg:mt-0 lg:ml-5 col-span-1 lg:col-span-7">
+          <CardHeader className="flex flex-col gap-5">
+            <CardTitle className="flex items-center justify-between">
               <h2 className="text-2xl">Find Team</h2>
-              <button className="bg-orange-500 px-4 py-2 rounded" onClick={NavigateToCreateTeam}>Create Team</button>
-            </div>
+              <Button
+                // variant="outline"
+                className=""
+                onClick={NavigateToCreateTeam}
+              >
+                Create Team
+              </Button>
+            </CardTitle>
+
             <div className="mb-4 flex flex-wrap gap-2 justify-between">
-              <button className="bg-indigo-600 px-4 py-2 rounded text-sm">Request Raised</button>
-              <button className="bg-indigo-600 px-4 py-2 rounded text-sm">Request Sent</button>
-              <button className="bg-indigo-600 px-4 py-2 rounded text-sm">+ New Request</button>
+              <Button variant="outline" className="px-4 py-2 rounded text-sm">
+                Request Raised
+              </Button>
+              <Button variant="outline" className="px-4 py-2 rounded text-sm">
+                Request Sent
+              </Button>
+              <Button variant="outline" className="px-4 py-2 rounded text-sm">
+                + New Request
+              </Button>
             </div>
-          </div>
-          {teams.map((team, index) => (
-            <TeamCard key={index} team={team} />
-          ))}
-        </div>
+          </CardHeader>
+
+          <CardContent className="min-h-80 lg:h-full border-t">
+            {teams.map((team, index) => (
+              <TeamCard key={index} team={team} />
+            ))}
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
