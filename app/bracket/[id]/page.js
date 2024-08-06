@@ -32,7 +32,7 @@ const BracketDisplay = () => {
     }, [id]);
 
     if (error) {
-        return <div>Error: {error}</div>;
+        return <div>Error:  {error}</div>;
     }
 
     if (!bracket) {
