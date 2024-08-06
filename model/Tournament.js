@@ -53,7 +53,8 @@ const TournamentSchema = new Schema({
     selectedPlatform: String,
     participantType: String,
     selectedTimezone: String,
-    size: String
+    size: String,
+    brackets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bracket' }],
 });
 
 // Add indexes
