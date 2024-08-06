@@ -36,7 +36,7 @@ const TeamFinder = () => {
   }, []);
 
   const NavigateToCreateTeam = () => {
-    router.push("/create-team");
+    router.push("/create/team");
   };
 
   return (
