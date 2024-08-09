@@ -72,7 +72,7 @@ const Navbar = () => {
               key={index}
               href={item.href}
               className={`font-medium hover:text-foreground/90 transition-all
-                ${isActive(pathname, item.href) ? "text-foreground" : "text-foreground/70"}
+                ${isActive(pathname, item.href) ? "text-foreground" : "text-foreground/60"}
               `}
             >
               {item.title}
