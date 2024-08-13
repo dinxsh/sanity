@@ -15,14 +15,17 @@ export default function RegisterPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
+
+        const formData = {
+            teamName,
+            members,
+            email,
+            selectedPlatform,
+            participantType,
+        };
+
         try {
-            const response = await axios.post(`/api/register/${tournamentId}`, {
-                teamName,
-                members,
-                email,
-                selectedPlatform,
-                participantType
-            });
+            const response = await axios.post(`/api/register/${tournamentId}`, formData);
 
             if (response.status === 201) {
                 alert('Registration successful!');
