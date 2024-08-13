@@ -25,7 +25,7 @@ import {
 } from "../../../@/components/ui/card";
 
 import { useToast } from "../../../@/components/ui/use-toast";
-import axios from "axios";
+import axios from "axios"
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { signUpSchema } from "../../../model/Schema/signUpSchema";
@@ -102,6 +102,8 @@ const Page = () => {
   };
 
   return (
+    <div>
+    <div className="bg-cover bg-center h-screen" style={{ backgroundImage: "url('/pexels-lulizler-3165335.jpg')" }}>  
     <div className="flex justify-center items-center min-h-[70vh] pt-16">
       <Card className="w-96">
         <CardHeader>
@@ -194,6 +196,8 @@ const Page = () => {
           </form>
         </Form>
       </Card>
+    </div>
+    </div>
     </div>
   );
 };

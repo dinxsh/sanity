@@ -28,6 +28,9 @@ import {
 } from "../../../@/components/ui/card";
 import { FaDiscord, FaGoogle } from "react-icons/fa";
 import { Loader2 } from "lucide-react";
+import LetterPullup from "../../../@/components/magicui/letter-pullup"
+import { delay } from "framer-motion";
+import SparklesText from "../../../@/components/magicui/sparkles-text"
 
 export default function SignInForm() {
   const router = useRouter();
@@ -79,15 +82,14 @@ export default function SignInForm() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-[70vh] pt-10">
+    <div>
+    <div className="bg-cover bg-center h-screen" style={{ backgroundImage: "url('pexels-lulizler-3165335.jpg')" }}>
+    <div className="flex justify-center  items-center min-h-[70vh]  pt-10">
       <Card className="w-96">
         <CardHeader>
-          <CardTitle className="text-2xl md:text-3xl tracking-tight">
-            Welcome to Sanity
-          </CardTitle>
 
-          <CardDescription>
-            Sign in to continue your gaming adventure
+            <CardDescription>
+
           </CardDescription>
         </CardHeader>
 
@@ -99,8 +101,8 @@ export default function SignInForm() {
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email or Username</FormLabel>
-                    <Input {...field} />
+                    <FormLabel className="text-xl" >Email or Username</FormLabel>
+                    <Input className="text-xl" {...field} />
                     <FormMessage />
                   </FormItem>
                 )}
@@ -111,8 +113,8 @@ export default function SignInForm() {
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <Input type="password" {...field} />
+                    <FormLabel className="text-xl">Password</FormLabel>
+                    <Input type="password" className="text-xl" {...field} />
                     <FormMessage />
                   </FormItem>
                 )}
@@ -162,6 +164,8 @@ export default function SignInForm() {
           </div>
         </CardFooter>
       </Card>
+    </div>
+    </div>
     </div>
   );
 }

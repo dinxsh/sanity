@@ -25,6 +25,7 @@
     "@tabler/icons": "^1.115.0",
     "@tabler/icons-react": "^3.11.0",
     "@types/bcrypt": "^5.0.2",
+    "axios": "^1.7.3",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
