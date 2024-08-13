@@ -153,6 +153,10 @@ const navLinks = [
     href: "/blogs",
   },
   {
+    title: "News",
+    href: "/news",
+  },
+  {
     title: "About",
     href: "/about",
   },
