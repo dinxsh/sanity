@@ -3,11 +3,8 @@
 import { dbConnect } from '../../../../lib/dbConnect';
 import Tournament from '../../../../model/Tournament';
 
-export default async function handler(req, res) {
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method Not Allowed' });
-    }
-
+export default async function POST(req, res) {
+    
     const { tournamentId, teamName, members, inviteCode } = req.body;
 
     if (!tournamentId || !teamName || !members || members.length === 0) {
