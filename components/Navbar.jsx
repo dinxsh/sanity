@@ -83,7 +83,7 @@ const Navbar = () => {
 
       {/* buttons */}
       <div className="hidden lg:flex items-center gap-4 transition-all">
-        <Link href="https://discord.gg/AB2vCdyw">
+        <Link href="https://discord.com/invite/rUYVa93Svr">
           <Button variant="outline" className="px-5 rounded-md">
             Join Community
           </Button>
@@ -120,7 +120,7 @@ const Navbar = () => {
               </nav>
             </div>
             <SheetFooter className="mt-10">
-              <Link href="https://discord.gg/AB2vCdyw">
+              <Link href="https://discord.com/invite/rUYVa93Svr">
                 <Button variant="link" className="px-5 -ml-5 text-lg underline">
                   Join Community
                 </Button>

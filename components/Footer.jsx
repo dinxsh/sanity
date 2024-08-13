@@ -30,7 +30,7 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <div className="grid grid-cols-1 px-10 mt-40 pt-10 md:px-[10%] lg:px-[20%] shadow-sm border-t transition-all">
+    <div className="grid grid-cols-1 px-10 mt-40 pt-10 md:px-[10%] lg:px-[12%] border-t transition-all">
       <div className="flex flex-col md:flex-row gap-20 justify-between transition-all">
         {/* main sec */}
         <div className="flex flex-col">
@@ -64,10 +64,13 @@ export default function Footer() {
                 key={index}
                 href={item.link}
                 target="_blank"
-                className="hover:scale-110 transition-all"
+                className="hover:scale-110 transition-all duration-300"
               >
                 {/* <item.icon /> */}
-                <item.icon size={24} className="text-gray-500" />
+                <item.icon
+                  size={24}
+                  className="text-foreground/50 hover:text-foreground/70 transition-all duration-300"
+                />
               </Link>
             ))}
           </div>
@@ -78,7 +81,7 @@ export default function Footer() {
           <h1 className="text-2xl font-semibold">Important Links</h1>
           <div className="flex flex-col gap-4 font-medium text-gray-600 dark:text-gray-400">
             <Link
-              href="https://discord.com/invite/AB2vCdyw"
+              href="https://discord.com/invite/rUYVa93Svr"
               className="hover:underline"
             >
               Join Community
