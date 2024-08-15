@@ -60,6 +60,8 @@ const VerifyAccount = () => {
   };
 
   return (
+    <div>
+    <div className="bg-cover bg-center h-screen" style={{ backgroundImage: "url('/pexels-lulizler-3165335.jpg')" }}>
     <div className="flex justify-center items-center min-h-[70vh]">
       <Card>
         <CardHeader className="mb-5">
@@ -93,6 +95,8 @@ const VerifyAccount = () => {
           </form>
         </Form>
       </Card>
+    </div>
+    </div>
     </div>
   );
 };

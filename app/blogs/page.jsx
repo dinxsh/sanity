@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Card,
   CardContent,
@@ -6,13 +6,13 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '../../components/ui/card';
-import Link from 'next/link';
-import { Button } from '../../components/ui/button';
-import { client, urlFor } from '../../lib/sanity';
-import Image from 'next/image';
-import BlogBanner from '../../components/BlogBanner';
-import BlogOffer from '../../components/BlogOffer';
+} from "../../components/ui/card";
+import Link from "next/link";
+import { Button } from "../../components/ui/button";
+import { client, urlFor } from "../../lib/sanity";
+import Image from "next/image";
+import BlogBanner from "../../components/BlogBanner";
+import BlogOffer from "../../components/BlogOffer";
 
 export const revalidate = 30;
 
@@ -30,13 +30,18 @@ const getData = async () => {
 const page = async () => {
   const data = await getData();
   return (
-    <div className="flex flex-col mt-5 gap-7">
+    <div className="px-5 xl:px-[10%] flex flex-col mt-5 gap-7 transition-all">
       <BlogBanner />
+
       <BlogOffer />
+
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 px-7">
         {data.map((item, idx) => {
           return (
-            <Card key={idx} className="flex flex-row border-none">
+            <Card
+              key={idx}
+              className="flex flex-col lg:flex-row justify-between border"
+            >
               <CardHeader>
                 <Image
                   src={urlFor(item.titleImage).url()}
@@ -46,7 +51,7 @@ const page = async () => {
                   className="object-cover rounded-t-lg h-[200px] w-full"
                 />
               </CardHeader>
-              <CardContent className="flex flex-col justify-between py-4">
+              <CardContent className="flex flex-col gap-10 justify-between py-4">
                 <div className="flex flex-col gap-3">
                   <CardTitle className="text-2xl font-bold">
                     {item.title}
@@ -55,6 +60,7 @@ const page = async () => {
                     {item.smallDescription}
                   </CardDescription>
                 </div>
+
                 <Button asChild className="">
                   <Link href={`/blog/${item.currentSlug}`}>Read More</Link>
                 </Button>

@@ -59,7 +59,9 @@ const Navbar = () => {
               width={30}
               className="rounded"
             />
-            <h1 className="text-2xl font-semibold mt-1">Sanity Gaming</h1>
+            <h1 className="text-2xl font-semibold tracking-tight mt-1">
+              Sanity Gaming
+            </h1>
           </Link>
         </div>
 
@@ -69,7 +71,7 @@ const Navbar = () => {
             <Link
               key={index}
               href={item.href}
-              className={`font-medium hover:text-foreground/80 transition-all
+              className={`font-medium hover:text-foreground/90 transition-all
                 ${isActive(pathname, item.href) ? "text-foreground" : "text-foreground/60"}
               `}
             >
@@ -81,7 +83,7 @@ const Navbar = () => {
 
       {/* buttons */}
       <div className="hidden lg:flex items-center gap-4 transition-all">
-        <Link href="https://discord.gg/AB2vCdyw">
+        <Link href="https://discord.com/invite/rUYVa93Svr">
           <Button variant="outline" className="px-5 rounded-md">
             Join Community
           </Button>
@@ -118,7 +120,7 @@ const Navbar = () => {
               </nav>
             </div>
             <SheetFooter className="mt-10">
-              <Link href="https://discord.gg/AB2vCdyw">
+              <Link href="https://discord.com/invite/rUYVa93Svr">
                 <Button variant="link" className="px-5 -ml-5 text-lg underline">
                   Join Community
                 </Button>
@@ -149,6 +151,10 @@ const navLinks = [
   {
     title: "Blogs",
     href: "/blogs",
+  },
+  {
+    title: "News",
+    href: "/news",
   },
   {
     title: "About",

@@ -1,12 +1,12 @@
-import Image from 'next/image';
-import React from 'react';
-import capa from '../app/assets/pexels.jpeg';
-import { Figma } from 'lucide-react';
+import Image from "next/image";
+import React from "react";
+import capa from "../app/assets/pexels.jpeg";
+import { Figma } from "lucide-react";
 
 const BlogOffer = () => {
   return (
-    <div className="sm:flex flex-row items-center gap-4 px-8">
-      <div className="flex-1">
+    <div className="lg:flex flex-row items-center justify-center gap-4 px-10 mb-10 lg:mb-20 mx-auto transition-all">
+      <div className="flex">
         <Image
           src={capa}
           alt="image"
@@ -15,8 +15,12 @@ const BlogOffer = () => {
           className="object-cover rounded-lg"
         />
       </div>
-      <div className="flex-1 flex flex-col h-[400px] gap-5">
-        <h1 className="text-2xl font-bold text-indigo-500">What we offer</h1>
+
+      <div className="flex flex-col items-start justify-center h-[400px] gap-5 lg:ml-10">
+        <h1 className="mb-10 text-2xl font-bold text-indigo-500">
+          What we offer
+        </h1>
+
         <div className="flex flex-row gap-3">
           <div className="pt-1">
             <Figma />
