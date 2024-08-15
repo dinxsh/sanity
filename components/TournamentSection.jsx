@@ -42,10 +42,12 @@ export default function TournamentSection({ filters }) {
           : "paid"
         : "";
 
-    if (filters.entryFee && filters.entryFee !== entryFee) return false;
-    if (filters.mode && filters.mode.toUpperCase() !== tournament.gameType)
+    if (filters?.entryFee && filters.entryFee !== entryFee) return false;
+
+    if (filters?.mode && filters.mode.toUpperCase() !== tournament.gameType)
       return false;
-    if (filters.status && filters.status !== status.toLowerCase()) return false;
+    if (filters?.status && filters.status !== status.toLowerCase())
+      return false;
     return true;
   });
 
