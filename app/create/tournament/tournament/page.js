@@ -2,7 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { platforms, timezones } from "./data";
-import { games } from "../../games/data/index";
+import { games } from "../../../games/data/index";
 
 export default function Page() {
   const [selectedPlatform, setSelectedPlatform] = useState("");
