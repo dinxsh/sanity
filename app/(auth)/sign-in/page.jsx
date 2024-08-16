@@ -28,9 +28,9 @@ import {
 } from "../../../@/components/ui/card";
 import { FaDiscord, FaGoogle } from "react-icons/fa";
 import { Loader2 } from "lucide-react";
-import LetterPullup from "../../../@/components/magicui/letter-pullup"
+// import LetterPullup from "../../../@/components/magicui/letter-pullup"
 import { delay } from "framer-motion";
-import SparklesText from "../../../@/components/magicui/sparkles-text"
+// import SparklesText from "../../../@/components/magicui/sparkles-text"
 
 export default function SignInForm() {
   const router = useRouter();
@@ -83,89 +83,91 @@ export default function SignInForm() {
 
   return (
     <div>
-    <div className="bg-cover bg-center h-screen" style={{ backgroundImage: "url('pexels-lulizler-3165335.jpg')" }}>
-    <div className="flex justify-center  items-center min-h-[70vh]  pt-10">
-      <Card className="w-96">
-        <CardHeader>
+      <div
+        className="bg-cover bg-center h-screen"
+        style={{ backgroundImage: "url('pexels-lulizler-3165335.jpg')" }}
+      >
+        <div className="flex justify-center  items-center min-h-[70vh]  pt-10">
+          <Card className="w-96">
+            <CardHeader>
+              <CardDescription></CardDescription>
+            </CardHeader>
 
-            <CardDescription>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)}>
+                <CardContent className="space-y-5">
+                  <FormField
+                    name="identifier"
+                    control={form.control}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-xl">
+                          Email or Username
+                        </FormLabel>
+                        <Input className="text-xl" {...field} />
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-          </CardDescription>
-        </CardHeader>
+                  <FormField
+                    name="password"
+                    control={form.control}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-xl">Password</FormLabel>
+                        <Input type="password" className="text-xl" {...field} />
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </CardContent>
+              </form>
+            </Form>
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <CardContent className="space-y-5">
-              <FormField
-                name="identifier"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-xl" >Email or Username</FormLabel>
-                    <Input className="text-xl" {...field} />
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <CardFooter className="grid mt-4">
+              <Button className="w-full" type="submit">
+                Sign In
+              </Button>
 
-              <FormField
-                name="password"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-xl">Password</FormLabel>
-                    <Input type="password" className="text-xl" {...field} />
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </CardContent>
-          </form>
-        </Form>
+              <div className="text-center">
+                <div className="my-5 flex items-center">
+                  <div className="h-[1px] bg-foreground/20 w-1/2"></div>
+                  <div className="mx-2 text-foreground/60">OR</div>
+                  <div className="h-[1px] bg-foreground/20 w-1/2"></div>
+                </div>
 
-        <CardFooter className="grid mt-4">
-          <Button className="w-full" type="submit">
-            Sign In
-          </Button>
+                <Button
+                  variant="outline"
+                  className="w-full flex gap-4"
+                  onClick={handleGoogleSignIn}
+                >
+                  <FaGoogle className="h-4 w-4" /> Sign in with Google
+                </Button>
 
-          <div className="text-center">
-            <div className="my-5 flex items-center">
-              <div className="h-[1px] bg-foreground/20 w-1/2"></div>
-              <div className="mx-2 text-foreground/60">OR</div>
-              <div className="h-[1px] bg-foreground/20 w-1/2"></div>
-            </div>
+                <Button
+                  variant="outline"
+                  className="w-full mt-2 flex gap-4"
+                  onClick={handleDiscordSignIn}
+                >
+                  <FaDiscord className="h-4 w-4" />
+                  Sign in with Discord
+                </Button>
 
-            <Button
-              variant="outline"
-              className="w-full flex gap-4"
-              onClick={handleGoogleSignIn}
-            >
-              <FaGoogle className="h-4 w-4" /> Sign in with Google
-            </Button>
-
-            <Button
-              variant="outline"
-              className="w-full mt-2 flex gap-4"
-              onClick={handleDiscordSignIn}
-            >
-              <FaDiscord className="h-4 w-4" />
-              Sign in with Discord
-            </Button>
-
-            <div className="mt-10 text-foreground/80">
-              Not a member yet?{" "}
-              <Link
-                href="/sign-up"
-                className="hover:text-foreground underline transition-all"
-              >
-                Sign up
-              </Link>
-            </div>
-          </div>
-        </CardFooter>
-      </Card>
-    </div>
-    </div>
+                <div className="mt-10 text-foreground/80">
+                  Not a member yet?{" "}
+                  <Link
+                    href="/sign-up"
+                    className="hover:text-foreground underline transition-all"
+                  >
+                    Sign up
+                  </Link>
+                </div>
+              </div>
+            </CardFooter>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }
