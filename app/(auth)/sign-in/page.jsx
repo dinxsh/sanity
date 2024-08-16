@@ -28,9 +28,7 @@ import {
 } from "../../../@/components/ui/card";
 import { FaDiscord, FaGoogle } from "react-icons/fa";
 import { Loader2 } from "lucide-react";
-// import LetterPullup from "../../../@/components/magicui/letter-pullup"
 import { delay } from "framer-motion";
-// import SparklesText from "../../../@/components/magicui/sparkles-text"
 
 export default function SignInForm() {
   const router = useRouter();
