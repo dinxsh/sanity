@@ -20,6 +20,11 @@ const TournamentSchema = new Schema({
         name: { type: String, required: true },
         members: [{ type: Schema.Types.ObjectId, ref: 'User' }]
     }],
+    participantCount: {
+        type: Number,
+        required: true,
+        min: 1
+    },
     rounds: [Schema.Types.Mixed],
     teamSize: { type: Number, min: 1 },
     prize: [Schema.Types.Mixed],
