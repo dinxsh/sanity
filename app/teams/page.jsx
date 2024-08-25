@@ -40,15 +40,13 @@ const TeamFinder = () => {
   };
 
   return (
-    <div className="mt-20 px-10 xl:px-[12%] min-h-[70vh]">
+    <div className="mt-20 px-5 md:px-10 xl:px-[12%] min-h-[70vh] transition-all">
       <h1 className="text-3xl ml-4 mb-14 font-semibold tracking-tight">
         Team Finder
       </h1>
 
-      <div className="mx-5 p-2 grid grid-cols-1 lg:grid-cols-10 overflow-hidden">
-        <FiltersSidebar className="" />
-
-        <Card className="mt-5 lg:mt-0 lg:ml-5 col-span-1 lg:col-span-7">
+      <div className="mx-5 p-2 grid gap-5 grid-cols-1 lg:grid-cols-10 overflow-hidden transition-all">
+        <Card className="mt-5 lg:mt-0 lg:ml-5 col-span-1 lg:col-span-7 transition-all">
           <CardHeader className="flex flex-col gap-5">
             <CardTitle className="flex items-center justify-between">
               <h2 className="text-2xl">Find Team</h2>
@@ -74,12 +72,14 @@ const TeamFinder = () => {
             </div>
           </CardHeader>
 
-          <CardContent className="min-h-80 lg:h-full border-t">
+          <CardContent className="min-h-80 lg:h-full border-t pt-5 transition-all">
             {teams.map((team, index) => (
               <TeamCard key={index} team={team} />
             ))}
           </CardContent>
         </Card>
+
+        <FiltersSidebar className="" />
       </div>
     </div>
   );
