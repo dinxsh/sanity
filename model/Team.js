@@ -9,16 +9,17 @@ const TeamSchema = new mongoose.Schema({
   server: { type: String, required: true },
   language: { type: String, required: true },
   players: [{ type: String, required: true }],
-  requests: { type: String, required: true }
+  requests: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'UserModel'
+  }]
 });
-
 
 const TeamModel = mongoose.models.TeamModel || mongoose.model('TeamModel', TeamSchema);
 
 module.exports = {
   TeamModel
 };
-
 
 
 
