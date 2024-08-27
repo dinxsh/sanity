@@ -8,13 +8,12 @@ const News = () => {
   const [latestNews, setLatestNews] = useState([]);
   const [esportsNews, setEsportsNews] = useState([]);
   const [gamingNews, setGamingNews] = useState([]);
-  const [tournamentNews, setTournamentNews] = useState([]);
 
   useEffect(() => {
     const fetchNews = async (category, setter) => {
       try {
         const response = await axios.get(
-          `https://gnews.io/api/v4/search?q=${category}&lang=en&country=us&max=10&apikey=${process.env.NEWSAPIKEY}`
+          `https://gnews.io/api/v4/search?q=${category}&lang=en&country=us&max=10&apikey=81a4b76d35bd5ea98535a29f90daa9fa`
         );
         const articlesWithImages = response.data.articles.filter(article => article.image);
         setter(articlesWithImages);
