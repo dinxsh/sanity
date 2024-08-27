@@ -14,7 +14,7 @@ const News = () => {
     const fetchNews = async (category, setter) => {
       try {
         const response = await axios.get(
-          `https://gnews.io/api/v4/search?q=${category}&lang=en&country=us&max=10&apikey=81a4b76d35bd5ea98535a29f90daa9fa`
+          `https://gnews.io/api/v4/search?q=${category}&lang=en&country=us&max=10&apikey=${process.env.NEWSAPIKEY}`
         );
         const articlesWithImages = response.data.articles.filter(article => article.image);
         setter(articlesWithImages);
