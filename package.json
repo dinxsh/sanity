@@ -55,6 +55,7 @@
     "@tailwindcss/typography": "^0.5.13",
     "@types/node": "22.5.0",
     "@types/react": "18.3.4",
+    "@types/react-reconciler": "^0.28.8",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
     "postcss": "^8",
