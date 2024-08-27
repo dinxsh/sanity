@@ -14,20 +14,33 @@ const NewsItem = ({ title, description, url, urlToImage }) => {
         </div>
         <div className="p-4 flex flex-col justify-between flex-grow">
           <h3 className="text-lg font-bold mb-2 text-indigo-400 hover:text-white transition-colors duration-300 line-clamp-3">
-            <a href={url} target="_blank" rel="noopener noreferrer">{title}</a>
+            <a href={url} target="_blank" rel="noopener noreferrer">
+              {title}
+            </a>
           </h3>
           <p className="text-gray-300 text-sm mb-3 line-clamp-4">
             {description}
           </p>
-          <a 
-            href={url} 
+          <a
+            href={url}
             target="_blank"
             rel="noopener noreferrer"
             className="text-indigo-400 text-sm font-semibold hover:text-white transition-colors duration-300 flex items-center mt-auto"
           >
             Read Full Article
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4 ml-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
             </svg>
           </a>
         </div>

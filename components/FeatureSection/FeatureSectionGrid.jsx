@@ -18,7 +18,7 @@ export default function FeaturesSectionGrid() {
       className:
         "col-span-1 lg:col-span-4 border-b lg:border-r dark:border-neutral-800",
     },
-    { 
+    {
       title: "Most Games Included",
       description:
         "Join tournaments and play across a wide range of popular games.",
@@ -107,7 +107,7 @@ export const SkeletonOne = () => {
         <div className="flex flex-1 w-full h-full flex-col space-y-2  ">
           {/* TODO */}
           <Image
-            src="https://sanityesports.live/demo.png"
+            src="/hero.jpg"
             alt="header"
             width={1000}
             height={1000}
