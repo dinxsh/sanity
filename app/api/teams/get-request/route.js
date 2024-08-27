@@ -3,7 +3,12 @@ import { TeamModel } from "../../../../model/Team";
 
 export async function GET(req) {
     await dbConnect();
-    const { teamId } = req.query;
+    const { searchParams } = new URL(req.url);
+    const teamId = searchParams.get('teamId');
+
+    if (!teamId) {
+        return new Response(JSON.stringify({ success: false, message: 'Team ID is required' }), { status: 400 });
+    }
 
     try {
         const team = await TeamModel.findById(teamId).populate('requests', 'username');

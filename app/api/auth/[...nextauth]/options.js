@@ -1,12 +1,12 @@
-import { NextAuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import DiscordProvider from "next-auth/providers/discord";
-import bcrypt from "bcryptjs";
-import UserModel from "../../../../model/User";
-import dbConnect from "../../../../lib/dbConnect";
-import CredentialsProvider from "next-auth/providers/credentials";
+const { NextAuthOptions } = require("next-auth");
+const GoogleProvider = require("next-auth/providers/google").default;
+const DiscordProvider = require("next-auth/providers/discord").default;
+const bcrypt = require("bcryptjs");
+const UserModel = require("../../../../model/User");
+const dbConnect = require("../../../../lib/dbConnect");
+const CredentialsProvider = require("next-auth/providers/credentials").default;
 
-export const authOptions: NextAuthOptions = {
+const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -24,7 +24,7 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials: any): Promise<any> {
+      async authorize(credentials) {
         await dbConnect();
         try {
           const user = await UserModel.findOne({
@@ -104,3 +104,5 @@ export const authOptions: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
+
+module.exports = { authOptions };

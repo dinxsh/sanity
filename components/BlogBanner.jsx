@@ -3,22 +3,13 @@ import React from "react";
 
 const BlogBanner = () => {
   return (
-    <div className="blogBanner h-[420px] w-full flex flex-col justify-center gap-4 pl-5 pt-7 text-center items-center">
-      <h1 className="text-4xl font-extrabold md:text-5xl ">
-        Welcome to{" "}
+    <div className="blogBanner min-h-[240px] w-full flex flex-col justify-center items-center px-4 py-8 bg-gradient-to-r from-gray-900 to-gray-800">
+      <h1 className="text-5xl font-black md:text-7xl mb-6 text-center leading-tight">
+        Catch up on the latest {" "}
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#E114E5]">
           Sanity Esports
         </span>
       </h1>
-      <span className="md:auto  text-md">
-        Your Ultimate Source for Esports News and Blogs
-      </span>
-      <Button
-        className="items-center justify-center gap-4 border-indigo-800 "
-        variant="outline"
-      >
-        Read Latest Blogs
-      </Button>
     </div>
   );
 };
