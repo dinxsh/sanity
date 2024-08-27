@@ -46,7 +46,7 @@ export default function HeroSection() {
 
       <div className="mt-20">
         <Image
-          src="https://sanityesports.live/demo.png"
+          src="/hero.jpg"
           height={1000}
           width={1200}
           className="mx-auto shadow-lg rounded-2xl"
