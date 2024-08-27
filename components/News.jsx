@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import NewsItem from "./NewsItem";
-import dotenv from "dotenv";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const News = () => {
@@ -11,21 +10,22 @@ const News = () => {
   const [gamingNews, setGamingNews] = useState([]);
   const [tournamentNews, setTournamentNews] = useState([]);
 
-  dotenv.config();
-
   useEffect(() => {
     const fetchNews = async (category, setter) => {
-      const response = await axios.get(
-        `https://newsapi.org/v2/everything?q=${category}&from=2024-08-11&sortBy=publishedAt&language=en&apiKey=08573ce9567742189e61fdc2618a482b`
-      );
-      const articlesWithImages = response.data.articles.filter(article => article.urlToImage);
-      setter(articlesWithImages);
+      try {
+        const response = await axios.get(
+          `https://gnews.io/api/v4/search?q=${category}&lang=en&country=us&max=10&apikey=${process.env.NEWSAPIKEY}`
+        );
+        const articlesWithImages = response.data.articles.filter(article => article.image);
+        setter(articlesWithImages);
+      } catch (error) {
+        console.error(`Error fetching ${category} news:`, error);
+      }
     };
 
     fetchNews("Gaming", setLatestNews);
     fetchNews("Esports", setEsportsNews);
     fetchNews("Gaming News", setGamingNews);
-    fetchNews("Gaming Tournaments", setTournamentNews);
   }, []);
 
   const sliderRefs = {
@@ -60,7 +60,7 @@ const News = () => {
                 title={article.title}
                 description={article.description}
                 url={article.url}
-                urlToImage={article.urlToImage}
+                urlToImage={article.image}
               />
             </div>
           ))}
@@ -81,7 +81,6 @@ const News = () => {
       {renderNewsSlider("Latest News", latestNews, "latestNews")}
       {renderNewsSlider("Esports", esportsNews, "esportsNews")}
       {renderNewsSlider("Gaming News", gamingNews, "gamingNews")}
-      {renderNewsSlider("Tournaments", tournamentNews, "tournamentNews")}
     </div>
   );
 };
