@@ -3,17 +3,31 @@
 import React, { useState, useEffect } from "react";
 import { generateBracket } from "../lib/generateBracket";
 import html2canvas from "html2canvas";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../@/components/ui/card";
+import { Button } from "../@/components/ui/button";
+import { Input } from "../@/components/ui/input";
+import Image from "next/image";
 
 const TournamentBracket = () => {
   const [tournaments, setTournaments] = useState([]);
   const [selectedTournament, setSelectedTournament] = useState("");
   const [tournamentName, setTournamentName] = useState("");
-  const [tournamentType, setTournamentType] = useState("single");
-  const [participants, setParticipants] = useState(["", ""]);
+  const [tournamentType, setTournamentType] = useState("single-elimination");
+  const [participants, setParticipants] = useState("");
   const [bracket, setBracket] = useState([]);
   const [isSetup, setIsSetup] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  const formatImages = {
+    "single-elimination": "/single-elimination.png",
+    "double-elimination": "/double-elimination.png",
+  };
 
   useEffect(() => {
     const fetchTournaments = async () => {
@@ -56,11 +70,13 @@ const TournamentBracket = () => {
       alert("Please select a tournament.");
       return;
     }
-    const validParticipants = participants.filter((p) => p.trim() !== "");
+    const participantsArray = participants.split("\n");
+    const validParticipants = participantsArray.filter((p) => p.trim() !== "");
     if (validParticipants.length < 2) {
       alert("Please enter at least 2 participants.");
       return;
     }
+    // Here you would typically set up the bracket based on the inputs
     setBracket(generateBracket(validParticipants));
     setIsSetup(true);
   };
@@ -127,22 +143,82 @@ const TournamentBracket = () => {
 
   if (!isSetup) {
     return (
-      <div className="w-full max-w-2xl mx-auto p-8 border rounded-lg shadow">
-        <h2 className="mb-5 text-2xl font-medium tracking-tight text-center">
-          Tournament Setup
-        </h2>
+      <div className="bg-gray-900 text-gray-100 min-h-screen py-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {" "}
+          <h1 className="text-3xl font-bold mb-8 text-center">
+            Tournament Bracket Generator
+          </h1>
+          <div className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4 text-center">
+              Tournament Format
+            </h2>
+            <div className="flex flex-wrap justify-center gap-4">
+              {Object.entries(formatImages).map(([format, imageSrc]) => (
+                <Card
+                  key={format}
+                  className={`relative cursor-pointer transition-all duration-300 overflow-hidden ${
+                    tournamentType === format ? "ring-2 ring-purple-500" : ""
+                  }`}
+                  onClick={() => setTournamentType(format)}
+                >
+                  <Image
+                    src={imageSrc}
+                    alt={format.replace("-", " ")}
+                    width={200}
+                    height={150}
+                    layout="responsive"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-white text-sm font-bold capitalize text-center px-2">
+                      {format.replace("-", " ")}
+                    </span>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+          <div className="space-y-6">
+            <div>
+              <label
+                htmlFor="participants"
+                className="block text-lg font-semibold mb-2"
+              >
+                Participants (One per line, ordered by seed from best to worst)
+              </label>
+              <textarea
+                id="participants"
+                rows={5}
+                className="w-full px-3 py-2 text-gray-200 border rounded-lg focus:outline-none focus:border-purple-500"
+                placeholder="Enter participants here"
+                value={participants}
+                onChange={(e) => setParticipants(e.target.value)}
+              />
+            </div>
 
-        <form onSubmit={handleSubmit} className="grid gap-10">
-          {isLoading ? (
-            <p>Loading tournaments...</p>
-          ) : (
-            <div className="grid">
-              <label className="font-medium">Select Tournament</label>
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="randomize-seeds"
+                className="rounded text-purple-600"
+              />
+              <label htmlFor="randomize-seeds" className="text-sm">
+                Randomize seeds
+              </label>
+            </div>
+
+            <div>
+              <label
+                htmlFor="tournament-select"
+                className="block text-lg font-semibold mb-2"
+              >
+                Select Tournament
+              </label>
               <select
+                id="tournament-select"
+                className="w-full px-3 py-2 text-gray-200 border rounded-lg focus:outline-none focus:border-purple-500"
                 value={selectedTournament}
                 onChange={(e) => setSelectedTournament(e.target.value)}
-                className="w-full mt-2 px-3 py-2 bg-background rounded-md border focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
-                required
               >
                 <option value="">Select a tournament</option>
                 {tournaments.map((tournament) => (
@@ -152,74 +228,27 @@ const TournamentBracket = () => {
                 ))}
               </select>
             </div>
-          )}
 
-          <div className="grid">
-            <label className="font-medium">Tournament Name</label>
-            <input
-              type="text"
-              value={tournamentName}
-              onChange={(e) => setTournamentName(e.target.value)}
-              className="w-full mt-2 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
-              required
-            />
-          </div>
-
-          <div className="grid">
-            <label className="font-medium">Tournament Type</label>
-            <select
-              value={tournamentType}
-              onChange={(e) => setTournamentType(e.target.value)}
-              className="w-full mt-2 px-3 py-2 bg-background rounded-md border focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
-            >
-              <option value="single">Single Elimination</option>
-              <option value="double">Double Elimination</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <label className="font-medium">Participants</label>
-
-            <div className="">
-              {participants.map((participant, index) => (
-                <div key={index} className="flex mb-2">
-                  <input
-                    type="text"
-                    value={participant}
-                    onChange={(e) =>
-                      handleParticipantChange(index, e.target.value)
-                    }
-                    className="w-10 md:w-full flex-grow px-3 py-2 rounded-l-md border focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    placeholder={`Participant ${index + 1}`}
-                  />
-
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveParticipant(index)}
-                    className="px-4 py-2 bg-red-500 text-white rounded-r-md hover:bg-red-600 transition-all duration-300"
-                  >
-                    Remove
-                  </button>
-                </div>
-              ))}
+            <div>
+              <label
+                htmlFor="tournament-name"
+                className="block text-lg font-semibold mb-2"
+              >
+                Tournament Name
+              </label>
+              <Input
+                id="tournament-name"
+                placeholder="Enter the tournament name"
+                value={tournamentName}
+                onChange={(e) => setTournamentName(e.target.value)}
+              />
             </div>
 
-            <button
-              type="button"
-              onClick={handleAddParticipant}
-              className="w-full mt-2 px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all duration-300"
-            >
-              Add Participant
-            </button>
+            <Button onClick={handleSubmit} className="w-full">
+              CREATE TOURNAMENT
+            </Button>
           </div>
-
-          <button
-            type="submit"
-            className="w-full px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition duration-200"
-          >
-            Create Tournament
-          </button>
-        </form>
+        </div>
       </div>
     );
   }
