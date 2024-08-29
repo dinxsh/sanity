@@ -9,7 +9,7 @@ const News = () => {
   const [esportsNews, setEsportsNews] = useState([]);
   const [gamingNews, setGamingNews] = useState([]);
   const [tournamentNews, setTournamentNews] = useState([]);
-
+  
   useEffect(() => {
     const fetchNews = async (category, setter) => {
       try {
@@ -47,14 +47,14 @@ const News = () => {
 
   const renderNewsSlider = (title, articles, category) => (
     <div className="mb-16">
-      <h2 className="text-[50px] text-[#dfdfdf] font-semibold mb-8 border-b-[1px] border-[#dfdfdf] pb-2">
+      <h2 className="text-[50px] text-tertiary font-semibold mb-8 border-b-[1px] border-tertiary pb-2">
         {title}
       </h2>
 
       <div className="relative">
         <button
           onClick={() => scroll(category, "left")}
-          className="absolute -left-2 top-0 bg-gradient-to-r from-black to-transparent text-white text-[20px] px-5 h-full w-auto z-10"
+          className="absolute -left-2 top-0 bg-gradient-to-r from-primary to-transparent text-secondary text-[20px] px-5 h-full w-auto z-10"
         >
           <FaChevronLeft />
         </button>
@@ -64,18 +64,18 @@ const News = () => {
         >
           {articles.map((article, index) => (
             <div key={index} className="flex-none">
-              <NewsItem
-                title={article.title}
-                description={article.description}
-                url={article.url}
-                urlToImage={article.image}
-              />
+                <NewsItem
+                  title={article.title}
+                  description={article.description}
+                  url={article.url}
+                  urlToImage={article.image}
+                />
             </div>
           ))}
         </div>
         <button
           onClick={() => scroll(category, "right")}
-          className="absolute -right-2 top-0 bg-gradient-to-l from-black to-transparent text-white text-[20px] px-5 h-full w-auto z-10"
+          className="absolute -right-2 top-0 bg-gradient-to-l from-primary to-transparent text-secondary text-[20px] px-5 h-full w-auto z-10"
         >
           <FaChevronRight />
         </button>
