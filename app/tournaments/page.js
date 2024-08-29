@@ -36,8 +36,8 @@ const TournamentPage = () => {
       {/* Tournaments */}
       <div className="mt-20 flex flex-col">
         {/* title */}
-        <div className="flex items-center justify-between">
-          <h1 className="text-4xl font-semibold mb-10 ">Tournaments</h1>
+        <div className="flex justify-between items-center pb-[20px] border-b-[1px] border-tertiary">
+          <h1 className="text-4xl font-semibold">Tournaments</h1>
 
           <div className="relative">
             <DropdownMenu>
@@ -48,7 +48,7 @@ const TournamentPage = () => {
                 </Button>
               </DropdownMenuTrigger>
 
-              <DropdownMenuContent className="w-56">
+              <DropdownMenuContent className="w-56 bg-primary">
                 <div className="mb-4 p-2">
                   <label className="block text-sm font-medium mb-2">
                     Entry Fee
@@ -57,7 +57,7 @@ const TournamentPage = () => {
                     name="entryFee"
                     value={filters.entryFee}
                     onChange={handleFilterChange}
-                    className="w-full rounded px-2 py-1 bg-background border"
+                    className="w-full  px-2 py-1 bg-primary border"
                   >
                     <option value="">All</option>
                     <option value="free">Free</option>
@@ -70,7 +70,7 @@ const TournamentPage = () => {
                     name="mode"
                     value={filters.mode}
                     onChange={handleFilterChange}
-                    className="w-full rounded px-2 py-1 bg-background border"
+                    className="w-full  px-2 py-1 bg-primary border"
                   >
                     <option value="">All</option>
                     <option value="solo">Solo</option>
@@ -86,7 +86,7 @@ const TournamentPage = () => {
                     name="status"
                     value={filters.status}
                     onChange={handleFilterChange}
-                    className="w-full rounded px-2 py-1 bg-background border"
+                    className="w-full  px-2 py-1 bg-primary border"
                   >
                     <option value="">All</option>
                     <option value="open">Open</option>
@@ -100,7 +100,7 @@ const TournamentPage = () => {
                 <Button
                   variant="ghost"
                   onClick={clearFilters}
-                  className="w-full rounded transition-colors"
+                  className="w-full  transition-colors"
                 >
                   Clear Filters
                 </Button>
