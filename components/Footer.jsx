@@ -38,11 +38,11 @@ export default function Footer() {
           <div>
             <Link href="/" className="flex items-center gap-2">
               <Image
-                src="https://sanityesports.live/sanity_esports_logo.jpeg"
+                src="/sanity_esports_logo.jpg"
                 alt="logo"
-                height={40}
-                width={40}
-                className="rounded-xl"
+                height={32}
+                width={32}
+                className="rounded-md"
               />
               <h1 className="text-2xl font-semibold mt-1">Sanity Gaming</h1>
             </Link>

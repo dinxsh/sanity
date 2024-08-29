@@ -53,7 +53,7 @@ const Navbar = () => {
         <div className="flex items-center">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="https://sanityesports.live/sanity_esports_logo.jpeg"
+              src="/sanity_esports_logo.jpg"
               alt="logo"
               height={30}
               width={30}
@@ -156,11 +156,6 @@ const navLinks = [
     title: "News",
     href: "/news",
   },
-  {
-    title: "About",
-    href: "/about",
-  },
-
   {
     title: "Contact",
     href: "/contact",

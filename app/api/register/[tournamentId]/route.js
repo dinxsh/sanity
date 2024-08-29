@@ -1,6 +1,6 @@
 // pages/api/register.js
 
-import { dbConnect } from "../../../../lib/dbConnect";
+import dbConnect  from "../../../../lib/dbConnect";
 import Tournament from "../../../../model/Tournament";
 
 async function handler(req, res) {
