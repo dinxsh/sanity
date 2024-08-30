@@ -9,12 +9,12 @@ const News = () => {
   const [esportsNews, setEsportsNews] = useState([]);
   const [gamingNews, setGamingNews] = useState([]);
   const [tournamentNews, setTournamentNews] = useState([]);
-
+  
   useEffect(() => {
     const fetchNews = async (category, setter) => {
       try {
         const response = await axios.get(
-          `https://gnews.io/api/v4/search?q=${category}&lang=en&country=us&max=10&apikey=${process.env.NEWSAPIKEY}`
+          `https://gnews.io/api/v4/search?q=${category}&lang=en&country=us&max=10&apikey=81a4b76d35bd5ea98535a29f90daa9fa`
         );
         const articlesWithImages = response.data.articles.filter(
           (article) => article.image
@@ -47,14 +47,14 @@ const News = () => {
 
   const renderNewsSlider = (title, articles, category) => (
     <div className="mb-16">
-      <h2 className="text-4xl font-bold mb-8 border-b-2 border-indigo-500 pb-2">
+      <h2 className="text-[50px] text-tertiary font-semibold mb-8 border-b-[1px] border-tertiary pb-2">
         {title}
       </h2>
 
       <div className="relative">
         <button
           onClick={() => scroll(category, "left")}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-indigo-600 text-white p-3 rounded-full z-10 hover:bg-indigo-700 transition-colors duration-300"
+          className="absolute -left-2 top-0 bg-gradient-to-r from-primary to-transparent text-secondary text-[20px] px-5 h-full w-auto z-10"
         >
           <FaChevronLeft />
         </button>
@@ -63,19 +63,19 @@ const News = () => {
           className="flex overflow-x-hidden space-x-6 pb-8"
         >
           {articles.map((article, index) => (
-            <div key={index} className="flex-none w-80 h-96">
-              <NewsItem
-                title={article.title}
-                description={article.description}
-                url={article.url}
-                urlToImage={article.image}
-              />
+            <div key={index} className="flex-none">
+                <NewsItem
+                  title={article.title}
+                  description={article.description}
+                  url={article.url}
+                  urlToImage={article.image}
+                />
             </div>
           ))}
         </div>
         <button
           onClick={() => scroll(category, "right")}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-indigo-600 text-white p-3 rounded-full z-10 hover:bg-indigo-700 transition-colors duration-300"
+          className="absolute -right-2 top-0 bg-gradient-to-l from-primary to-transparent text-secondary text-[20px] px-5 h-full w-auto z-10"
         >
           <FaChevronRight />
         </button>
@@ -85,7 +85,7 @@ const News = () => {
 
   return (
     <div className="container mx-auto px-8 py-16">
-      <h1 className="text-5xl font-bold mb-16 text-center">News Highlights</h1>
+      <h1 className="text-6xl font-bold mb-16 text-center">News Highlights</h1>
       {renderNewsSlider("Latest News", latestNews, "latestNews")}
       {renderNewsSlider("Esports", esportsNews, "esportsNews")}
       {renderNewsSlider("Gaming News", gamingNews, "gamingNews")}

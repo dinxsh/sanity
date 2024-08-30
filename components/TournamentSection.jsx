@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function TournamentSection({ filters }) {
   const [tournaments, setTournaments] = useState([]);
@@ -28,8 +30,41 @@ export default function TournamentSection({ filters }) {
 
     fetchTournaments();
   }, []);
-
-  if (isLoading) return <div>Loading tournaments...</div>;
+  if (isLoading)
+    return (
+      <div className="flex gap-10 mt-16">
+        <SkeletonTheme
+          baseColor="#202020"
+          highlightColor="#444"
+          height={400}
+          width={288}
+        >
+          <p>
+            <Skeleton />
+          </p>
+        </SkeletonTheme>
+        <SkeletonTheme
+          baseColor="#202020"
+          highlightColor="#444"
+          height={400}
+          width={288}
+        >
+          <p>
+            <Skeleton />
+          </p>
+        </SkeletonTheme>
+        <SkeletonTheme
+          baseColor="#202020"
+          highlightColor="#444"
+          height={400}
+          width={288}
+        >
+          <p>
+            <Skeleton />
+          </p>
+        </SkeletonTheme>
+      </div>
+    );
   if (error) return <div>Error: {error}</div>;
 
   // Apply filters
@@ -62,16 +97,16 @@ export default function TournamentSection({ filters }) {
   }
 
   return (
-    <div className="mt-20 pb-20 flex items-center justify-center">
+    <div className="mt-16 pb-20 flex">
       {filteredTournaments.length === 0 ? (
         <div>No tournaments match the current filters.</div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2 transition-all">
+        <div className="flex flex-wrap gap-10">
           {filteredTournaments.map((tournament) => (
             <Link
               key={tournament._id}
               href={`/tournaments/${tournament._id}`}
-              className="hover:scale-105 transition-all"
+              className=""
               prefetch={true} // prefetch the tournament page
             >
               <TournamentCard {...tournament} />
@@ -112,22 +147,23 @@ function TournamentCard({
       : "N/A";
 
   return (
-    <div className="bg-gray-800 text-white rounded-xl overflow-hidden shadow-lg w-72 m-4 p-2">
-      <div className="relative">
-        <span className="bg-blue-600 text-xs px-2 py-0.5 absolute bottom-0">
+    <div className="bg-quinary group relative text-xs text-secondary overflow-hidden w-[288px]">
+      <div className="relative overflow-hidden">
+        <span className="bg-[#16a9ff] px-2 py-1 text-xs absolute bottom-0 left-0 z-[2]">
           {gameType}
         </span>
         <span
-          className={`text-xs px-2 py-1 rounded-full absolute top-1 right-1 ${
+          className={`text-xs px-2 py-1 absolute top-0 right-0 font-medium z-[2] ${
             status === "Open"
-              ? "bg-green-600"
+              ? "bg-[#0ec00e]"
               : status === "Live"
-                ? "bg-yellow-600"
-                : "bg-red-600"
+                ? "bg-[yellow]"
+                : "bg-[red]"
           }`}
         >
           {status}
         </span>
+        <div className="absolute top-0 w-full h-full bg-gradient-to-t from-primary to-[transparent] z-[1]"></div>
         <Image
           src={
             (gameId && gameId.gameBannerPhoto) || "/placeholder-tournament.jpg"
@@ -135,12 +171,12 @@ function TournamentCard({
           alt={tournamentName}
           width={500}
           height={200}
-          className="object-cover rounded-xl"
+          className="object-cover h-[250px] w-auto group-hover:scale-[1.1] transition-all"
         />
       </div>
 
-      <div className="p-2 mt-2 grid grid-cols-1">
-        <p className="text-xs text-gray-400 mt-1">
+      <div className="p-4 mt-2 grid grid-cols-1">
+        <p className="text-xs text-gray-400 mt-1 text-tertiary">
           {new Date(tournamentDates.started).toLocaleDateString()}
         </p>
         <h2 className="mt-2 text-sm font-semibold">{tournamentName}</h2>
