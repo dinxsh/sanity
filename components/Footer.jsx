@@ -93,7 +93,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t mt-20 py-10 text-sm text-center text-gray-600 dark:text-gray-400">
+      <div className="border-t mt-20 py-10 text-xs md:text-sm text-center text-gray-600 dark:text-gray-400 transition-all">
         Built and maintained by Sanity Gaming - © 2024
       </div>
     </div>
