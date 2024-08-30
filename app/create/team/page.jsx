@@ -100,16 +100,17 @@ export default function CreateTeamForm() {
   };
 
   return (
-    <div className="flex justify-center items-center ">
-      <div className="w-3/4 p-8 space-y-8 rounded-lg shadow-md bg-gray-800">
+    <div className="flex justify-center items-center">
+      <div className="w-3/4 p-8 space-y-8 rounded-lg shadow-md border">
         <div className="text-center">
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-bold tracking-tight first:mt-0 text-gray-100">
+          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
             Create Team
           </h2>
-          <p className="mb-4 text-gray-100">
+          <p className="mt-2 mb-4 text-sm">
             Create your team and start competing
           </p>
         </div>
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
