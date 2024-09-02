@@ -10,7 +10,8 @@ const config: Config = {
     colors: {
       primary : "#000000",
       secondary: "#ffffff",
-      accent: "#d00000"
+      accent: "#d00000",
+      transparent: "transparent",
     }
   },
   plugins: [],
