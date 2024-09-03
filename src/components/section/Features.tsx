@@ -17,7 +17,7 @@ export default function Features() {
     },
   };
   return (
-    <section className="w-full flex flex-col items-center justify-center py-40 border-x-[1px]">
+    <section className="w-full flex flex-col items-center justify-center pt-40 ">
       <motion.h1
         variants={initialVar}
         initial="initial"
@@ -28,7 +28,7 @@ export default function Features() {
         Freatures We Provide
       </motion.h1>
       <div className="w-[50%] grid grid-cols-2 gap-4">
-        <div className="border-[1px] h-[250px] p-8 flex flex-col justify-between leading-tight">
+        <div className=" h-[250px] p-8 flex flex-col justify-between leading-tight">
           <Image
             src={"/assets/ui/create.svg"}
             height={40}
@@ -56,7 +56,7 @@ export default function Features() {
           </motion.p>
         </div>
 
-        <div className="border-[1px] h-[250px] p-8 flex flex-col justify-between leading-tight">
+        <div className=" h-[250px] p-8 flex flex-col justify-between leading-tight">
           <Image
             src={"/assets/ui/join.svg"}
             height={40}
@@ -83,7 +83,7 @@ export default function Features() {
           </motion.p>
         </div>
 
-        <div className="border-[1px] h-[250px] p-8 flex flex-col justify-between leading-tight">
+        <div className=" h-[250px] p-8 flex flex-col justify-between leading-tight">
           <Image
             src={"/assets/ui/community.svg"}
             height={40}
@@ -110,7 +110,7 @@ export default function Features() {
           </motion.p>
         </div>
 
-        <div className="border-[1px] h-[250px] p-8 flex flex-col justify-between leading-tight">
+        <div className=" h-[250px] p-8 flex flex-col justify-between leading-tight">
           <Image
             src={"/assets/ui/rewards.svg"}
             height={40}
