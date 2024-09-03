@@ -9,7 +9,6 @@
 }
 
 body {
-  padding: 20px;
   background: #000;
   color: #fff;
   overflow-x: hidden;
@@ -22,4 +21,7 @@ body {
 }
 ::-webkit-scrollbar-thumb {
   background-color: #111111;
+}
+.link:hover {
+  color: #d00000;
 }
