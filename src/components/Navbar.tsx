@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import NavItems from "./NavItems";
+import Link from "next/link";
 
 export default function Navbar() {
   const [menu, setMenu] = useState(false);
@@ -18,29 +19,31 @@ export default function Navbar() {
     }
   };
   return (
-    <div className="sticky w-full top-0 left-0 z-10">
-      <div className="relative z-10 bg-primary border-[1px] p-4 flex items-center justify-between">
+    <div className="fixed backdrop-blur top-0 left-1/2 -translate-x-1/2 w-[80%] my-6 px-8 py-4 rounded-full z-10 bg-[rgba(0,0,0,0.75)] flex items-center justify-between">
       <Image
-        className="h-[40px] w-auto"
+        className="h-[40px] w-auto rounded-full"
         src={"/assets/logo.jpg"}
         height={20}
         width={20}
         alt="Sanity Esports"
       />
-      <p className="text-2xl font-semibold">Sanity Esports</p>
-
-      <button onClick={handleMenu}>
-        <Image
-          className={`h-[30px] w-auto ${rotate} transition-all`}
-          src={"/assets/menu.svg"}
-          height={40}
-          width={40}
-          alt="Menu"
-        />
-      </button></div>
-
-      <AnimatePresence>{menu && <NavItems />}</AnimatePresence>
-      {/* <NavItems /> */}
+      <div className="flex justify-between items-center gap-10">
+        <Link href={"/"} className="link transition-all">
+          TOURNAMENTS
+        </Link>
+        <Link href={"/"} className="link transition-all">
+          TEAMS
+        </Link>
+        <Link href={"/"} className="link transition-all">
+          BLOGS
+        </Link>
+        <Link href={"/"} className="link transition-all">
+          NEWS
+        </Link>
+        <Link href={"/"} className="link transition-all">
+          CONTACT
+        </Link>
+      </div>
     </div>
   );
 }
