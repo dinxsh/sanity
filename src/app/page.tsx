@@ -4,6 +4,8 @@ import { cubicBezier, motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import Features from "@/components/section/Features";
+import FAQ from "@/components/section/Faq";
+import Games from "@/components/section/Games";
 
 export default function Home() {
   const initialVar = {
@@ -23,9 +25,9 @@ export default function Home() {
 
   return (
     <main className="">
-      <div className="w-full h-[85vh] relative -z-[1]">
+      <div className="w-full h-[85vh] relative">
         <video
-          className="w-full h-full object-cover border-[1px] mt-2"
+          className="object-cover h-full w-full"
           autoPlay
           muted
           loop
@@ -33,7 +35,7 @@ export default function Home() {
           <source src="/assets/trailer.webm" type="video/mp4" />
         </video>
 
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-primary to-transparent z-0 border-x-[1px]"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-primary to-transparent z-0"></div>
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-center leading-tight">
           <motion.h1
             variants={initialVar}
@@ -41,7 +43,7 @@ export default function Home() {
             animate="animate"
             className="text-[100px] font-semibold"
           >
-            Sanity Esports
+            Sanity Gaming
           </motion.h1>
           <motion.p
             variants={initialVar}
@@ -54,7 +56,7 @@ export default function Home() {
           </motion.p>
         </div>
       </div>
-      <div className="w-full flex justify-center gap-10 text-[15px] font-medium border-x-[1px]">
+      <div className="w-full flex justify-center gap-10 text-[15px] font-medium ">
         <Link
           href={""}
           className="bg-accent px-7 py-3 hover:bg-[red] transition-all items-center inline-flex"
@@ -76,6 +78,8 @@ export default function Home() {
         </Link>
       </div>
       <Features />
+      <FAQ />
+      <Games />
     </main>
   );
 }
