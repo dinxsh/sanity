@@ -28,19 +28,19 @@ export default function Navbar() {
         alt="Sanity Esports"
       />
       <div className="flex justify-between items-center gap-10">
-        <Link href={"/"} className="link transition-all">
+        <Link href={"/tournaments"} className="link transition-all">
           TOURNAMENTS
         </Link>
-        <Link href={"/"} className="link transition-all">
+        <Link href={"/teams"} className="link transition-all">
           TEAMS
         </Link>
-        <Link href={"/"} className="link transition-all">
+        <Link href={"/blogs"} className="link transition-all">
           BLOGS
         </Link>
-        <Link href={"/"} className="link transition-all">
+        <Link href={"/news"} className="link transition-all">
           NEWS
         </Link>
-        <Link href={"/"} className="link transition-all">
+        <Link href={"/contact"} className="link transition-all">
           CONTACT
         </Link>
       </div>
