@@ -19,7 +19,7 @@ export default function Blogs() {
     setLoading(false);
   }, []);
   return (
-    <div className="flex flex-col items-center justify-center mt-32">
+    <div className="flex flex-col items-center justify-center my-32">
       <h1 className="text-[100px] font-medium tracking-tight max-sm:text-[50px] max-sm:my-2">
         BLOGS
       </h1>
@@ -39,7 +39,7 @@ export default function Blogs() {
                     />
                   </div>
                   <div className="px-4 py-8 flex flex-col gap-2">
-                    <h2 className="text-2xl font-semibold">{data.id}. {data.name}</h2>
+                    <h2 className="text-2xl font-semibold">{data.name}</h2>
                     <p className="text-sm text-gray-500">
                       {data.description.substring(0, 100)} <Link href={`/blogs/${data.id}`} className="text-[#157eff] ml-1">Read More</Link>...
                     </p>
