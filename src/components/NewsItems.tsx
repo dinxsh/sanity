@@ -27,10 +27,12 @@ export default function NewsItems({ category }: NewsProps) {
   return (
     <div className="flex flex-col w-full items-center justify-center">
       <h1 className="uppercase text-[100px] font-medium tracking-tight max-sm:text-[50px] max-sm:my-2">
-        {category} NEWS
+        NEWS
       </h1>
       {loading ? (
-        <p className="h-[60vh] w-full flex justify-center items-center">Hang on tight while we fetch the latest news...</p>
+        <p className="h-[60vh] w-full flex justify-center items-center">
+          Hang on tight while we fetch the latest news...
+        </p>
       ) : (
         <span className="flex flex-wrap max-w-[1600px] gap-7 justify-start w-full max-2xl:justify-center">
           {news.map((data, index) => (
@@ -48,9 +50,12 @@ export default function NewsItems({ category }: NewsProps) {
                   width={500}
                   alt={data.title}
                 />
-                <h1 className="absolute bottom-0 left-0 text-xl tracking-tight font-semibold z-[1] group-hover:underline transition-all p-3">
-                  {data.title}
-                </h1>
+                <div className="absolute bottom-0 left-0 p-3 z-[1]">
+                  <p className="text-[#157eff]">{data.category}</p>
+                  <h1 className="text-xl tracking-tight font-semibold z-[1] group-hover:underline transition-all">
+                    {data.title}
+                  </h1>
+                </div>
                 <div className="absolute top-0 left-0 w-full h-full group-hover:bg-gradient-to-t from-primary to-transparent transition-all"></div>
               </div>
             </Link>
