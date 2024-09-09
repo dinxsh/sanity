@@ -20,13 +20,15 @@ export default function Navbar() {
   };
   return (
     <div className="fixed backdrop-blur top-0 left-1/2 -translate-x-1/2 w-[80%] my-6 px-8 py-4 rounded-full z-10 bg-[rgba(0,0,0,0.75)] flex items-center justify-between">
-      <Image
-        className="h-[40px] w-auto rounded-full"
-        src={"/assets/logo.jpg"}
-        height={20}
-        width={20}
-        alt="Sanity Esports"
-      />
+      <Link href={"/"}>
+        <Image
+          className="h-[40px] w-auto rounded-full"
+          src={"/assets/logo.jpg"}
+          height={20}
+          width={20}
+          alt="Sanity Esports"
+        />
+      </Link>
       <div className="flex justify-between items-center gap-10">
         <Link href={"/tournaments"} className="link transition-all">
           TOURNAMENTS
