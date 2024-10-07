@@ -69,7 +69,6 @@ export default function ContactPage() {
               </div>
 
               <Button
-                // variant="outline"
                 className="w-1/3"
               >
                 Submit
