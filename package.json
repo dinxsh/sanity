@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
+  "name": "sanity-frontend",
+=======
   "name": "sanity",
+>>>>>>> c64d4052a8a28cb66fc7ed964cea672fd032d412
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,6 +12,24 @@
     "start": "next start",
     "lint": "next lint"
   },
+<<<<<<< HEAD
+  "dependencies": {
+    "framer-motion": "^11.3.31",
+    "next": "14.2.7",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-loading-skeleton": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.7",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+=======
   "prisma": {
     "seed": "node prisma/seed.js"
   },
@@ -62,5 +84,6 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.4",
     "typescript": "5.5.4"
+>>>>>>> c64d4052a8a28cb66fc7ed964cea672fd032d412
   }
 }
