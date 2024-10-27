@@ -3,17 +3,6 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-<<<<<<< HEAD
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-=======
     "strict": false,
     "noEmit": true,
     "incremental": true,
@@ -23,21 +12,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
->>>>>>> c64d4052a8a28cb66fc7ed964cea672fd032d412
     "plugins": [
       {
         "name": "next"
       }
     ],
-<<<<<<< HEAD
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
-}
-=======
     "types": [
       "react-reconciler"
     ]
@@ -53,4 +32,3 @@
 , "app/api/auth/[...nextauth]/route.js", "app/api/auth/[...nextauth]/options.js"  ],
   "exclude": ["node_modules"]
 }
->>>>>>> c64d4052a8a28cb66fc7ed964cea672fd032d412
