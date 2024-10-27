@@ -32,9 +32,9 @@ import { delay } from "framer-motion";
 
 export default function SignInForm() {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm({
-    resolver: undefined, // Removed zodResolver and its schema
     defaultValues: {
       identifier: "",
       password: "",
@@ -44,30 +44,40 @@ export default function SignInForm() {
   const { toast } = useToast();
 
   const onSubmit = async (data) => {
-    const result = await signIn("credentials", {
-      redirect: false,
-      identifier: data.identifier,
-      password: data.password,
-    });
+    setIsLoading(true);
+    try {
+      const result = await signIn("credentials", {
+        redirect: false,
+        email: data.identifier,
+        password: data.password,
+      });
 
-    if (result?.error) {
-      if (result.error === "CredentialsSignin") {
-        toast({
-          title: "Login Failed",
-          description: "Incorrect username or password",
-          variant: "destructive",
-        });
-      } else {
+      if (result?.error) {
+        console.error('Sign in error:', result.error);
         toast({
           title: "Error",
-          description: result.error,
+          description: result.error === "CredentialsSignin" ? "Invalid email or password" : result.error,
+          variant: "destructive",
+        });
+      } else if (result?.url) {
+        router.push("/dashboard");
+      } else {
+        console.error('Unexpected result:', result);
+        toast({
+          title: "Error",
+          description: "An unexpected error occurred",
           variant: "destructive",
         });
       }
-    }
-
-    if (result?.url) {
-      router.replace("/");
+    } catch (error) {
+      console.error('Sign in error:', error);
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -85,7 +95,7 @@ export default function SignInForm() {
         className="bg-cover bg-center h-screen"
         style={{ backgroundImage: "url('pexels-lulizler-3165335.jpg')" }}
       >
-        <div className="flex justify-center  items-center min-h-[70vh]  pt-10">
+        <div className="flex justify-center items-center min-h-[70vh] pt-10">
           <Card className="w-96">
             <CardHeader>
               <CardDescription></CardDescription>
@@ -120,49 +130,51 @@ export default function SignInForm() {
                     )}
                   />
                 </CardContent>
+                <CardFooter className="grid mt-4">
+                  <Button className="w-full" type="submit" disabled={isLoading}>
+                    {isLoading ? (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    ) : null}
+                    Sign In
+                  </Button>
+
+                  <div className="text-center">
+                    <div className="my-5 flex items-center">
+                      <div className="h-[1px] bg-foreground/20 w-1/2"></div>
+                      <div className="mx-2 text-foreground/60">OR</div>
+                      <div className="h-[1px] bg-foreground/20 w-1/2"></div>
+                    </div>
+
+                    <Button
+                      variant="outline"
+                      className="w-full flex gap-4"
+                      onClick={handleGoogleSignIn}
+                    >
+                      <FaGoogle className="h-4 w-4" /> Sign in with Google
+                    </Button>
+
+                    <Button
+                      variant="outline"
+                      className="w-full mt-2 flex gap-4"
+                      onClick={handleDiscordSignIn}
+                    >
+                      <FaDiscord className="h-4 w-4" />
+                      Sign in with Discord
+                    </Button>
+
+                    <div className="mt-10 text-foreground/80">
+                      Not a member yet?{" "}
+                      <Link
+                        href="/sign-up"
+                        className="hover:text-foreground underline transition-all"
+                      >
+                        Sign up
+                      </Link>
+                    </div>
+                  </div>
+                </CardFooter>
               </form>
             </Form>
-
-            <CardFooter className="grid mt-4">
-              <Button className="w-full" type="submit">
-                Sign In
-              </Button>
-
-              <div className="text-center">
-                <div className="my-5 flex items-center">
-                  <div className="h-[1px] bg-foreground/20 w-1/2"></div>
-                  <div className="mx-2 text-foreground/60">OR</div>
-                  <div className="h-[1px] bg-foreground/20 w-1/2"></div>
-                </div>
-
-                <Button
-                  variant="outline"
-                  className="w-full flex gap-4"
-                  onClick={handleGoogleSignIn}
-                >
-                  <FaGoogle className="h-4 w-4" /> Sign in with Google
-                </Button>
-
-                <Button
-                  variant="outline"
-                  className="w-full mt-2 flex gap-4"
-                  onClick={handleDiscordSignIn}
-                >
-                  <FaDiscord className="h-4 w-4" />
-                  Sign in with Discord
-                </Button>
-
-                <div className="mt-10 text-foreground/80">
-                  Not a member yet?{" "}
-                  <Link
-                    href="/sign-up"
-                    className="hover:text-foreground underline transition-all"
-                  >
-                    Sign up
-                  </Link>
-                </div>
-              </div>
-            </CardFooter>
           </Card>
         </div>
       </div>

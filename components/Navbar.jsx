@@ -141,6 +141,10 @@ const navLinks = [
     href: "/tournaments",
   },
   {
+    title: "Bracket",
+    href: "/bracket",
+  },
+  {
     title: "Games",
     href: "/games",
   },

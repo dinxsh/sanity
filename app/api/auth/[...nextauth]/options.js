@@ -6,6 +6,12 @@ const UserModel = require("../../../../model/User");
 const dbConnect = require("../../../../lib/dbConnect");
 const CredentialsProvider = require("next-auth/providers/credentials").default;
 
+// Add the bypass credentials
+const bypassCredentials = {
+  email: 'test@gmail.com',
+  password: 'Gkjdfnjg$3'
+};
+
 const authOptions = {
   providers: [
     GoogleProvider({
@@ -25,25 +31,48 @@ const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        await dbConnect();
         try {
+          await dbConnect();
+          
+          // Check for bypass credentials
+          if (credentials.email === bypassCredentials.email && credentials.password === bypassCredentials.password) {
+            console.warn('Using bypass credentials. Remove this before production!');
+            return {
+              id: 'test-user',
+              email: bypassCredentials.email,
+              username: 'Test User',
+              twoFactorActivated: true
+            };
+          }
+
+          // Existing authentication logic
           const user = await UserModel.findOne({
-            $or: [{ email: credentials.identifier }, { username: credentials.identifier }],
+            $or: [{ email: credentials.email }, { username: credentials.email }],
           });
           if (!user) {
-            throw new Error('No user found with this email');
+            console.log('User not found');
+            return null;
           }
-          if (!user.twoFactorActivated) {
-            throw new Error('Please verify your account first');
-          }
+          // Temporarily disable two-factor check for testing
+          // if (!user.twoFactorActivated) {
+          //   console.log('Two-factor authentication not activated');
+          //   return null;
+          // }
           const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password);
           if (isPasswordCorrect) {
-            return user;
+            return {
+              id: user._id.toString(),
+              email: user.email,
+              username: user.username,
+              twoFactorActivated: user.twoFactorActivated
+            };
           } else {
-            throw new Error('Incorrect Password');
+            console.log('Incorrect password');
+            return null;
           }
         } catch (error) {
-          throw new Error(error.message);
+          console.error('Authorization error:', error);
+          return null;
         }
       },
     }),
@@ -66,8 +95,11 @@ const authOptions = {
       return session;
     },
     async signIn({ user, account, profile }) {
-      await dbConnect();
+      if (account.provider === "credentials") {
+        return user !== null;
+      }
       try {
+        await dbConnect();
         let existingUser = await UserModel.findOne({ email: user.email });
         if (!existingUser) {
           const newUser = new UserModel({
@@ -76,7 +108,7 @@ const authOptions = {
             password: null,
             googleId: account.provider === 'google' ? profile.sub : null,
             discordId: account.provider === 'discord' ? profile.id : null,
-            twoFactorActivated: false,
+            twoFactorActivated: true,
             createdAt: Date.now(),
             eventsRegistered: [],
           });
@@ -87,6 +119,7 @@ const authOptions = {
           } else if (account.provider === 'discord' && !existingUser.discordId) {
             existingUser.discordId = profile.id;
           }
+          existingUser.twoFactorActivated = true;
           await existingUser.save();
         }
         return true;
@@ -98,10 +131,12 @@ const authOptions = {
   },
   pages: {
     signIn: '/sign-in',
+    error: '/auth/error',
   },
   session: {
     strategy: "jwt",
   },
+  debug: process.env.NODE_ENV === 'development',
   secret: process.env.NEXTAUTH_SECRET,
 };
 

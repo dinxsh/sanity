@@ -234,18 +234,18 @@ const TournamentBracket = () => {
                 htmlFor="tournament-name"
                 className="block text-lg font-semibold mb-2"
               >
-                Tournament Name
+                Bracket Name
               </label>
               <Input
                 id="tournament-name"
-                placeholder="Enter the tournament name"
+                placeholder="Enter the bracket name"
                 value={tournamentName}
                 onChange={(e) => setTournamentName(e.target.value)}
               />
             </div>
 
             <Button onClick={handleSubmit} className="w-full">
-              CREATE TOURNAMENT
+              CREATE BRACKET
             </Button>
           </div>
         </div>
