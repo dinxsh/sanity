@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Games {
+  id                  String       @id @default(auto()) @map("_id") @db.ObjectId
+  name                String       @unique
+  category            String
+  linkedTournaments   Tournament[]
+  profile             String
+  gameBannerPhoto     String
+}
+
+model Organizer {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  orgName       String   @unique
+  orgEmail      String   @unique
+  description   String?
+  bannerPhoto   String?
+  twoFactorActivated Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  socials       String[]
+  members       String[]
+  eventsCreated Tournament[]
+}
+
+model Tournament {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  tournamentName   String
+  tournamentDates  TournamentDates
+  schedules        Json?
+  organizerId      String   @db.ObjectId
+  organizer        Organizer @relation(fields: [organizerId], references: [id])
+  gameType         GameType
+  gameId           String   @db.ObjectId
+  game             Games     @relation(fields: [gameId], references: [id])
+  links            Json?
+  gameBannerPhoto  String?
+  results          Json[]
+  teamsRegistered  TeamRegistration[]
+  rounds           Json[]
+  teamSize         Int
+  prize            Json[]
+  howToX           String[]
+  rules            String
+  slots            Int
+  email            String
+  registeredNumber Int      @default(0)
+}
+
+type TournamentDates {
+  created DateTime @default(now())
+  started DateTime?
+  ended   DateTime?
+}
+
+type TeamRegistration {
+  id      String   @db.ObjectId
+  name    String
+  members String[] @db.ObjectId
+}
+
+enum GameType {
+  SQUAD
+  SOLO
+  DUO
+}
+

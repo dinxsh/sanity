@@ -3,6 +3,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
+<<<<<<< HEAD
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -12,11 +13,23 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+=======
+    "strict": false,
+    "noEmit": true,
+    "incremental": true,
+    "module": "esnext",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+>>>>>>> c64d4052a8a28cb66fc7ed964cea672fd032d412
     "plugins": [
       {
         "name": "next"
       }
     ],
+<<<<<<< HEAD
     "paths": {
       "@/*": ["./src/*"]
     }
@@ -24,3 +37,20 @@
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
+=======
+    "types": [
+      "react-reconciler"
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "middleware.ts",
+    "app/(auth)/sign-in/page.jsx",
+    "prisma/seed.js"
+, "app/api/auth/[...nextauth]/route.js", "app/api/auth/[...nextauth]/options.js"  ],
+  "exclude": ["node_modules"]
+}
+>>>>>>> c64d4052a8a28cb66fc7ed964cea672fd032d412

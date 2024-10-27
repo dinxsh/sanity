@@ -1,0 +1,8 @@
+Backend:
+- changed-files:
+  - any-glob-to-any-file: [ 'app/**', 'lib/**', 'model/**', 'prisma/**', 'context/**', 'types/**' ]
+
+Frontend:
+- changed-files:
+  - any-glob-to-any-file: [ 'components/**', '@/**', 'public/**' ]
+
