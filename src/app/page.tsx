@@ -3,9 +3,9 @@
 import { cubicBezier, motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import Features from "@/components/section/Features";
-import FAQ from "@/components/section/Faq";
-import Games from "@/components/section/Games";
+import Features from "../components/section/Features";
+import FAQ from "../components/section/Faq";
+import Games from "../components/section/Games";
 
 export default function Home() {
   const initialVar = {

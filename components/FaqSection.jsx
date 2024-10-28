@@ -25,7 +25,7 @@ export default function FaqSection() {
 
       <div className="mt-10 max-w-2xl mx-auto">
         {faqsList.map((item, idx) => (
-          <FaqsCard idx={idx} faqsList={item} />
+          <FaqsCard key={idx} idx={idx} faqsList={item} />
         ))}
       </div>
     </motion.div>

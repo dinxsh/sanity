@@ -1,6 +1,6 @@
 "use client";
 
-import NewsItems from "@/components/NewsItems";
+import NewsItems from "../../components/NewsItems";
 
 export default function News() {
   return (
