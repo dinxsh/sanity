@@ -16,6 +16,8 @@ import { useState } from "react";
 import axios from "axios";
 import { teamSchema } from "../../../model/Schema/teamSchema";
 import { useToast } from "../../../@/components/ui/use-toast";
+import { FaArrowLeft } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 export default function CreateTeamForm() {
   const [teamname, setTeamname] = useState("");
@@ -28,6 +30,7 @@ export default function CreateTeamForm() {
   const [requests, setRequests] = useState("");
   const [participantCount, setParticipantCount] = useState("");
 
+  const router = useRouter();
   const { toast } = useToast();
 
   const form = useForm({
@@ -103,6 +106,9 @@ export default function CreateTeamForm() {
     <div className="flex justify-center items-center">
       <div className="w-3/4 p-8 space-y-8 rounded-lg shadow-md border">
         <div className="text-center">
+          <div className="w-8 cursor-pointer" onClick={() => router.push('/teams')}>
+            <FaArrowLeft />
+          </div>
           <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
             Create Team
           </h2>
