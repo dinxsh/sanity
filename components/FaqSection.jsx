@@ -7,23 +7,22 @@ import { motion } from "framer-motion";
 export default function FaqSection() {
   return (
     <motion.div
-      className="mt-20 lg:mt-40 px-10 mx-auto max-w-5xl flex flex-col items-center"
+      className="container mx-auto px-4 py-20"
       viewport={{ once: true }}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ type: "easIn", duration: 0.5, delay: 0.6 }}
     >
-      <div className="flex flex-col items-center justify-center text-center">
-        <h1 className="text-3xl lg:text-5xl font-medium tracking-tight transition-all">
+      <div className="text-center max-w-3xl mx-auto mb-12">
+        <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
           Frequently Asked Questions
-        </h1>
-        <h6 className="mt-5 text-sm">
-          Need help with something? Here are some of the most common questions
-          we get.
-        </h6>
+        </h2>
+        <p className="text-muted-foreground">
+          Need help with something? Here are some of the most common questions we get.
+        </p>
       </div>
 
-      <div className="mt-10 max-w-2xl mx-auto">
+      <div className="max-w-2xl mx-auto space-y-4">
         {faqsList.map((item, idx) => (
           <FaqsCard key={idx} idx={idx} faqsList={item} />
         ))}
@@ -32,36 +31,30 @@ export default function FaqSection() {
   );
 }
 
-const FaqsCard = (props) => {
+const FaqsCard = ({ faqsList, idx }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const answerElRef = useRef();
-  const [state, setState] = useState(false);
-  const [answerH, setAnswerH] = useState("0px");
-  const { faqsList, idx } = props;
-
-  const handleOpenAnswer = () => {
-    const answerElH = answerElRef.current.childNodes[0].offsetHeight;
-    setState(!state);
-    setAnswerH(`${answerElH + 20}px`);
-  };
 
   return (
-    <div
-      className="space-y-3 mt-5 overflow-hidden border-b"
-      key={idx}
-      onClick={handleOpenAnswer}
+    <div 
+      className="border border-border rounded-lg overflow-hidden hover:border-primary/50 transition-colors"
+      onClick={() => setIsOpen(!isOpen)}
     >
-      <h4 className="cursor-pointer pb-5 flex items-center justify-between text-lg font-medium transition-all duration-500">
-        {faqsList.title}
-        {state ? <FaMinus /> : <FaPlus />}
-      </h4>
-      <div
-        ref={answerElRef}
-        className="duration-500"
-        style={state ? { height: answerH } : { height: "0px" }}
+      <button
+        className="w-full px-6 py-4 flex items-center justify-between text-left"
       >
-        <div>
-          <p className="text-gray-500">{faqsList.content}</p>
-        </div>
+        <h3 className="font-semibold text-lg">{faqsList.title}</h3>
+        <span className="text-primary">
+          {isOpen ? <FaMinus /> : <FaPlus />}
+        </span>
+      </button>
+      
+      <div
+        className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${
+          isOpen ? "py-4" : "py-0 h-0"
+        }`}
+      >
+        <p className="text-muted-foreground">{faqsList.content}</p>
       </div>
     </div>
   );

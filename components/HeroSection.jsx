@@ -8,52 +8,52 @@ import { motion } from "framer-motion";
 export default function HeroSection() {
   return (
     <motion.section
-      className="px-10 mx-auto md:px-[8%] xl:px-[15%] my-20 md:my-32 gap-20"
+      className="container mx-auto px-4 py-20"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.8,
-        delay: 0.4,
-      }}
+      transition={{ duration: 0.8, delay: 0.4 }}
     >
-      <div className="space-y-5 max-w-4xl mx-auto text-center">
-        <h4 className="text-sm text-indigo-600 font-medium">
+      <div className="text-center max-w-4xl mx-auto space-y-6">
+        <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium">
           Discover new heights
-        </h4>
+        </span>
 
-        <h1 className="text-4xl font-extrabold mx-auto md:text-5xl max-w-3xl">
+        <h1 className="text-5xl md:text-6xl font-bold leading-tight">
           Level Up Your Esports Journey with{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#E114E5]">
+          <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             Sanity Esports
           </span>
         </h1>
 
-        <h6 className="max-w-2xl mx-auto">
-          The Go-To Esports Platform at the intersection of esports and mental
-          well-being
-        </h6>
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          The Go-To Esports Platform at the intersection of esports and mental well-being
+        </p>
 
-        <div className="flex items-center justify-center gap-4">
-          <Link href="/">
-            <Button>Get Started</Button>
-          </Link>
-
-          <Link href="/">
-            <Button variant="outline">Learn More</Button>
-          </Link>
+        <div className="flex items-center justify-center gap-4 pt-4">
+          <Button size="lg" className="bg-primary hover:bg-primary-hover">
+            Get Started
+          </Button>
+          <Button size="lg" variant="outline">
+            Learn More
+          </Button>
         </div>
       </div>
 
-      <div className="mt-20">
+      <motion.div 
+        className="mt-20"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6 }}
+      >
         <Image
           src="/hero.jpg"
           height={1000}
           width={1200}
-          className="mx-auto shadow-lg rounded-2xl"
-          alt=""
-          draggable={false}
+          className="rounded-2xl shadow-2xl mx-auto"
+          alt="Sanity Esports Hero"
+          priority
         />
-      </div>
+      </motion.div>
     </motion.section>
   );
 }

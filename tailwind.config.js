@@ -1,13 +1,9 @@
+import { fontFamily } from "tailwindcss/defaultTheme";
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: [
-    "./pages/**/*.{js,jsx}",
-    "./components/**/*.{js,jsx}",
-    "./app/**/*.{js,jsx}",
-    "./src/**/*.{js,jsx}",
-  ],
-  prefix: "",
+  content: ["app/**/*.{ts,tsx,js,jsx}", "components/**/*.{ts,tsx,js,jsx}"],
   theme: {
     container: {
       center: true,
@@ -16,69 +12,63 @@ module.exports = {
         "2xl": "1400px",
       },
     },
-    colors: {
-      primary: "#000000",
-      secondary: "#ffffff",
-      tertiary: "#d8d8d8",
-      quinary: "#111111"
+    extend: {
+      colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "#4F46E5", // Indigo
+          foreground: "hsl(var(--primary-foreground))",
+          hover: "#4338CA",
+        },
+        secondary: {
+          DEFAULT: "#E114E5", // Pink
+          foreground: "hsl(var(--secondary-foreground))",
+          hover: "#C026D3",
+        },
+        accent: {
+          DEFAULT: "#18181B", // Dark gray
+          foreground: "hsl(var(--accent-foreground))",
+          hover: "#27272A",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
+      fontFamily: {
+        sans: ["var(--font-helvetica)", ...fontFamily.sans],
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: 0 },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: 0 },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
     },
-    //   extend: {
-    //     colors: {
-    //       border: 'hsl(var(--border))',
-    //       input: 'hsl(var(--input))',
-    //       ring: 'hsl(var(--ring))',
-    //       background: 'hsl(var(--background))',
-    //       foreground: 'hsl(var(--foreground))',
-    //       primary: {
-    //         DEFAULT: 'hsl(var(--primary))',
-    //         foreground: 'hsl(var(--primary-foreground))',
-    //       },
-    //       secondary: {
-    //         DEFAULT: 'hsl(var(--secondary))',
-    //         foreground: 'hsl(var(--secondary-foreground))',
-    //       },
-    //       destructive: {
-    //         DEFAULT: 'hsl(var(--destructive))',
-    //         foreground: 'hsl(var(--destructive-foreground))',
-    //       },
-    //       muted: {
-    //         DEFAULT: 'hsl(var(--muted))',
-    //         foreground: 'hsl(var(--muted-foreground))',
-    //       },
-    //       accent: {
-    //         DEFAULT: 'hsl(var(--accent))',
-    //         foreground: 'hsl(var(--accent-foreground))',
-    //       },
-    //       popover: {
-    //         DEFAULT: 'hsl(var(--popover))',
-    //         foreground: 'hsl(var(--popover-foreground))',
-    //       },
-    //       card: {
-    //         DEFAULT: 'hsl(var(--card))',
-    //         foreground: 'hsl(var(--card-foreground))',
-    //       },
-    //     },
-    //     borderRadius: {
-    //       lg: 'var(--radius)',
-    //       md: 'calc(var(--radius) - 2px)',
-    //       sm: 'calc(var(--radius) - 4px)',
-    //     },
-    //     keyframes: {
-    //       'accordion-down': {
-    //         from: { height: '0' },
-    //         to: { height: 'var(--radix-accordion-content-height)' },
-    //       },
-    //       'accordion-up': {
-    //         from: { height: 'var(--radix-accordion-content-height)' },
-    //         to: { height: '0' },
-    //       },
-    //     },
-    //     animation: {
-    //       'accordion-down': 'accordion-down 0.2s ease-out',
-    //       'accordion-up': 'accordion-up 0.2s ease-out',
-    //     },
-    //   },
-    // },
-    // plugins: [require('@tailwindcss/typography'), require('tailwindcss-animate')],
   },
+  plugins: [require("tailwindcss-animate")],
 };

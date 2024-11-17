@@ -1,222 +1,220 @@
-import Image from "next/image";
-import Link from "next/link";
-import { CalendarIcon, ClockIcon } from "@radix-ui/react-icons";
-import { Trophy, DollarSign, Users, Shield } from "lucide-react";
-import dbConnect from "../../../lib/dbConnect";
-import Tournament from "../../../model/Tournament";
+"use client";
 
-async function getTournament(id) {
-  await dbConnect();
-  if (!id) {
-    console.error("Tournament ID is undefined");
-    return null;
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
+import TournamentBracket from "@/components/TournamentBracket";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { motion, AnimatePresence } from "framer-motion";
+import { fetchTournamentData, registerForTournament } from "@/lib/api/tournament";
+import { Loader2 } from "lucide-react";
+
+export default function TournamentPage({ params }) {
+  const [tournament, setTournament] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [registering, setRegistering] = useState(false);
+  const router = useRouter();
+  const { toast } = useToast();
+
+  useEffect(() => {
+    loadTournamentData();
+  }, [params.id]);
+
+  const loadTournamentData = async () => {
+    try {
+      setLoading(true);
+      const data = await fetchTournamentData(params.id);
+      setTournament(data);
+      setError(null);
+    } catch (err) {
+      setError(err.message || 'Failed to load tournament');
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to load tournament data"
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRegister = async () => {
+    try {
+      setRegistering(true);
+      await registerForTournament(params.id);
+      toast({
+        title: "Success",
+        description: "Successfully registered for tournament"
+      });
+      router.refresh();
+    } catch (err) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: err.message || "Failed to register for tournament"
+      });
+    } finally {
+      setRegistering(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        <p className="text-muted-foreground">Loading tournament details...</p>
+      </div>
+    );
   }
-  try {
-    const tournament = await Tournament.findById(id)
-      .populate("gameId")
-      .populate("organizerId")
-      .lean();
-    return tournament ? JSON.parse(JSON.stringify(tournament)) : null;
-  } catch (error) {
-    console.error("Error fetching tournament:", error);
-    return null;
-  }
-}
 
-export default async function TournamentPage({ params }) {
-  if (!params || !params.id) {
-    return <div>Invalid tournament ID</div>;
-  }
-
-  const tournament = await getTournament(params.id);
-
-  if (!tournament) {
-    return <div>Tournament not found</div>;
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+        <p className="text-destructive text-lg">{error}</p>
+        <Button onClick={loadTournamentData}>Retry</Button>
+      </div>
+    );
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="overflow-hidden">
-        <div className="relative h-64 sm:h-80 lg:h-96">
-          <Image
-            src={
-              tournament.gameId?.gameBannerPhoto ||
-              "/placeholder-tournament.jpg"
-            }
-            alt={tournament.tournamentName}
-            layout="fill"
-            objectFit="cover"
-            className="rounded-xl"
-          />
-
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-end rounded-xl">
-            <div className="p-6">
-              <h1 className="text-3xl font-bold text-white mb-2">
-                {tournament.tournamentName}
-              </h1>
-              <div className="flex items-center text-gray-300 space-x-4">
-                <span className="flex items-center">
-                  <CalendarIcon className="h-5 w-5 mr-1" />
-                  {new Date(
-                    tournament.tournamentDates.started
-                  ).toLocaleDateString()}
-                </span>
-                <span className="flex items-center">
-                  <ClockIcon className="h-5 w-5 mr-1" />
-                  {new Date(
-                    tournament.tournamentDates.started
-                  ).toLocaleTimeString()}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h2 className="text-xl font-semibold mb-4">Tournament Details</h2>
-              <div className="space-y-2">
-                <p className="flex items-center">
-                  <Trophy className="h-5 w-5 mr-2" />
-                  Prize Pool: $
-                  {tournament.prize.reduce(
-                    (sum, prize) => sum + prize.amount,
-                    0
+    <AnimatePresence mode="wait">
+      <div className="container mx-auto px-4 py-10">
+        {tournament && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {/* Tournament Header */}
+            <div className="mb-10 text-center">
+              <motion.h1 
+                className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.2 }}
+              >
+                {tournament.title}
+              </motion.h1>
+              <motion.p 
+                className="text-muted-foreground mb-6"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                {tournament.description}
+              </motion.p>
+              <motion.div 
+                className="flex justify-center gap-4"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.4 }}
+              >
+                <Button 
+                  size="lg"
+                  onClick={handleRegister}
+                  disabled={registering}
+                >
+                  {registering ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Registering...
+                    </>
+                  ) : (
+                    'Register Now'
                   )}
-                </p>
-                <p className="flex items-center">
-                  <Users className="h-5 w-5 mr-2" />
-                  Participants: {tournament.registeredNumber}/{tournament.slots}
-                </p>
-                <p className="flex items-center">
-                  <Shield className="h-5 w-5 mr-2" />
-                  Mode: {tournament.gameType}
-                </p>
-                <p className="flex items-center">
-                  <DollarSign className="h-5 w-5 mr-2" />
-                  Entry Fee:{" "}
-                  {tournament.prize[0].amount === 0
-                    ? "Free"
-                    : `₹${tournament.prize[0].amount}`}
-                </p>
-                <p>
-                  Status:{" "}
-                  <span
-                    className={`px-2 py-1 rounded ${
-                      new Date() < new Date(tournament.tournamentDates.started)
-                        ? "bg-green-600"
-                        : new Date() >
-                            new Date(tournament.tournamentDates.ended)
-                          ? "bg-red-600"
-                          : "bg-yellow-600"
-                    }`}
-                  >
-                    {new Date() < new Date(tournament.tournamentDates.started)
-                      ? "Open"
-                      : new Date() > new Date(tournament.tournamentDates.ended)
-                        ? "Completed"
-                        : "Live"}
+                </Button>
+                <Button size="lg" variant="outline">
+                  View Details
+                </Button>
+              </motion.div>
+            </div>
+
+            {/* Tournament Info Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Prize Pool</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-2xl font-bold text-primary">
+                    {tournament.prizePool}
+                  </p>
+                </CardContent>
+              </Card>
+              
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Participants</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-2xl font-bold text-primary">
+                    {tournament.participants}
+                  </p>
+                </CardContent>
+              </Card>
+              
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Status</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary">
+                    {tournament.status}
                   </span>
-                </p>
-              </div>
+                </CardContent>
+              </Card>
             </div>
-            <div>
-              <h2 className="text-xl font-semibold mb-4">Host</h2>
-              <div className="flex items-center">
-                <Image
-                  src={
-                    tournament.organizerId?.bannerPhoto ||
-                    "/placeholder-organizer.jpg"
-                  }
-                  alt={tournament.organizerId?.orgName || "Organizer"}
-                  width={50}
-                  height={50}
-                  className="rounded-full"
+
+            {/* Tournament Bracket */}
+            <Card className="mb-10">
+              <CardHeader>
+                <CardTitle>Tournament Bracket</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <TournamentBracket
+                  matches={tournament.matches}
+                  roundNames={roundNames}
                 />
-                <span className="ml-4 text-lg">
-                  {tournament.organizerId?.orgName || "Unknown Organizer"}
-                </span>
-              </div>
+              </CardContent>
+            </Card>
+
+            {/* Rules and Information */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Tournament Rules</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                    {tournament.rules.map((rule, index) => (
+                      <li key={index}>{rule}</li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Schedule</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {tournament.schedule.map((event, index) => (
+                      <div key={index} className="flex justify-between items-center">
+                        <span className="text-muted-foreground">{event.stage}</span>
+                        <span className="text-primary">{event.date}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
-          </div>
-
-          <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-4">Description</h2>
-            <p>{tournament.gameId?.profile || "No description available"}</p>
-          </div>
-
-          <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-4">Rules</h2>
-            <p>{tournament.rules}</p>
-          </div>
-
-          <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-4">Schedule</h2>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between p-4 border rounded">
-                <span>Tournament Start</span>
-                <span>
-                  {new Date(
-                    tournament.tournamentDates.started
-                  ).toLocaleString()}
-                </span>
-              </div>
-              <div className="flex items-center justify-between p-4 border rounded">
-                <span>Tournament End</span>
-                <span>
-                  {new Date(tournament.tournamentDates.ended).toLocaleString()}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-8 flex justify-center">
-            <Link
-              href={`/register/${tournament._id}`}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-            >
-              Register for Tournament
-            </Link>
-          </div>
-        </div>
+          </motion.div>
+        )}
       </div>
-    </div>
+    </AnimatePresence>
   );
 }
-
-// Add caching and revalidation
-export const revalidate = 60; // Revalidate this page every 60 seconds
-
-// Static tournament data for UI demonstration
-// const tournament = {
-//     id: "1",
-//     image: "/tournament-banner.jpg",
-//     title: "KINGS ESPORTS PRO SCRIMS",
-//     date: "JUL 1, 2024",
-//     time: "11:00 PM",
-//     entryFee: 500,
-//     mode: "Squad",
-//     participants: "16/21",
-//     host: {
-//         image: "/host-avatar.jpg",
-//         name: "KINGS ESPORTS",
-//     },
-//     status: "Open",
-//     prizePool: "$10,000",
-//     description: "Join the ultimate BGMI showdown in our Pro Scrims tournament. Prove your skills, compete against the best, and claim your share of the prize pool!",
-//     rules: [
-//         "Players must be 18 years or older to participate.",
-//         "Teams must have 4 players.",
-//         "Use of cheats, exploits, or third-party software is strictly prohibited.",
-//         "All participants must join the official Discord server for communication.",
-//         "Tournament admins have the final say in all disputes."
-//     ],
-//     schedule: [
-//         { stage: "Registration Deadline", date: "JUN 30, 2024", time: "11:59 PM" },
-//         { stage: "Tournament Start", date: "JUL 1, 2024", time: "11:00 PM" },
-//         { stage: "Quarter Finals", date: "JUL 2, 2024", time: "7:00 PM" },
-//         { stage: "Semi Finals", date: "JUL 3, 2024", time: "7:00 PM" },
-//         { stage: "Finals", date: "JUL 4, 2024", time: "8:00 PM" }
-//     ]
-// };
