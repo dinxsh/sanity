@@ -16,14 +16,29 @@ import BlogOffer from "../../components/BlogOffer";
 
 export const revalidate = 30;
 
+// NOTE:- this is temporrary array for tag
+const randomTagarrayofstring = [
+  "abc",
+  "den",
+  "efg",
+  "hij",
+  "klm",
+  "nop",
+  "qrs",
+  "tuv",
+  "wxyz",
+];
+
 const getData = async () => {
-  const querry = `
+  const query = `
     *[_type=='blog'] | order(_createdAt desc){
-      title, smallDescription,
-        titleImage,
-        "currentSlug":slug.current
+      title, 
+      smallDescription,
+      titleImage,
+      "currentSlug":slug.current,
+      _createdAt
     }`;
-  const data = await client.fetch(querry);
+  const data = await client.fetch(query);
   return data;
 };
 
@@ -35,33 +50,54 @@ const page = async () => {
 
       <BlogOffer />
 
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 px-7">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 px-4 sm:px-6 lg:px-8">
         {data.map((item, idx) => {
           return (
             <Card
               key={idx}
-              className="flex flex-col lg:flex-row justify-between border"
+              className="flex flex-col justify-between border border-gray-700 rounded-lg shadow-md bg-gray-800 dark:border-gray-600"
             >
               <CardHeader>
                 <Image
                   src={urlFor(item.titleImage).url()}
                   alt="title"
-                  width={200}
+                  width={300}
                   height={200}
                   className="object-cover rounded-t-lg h-[200px] w-full"
                 />
               </CardHeader>
-              <CardContent className="flex flex-col gap-10 justify-between py-4">
-                <div className="flex flex-col gap-3">
-                  <CardTitle className="text-2xl font-bold">
+              <CardContent className="flex flex-col justify-between p-4 h-[260px]">
+                <div className="flex flex-col gap-2">
+                  <CardTitle className="text-xl font-bold text-white line-clamp-2">
                     {item.title}
                   </CardTitle>
-                  <CardDescription className="text-sm text-gray-600 line-clamp-3 dark:text-gray-300">
+                  <CardDescription className="text-sm text-gray-400 line-clamp-3">
                     {item.smallDescription}
                   </CardDescription>
+                  <p className="text-xs text-gray-500">
+                    Published: {new Date(item._createdAt).toLocaleDateString()}
+                  </p>
+                  <div className="flex items-center gap-2 mt-2">
+                    {randomTagarrayofstring.slice(0, 3).map((tag, tagIdx) => (
+                      <span
+                        key={tagIdx}
+                        className="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                    {randomTagarrayofstring.length > 3 && (
+                      <span className="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded">
+                        +{randomTagarrayofstring.length - 3}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
-                <Button asChild className="">
+                <Button
+                  asChild
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+                >
                   <Link href={`/blog/${item.currentSlug}`}>Read More</Link>
                 </Button>
               </CardContent>
