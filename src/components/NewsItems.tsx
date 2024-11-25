@@ -27,7 +27,7 @@ export default function NewsItems({ category }: NewsProps) {
   return (
     <div className="flex flex-col w-full items-center justify-center">
       <h1 className="uppercase text-[100px] font-medium tracking-tight max-sm:text-[50px] max-sm:my-2">
-        NEWS
+        NEWS 
       </h1>
       {loading ? (
         <p className="h-[60vh] w-full flex justify-center items-center">
