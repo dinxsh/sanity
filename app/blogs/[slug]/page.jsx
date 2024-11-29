@@ -8,14 +8,14 @@ import { ArrowLeft } from 'lucide-react';
 export const revalidate = 30;
 
 const getData = async (slug) => {
-  const querry = `
+  const query = `
     *[_type=='blog' && slug.current =='${slug}']{
         "currentSlug":slug.current,
           title,
           content,
           titleImage
       }[0]`;
-  const data = await client.fetch(querry);
+  const data = await client.fetch(query);
   return data;
 };
 
