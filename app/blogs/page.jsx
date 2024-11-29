@@ -16,27 +16,15 @@ import BlogOffer from "../../components/BlogOffer";
 
 export const revalidate = 30;
 
-// NOTE:- this is temporrary array for tag
-const randomTagarrayofstring = [
-  "abc",
-  "den",
-  "efg",
-  "hij",
-  "klm",
-  "nop",
-  "qrs",
-  "tuv",
-  "wxyz",
-];
-
 const getData = async () => {
   const query = `
-    *[_type=='blog'] | order(_createdAt desc){
+    *[_type=='blog'] | order(createdAt desc){
       title, 
       smallDescription,
       titleImage,
       "currentSlug":slug.current,
-      _createdAt
+      createdAt,
+      tags
     }`;
   const data = await client.fetch(query);
   return data;
@@ -75,20 +63,21 @@ const page = async () => {
                     {item.smallDescription}
                   </CardDescription>
                   <p className="text-xs text-gray-500">
-                    Published: {new Date(item._createdAt).toLocaleDateString()}
+                    Published: {new Date(item.createdAt).toLocaleDateString()}
                   </p>
                   <div className="flex items-center gap-2 mt-2">
-                    {randomTagarrayofstring.slice(0, 3).map((tag, tagIdx) => (
-                      <span
-                        key={tagIdx}
-                        className="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    {randomTagarrayofstring.length > 3 && (
+                    {item.tags &&
+                      item.tags.slice(0, 3).map((tag, tagIdx) => (
+                        <span
+                          key={tagIdx}
+                          className="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    {item.tags && item.tags.length > 3 && (
                       <span className="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded">
-                        +{randomTagarrayofstring.length - 3}
+                        +{item.tags.length - 3}
                       </span>
                     )}
                   </div>
@@ -98,7 +87,7 @@ const page = async () => {
                   asChild
                   className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
                 >
-                  <Link href={`/blog/${item.currentSlug}`}>Read More</Link>
+                  <Link href={`/blogs/${item.currentSlug}`}>Read More</Link>
                 </Button>
               </CardContent>
             </Card>
