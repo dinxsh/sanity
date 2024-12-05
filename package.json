@@ -25,6 +25,7 @@
     "axios": "1.7.4",
     "bcrypt": "5.1.1",
     "bcryptjs": "2.4.3",
+    "brackets-viewer": "^1.6.2",
     "class-variance-authority": "0.7.0",
     "clsx": "2.1.1",
     "cobe": "0.6.3",
