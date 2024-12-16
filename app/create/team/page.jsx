@@ -25,7 +25,7 @@ export default function CreateTeamForm() {
   const [server, setServer] = useState("");
   const [language, setLanguage] = useState("");
   const [players, setPlayers] = useState("");
-  const [requests, setRequests] = useState("");
+  // const [requests, setRequests] = useState("");
   const [participantCount, setParticipantCount] = useState("");
 
   const { toast } = useToast();
@@ -40,7 +40,7 @@ export default function CreateTeamForm() {
       server: "",
       language: "",
       players: "",
-      requests: "",
+      // requests: "",
       participantCount: "",
     },
     shouldFocusError: false,
@@ -58,14 +58,12 @@ export default function CreateTeamForm() {
         server !== "" &&
         language !== "" &&
         players !== "" &&
-        requests !== "" &&
+        // requests !== "" &&
         participantCount !== ""
       ) {
-        const playersArray = players.split(",").map((player) => player.trim());
+        // const playersArray = players.split(",").map((player) => player.trim());
         const dataWithPlayersArray = {
-          ...data,
-          players: playersArray,
-          participantCount: parseInt(participantCount, 10),
+          ...data    
         };
 
         const response = await axios.post(
@@ -86,7 +84,7 @@ export default function CreateTeamForm() {
         setServer("");
         setLanguage("");
         setPlayers("");
-        setRequests("");
+        // setRequests("");
         setParticipantCount("");
       }
     } catch (error) {
@@ -274,7 +272,7 @@ export default function CreateTeamForm() {
                   </FormItem>
                 )}
               />
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="requests"
                 render={({ field }) => (
@@ -294,7 +292,7 @@ export default function CreateTeamForm() {
                     <FormMessage className="text-red-500" />
                   </FormItem>
                 )}
-              />
+              /> */}
               <FormField
                 control={form.control}
                 name="participantCount"

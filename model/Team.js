@@ -20,12 +20,3 @@ const TeamModel = mongoose.models.TeamModel || mongoose.model('TeamModel', TeamS
 module.exports = {
   TeamModel
 };
-
-
-
-
-// const TeamModel = mongoose.model('TeamModel', TeamSchema);
-
-// module.exports = {
-//   TeamModel
-// }
