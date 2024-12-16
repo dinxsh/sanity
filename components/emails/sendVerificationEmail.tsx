@@ -5,7 +5,7 @@ export async function sendVerificationEmail(
     email: string,
     username: string,
     verifyCode: string,
-): Promise<any>{
+): Promise<{success:boolean;message:string}>{
     try{
         await resend.emails.send({
             from: 'sanityesportsindia@gmail.com',
