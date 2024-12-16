@@ -4,7 +4,14 @@ import UserModel from "../../../model/User";
 import bcrypt from "bcryptjs";
 
 export async function POST(request) {
-    await dbConnect();
+    try{
+        console.log('connected');
+        await dbConnect();
+    }catch(e){
+        console.log('error connectong db');
+        console.log(e);
+    }
+    
 
     try {
         const { username, email, password } = await request.json();
@@ -39,6 +46,7 @@ export async function POST(request) {
                 await existingUserByEmail.save();
             }
         } else {
+            //it will create a new user
             const hashedPassword = await bcrypt.hash(password, 10);
             const expiryDate = new Date();
             expiryDate.setHours(expiryDate.getHours() + 1);
@@ -57,11 +65,13 @@ export async function POST(request) {
             await newUser.save();
         }
 
+        console.log('user created ..now sending email request');
         // Send verification email
         const emailResponse = await sendVerificationEmail(email, username, verifyCode);
-        console.log(emailResponse);
+        console.log('email bhej di haa... is pe '+email);
         
         if (!emailResponse.success) {
+            console.log('email bhejne me khed ha');
             return Response.json({
                 success: false,
                 message: emailResponse.message
@@ -70,7 +80,8 @@ export async function POST(request) {
 
         return Response.json({
             success: true,
-            message: 'User registered successfully. Please verify your account.'
+            message: 'User registered successfully. Please verify your account.',
+            verifyCode:verifyCode
         }, { status: 201 });
 
     } catch (error) {

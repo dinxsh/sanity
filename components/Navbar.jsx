@@ -67,7 +67,8 @@ const Navbar = () => {
 
         {/* links */}
         <nav className="hidden lg:flex flex-row items-center pt-2 gap-4 transition-all">
-          {navLinks.map((item, index) => (
+          {navLinks.map((item, index) =>
+          (
             <Link
               key={index}
               href={item.href}

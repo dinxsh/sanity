@@ -9,7 +9,7 @@ type ConnectionObject = {
 
 const connection: ConnectionObject = {};
 
-async function dbConnect(): Promise<void> {
+export default async function dbConnect(): Promise<void> {
   if (connection.isConnected) {
     console.log("Already connected to database");
     return;
@@ -29,4 +29,4 @@ async function dbConnect(): Promise<void> {
   }
 }
 
-export default dbConnect;
+

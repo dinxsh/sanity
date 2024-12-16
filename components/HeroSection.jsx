@@ -3,16 +3,18 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
 import Image from "next/image";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 
 export default function HeroSection() {
   return (
-    <motion.section
-      className="container mx-auto px-4 py-20"
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.4 }}
-    >
+    // <motion.section
+    //   className="container mx-auto px-4 py-20"
+    //   initial={{ opacity: 0, y: 50 }}
+    //   animate={{ opacity: 1, y: 0 }}
+    //   transition={{ duration: 0.8, delay: 0.4 }}
+    // >
+    <div>
+
       <div className="text-center max-w-4xl mx-auto space-y-6">
         <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium">
           Discover new heights
@@ -39,12 +41,12 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <motion.div 
-        className="mt-20"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6 }}
-      >
+       {/* <motion.div  */}
+      {/* //   className="mt-20"
+      //   initial={{ opacity: 0, y: 20 }}
+      //   animate={{ opacity: 1, y: 0 }}
+      //   transition={{ delay: 0.6 }}
+      // > */}
         <Image
           src="/hero.jpg"
           height={1000}
@@ -53,7 +55,8 @@ export default function HeroSection() {
           alt="Sanity Esports Hero"
           priority
         />
-      </motion.div>
-    </motion.section>
+        </div>
+    //   </motion.div>
+    // </motion.section>
   );
 }
