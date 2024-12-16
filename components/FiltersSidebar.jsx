@@ -1,59 +1,86 @@
+import React from "react";
 import { Button } from "../@/components/ui/button";
 
-const FiltersSidebar = () => {
+const FiltersSidebar = ({ filters, setFilters, onReset }) => {
+  const handleChange = (e) => {
+    setFilters((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
   return (
-    <div class="p-4 rounded-lg col-span-1 lg:col-span-3 h-fit border shadow transition-all">
+    <div className="p-4 rounded-lg col-span-1 lg:col-span-3 h-fit border shadow transition-all">
       <form>
-        <div class="flex justify-between items-center mb-4">
-          <div className="flex justify-between items-center w-full">
-            <div class="text-xl font-semibold">Filters</div>
-            <Button variant="outline" className="transition-all">
-              <input type="reset" value="Reset" className="cursor-pointer" />
-            </Button>
-          </div>
+        <div className="flex justify-between items-center mb-4">
+          <div className="text-xl font-semibold">Filters</div>
+          <Button
+            variant="outline"
+            type="button"
+            className="transition-all"
+            onClick={onReset}
+          >
+            Reset
+          </Button>
         </div>
 
+        {/* Game Filter */}
         <div className="mb-4">
           <label className="block mb-2">Game</label>
-          <select className="w-full p-2 rounded-md bg-background border">
-            <option selected>Select Game</option>
-            <option className="text-sm">BGMI</option>
-            <option className="text-sm">Free Fire Max</option>
-            <option className="text-sm">Valorant</option>
-            <option className="text-sm">COD Mobile</option>
-            <option className="text-sm">Pokemon Unite</option>
-            <option className="text-sm">Clash of Clans</option>
-            <option className="text-sm">Cricket</option>
-            <option className="text-sm">NEW STATE Mobile</option>
-            <option className="text-sm">GTA V</option>
-            <option className="text-sm">League of Legends PC</option>
-            <option className="text-sm">FIFA 22</option>
-            <option className="text-sm">Brawl Stars</option>
-            <option className="text-sm">Apex Legends Mobile</option>
-            <option className="text-sm">Clash Royale</option>
-            <option className="text-sm">Mobile Legends Bang Bang</option>
-          </select>
-        </div>
-        <div className="mb-4">
-          <label className="block mb-2">Role</label>
-          <select className="w-full p-2 rounded-md bg-background border">
-            <option>Select role</option>
-            <option>Select role</option>
-            <option>Select role</option>
-            <option>Select role</option>
-            <option>Select role</option>
-          </select>
-        </div>
-        <div className="mb-4">
-          <label className="block mb-2">Language</label>
-          <select className="w-full p-2 rounded-md bg-background border">
-            <option selected>Select Language</option>
-            <option>English</option>
-            <option>Hindi</option>
+          <select
+            name="game"
+            value={filters.game}
+            onChange={handleChange}
+            className="w-full p-2 rounded-md bg-background  border"
+          >
+            <option className="text-black"  value="" disabled>
+              Select Game
+            </option>
+            <option className="text-black">BGMI</option>
+            <option className="text-black">Free Fire Max</option>
+            <option className="text-black">Valorant</option>
+            <option className="text-black">COD Mobile</option>
+            <option className="text-black">Pokemon Unite</option>
+            <option className="text-black">Clash of Clans</option>
+            <option className="text-black">Cricket</option>
           </select>
         </div>
 
-        <Button className="w-full mt-5">Apply</Button>
+        {/* Role Filter */}
+        <div className="mb-4">
+          <label className="block mb-2">Role</label>
+          <select
+            name="role"
+            value={filters.role}
+            onChange={handleChange}
+            className="w-full p-2 rounded-md bg-background border"
+          >
+            <option value="" disabled>
+              Select Role
+            </option>
+            <option className="text-black">Leader</option>
+            <option className="text-black">Member</option>
+            <option className="text-black">Support</option>
+          </select>
+        </div>
+
+        {/* Language Filter */}
+        <div className="mb-4">
+          <label className="block mb-2">Language</label>
+          <select
+            name="language"
+            value={filters.language}
+            onChange={handleChange}
+            className="w-full p-2 rounded-md bg-background border"
+          >
+            <option className="text-black" value="" disabled>
+              Select Language
+            </option>
+            <option className="text-black">English</option>
+            <option className="text-black">Hindi</option>
+          </select>
+        </div>
+
+        <Button type="button" className="w-full mt-5">
+          Apply
+        </Button>
       </form>
     </div>
   );

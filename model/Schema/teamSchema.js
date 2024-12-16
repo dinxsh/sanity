@@ -8,5 +8,6 @@ export const teamSchema = z.object({
     server: z.string().min(4, { message: 'Server must be at least 4 characters long' }),
     language: z.string().min(4, { message: 'Language must be at least 4 characters long' }),
     players: z.string().min(4, { message: 'Players field must be at least 4 characters long' }),
-    requests: z.string().min(4, { message: 'Requests field must be at least 4 characters long' }),
+    //requests: z.string().min(4, { message: 'Requests field must be at least 4 characters long' }),
+    participantCount:z.string(),
 });
