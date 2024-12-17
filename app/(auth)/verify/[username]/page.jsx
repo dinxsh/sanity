@@ -25,6 +25,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../../../../@/components/ui/card";
+import Image from "next/image";
 
 const VerifyAccount = () => {
   const router = useRouter();
@@ -61,42 +62,57 @@ const VerifyAccount = () => {
 
   return (
     <div>
-    <div className="bg-cover bg-center h-screen" style={{ backgroundImage: "url('/pexels-lulizler-3165335.jpg')" }}>
-    <div className="flex justify-center items-center min-h-[70vh]">
-      <Card>
-        <CardHeader className="mb-5">
-          <CardTitle className="text-2xl md:text-3xl tracking-tight transition-all">
-            Verify your account
-          </CardTitle>
-          <CardDescription className="pl-1">
-            Enter your verification code
-          </CardDescription>
-        </CardHeader>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <CardContent>
-              <FormField
-                control={form.control}
-                name="code"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Verification Code</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter Your code" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </CardContent>
-            <CardFooter>
-              <Button type="submit">Submit</Button>
-            </CardFooter>
-          </form>
-        </Form>
-      </Card>
-    </div>
-    </div>
+      <div className="">
+        <div className="flex justify-center items-center">
+          <Card className="w-[23rem] max-sm:w-[19rem] border-zinc-400/10">
+            <CardHeader className="p-2">
+              <CardDescription className="flex flex-col gap-2 pt-5 items-center justify-center">
+                <Image
+                  src="/assets/logo.jpg"
+                  alt=""
+                  width={500}
+                  height={500}
+                  className="size-12 rounded-xl"
+                />
+                <p className="font-bold text-base">Verify your account.</p>
+              </CardDescription>
+            </CardHeader>
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-8"
+              >
+                <CardContent>
+                  <FormField
+                    control={form.control}
+                    name="code"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-base font-bold text-zinc-300">
+                          Verification Code
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            className="text-base border-zinc-400/10"
+                            placeholder="Enter Your code"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </CardContent>
+                <CardFooter>
+                  <Button className="font-bold" type="submit">
+                    Submit
+                  </Button>
+                </CardFooter>
+              </form>
+            </Form>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 };
