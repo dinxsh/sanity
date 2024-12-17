@@ -48,7 +48,7 @@ const Navbar = () => {
       ${scrolled ? "border-b" : ""}
     `}
     >
-      <div className="flex items-center gap-10">
+      <div className="flex gap-20">
         {/* Logo */}
         <div className="flex items-center">
           <Link href="/" className="flex items-center gap-2">
@@ -66,7 +66,7 @@ const Navbar = () => {
         </div>
 
         {/* links */}
-        <nav className="hidden lg:flex flex-row items-center pt-2 gap-4 transition-all">
+        <nav className="hidden lg:flex flex-row items-center pt-2 gap-10 transition-all">
           {navLinks.map((item, index) => (
             <Link
               key={index}
@@ -82,7 +82,7 @@ const Navbar = () => {
       </div>
 
       {/* buttons */}
-      <div className="hidden lg:flex items-center gap-4 transition-all">
+      <div className="hidden lg:flex items-center pt-2 gap-4 transition-all">
         <Link href="https://discord.com/invite/rUYVa93Svr">
           <Button variant="outline" className="px-5 rounded-md">
             Join Community
