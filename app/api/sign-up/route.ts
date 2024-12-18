@@ -2,6 +2,7 @@ import { sendVerificationEmail } from "../../../components/emails/sendVerificati
 import dbConnect from "../../../lib/dbConnect";
 import UserModel from "../../../model/User";
 import bcrypt from "bcryptjs";
+import crypto from "crypto";
 
 export async function POST(request) {
     await dbConnect();
@@ -23,7 +24,7 @@ export async function POST(request) {
 
         const existingUserByEmail = await UserModel.findOne({ email });
 
-        let verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
+        let verifyCode = crypto.randomInt(100000, 1000000).toString();
 
         if (existingUserByEmail) {
             if (existingUserByEmail.twoFactorActivated) {
