@@ -2,6 +2,16 @@ import dbConnect from '../../../lib/dbConnect';
 import Bracket from '../../../model/Bracket';
 import { NextResponse } from 'next/server';
 import Tournament from '../../../model/Tournament';
+import { z } from 'zod';
+
+const bracketSchema = z.object({
+    tournament_id: z.string(),
+    name: z.string(),
+    number: z.number(),
+    consolationFinal: z.boolean().default(false),
+    grandFinalType: z.enum(['none', 'simple', 'double'])
+
+})
 
 export async function POST(request) {
     try {

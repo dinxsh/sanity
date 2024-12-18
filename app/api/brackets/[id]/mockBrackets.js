@@ -87,7 +87,6 @@ export default {
       "tournament_id": 1,
       "name": "Elimination stage",
       "type": "single_elimination",
-      "number": 1,
       "settings": {
         "grandFinal": "single",
         "consolationFinal": false,
