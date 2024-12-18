@@ -68,7 +68,10 @@ type TournamentDates {
 type TeamRegistration {
   id      String   @db.ObjectId
   name    String
-  members String[] @db.ObjectId
+  members String[]
+  email            String
+  selectedPlatform String
+  participantType  String
 }
 
 enum GameType {
@@ -76,4 +79,3 @@ enum GameType {
   SOLO
   DUO
 }
-
