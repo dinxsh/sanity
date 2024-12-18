@@ -17,9 +17,7 @@
         "name": "next"
       }
     ],
-    "types": [
-      "react-reconciler"
-    ]
+    "types": ["react-reconciler"]
   },
   "include": [
     "next-env.d.ts",
@@ -28,7 +26,10 @@
     "**/*.tsx",
     "middleware.ts",
     "app/(auth)/sign-in/page.jsx",
-    "prisma/seed.js"
-, "app/api/auth/[...nextauth]/route.js", "app/api/auth/[...nextauth]/options.js"  ],
+    "prisma/seed.js",
+    "app/api/auth/[...nextauth]/route.js",
+    "app/api/auth/[...nextauth]/options.js",
+    "app/(auth)/layout.jsx"
+  ],
   "exclude": ["node_modules"]
 }
