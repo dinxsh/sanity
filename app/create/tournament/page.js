@@ -108,21 +108,25 @@ export default function Page() {
     setErrorMessage("");
   };
 
+  const validateImageFile = (file) => {
+    return file && file.type.startsWith("image/") && file.size > 0;
+  };
+
   const handleIconUpload = (event) => {
     const file = event.target.files[0];
-    if (file && file.type.substr(0, 5) === "image") {
+    if (validateImageFile(file)) {
       setTournamentIcon(URL.createObjectURL(file));
     } else {
-      alert("Please select an image file");
+      alert("Please select a valid image file");
     }
   };
 
   const handleBannerUpload = (event) => {
     const file = event.target.files[0];
-    if (file && file.type.substr(0, 5) === "image") {
+    if (validateImageFile(file)) {
       setTournamentBanner(URL.createObjectURL(file));
     } else {
-      alert("Please select an image file");
+      alert("Please select a valid image file");
     }
   };
 
