@@ -1,6 +1,7 @@
+import { string } from "zod";
 import { sendVerificationEmail } from "../../../components/emails/sendVerificationEmail";
 import dbConnect from "../../../lib/dbConnect";
-import UserModel from "../../../model/User";
+import userSchema from "../../../model/User";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 
@@ -9,10 +10,8 @@ export async function POST(request) {
 
   try {
     const { username, email, password } = await request.json();
- //@ts-ignore
-    const existingUserVerifiedUsername = await UserModel.findOne({
+    const existingUserVerifiedUsername = await userSchema.findOne({
       username,
-      twoFactorActivated: true,
     });
 
     if (existingUserVerifiedUsername) {
@@ -24,9 +23,8 @@ export async function POST(request) {
         { status: 400 },
       );
     }
-
-    const existingUserByEmail = await UserModel.findOne({ email });
-
+  //ts-ignore
+    const existingUserByEmail = await userSchema.findOne({ email });
     let verifyCode = crypto.randomInt(100000, 1000000).toString();
 
     if (existingUserByEmail) {
@@ -50,7 +48,7 @@ export async function POST(request) {
       const expiryDate = new Date();
       expiryDate.setHours(expiryDate.getHours() + 1);
 
-      const newUser = new UserModel({
+      const newUser = new userSchema({
         username,
         email,
         password: hashedPassword,

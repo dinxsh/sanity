@@ -1,9 +1,8 @@
 {
-  "extends": "next/core-web-vitals"
-}
-{
+  "extends": "next/core-web-vitals",
   "rules": {
-      "no-unused-vars": "off",
-      "some-other-rule": "off"
+    "@next/next/no-img-element": "off",
+    "no-unused-vars": "off",
+    "some-other-rule": "off"
   }
 }
