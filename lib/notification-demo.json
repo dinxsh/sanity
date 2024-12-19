@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "type": "message",
+    "title": "New Message",
+    "message": "You have received a new message from John Doe.",
+    "timestamp": "2024-06-17T10:15:00Z",
+    "marked_as_read": false,
+    "icon": "message-icon.png"
+  },
+  {
+    "id": 2,
+    "type": "alert",
+    "title": "Security Alert",
+    "message": "Suspicious login attempt detected on your account.",
+    "timestamp": "2024-06-16T22:30:00Z",
+    "marked_as_read": true,
+    "icon": "alert-icon.png"
+  },
+  {
+    "id": 3,
+    "type": "update",
+    "title": "System Update",
+    "message": "The system will undergo maintenance at midnight tonight.",
+    "timestamp": "2024-06-15T18:00:00Z",
+    "marked_as_read": false,
+    "icon": "update-icon.png"
+  },
+  {
+    "id": 4,
+    "type": "comment",
+    "title": "New Comment",
+    "message": "Someone replied to your confession post: 'Interesting thoughts!'",
+    "timestamp": "2024-06-17T09:20:00Z",
+    "marked_as_read": false,
+    "icon": "comment-icon.png"
+  },
+  {
+    "id": 5,
+    "type": "promo",
+    "title": "Limited-Time Offer",
+    "message": "Get 20% off on all SVG generation services today!",
+    "timestamp": "2024-06-17T08:00:00Z",
+    "marked_as_read": true,
+    "icon": "promo-icon.png"
+  }
+]

@@ -16,7 +16,7 @@ import {
 } from "../components/ui/sheet";
 import { AlignJustify } from "lucide-react";
 import { usePathname } from "next/navigation";
-
+import NotificationBar from "../components/Notification";
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
 
@@ -83,6 +83,7 @@ const Navbar = () => {
 
       {/* buttons */}
       <div className="hidden lg:flex items-center pt-2 gap-4 transition-all">
+        <NotificationBar />
         <Link href="https://discord.com/invite/rUYVa93Svr">
           <Button variant="outline" className="px-5 rounded-md">
             Join Community
@@ -92,14 +93,15 @@ const Navbar = () => {
       </div>
 
       {/* mobile nav menu */}
-      <div className="lg:hidden transition-all">
+      <div className="lg:hidden flex gap-8 items-center  transition-all">
+        <NotificationBar />
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline">
               <AlignJustify />
             </Button>
           </SheetTrigger>
-          <SheetContent className="flex flex-col items-start justify-start">
+          <SheetContent className="flex flex-col items-start justify-start bg-black">
             <SheetHeader>
               <SheetTitle>
                 <ModeToggle />

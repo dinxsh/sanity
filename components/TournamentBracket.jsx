@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "./ui/card";
 import { motion, AnimatePresence } from "framer-motion";
-import { Loader2 } from "lucide-react";
+import { PacmanLoader } from "react-spinners";
 
 const TournamentBracket = ({ matches, roundNames }) => {
   const [rounds, setRounds] = useState([]);
@@ -17,7 +17,7 @@ const TournamentBracket = ({ matches, roundNames }) => {
         organizeMatchesByRound(matches);
         setError(null);
       } catch (err) {
-        setError('Failed to organize matches');
+        setError("Failed to organize matches");
       } finally {
         setLoading(false);
       }
@@ -37,18 +37,14 @@ const TournamentBracket = ({ matches, roundNames }) => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center py-10">
-        <Loader2 className="h-6 w-6 animate-spin text-primary" />
+      <div className="flex w-full h-screen justify-center items-center">
+        <PacmanLoader color="white" />
       </div>
     );
   }
 
   if (error) {
-    return (
-      <div className="text-center text-destructive py-10">
-        {error}
-      </div>
-    );
+    return <div className="text-center text-destructive py-10">{error}</div>;
   }
 
   return (
@@ -72,13 +68,13 @@ const TournamentBracket = ({ matches, roundNames }) => {
               >
                 {roundNames[roundIndex]}
               </motion.h3>
-              
+
               {round.map((match, matchIndex) => (
                 <motion.div
                   key={matchIndex}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: (roundIndex * 0.1) + (matchIndex * 0.05) }}
+                  transition={{ delay: roundIndex * 0.1 + matchIndex * 0.05 }}
                 >
                   <Card className="relative">
                     <CardContent className="p-4">
@@ -97,7 +93,7 @@ const TournamentBracket = ({ matches, roundNames }) => {
                           </div>
                         ))}
                       </div>
-                      
+
                       {match.status && (
                         <div className="absolute -right-2 -top-2">
                           <span className="inline-block px-2 py-1 text-xs rounded-full bg-secondary/10 text-secondary">
