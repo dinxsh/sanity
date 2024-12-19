@@ -17,7 +17,8 @@
         "name": "next"
       }
     ],
-    "types": ["react-reconciler"]
+    "types": ["react-reconciler"],
+    "target": "ES2017"
   },
   "include": [
     "next-env.d.ts",

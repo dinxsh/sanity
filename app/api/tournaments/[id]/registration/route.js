@@ -15,36 +15,42 @@ async function handler(request, { params }) {
     if (!name || !members || !email || !selectedPlatform || !participantType) {
       return NextResponse.json(
         { message: "All fields are required for registration" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    if (!Array.isArray(members) || members.some((member) => typeof member !== "string")) {
+    if (
+      !Array.isArray(members) ||
+      members.some((member) => typeof member !== "string")
+    ) {
       return NextResponse.json(
-        { message: "Invalid members format. Members must be an array of strings." },
-        { status: 400 }
+        {
+          message:
+            "Invalid members format. Members must be an array of strings.",
+        },
+        { status: 400 },
       );
     }
 
     const teamRegistration = {
-      id: new mongoose.Types.ObjectId(), 
+      id: new mongoose.Types.ObjectId(),
       name,
-      members, 
+      members,
       email,
       selectedPlatform,
       participantType,
     };
-   
+
     const updatedTournament = await Tournament.findByIdAndUpdate(
       id,
       { $push: { teamsRegistered: teamRegistration } },
-      { new: true }
+      { new: true },
     );
 
     if (!updatedTournament) {
       return NextResponse.json(
         { message: "Tournament not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -56,7 +62,7 @@ async function handler(request, { params }) {
     console.error("Error while registering for the tournament:", error);
     return NextResponse.json(
       { message: "An error occurred during registration" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

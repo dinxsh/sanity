@@ -5,9 +5,17 @@ import { useEffect, useState } from "react";
 import { useToast } from "../../../@/components/ui/use-toast";
 import TournamentBracket from "../../../components/TournamentBracket";
 import { Button } from "../../../@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "../../../@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../../../@/components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
-import { fetchTournamentData, registerForTournament } from "../../../lib/api/tournament";
+import {
+  fetchTournamentData,
+  registerForTournament,
+} from "../../../lib/api/tournament";
 import { Loader2 } from "lucide-react";
 
 export default function TournamentPage({ params }) {
@@ -29,11 +37,11 @@ export default function TournamentPage({ params }) {
       setTournament(data);
       setError(null);
     } catch (err) {
-      setError(err.message || 'Failed to load tournament');
+      setError(err.message || "Failed to load tournament");
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Failed to load tournament data"
+        description: "Failed to load tournament data",
       });
     } finally {
       setLoading(false);
@@ -90,7 +98,7 @@ export default function TournamentPage({ params }) {
           >
             {/* Tournament Header */}
             <div className="mb-10 text-center">
-              <motion.h1 
+              <motion.h1
                 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -98,7 +106,7 @@ export default function TournamentPage({ params }) {
               >
                 {tournament.title}
               </motion.h1>
-              <motion.p 
+              <motion.p
                 className="text-muted-foreground mb-6"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -106,17 +114,16 @@ export default function TournamentPage({ params }) {
               >
                 {tournament.description}
               </motion.p>
-              <motion.div 
+              <motion.div
                 className="flex justify-center gap-4"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.4 }}
               >
-                <Button 
-                  size="lg"
-                  asChild
-                >
-                  <Link href={`/tournaments/${tournament._id}/register`}>Register Now</Link>
+                <Button size="lg" asChild>
+                  <Link href={`/tournaments/${tournament._id}/register`}>
+                    Register Now
+                  </Link>
                 </Button>
                 <Button size="lg" variant="outline">
                   View Details
@@ -136,7 +143,7 @@ export default function TournamentPage({ params }) {
                   </p>
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardHeader>
                   <CardTitle className="text-lg">Participants</CardTitle>
@@ -147,7 +154,7 @@ export default function TournamentPage({ params }) {
                   </p>
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardHeader>
                   <CardTitle className="text-lg">Status</CardTitle>
@@ -194,12 +201,18 @@ export default function TournamentPage({ params }) {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    {tournament && tournament?.schedule?.map((event, index) => (
-                      <div key={index} className="flex justify-between items-center">
-                        <span className="text-muted-foreground">{event.stage}</span>
-                        <span className="text-primary">{event.date}</span>
-                      </div>
-                    ))}
+                    {tournament &&
+                      tournament?.schedule?.map((event, index) => (
+                        <div
+                          key={index}
+                          className="flex justify-between items-center"
+                        >
+                          <span className="text-muted-foreground">
+                            {event.stage}
+                          </span>
+                          <span className="text-primary">{event.date}</span>
+                        </div>
+                      ))}
                   </div>
                 </CardContent>
               </Card>

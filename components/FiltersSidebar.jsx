@@ -30,7 +30,7 @@ const FiltersSidebar = ({ filters, setFilters, onReset }) => {
             onChange={handleChange}
             className="w-full p-2 rounded-md bg-background  border"
           >
-            <option className="text-black"  value="" disabled>
+            <option className="text-black" value="" disabled>
               Select Game
             </option>
             <option className="text-black">BGMI</option>

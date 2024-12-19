@@ -12,7 +12,7 @@ export async function GET(request, { params }) {
     console.error("Error fetching brackets for tournament:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
