@@ -8,8 +8,8 @@ const CredentialsProvider = require("next-auth/providers/credentials").default;
 
 // Add the bypass credentials
 const bypassCredentials = {
-  email: 'test@gmail.com',
-  password: 'Gkjdfnjg$3'
+  email: "test@gmail.com",
+  password: "Gkjdfnjg$3",
 };
 
 const authOptions = {
@@ -21,7 +21,7 @@ const authOptions = {
     DiscordProvider({
       clientId: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
-      authorization: { params: { scope: 'identify email' } },
+      authorization: { params: { scope: "identify email" } },
     }),
     CredentialsProvider({
       id: "credentials",
@@ -33,24 +33,32 @@ const authOptions = {
       async authorize(credentials) {
         try {
           await dbConnect();
-          
+
           // Check for bypass credentials
-          if (credentials.email === bypassCredentials.email && credentials.password === bypassCredentials.password) {
-            console.warn('Using bypass credentials. Remove this before production!');
+          if (
+            credentials.email === bypassCredentials.email &&
+            credentials.password === bypassCredentials.password
+          ) {
+            console.warn(
+              "Using bypass credentials. Remove this before production!",
+            );
             return {
-              id: 'test-user',
+              id: "test-user",
               email: bypassCredentials.email,
-              username: 'Test User',
-              twoFactorActivated: true
+              username: "Test User",
+              twoFactorActivated: true,
             };
           }
 
           // Existing authentication logic
           const user = await UserModel.findOne({
-            $or: [{ email: credentials.email }, { username: credentials.email }],
+            $or: [
+              { email: credentials.email },
+              { username: credentials.email },
+            ],
           });
           if (!user) {
-            console.log('User not found');
+            console.log("User not found");
             return null;
           }
           // Temporarily disable two-factor check for testing
@@ -58,20 +66,23 @@ const authOptions = {
           //   console.log('Two-factor authentication not activated');
           //   return null;
           // }
-          const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password);
+          const isPasswordCorrect = await bcrypt.compare(
+            credentials.password,
+            user.password,
+          );
           if (isPasswordCorrect) {
             return {
               id: user._id.toString(),
               email: user.email,
               username: user.username,
-              twoFactorActivated: user.twoFactorActivated
+              twoFactorActivated: user.twoFactorActivated,
             };
           } else {
-            console.log('Incorrect password');
+            console.log("Incorrect password");
             return null;
           }
         } catch (error) {
-          console.error('Authorization error:', error);
+          console.error("Authorization error:", error);
           return null;
         }
       },
@@ -106,17 +117,20 @@ const authOptions = {
             email: user.email,
             username: user.name,
             password: null,
-            googleId: account.provider === 'google' ? profile.sub : null,
-            discordId: account.provider === 'discord' ? profile.id : null,
+            googleId: account.provider === "google" ? profile.sub : null,
+            discordId: account.provider === "discord" ? profile.id : null,
             twoFactorActivated: true,
             createdAt: Date.now(),
             eventsRegistered: [],
           });
           await newUser.save();
         } else {
-          if (account.provider === 'google' && !existingUser.googleId) {
+          if (account.provider === "google" && !existingUser.googleId) {
             existingUser.googleId = profile.sub;
-          } else if (account.provider === 'discord' && !existingUser.discordId) {
+          } else if (
+            account.provider === "discord" &&
+            !existingUser.discordId
+          ) {
             existingUser.discordId = profile.id;
           }
           existingUser.twoFactorActivated = true;
@@ -130,13 +144,13 @@ const authOptions = {
     },
   },
   pages: {
-    signIn: '/sign-in',
-    error: '/auth/error',
+    signIn: "/sign-in",
+    error: "/auth/error",
   },
   session: {
     strategy: "jwt",
   },
-  debug: process.env.NODE_ENV === 'development',
+  debug: process.env.NODE_ENV === "development",
   secret: process.env.NEXTAUTH_SECRET,
 };
 

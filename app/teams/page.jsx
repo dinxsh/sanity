@@ -5,7 +5,12 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import FiltersSidebar from "../../components/FiltersSidebar";
 import TeamCard from "../../components/TeamCard";
-import { Card, CardContent, CardHeader, CardTitle } from "../../@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../../@/components/ui/card";
 import { Button } from "../../@/components/ui/button";
 
 const TeamFinder = () => {

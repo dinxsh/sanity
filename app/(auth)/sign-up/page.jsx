@@ -38,7 +38,7 @@ const Page = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const debouncedUsername = useDebounceCallback(
     (value) => setUsername(value),
-    300
+    300,
   );
 
   const router = useRouter();

@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity';
+import {defineType, defineField} from 'sanity'
 
 export const blog = defineType({
   title: 'Blog',
@@ -9,19 +9,19 @@ export const blog = defineType({
       title: 'Title',
       name: 'title',
       type: 'string',
-      validation: Rule => Rule.required(),
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       title: 'Small Description',
       name: 'smallDescription',
       type: 'text',
-      validation: Rule => Rule.required(),
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       title: 'Content',
       name: 'content',
       type: 'array',
-      of: [{ type: 'block' }], 
+      of: [{type: 'block'}],
     }),
     defineField({
       title: 'Title Image',
@@ -36,7 +36,7 @@ export const blog = defineType({
       name: 'slug',
       type: 'slug',
       options: {
-        source: 'title', 
+        source: 'title',
         maxLength: 96,
       },
     }),
@@ -44,9 +44,9 @@ export const blog = defineType({
       title: 'Tags',
       name: 'tags',
       type: 'array',
-      of: [{ type: 'string' }],
+      of: [{type: 'string'}],
       options: {
-        layout: 'tags', 
+        layout: 'tags',
       },
     }),
     defineField({
@@ -55,6 +55,6 @@ export const blog = defineType({
       type: 'datetime',
     }),
   ],
-});
+})
 
-export default blog;
+export default blog
