@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const TournamentSchema = new Schema(
@@ -10,15 +10,19 @@ const TournamentSchema = new Schema(
       ended: Date,
     },
     schedules: Schema.Types.Mixed,
-    organizerId: { type: Schema.Types.ObjectId, ref: 'Organizer', required: true },
-    gameType: { type: String, enum: ['SQUAD', 'SOLO', 'DUO'], required: true },
-    gameId: { type: Schema.Types.ObjectId, ref: 'Games', required: true },
+    organizerId: {
+      type: Schema.Types.ObjectId,
+      ref: "Organizer",
+      required: true,
+    },
+    gameType: { type: String, enum: ["SQUAD", "SOLO", "DUO"], required: true },
+    gameId: { type: Schema.Types.ObjectId, ref: "Games", required: true },
     links: Schema.Types.Mixed,
     gameBannerPhoto: String,
     results: [Schema.Types.Mixed],
     teamsRegistered: [
       {
-        id: { type: mongoose.Schema.Types.ObjectId, required: true }, 
+        id: { type: mongoose.Schema.Types.ObjectId, required: true },
         name: { type: String, required: true },
         members: [{ type: String }],
         email: { type: String, required: true, lowercase: true, trim: true },
@@ -49,8 +53,8 @@ const TournamentSchema = new Schema(
     minTeams: { type: Number, min: 1 },
     tournamentVisibility: {
       type: String,
-      enum: ['public', 'private'],
-      default: 'public',
+      enum: ["public", "private"],
+      default: "public",
     },
     inviteCode: String,
     prizeConfig: [Schema.Types.Mixed],
@@ -69,13 +73,14 @@ const TournamentSchema = new Schema(
     participantType: String,
     selectedTimezone: String,
     size: String,
-    brackets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bracket' }],
+    brackets: [{ type: mongoose.Schema.Types.ObjectId, ref: "Bracket" }],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 // Indexes remain the same
 
-const Tournament = mongoose.models.Tournament || mongoose.model('Tournament', TournamentSchema);
+const Tournament =
+  mongoose.models.Tournament || mongoose.model("Tournament", TournamentSchema);
 
 module.exports = Tournament;

@@ -25,7 +25,7 @@ export async function POST(request) {
     console.error("Error adding participant:", error);
     return NextResponse.json(
       { message: "An error occurred while adding the participant" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

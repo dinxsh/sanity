@@ -9,8 +9,8 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-    - uses: actions/first-interaction@v1
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        issue-message: "Hello! Thanks for creating an issue. ping @dinxsh for help!"
-        pr-message: "Hello! Thanks for creating a pull request. ping @dinxsh for help!"
+      - uses: actions/first-interaction@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          issue-message: "Hello! Thanks for creating an issue. ping @dinxsh for help!"
+          pr-message: "Hello! Thanks for creating a pull request. ping @dinxsh for help!"

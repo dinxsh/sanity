@@ -2,23 +2,30 @@
 
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage({ params }) {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const router = useRouter();
 
   const onSubmit = async (data) => {
-    console.log(data)
+    console.log(data);
 
     // modify members string to desired format
     const membersString = data.members;
     const membersArray = membersString.split(",");
-    data = { ...data, members : membersArray };
-    console.log(data)
-    
+    data = { ...data, members: membersArray };
+    console.log(data);
+
     try {
-      const response = await axios.post(`/api/tournaments/${params.id}/registration`, data);
+      const response = await axios.post(
+        `/api/tournaments/${params.id}/registration`,
+        data,
+      );
 
       if (response.status === 200) {
         // toast({
@@ -26,7 +33,7 @@ export default function RegisterPage({ params }) {
         //   description: "Registration successful!",
         //   variant: "success",
         // });
-        alert("Registration successful")
+        alert("Registration successful");
         router.push(`/tournaments/${params.id}`);
       } else {
         // toast({
@@ -84,11 +91,12 @@ export default function RegisterPage({ params }) {
               Team Members (Comma-separated)
             </label>
             <input
-               {...register("members", {
+              {...register("members", {
                 required: "Members are required",
                 pattern: {
                   value: /^[a-zA-Z]+(,[a-zA-Z]+)*$/,
-                  message: "Enter names separated by commas only (e.g., John,Jane,Joe)",
+                  message:
+                    "Enter names separated by commas only (e.g., John,Jane,Joe)",
                 },
               })}
               id="members"
@@ -97,7 +105,9 @@ export default function RegisterPage({ params }) {
               placeholder="Enter team members"
             />
             {errors.members && (
-              <p className="text-red-500 text-xs mt-1">{errors.members.message}</p>
+              <p className="text-red-500 text-xs mt-1">
+                {errors.members.message}
+              </p>
             )}
           </div>
           <div>
@@ -108,9 +118,12 @@ export default function RegisterPage({ params }) {
               Email
             </label>
             <input
-              {...register("email", { 
-                required: "Email is required", 
-                pattern: { value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, message: "Enter a valid email" } 
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                  message: "Enter a valid email",
+                },
               })}
               id="email"
               type="email"
@@ -118,7 +131,9 @@ export default function RegisterPage({ params }) {
               placeholder="Enter your email"
             />
             {errors.email && (
-              <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
+              <p className="text-red-500 text-xs mt-1">
+                {errors.email.message}
+              </p>
             )}
           </div>
           <div>
@@ -129,14 +144,18 @@ export default function RegisterPage({ params }) {
               Selected Platform
             </label>
             <input
-              {...register("selectedPlatform",  { required: "Platform is required" })}
+              {...register("selectedPlatform", {
+                required: "Platform is required",
+              })}
               id="selectedPlatform"
               type="text"
               className="w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter the platform (e.g., PC, Console)"
             />
             {errors.selectedPlatform && (
-              <p className="text-red-500 text-xs mt-1">{errors.selectedPlatform.message}</p>
+              <p className="text-red-500 text-xs mt-1">
+                {errors.selectedPlatform.message}
+              </p>
             )}
           </div>
           <div>
@@ -147,14 +166,18 @@ export default function RegisterPage({ params }) {
               Participant Type
             </label>
             <input
-              {...register("participantType",  { required: "Participant type is required" })}
+              {...register("participantType", {
+                required: "Participant type is required",
+              })}
               id="participantType"
               type="text"
               className="w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter the participant type (e.g., Player, Coach)"
             />
             {errors.participantType && (
-              <p className="text-red-500 text-xs mt-1">{errors.participantType.message}</p>
+              <p className="text-red-500 text-xs mt-1">
+                {errors.participantType.message}
+              </p>
             )}
           </div>
           <button

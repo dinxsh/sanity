@@ -15,7 +15,9 @@ export default function AuthLayout({ children }) {
           Sanity Gaming
         </h2>
       </div>
-      <div className="w-1/2 max-md:w-full relative p-2 flex items-center justify-center">{children}</div>
+      <div className="w-1/2 max-md:w-full relative p-2 flex items-center justify-center">
+        {children}
+      </div>
     </div>
   );
 }
