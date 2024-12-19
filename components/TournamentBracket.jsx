@@ -38,7 +38,7 @@ const TournamentBracket = ({ matches, roundNames }) => {
   if (loading) {
     return (
       <div className="flex w-full h-screen justify-center items-center">
-        <PacmanLoader color="#4ade80" />
+        <PacmanLoader color="white" />
       </div>
     );
   }
