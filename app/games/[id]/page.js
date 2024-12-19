@@ -49,7 +49,7 @@ export default function GamePage({ params }) {
       {/* Banner */}
       <div className="">
         <Image
-          src={game.z}
+          src={game.banner}
           alt={game.name}
           layout="responsi"
           width={1500}
