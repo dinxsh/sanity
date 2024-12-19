@@ -6,30 +6,45 @@ import { z } from 'zod';
 
 const bracketSchema = z.object({
     tournament_id: z.string(),
-    name: z.string(),
-    number: z.number(),
     consolationFinal: z.boolean().default(false),
     grandFinalType: z.enum(['none', 'simple', 'double'])
-
 })
 
 export async function POST(request) {
     try {
         await dbConnect();
 
-        const { tournamentId, bracketName, bracketImage, bracketData } = await request.json();
+        const body = await request.json();
+
+        const validation = bracketSchema.safeParse(body)
+
+        if (!validation.success) {
+            return NextResponse.json(validation.error.format(), { status: 400 })
+        }
+
+        const { tournament_id, consolationFinal, grandFinalType } = validation.data;
+
+
+        const tournament = await Tournament.findById(tournament_id);
+        if (!tournament) {
+            return NextResponse.json({ error: 'Tournament not found' }, { status: 404 });
+        }
+
+        const bracketName = tournament.tournamentName;
+        const registeredCount = tournament.teamsRegistered.length
 
         const newBracket = new Bracket({
-            tournamentId,
             bracketName,
-            bracketImage,
-            bracketData
+            tournamentId: tournament_id,
+            BracketNumber: registeredCount,
+            consolationFinal,
+            grandFinalType,
         });
 
         await newBracket.save();
 
         // Update the tournament with the new bracket
-        await Tournament.findByIdAndUpdate(tournamentId,
+        await Tournament.findByIdAndUpdate(tournament_id,
             { $push: { brackets: newBracket._id } }
         );
 
