@@ -6,7 +6,12 @@ export async function GET(req) {
   await dbConnect();
 
   try {
-    const gameData = await Games.find().lean();
+    const { searchParams } = new URL(req.url);
+    const filter = searchParams.get("filter") || "";
+    const query = {
+      category: { $regex: new RegExp(filter, "i") },
+    };
+    const gameData = await Games.find(query).lean();
 
     return NextResponse.json(gameData, { status: 200 });
   } catch (error) {
@@ -17,3 +22,4 @@ export async function GET(req) {
     );
   }
 }
+
