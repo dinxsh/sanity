@@ -14,10 +14,8 @@ export async function GET(req) {
     };
 
 
-    console.log("filter", query);
-
     const gameData = await Games.find(query).lean();
-    console.log(gameData);
+
     return NextResponse.json(gameData, { status: 200 });
   } catch (error) {
     console.error("Error fetching games:", error);
