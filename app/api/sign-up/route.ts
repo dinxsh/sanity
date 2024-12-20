@@ -24,9 +24,6 @@ export async function POST(request) {
         { status: 400 },
       );
     }
-<<<<<<< HEAD
-}
-=======
 
     const existingUserByEmail = await UserModel.findOne({ email });
 
@@ -103,4 +100,3 @@ export async function POST(request) {
     );
   }
 }
->>>>>>> b418101d01fe295be81b7e9ac6f6e768af6ec6b3
