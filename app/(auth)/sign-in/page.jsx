@@ -53,8 +53,6 @@ export default function SignInForm() {
         password: data.password,
       });
 
-      console.log(result);
-
       if (result?.error) {
         console.error("Sign in error:", result.error);
         toast({
