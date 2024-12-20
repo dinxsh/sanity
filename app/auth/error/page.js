@@ -18,22 +18,22 @@ function ErrorContent() {//   const searchParams = useSearchParams()
     return errorMessages[errorCode] || errorMessages.Default
   }
 
-  return (
-    <div className="flex min-h-screen items-center justify-center p-4">
-      <Alert variant="destructive" className="max-w-md">
-        <ExclamationTriangleIcon className="h-4 w-4" />
-        <AlertTitle>Authentication Error</AlertTitle>
-        <AlertDescription>
-          {getErrorMessage(error)}
-          {error && (
-            <div className="mt-2 text-sm text-gray-500">
-              Error code: {error}
-            </div>
-          )}
-        </AlertDescription>
-      </Alert>
-    </div>
-  )
+    return (
+      <div className="flex min-h-screen items-center justify-center p-4">
+        <Alert variant="destructive" className="max-w-md">
+          <ExclamationTriangleIcon className="h-4 w-4" />
+          <AlertTitle>Authentication Error</AlertTitle>
+          <AlertDescription>
+            {getErrorMessage(error)}
+            {error && (
+              <div className="mt-2 text-sm text-gray-500">
+                Error code: {error}
+              </div>
+            )}
+          </AlertDescription>
+        </Alert>
+      </div>
+    );
 }
 
 export default function ErrorPage() {

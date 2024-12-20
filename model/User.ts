@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document, Model } from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 
 // Define the interface for the User document
 interface IUser extends Document {
@@ -78,8 +78,6 @@ const userSchema = new Schema<IUser>({
     ],
 });
 
-// Create the User model
 const UserModel = mongoose.model<IUser>("User", userSchema);
 
-// Export the model
 export default UserModel;
