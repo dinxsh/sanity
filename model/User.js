@@ -1,23 +1,7 @@
-import mongoose, { Schema, Document } from "mongoose";
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-// Define the interface for the User document
-interface IUser extends Document {
-    username: string;
-    name?: string;
-    email: string;
-    bio?: string;
-    discordId?: string;
-    googleId?: string;
-    twoFactorActivated: boolean;
-    createdAt: Date;
-    verifyCode: string;
-    verifyCodeExpiry: Date;
-    password: string;
-    eventsRegistered: mongoose.Types.ObjectId[];
-}
-
-// Create the user schema
-const userSchema = new Schema<IUser>({
+const userSchema = new Schema({
     _id: {
         type: Schema.Types.ObjectId,
         required: true,
@@ -78,6 +62,6 @@ const userSchema = new Schema<IUser>({
     ],
 });
 
-const UserModel = mongoose.model<IUser>("User", userSchema);
+const UserModel = mongoose.model("User", userSchema);
 
-export default UserModel;
+module.exports = UserModel;
