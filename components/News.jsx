@@ -11,8 +11,11 @@ const News = () => {
   const [gamingNews, setGamingNews] = useState([]);
   const [tournamentNews, setTournamentNews] = useState([]);
 
+<<<<<<< HEAD
   axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
 
+=======
+>>>>>>> b418101d01fe295be81b7e9ac6f6e768af6ec6b3
   useEffect(() => {
     const fetchNews = async (category, setter) => {
       try {

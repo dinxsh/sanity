@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "./ui/card";
 import { motion, AnimatePresence } from "framer-motion";
-import { Loader2 } from "lucide-react";
+import { PacmanLoader } from "react-spinners";
 
 const TournamentBracket = ({ matches, roundNames }) => {
   const [rounds, setRounds] = useState([]);
@@ -37,8 +37,8 @@ const TournamentBracket = ({ matches, roundNames }) => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center py-10">
-        <Loader2 className="h-6 w-6 animate-spin text-primary" />
+      <div className="flex w-full h-screen justify-center items-center">
+        <PacmanLoader color="white" />
       </div>
     );
   }

@@ -7,7 +7,7 @@ const FiltersSidebar = ({ filters, setFilters, onReset }) => {
   };
 
   return (
-    <div className="p-4 rounded-lg col-span-1 lg:col-span-3 h-fit border shadow transition-all">
+    <div className="p-4 rounded-lg col-span-1 lg:col-span-3 h-fit border border-neutral-700 shadow transition-all">
       <form>
         <div className="flex justify-between items-center mb-4">
           <div className="text-xl font-semibold">Filters</div>

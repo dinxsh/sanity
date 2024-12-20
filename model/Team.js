@@ -21,5 +21,10 @@ const TeamModel =
   mongoose.models.TeamModel || mongoose.model("TeamModel", TeamSchema);
 
 module.exports = {
+<<<<<<< HEAD
   TeamModel
 };
+=======
+  TeamModel,
+};
+>>>>>>> b418101d01fe295be81b7e9ac6f6e768af6ec6b3
