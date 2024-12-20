@@ -30,11 +30,11 @@ const BracketList = () => {
     fetchBrackets();
   }, []);
 
-  if (isLoading) return <div>Loading brackets...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (isLoading) return <div className="pt-3">Loading brackets...</div>;
+  if (error) return <div className="pt-3">Error: {error}</div>;
 
   return (
-    <div className="mt-8">
+    <div className="mt-8 px-4">
       <h2 className="text-2xl font-bold mb-4">Existing Brackets</h2>
       {brackets.length === 0 ? (
         <p>No brackets found...</p>

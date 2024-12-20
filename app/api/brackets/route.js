@@ -5,9 +5,11 @@ import Tournament from '../../../model/Tournament';
 import { z } from 'zod';
 
 const bracketSchema = z.object({
-    tournament_id: z.string(),
+    tournament_name: z.string().min(1),
+    format: z.enum(['single_elimination', 'double_elimination']),
     consolationFinal: z.boolean().default(false),
-    grandFinalType: z.enum(['none', 'simple', 'double'])
+    grandFinalType: z.enum(['simple', 'double']),
+    teams: z.array(z.string().min(1)).min(4, "At least 4 teams are required")
 })
 
 export async function POST(request) {
@@ -22,36 +24,40 @@ export async function POST(request) {
             return NextResponse.json(validation.error.format(), { status: 400 })
         }
 
-        const { tournament_id, consolationFinal, grandFinalType } = validation.data;
+        console.log(validation.data)
+
+        return NextResponse.json(validation.data, { status: 201 });
+
+        // const { tournament_id, consolationFinal, grandFinalType } = validation.data;
 
 
-        const tournament = await Tournament.findById(tournament_id);
-        if (!tournament) {
-            return NextResponse.json({ error: 'Tournament not found' }, { status: 404 });
-        }
+        // const tournament = await Tournament.findById(tournament_id);
+        // if (!tournament) {
+        //     return NextResponse.json({ error: 'Tournament not found' }, { status: 404 });
+        // }
 
-        const bracketName = tournament.tournamentName;
-        const registeredCount = tournament.teamsRegistered.length
+        // const bracketName = tournament.tournamentName;
+        // const registeredCount = tournament.teamsRegistered.length
 
-        const newBracket = new Bracket({
-            bracketName,
-            tournamentId: tournament_id,
-            BracketNumber: registeredCount,
-            consolationFinal,
-            grandFinalType,
-        });
+        // const newBracket = new Bracket({
+        //     bracketName,
+        //     tournamentId: tournament_id,
+        //     BracketNumber: registeredCount,
+        //     consolationFinal,
+        //     grandFinalType,
+        // });
 
-        await newBracket.save();
+        // await newBracket.save();
 
-        // Update the tournament with the new bracket
-        await Tournament.findByIdAndUpdate(tournament_id,
-            { $push: { brackets: newBracket._id } }
-        );
+        // // Update the tournament with the new bracket
+        // await Tournament.findByIdAndUpdate(tournament_id,
+        //     { $push: { brackets: newBracket._id } }
+        // );
 
-        return NextResponse.json({
-            message: 'Bracket created and associated with tournament successfully',
-            id: newBracket._id
-        }, { status: 201 });
+        // return NextResponse.json({
+        //     message: 'Bracket created and associated with tournament successfully',
+        //     id: newBracket._id
+        // }, { status: 201 });
     } catch (error) {
         console.error('Error creating bracket:', error);
         return NextResponse.json({
