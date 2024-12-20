@@ -3,28 +3,34 @@ import Link from "next/link";
 import { games } from "./data/index";
 import Filter from "../../components/Filter";
 
-export default async function page({searchParams}) {
-
-  let filterUrl
-  if(searchParams?.filter){
-    filterUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/games?filter=${searchParams.filter}`
-  }else{
-    filterUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/games`
+export default async function page({ searchParams }) {
+  let filterUrl;
+  if (searchParams?.filter) {
+    filterUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/games?filter=${searchParams.filter}`;
+  } else {
+    filterUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/games`;
   }
 
   const response = await fetch(`${filterUrl}`, {
-    method: "GET"
+    method: "GET",
   });
 
-  const gameData = await response.json()
+  const gameData = await response.json();
 
-  const filterss = [{
-    name: 'FPS', value: 'fps'
-  }, {
-    name: 'Battle Royale', value: 'battle royale'
-  },{
-    name: "None", value: 'none'
-  }]
+  const filterss = [
+    {
+      name: "FPS",
+      value: "fps",
+    },
+    {
+      name: "Battle Royale",
+      value: "battle royale",
+    },
+    {
+      name: "None",
+      value: "none",
+    },
+  ];
 
   return (
     <section className="px-[5%] xl:px-[12%] pt-10 pb-20 transition-all">
