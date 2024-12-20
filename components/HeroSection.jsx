@@ -26,7 +26,8 @@ export default function HeroSection() {
         </h1>
 
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          The Go-To Esports Platform at the intersection of esports and mental well-being
+          The Go-To Esports Platform at the intersection of esports and mental
+          well-being
         </p>
 
         <div className="flex items-center justify-center gap-4 pt-4">
@@ -39,7 +40,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <motion.div 
+      <motion.div
         className="mt-20"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

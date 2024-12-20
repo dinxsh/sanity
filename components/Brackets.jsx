@@ -14,7 +14,7 @@ async function render(id) {
       data.participant.map((participant) => ({
         participantId: participant.id,
         imageUrl: "https://github.githubassets.com/pinned-octocat.svg",
-      }))
+      })),
     );
 
     window.bracketsViewer.render(
@@ -31,12 +31,12 @@ async function render(id) {
         showSlotsOrigin: true,
         showLowerBracketSlotsOrigin: true,
         highlightParticipantOnHover: true,
-      }
+      },
     );
   }
 }
 
-function Bracket({id}) {
+function Bracket({ id }) {
   useEffect(() => {
     render(id);
   }, []);

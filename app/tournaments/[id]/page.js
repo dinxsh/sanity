@@ -1,21 +1,29 @@
 "use client";
-
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useToast } from "@/components/ui/use-toast";
-import TournamentBracket from "@/components/TournamentBracket";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+// import { useRouter } from "next/navigation";
+import { useToast } from "../../../@/components/ui/use-toast";
+import TournamentBracket from "../../../components/TournamentBracket";
+import { Button } from "../../../@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../../../@/components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
-import { fetchTournamentData, registerForTournament } from "@/lib/api/tournament";
+import {
+  fetchTournamentData,
+  registerForTournament,
+} from "../../../lib/api/tournament";
 import { Loader2 } from "lucide-react";
 
 export default function TournamentPage({ params }) {
   const [tournament, setTournament] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [registering, setRegistering] = useState(false);
-  const router = useRouter();
+  // const [registering, setRegistering] = useState(false);
+  // const router = useRouter();
   const { toast } = useToast();
 
   useEffect(() => {
@@ -29,36 +37,36 @@ export default function TournamentPage({ params }) {
       setTournament(data);
       setError(null);
     } catch (err) {
-      setError(err.message || 'Failed to load tournament');
+      setError(err.message || "Failed to load tournament");
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Failed to load tournament data"
+        description: "Failed to load tournament data",
       });
     } finally {
       setLoading(false);
     }
   };
 
-  const handleRegister = async () => {
-    try {
-      setRegistering(true);
-      await registerForTournament(params.id);
-      toast({
-        title: "Success",
-        description: "Successfully registered for tournament"
-      });
-      router.refresh();
-    } catch (err) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: err.message || "Failed to register for tournament"
-      });
-    } finally {
-      setRegistering(false);
-    }
-  };
+  // const handleRegister = async () => {
+  //   try {
+  //     setRegistering(true);
+  //     await registerForTournament(params.id);
+  //     toast({
+  //       title: "Success",
+  //       description: "Successfully registered for tournament"
+  //     });
+  //     router.refresh();
+  //   } catch (err) {
+  //     toast({
+  //       variant: "destructive",
+  //       title: "Error",
+  //       description: err.message || "Failed to register for tournament"
+  //     });
+  //   } finally {
+  //     setRegistering(false);
+  //   }
+  // };
 
   if (loading) {
     return (
@@ -90,7 +98,7 @@ export default function TournamentPage({ params }) {
           >
             {/* Tournament Header */}
             <div className="mb-10 text-center">
-              <motion.h1 
+              <motion.h1
                 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -98,7 +106,7 @@ export default function TournamentPage({ params }) {
               >
                 {tournament.title}
               </motion.h1>
-              <motion.p 
+              <motion.p
                 className="text-muted-foreground mb-6"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -106,25 +114,16 @@ export default function TournamentPage({ params }) {
               >
                 {tournament.description}
               </motion.p>
-              <motion.div 
+              <motion.div
                 className="flex justify-center gap-4"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.4 }}
               >
-                <Button 
-                  size="lg"
-                  onClick={handleRegister}
-                  disabled={registering}
-                >
-                  {registering ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Registering...
-                    </>
-                  ) : (
-                    'Register Now'
-                  )}
+                <Button size="lg" asChild>
+                  <Link href={`/tournaments/${tournament._id}/register`}>
+                    Register Now
+                  </Link>
                 </Button>
                 <Button size="lg" variant="outline">
                   View Details
@@ -144,7 +143,7 @@ export default function TournamentPage({ params }) {
                   </p>
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardHeader>
                   <CardTitle className="text-lg">Participants</CardTitle>
@@ -155,7 +154,7 @@ export default function TournamentPage({ params }) {
                   </p>
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardHeader>
                   <CardTitle className="text-lg">Status</CardTitle>
@@ -176,7 +175,7 @@ export default function TournamentPage({ params }) {
               <CardContent>
                 <TournamentBracket
                   matches={tournament.matches}
-                  roundNames={roundNames}
+                  roundNames={tournament.roundNames}
                 />
               </CardContent>
             </Card>
@@ -189,7 +188,7 @@ export default function TournamentPage({ params }) {
                 </CardHeader>
                 <CardContent>
                   <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-                    {tournament.rules.map((rule, index) => (
+                    {tournament?.rules?.map((rule, index) => (
                       <li key={index}>{rule}</li>
                     ))}
                   </ul>
@@ -202,12 +201,18 @@ export default function TournamentPage({ params }) {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    {tournament.schedule.map((event, index) => (
-                      <div key={index} className="flex justify-between items-center">
-                        <span className="text-muted-foreground">{event.stage}</span>
-                        <span className="text-primary">{event.date}</span>
-                      </div>
-                    ))}
+                    {tournament &&
+                      tournament?.schedule?.map((event, index) => (
+                        <div
+                          key={index}
+                          className="flex justify-between items-center"
+                        >
+                          <span className="text-muted-foreground">
+                            {event.stage}
+                          </span>
+                          <span className="text-primary">{event.date}</span>
+                        </div>
+                      ))}
                   </div>
                 </CardContent>
               </Card>
