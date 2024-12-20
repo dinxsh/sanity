@@ -6,9 +6,6 @@ export async function GET(req) {
   await dbConnect();
 
   try {
-    
-
-
     const gameData = await Games.find().lean();
 
     return NextResponse.json(gameData, { status: 200 });
