@@ -29,6 +29,10 @@ const userSchema = new Schema({
     type: String,
     default: "",
   },
+  discordId: {
+    type: String,
+    default: "",
+  },
   twoFactorActivated: {
     type: Boolean,
     default: false,
