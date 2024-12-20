@@ -3,23 +3,27 @@
 import { useParams } from "next/navigation";
 import Bracket from "../../../components/Brackets";
 
-const BracketTemplate = () => {
-  const numOfTeams = 13;
-  const typeOfElimination = "Single";
-  const nameOfTournament = "XYZ";
-  const gridRows = numOfTeams % 2 === 0 ? numOfTeams : numOfTeams + 1;
+const BracketTemplate = async () => {
   const params = useParams();
   const { id } = params;
+
+  const bracket = await fetch(`/api/brackets/${id}`);
+
+  if (!bracket.ok) {
+    return <div>Error fetching bracket</div>;
+  }
+
+  const { tournamentName, format, consolationFinal, grandFinalType, teams } = await bracket.json();
 
   return (
     <section className="px-5 xl:px-[10%] mt-[7.6875rem]">
       <header aria-labelledby="tournament_heading">
         <h2 className="font-black text-3xl" id="tournament_heading">
-          {nameOfTournament} Tournament
+          {tournamentName}
         </h2>
         <p className="text-xl">
-          {numOfTeams} Teams{" "}
-          <span className="text-lg">({typeOfElimination} Elimination)</span>
+          {teams.length} Teams{" "}
+          <span className="text-lg">({format === "single_elimination" ? "Single Elimination" : format === "double_elimination" ? "Double Elimination" : "Invalid Format"})</span>
         </p>
       </header>
       {/* <div className="mt-20 bg-white/5 p-5 rounded-xl">
@@ -43,7 +47,7 @@ const BracketTemplate = () => {
           ))}
         </div>
       </div> */}
-      <Bracket id={id} />
+      {/* <Bracket id={id} /> */}
     </section>
   );
 };
