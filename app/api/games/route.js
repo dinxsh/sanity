@@ -15,5 +15,4 @@ export async function GET(req) {
       { error: "Internal Server Error" },
       { status: 500 },
     );
-  }
-}
+  }}
