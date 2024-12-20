@@ -18,7 +18,8 @@ export default function FaqSection() {
           Frequently Asked Questions
         </h2>
         <p className="text-muted-foreground">
-          Need help with something? Here are some of the most common questions we get.
+          Need help with something? Here are some of the most common questions
+          we get.
         </p>
       </div>
 
@@ -36,19 +37,17 @@ const FaqsCard = ({ faqsList, idx }) => {
   const answerElRef = useRef();
 
   return (
-    <div 
+    <div
       className="border border-border rounded-lg overflow-hidden hover:border-primary/50 transition-colors"
       onClick={() => setIsOpen(!isOpen)}
     >
-      <button
-        className="w-full px-6 py-4 flex items-center justify-between text-left"
-      >
+      <button className="w-full px-6 py-4 flex items-center justify-between text-left">
         <h3 className="font-semibold text-lg">{faqsList.title}</h3>
         <span className="text-primary">
           {isOpen ? <FaMinus /> : <FaPlus />}
         </span>
       </button>
-      
+
       <div
         className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${
           isOpen ? "py-4" : "py-0 h-0"

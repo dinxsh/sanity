@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const BracketSchema = new Schema({
@@ -10,4 +10,5 @@ const BracketSchema = new Schema({
     createdAt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.models.Bracket || mongoose.model('Bracket', BracketSchema);
+module.exports =
+  mongoose.models.Bracket || mongoose.model("Bracket", BracketSchema);

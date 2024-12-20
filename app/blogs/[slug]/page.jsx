@@ -1,9 +1,9 @@
-import { client, urlFor } from '../../../lib/sanity';
-import Image from 'next/image';
-import React from 'react';
-import { PortableText, PortableTextComponents } from '@portabletext/react';
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import { client, urlFor } from "../../../lib/sanity";
+import Image from "next/image";
+import React from "react";
+import { PortableText, PortableTextComponents } from "@portabletext/react";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 export const revalidate = 30;
 
@@ -25,7 +25,7 @@ const components = {
       return (
         <Image
           src={urlFor(value).url()}
-          alt={value.alt || 'blog image'}
+          alt={value.alt || "blog image"}
           width={600}
           height={600}
           className="object-cover border rounded-lg"
