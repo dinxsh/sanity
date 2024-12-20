@@ -25,10 +25,6 @@ const userSchema = new Schema({
     type: String,
     default: "",
   },
-  discordId: {
-    type: String,
-    default: "",
-  },
   googleId: {
     type: String,
     default: "",

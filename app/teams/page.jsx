@@ -73,7 +73,7 @@ const TeamFinder = () => {
     if (trimmedString === "") return setFilteredTeams(teams);
 
     const filteredArray = teams.filter((e) =>
-      e.teamname.toLowerCase().includes(trimmedString)
+      e.teamname.toLowerCase().includes(trimmedString),
     );
 
     setFilteredTeams(filteredArray);
