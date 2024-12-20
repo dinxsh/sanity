@@ -31,6 +31,6 @@
     "app/api/auth/[...nextauth]/route.js",
     "app/api/auth/[...nextauth]/options.js",
     "app/(auth)/layout.jsx"
-  ],
+, "model/User.ts"  ],
   "exclude": ["node_modules"]
 }

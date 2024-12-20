@@ -39,7 +39,7 @@ async function render(id) {
 function Bracket({ id }) {
   useEffect(() => {
     render(id);
-  }, []);
+  }, );
 
   return (
     <>
