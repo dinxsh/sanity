@@ -25,11 +25,11 @@ const userSchema = new Schema({
     type: String,
     default: "",
   },
-  discordId: {
+  googleId: {
     type: String,
     default: "",
   },
-  googleId: {
+  discordId: {
     type: String,
     default: "",
   },
