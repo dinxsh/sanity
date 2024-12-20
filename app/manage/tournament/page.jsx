@@ -62,9 +62,12 @@ export default function Page() {
 
     try {
       setLoading(true);
-      const response = await axios.post(`/api/tournaments/${selectedTournamentId}/structure`, {
-        structureData: { name: stageName }, // Send the new stage data
-      });
+      const response = await axios.post(
+        `/api/tournaments/${selectedTournamentId}/structure`,
+        {
+          structureData: { name: stageName }, // Send the new stage data
+        },
+      );
 
       console.log("Stage created:", response.data.tournament);
       setStageName(""); // Clear input after success
@@ -80,11 +83,14 @@ export default function Page() {
     if (!selectedTournamentId) return;
 
     try {
-      const response = await axios.put(`/api/tournaments/${selectedTournamentId}`, {
-        registrationData: {
-          enabled: true,
+      const response = await axios.put(
+        `/api/tournaments/${selectedTournamentId}`,
+        {
+          registrationData: {
+            enabled: true,
+          },
         },
-      });
+      );
 
       console.log("Registration enabled:", response.data.tournament);
       fetchTournamentDetails(selectedTournamentId); // Refresh details

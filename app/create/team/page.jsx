@@ -63,12 +63,12 @@ export default function CreateTeamForm() {
       ) {
         // const playersArray = players.split(",").map((player) => player.trim());
         const dataWithPlayersArray = {
-          ...data    
+          ...data,
         };
 
         const response = await axios.post(
           "/api/teams/create-team",
-          dataWithPlayersArray
+          dataWithPlayersArray,
         );
 
         toast({

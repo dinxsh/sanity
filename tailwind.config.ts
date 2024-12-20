@@ -8,11 +8,11 @@ const config: Config = {
   ],
   theme: {
     colors: {
-      primary : "#000000",
+      primary: "#000000",
       secondary: "#ffffff",
       accent: "#d00000",
       transparent: "transparent",
-    }
+    },
   },
   plugins: [],
 };

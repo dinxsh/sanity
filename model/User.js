@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -19,19 +19,19 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    match: [/.+\@.+\..+/, 'Please enter a valid email address'],
+    match: [/.+\@.+\..+/, "Please enter a valid email address"],
   },
   bio: {
     type: String,
-    default: '',
-  },
-  discordId: {
-    type: String,
-    default: '',
+    default: "",
   },
   googleId: {
     type: String,
-    default: '',
+    default: "",
+  },
+  discordId: {
+    type: String,
+    default: "",
   },
   twoFactorActivated: {
     type: Boolean,
@@ -43,22 +43,23 @@ const userSchema = new Schema({
   },
   verifyCode: {
     type: String,
-    required: [true, "Verification Code is required"]
+    required: [true, "Verification Code is required"],
   },
   verifyCodeExpiry: {
     type: Date,
-    required: [true, "Verify code expiry is a must"]
+    required: [true, "Verify code expiry is a must"],
   },
   password: {
-    type: String || '',
-    required: [true, "Password is required"]
+    type: String || "",
+    required: [true, "Password is required"],
   },
   eventsRegistered: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Tournament',
+      ref: "Tournament",
     },
   ],
 });
 
-module.exports = mongoose.models.UserModel || mongoose.model('UserModel', userSchema);
+module.exports =
+  mongoose.models.UserModel || mongoose.model("UserModel", userSchema);

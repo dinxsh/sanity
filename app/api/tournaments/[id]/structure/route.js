@@ -12,7 +12,7 @@ async function handler(request, { params }) {
     const updatedTournament = await Tournament.findByIdAndUpdate(
       id,
       { structure: structureData },
-      { new: true }
+      { new: true },
     );
 
     if (!updatedTournament) {
@@ -29,7 +29,7 @@ async function handler(request, { params }) {
       {
         message: "An error occurred while updating the tournament structure",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

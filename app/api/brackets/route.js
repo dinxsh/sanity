@@ -1,3 +1,4 @@
+
 import dbConnect from '../../../lib/dbConnect';
 import Bracket from '../../../model/Bracket';
 import { NextResponse } from 'next/server';
@@ -13,8 +14,8 @@ const bracketSchema = z.object({
 })
 
 export async function POST(request) {
-    try {
-        await dbConnect();
+  try {
+    await dbConnect();
 
         const body = await request.json();
 
@@ -68,12 +69,15 @@ export async function POST(request) {
 }
 
 export async function GET() {
-    try {
-        await dbConnect();
-        const brackets = await Bracket.find({}).sort({ createdAt: -1 });
-        return NextResponse.json(brackets);
-    } catch (error) {
-        console.error('Error fetching brackets:', error);
-        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
-    }
+  try {
+    await dbConnect();
+    const brackets = await Bracket.find({}).sort({ createdAt: -1 });
+    return NextResponse.json(brackets);
+  } catch (error) {
+    console.error("Error fetching brackets:", error);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 },
+    );
+  }
 }
