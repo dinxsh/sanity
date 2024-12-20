@@ -6,7 +6,7 @@ import { Alert, AlertDescription, AlertTitle } from "../../../@/components/ui/al
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons"
 
 function ErrorContent() {//   const searchParams = useSearchParams()
-  const error = searchParams.get('error')
+  const error = useSearchParams().get('error')
 
   const getErrorMessage = (errorCode) => {
     const errorMessages = {
