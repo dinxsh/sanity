@@ -4,7 +4,6 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   reactStrictMode: true,
-  swcMinify: true,
   images: {
     remotePatterns: [
       {

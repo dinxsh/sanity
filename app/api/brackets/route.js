@@ -49,17 +49,8 @@ export async function POST(request) {
       details: error.message
     }, { status: 500 });
 
-  } catch (error) {
-    console.error("Error creating bracket:", error);
-    return NextResponse.json(
-      {
-        error: "Internal Server Error",
-        details: error.message,
-      },
-      { status: 500 },
-    );
-  }
-}
+  } 
+};
 
 export async function GET() {
   try {

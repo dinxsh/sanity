@@ -4,7 +4,7 @@ require("dotenv").config();
 
 // Import the Mongoose models
 const GamesModel = require("../model/Games");
-const UserModel = require("../model/User");
+const UserModel = require("../model/User").default;
 const OrganizerModel = require("../model/Organizer");
 const TournamentModel = require("../model/Tournament");
 const { TeamModel } = require("../model/Team");

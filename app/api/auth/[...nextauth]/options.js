@@ -2,7 +2,7 @@ const { NextAuthOptions } = require("next-auth");
 const GoogleProvider = require("next-auth/providers/google").default;
 const DiscordProvider = require("next-auth/providers/discord").default;
 const bcrypt = require("bcryptjs");
-const UserModel = require("../../../../model/User");
+const UserModel = require("../../../../model/User").default;
 const dbConnect = require("../../../../lib/dbConnect");
 const CredentialsProvider = require("next-auth/providers/credentials").default;
 
