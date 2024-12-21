@@ -2,15 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import Filter from "../../components/Filter";
 
-export default async function Page({ searchParams }) {
+export default async function page({ searchParams }) {
   let filterUrl;
-  
   if (searchParams?.filter) {
     filterUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/games?filter=${searchParams.filter}`;
   } else {
     filterUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/games`;
-  }
-
+ 
   let gameData = [];
   let errorMessage = '';
 
@@ -33,6 +31,7 @@ export default async function Page({ searchParams }) {
     { name: 'FPS', value: 'fps' },
     { name: 'Battle Royale', value: 'battle royale' },
     { name: "None", value: 'none' }
+
   ];
 
   return (

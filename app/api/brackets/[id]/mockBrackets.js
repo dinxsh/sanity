@@ -81,22 +81,21 @@ export default {
       name: "Revenant Esports",
     },
   ],
-  
   stage: [
     {
       id: 0,
       tournament_id: 1,
       name: "Elimination stage",
       type: "single_elimination",
-      number: 1,
       settings: {
         grandFinal: "single",
         consolationFinal: false,
         matchesChildCount: 0,
         size: 16,
-        seedOrdering: ["inner_outer"]
-      }
-    }
+
+        seedOrdering: ["inner_outer"],
+      },
+    },
   ],
   
   group: [

@@ -55,11 +55,9 @@ const BracketList = () => {
                   </div>
                 )}
                 <h3 className="text-xl font-semibold mb-2">
-                  {bracket.bracketName}
+                  {bracket.tournamentName}
                 </h3>
-                <p className="text-gray-600 mb-1">
-                  Tournament: {bracket.tournamentName || "N/A"}
-                </p>
+
                 <p className="text-gray-600">
                   Created: {new Date(bracket.createdAt).toLocaleDateString()}
                 </p>

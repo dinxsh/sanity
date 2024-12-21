@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import AuthProvider from "../context/AuthProvider";
 import NextTopLoader from "nextjs-toploader";
 import dotenv from "dotenv";
+import { Toaster } from "../@/components/ui/toaster";
 
 dotenv.config();
 
@@ -69,6 +70,7 @@ export default function RootLayout({ children }) {
             <Navbar />
             <main className="mx-auto mt-10">{children}</main>
             <Footer />
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>
