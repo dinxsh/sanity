@@ -1,17 +1,16 @@
-
-import dbConnect from '../../../lib/dbConnect';
-import Bracket from '../../../model/Bracket';
-import { NextResponse } from 'next/server';
-import Tournament from '../../../model/Tournament';
-import { z } from 'zod';
+import dbConnect from "../../../lib/dbConnect";
+import Bracket from "../../../model/Bracket";
+import { NextResponse } from "next/server";
+import Tournament from "../../../model/Tournament";
+import { z } from "zod";
 
 const bracketSchema = z.object({
   tournament_name: z.string().min(1),
-  format: z.enum(['single_elimination', 'double_elimination']),
+  format: z.enum(["single_elimination", "double_elimination"]),
   consolationFinal: z.boolean().default(false),
-  grandFinalType: z.enum(['simple', 'double']),
-  teams: z.array(z.string().min(1)).min(4, "At least 4 teams are required")
-})
+  grandFinalType: z.enum(["simple", "double"]),
+  teams: z.array(z.string().min(1)).min(4, "At least 4 teams are required"),
+});
 
 export async function POST(request) {
   try {
@@ -50,6 +49,15 @@ export async function POST(request) {
       error: 'Internal Server Error',
       details: error.message
     }, { status: 500 });
+  } catch (error) {
+    console.error("Error creating bracket:", error);
+    return NextResponse.json(
+      {
+        error: "Internal Server Error",
+        details: error.message,
+      },
+      { status: 500 },
+    );
   }
 }
 
