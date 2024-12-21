@@ -1,3 +1,4 @@
+
 import { NextResponse } from "next/server";
 import dbConnect from "../../../lib/dbConnect";
 import Games from "../../../model/Games";
@@ -6,12 +7,7 @@ export async function GET(req) {
   await dbConnect();
 
   try {
-    const { searchParams } = new URL(req.url);
-    const filter = searchParams.get("filter") || "";
-    const query = {
-      category: { $regex: new RegExp(filter, "i") },
-    };
-    const gameData = await Games.find(query).lean();
+    const gameData = await Games.find().lean();
 
     return NextResponse.json(gameData, { status: 200 });
   } catch (error) {
@@ -22,4 +18,3 @@ export async function GET(req) {
     );
   }
 }
-
