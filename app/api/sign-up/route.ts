@@ -4,7 +4,7 @@ import UserModel from "../../../model/User";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 
-export async function POST(request) {
+export async function POST(request:Request) {
   await dbConnect();
 
   try {

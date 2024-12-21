@@ -15,7 +15,6 @@ const bracketSchema = z.object({
 export async function POST(request) {
   try {
     await dbConnect();
-
     const body = await request.json();
 
     const validation = bracketSchema.safeParse(body)
@@ -49,17 +48,9 @@ export async function POST(request) {
       error: 'Internal Server Error',
       details: error.message
     }, { status: 500 });
-  } catch (error) {
-    console.error("Error creating bracket:", error);
-    return NextResponse.json(
-      {
-        error: "Internal Server Error",
-        details: error.message,
-      },
-      { status: 500 },
-    );
-  }
-}
+
+  } 
+};
 
 export async function GET() {
   try {
