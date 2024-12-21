@@ -5,7 +5,7 @@ import React from "react";
 import Link from "next/link";
 import { FaDiscord, FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
 
-const socialLinks = [
+export const socialLinks = [
   {
     title: "instagram",
     icon: FaInstagram,
