@@ -25,11 +25,11 @@ const userSchema = new Schema({
     type: String,
     default: "",
   },
-  googleId: {
+  discordId: {
     type: String,
     default: "",
   },
-  discordId: {
+  googleId: {
     type: String,
     default: "",
   },
@@ -61,5 +61,9 @@ const userSchema = new Schema({
   ],
 });
 
-module.exports =
+const UserModel =
   mongoose.models.UserModel || mongoose.model("UserModel", userSchema);
+
+module.exports = {
+  UserModel,
+};
