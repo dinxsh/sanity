@@ -1,10 +1,5 @@
-import * as React from "react"
-export function Alert({
-  children,
-  className,
-  variant,
-  ...props
-}) {
+import * as React from "react";
+export function Alert({ children, className, variant, ...props }) {
   return (
     <div
       className={`${className} rounded-lg border p-4 ${
@@ -45,4 +40,4 @@ export function AlertDescription({ children, className, ...props }) {
   );
 }
 
-AlertDescription.displayName = "AlertDescription";  
+AlertDescription.displayName = "AlertDescription";

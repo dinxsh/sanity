@@ -21,5 +21,5 @@ const TeamModel =
   mongoose.models.TeamModel || mongoose.model("TeamModel", TeamSchema);
 
 module.exports = {
-  TeamModel
+  TeamModel,
 };

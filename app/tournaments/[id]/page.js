@@ -28,7 +28,7 @@ export default function TournamentPage({ params }) {
 
   useEffect(() => {
     loadTournamentData();
-  }, );
+  });
 
   const loadTournamentData = async () => {
     try {
