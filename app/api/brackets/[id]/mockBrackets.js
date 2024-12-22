@@ -97,99 +97,97 @@ export default {
       },
     },
   ],
-  
+
   group: [
     {
       id: 0,
       stage_id: 0,
-      number: 1
-    }
+      number: 1,
+    },
   ],
-  
+
   round: [
     { id: 0, number: 1, stage_id: 0, group_id: 0 },
     { id: 1, number: 2, stage_id: 0, group_id: 0 },
     { id: 2, number: 3, stage_id: 0, group_id: 0 },
-    { id: 3, number: 4, stage_id: 0, group_id: 0 }
+    { id: 3, number: 4, stage_id: 0, group_id: 0 },
   ],
-  
-   match:[
-     {
-       id :0,
-       number :1,
-       stage_id :0,
-       group_id :0,
-       round_id :0,
-       child_count :0,
-       status :4,
-       opponent1 :{id :0 , position :1 , score :1 , result :"win"},
-       opponent2 :{id :15 , position :16 , score :0 , result :"loss"}
-     },
-     {
-       id :1,
-       number :2,
-       stage_id :0,
-       group_id :0,
-       round_id :0,
-       child_count :0,
-       status :2,
-       opponent1 :{id :7 , position :8},
-       opponent2 :{id :8 , position :9}
-     },
-     {
-       id :2,
-       number :3,
-       stage_id :0,
-       group_id :0,
-       round_id :0,
-       child_count :0,
-       status :2,
-       opponent1 :{id :3 , position :4},
-       opponent2 :{id :12 , position :13}
-     },
-     {
-       id :3,
-       number :4,
-       stage_id :0,
-       group_id :0,
-       round_id :0,
-       child_count :0,
-       status :2,
-       opponent1:{id :4 , position :5},
-       opponent2:{id :11 , position :12}
-     },
-     {
-      id :4,
-      number :5,
-      stage_id :0,
-      group_id :0,
-      round_id :0,
-      child_count :0,
-      status :2,
-      opponent1:{id :1 , position :2},
-      opponent2:{id:null}
-   },
-   {
-     id   :5,
-     number   :6,
-     stage_id   :0,
-     group_id   :0,
-     round_id   :0,
-     child_count   :0,
-     status   :"pending",
-     opponent1   :
-         {
-             id   :"6",
-             position   :"7"
-         },
-     opponent2   :
-         {
-             id   :"9",
-             position   :"10"
-         }
-   }
-   // Continue adding matches as per the structure above
-   ],
-   
-   match_game:[]
-}
+
+  match: [
+    {
+      id: 0,
+      number: 1,
+      stage_id: 0,
+      group_id: 0,
+      round_id: 0,
+      child_count: 0,
+      status: 4,
+      opponent1: { id: 0, position: 1, score: 1, result: "win" },
+      opponent2: { id: 15, position: 16, score: 0, result: "loss" },
+    },
+    {
+      id: 1,
+      number: 2,
+      stage_id: 0,
+      group_id: 0,
+      round_id: 0,
+      child_count: 0,
+      status: 2,
+      opponent1: { id: 7, position: 8 },
+      opponent2: { id: 8, position: 9 },
+    },
+    {
+      id: 2,
+      number: 3,
+      stage_id: 0,
+      group_id: 0,
+      round_id: 0,
+      child_count: 0,
+      status: 2,
+      opponent1: { id: 3, position: 4 },
+      opponent2: { id: 12, position: 13 },
+    },
+    {
+      id: 3,
+      number: 4,
+      stage_id: 0,
+      group_id: 0,
+      round_id: 0,
+      child_count: 0,
+      status: 2,
+      opponent1: { id: 4, position: 5 },
+      opponent2: { id: 11, position: 12 },
+    },
+    {
+      id: 4,
+      number: 5,
+      stage_id: 0,
+      group_id: 0,
+      round_id: 0,
+      child_count: 0,
+      status: 2,
+      opponent1: { id: 1, position: 2 },
+      opponent2: { id: null },
+    },
+    {
+      id: 5,
+      number: 6,
+      stage_id: 0,
+      group_id: 0,
+      round_id: 0,
+      child_count: 0,
+      status: "pending",
+      opponent1: {
+        id: "6",
+        position: "7",
+      },
+      opponent2: {
+        id: "9",
+        position: "10",
+      },
+    },
+    // Continue adding matches as per the structure above
+  ],
+
+  match_game: [],
+};
