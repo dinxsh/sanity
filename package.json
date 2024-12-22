@@ -66,6 +66,7 @@
     "@eslint/js": "^9.17.0",
     "@tailwindcss/typography": "0.5.13",
     "@types/bcryptjs": "^2.4.6",
+    "@types/mongoose": "^5.11.97",
     "@types/node": "20.11.24",
     "@types/react": "18.2.61",
     "@types/react-dom": "18.2.19",
