@@ -10,7 +10,7 @@ export async function sendContactEmail(username, fromEmail, message, subject) {
       subject: subject,
       html: ContactEmailTemplate({ username, message, fromEmail }),
     });
-    console.log(res);
+
     if (!res.data) throw new Error(res.error.name);
 
     return {
