@@ -1,7 +1,30 @@
-import mongoose, { models, model } from "mongoose";
-const { Schema } = mongoose;
+import mongoose, { Document, Model, Schema } from "mongoose";
 
-const userSchema = new Schema({
+interface IUser extends Document {
+    username: string;
+    name?: string;
+    email: string;
+    bio?: string;
+    discordId?: string;
+    googleId?: string;
+    twoFactorActivated: boolean;
+    createdAt: Date;
+    verifyCode: string;
+    verifyCodeExpiry: Date;
+    password: string;
+    eventsRegistered: Array<mongoose.Types.ObjectId>;
+}
+
+interface IUserMethods {
+    updatePassword(newPassword: string): Promise<void>;
+}
+
+interface IUserModel extends Model<IUser, {}, IUserMethods> {
+    findByEmail(email: string): Promise<IUser | null>;
+}
+
+//  Created the User Schema
+const userSchema = new Schema<IUser, IUserModel, IUserMethods>({
     _id: {
         type: Schema.Types.ObjectId,
         required: true,
@@ -62,6 +85,6 @@ const userSchema = new Schema({
     ],
 });
 
-const UserModel = models.UserModel || model("UserModel", userSchema);
-
-export default UserModel; 
+// Created the User Model
+const UserModel = mongoose.models.UserModel || mongoose.model<IUser, IUserModel>("UserModel", userSchema);
+export default UserModel;
