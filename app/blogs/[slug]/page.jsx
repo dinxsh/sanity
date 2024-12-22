@@ -1,7 +1,7 @@
 import { client, urlFor } from "../../../lib/sanity";
 import Image from "next/image";
 import React from "react";
-import { PortableText, PortableTextComponents } from "@portabletext/react";
+import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
@@ -16,7 +16,10 @@ const getData = async (slug) => {
           titleImage
       }[0]`;
   const data = await client.fetch(query);
-  return data;
+  if (!data) {
+    throw new Error("Blog post not found");
+  }
+  return data;  
 };
 
 const components = {
@@ -37,6 +40,9 @@ const components = {
 
 const page = async ({ params }) => {
   const data = await getData(params.slug);
+  if (!data) {
+    return <div>Blog post not found.</div>; 
+  }
   return (
     <div className="flex flex-col items-center gap-7">
       <h1 className="relative flex flex-row items-center">
