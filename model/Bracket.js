@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const BracketSchema = new Schema({
+
     tournamentName: { type: String, required: true },
     format: {type: String, enum: ['single_elimination', 'double_elimination'], required: true},
     BracketSize: {type: Number, required: true},

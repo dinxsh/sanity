@@ -1,7 +1,7 @@
 import dbConnect from "../../../../lib/dbConnect";
 import { teamSchema } from "../../../../model/Schema/teamSchema";
 import { TeamModel } from "../../../../model/Team";
-import { UserModel } from "../../../../model/User";
+import UserModel from "../../../../model/User";
 
 export async function POST(request) {
   await dbConnect();
