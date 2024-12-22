@@ -18,7 +18,8 @@
       }
     ],
     "types": ["react-reconciler"],
-    "target": "ES2017"
+    "target": "ES2017",
+    "forceConsistentCasingInFileNames": true,
   },
   "include": [
     "**/*.js",
