@@ -24,7 +24,7 @@ import {
   CardTitle,
 } from "../../../@/components/ui/card";
 
-import { useToast } from "../../../@/components/ui/use-toast";
+import toast from "react-hot-toast";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -42,7 +42,6 @@ const Page = () => {
   );
 
   const router = useRouter();
-  const { toast } = useToast();
 
   const form = useForm({
     resolver: zodResolver(signUpSchema),
@@ -77,10 +76,7 @@ const Page = () => {
     try {
       const response = await axios.post("/api/sign-up", data);
 
-      toast({
-        title: "Success",
-        description: response.data.message,
-      });
+      toast.success(response.data.message);
 
       router.replace(`/verify/${data.username}`);
 
@@ -92,11 +88,7 @@ const Page = () => {
         error.response?.data.message ??
         "There was a problem with your sign-up. Please try again.";
 
-      toast({
-        title: "Sign Up Failed",
-        description: errorMessage,
-        variant: "destructive",
-      });
+      toast.error(errorMessage);
 
       setIsSubmitting(false);
     }

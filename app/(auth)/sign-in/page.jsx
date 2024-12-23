@@ -15,7 +15,7 @@ import { Button } from "../../../@/components/ui/button";
 import { Input } from "../../../@/components/ui/input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useToast } from "../../../@/components/ui/use-toast";
+import toast from "react-hot-toast";
 import { signInSchema } from "../../../model/Schema/signInSchema";
 import React, { useState } from "react";
 import {
@@ -42,8 +42,6 @@ export default function SignInForm() {
     },
   });
 
-  const { toast } = useToast();
-
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
@@ -54,32 +52,19 @@ export default function SignInForm() {
       });
 
       if (result?.error) {
-        console.error("Sign in error:", result.error);
-        toast({
-          title: "Error",
-          description:
-            result.error === "CredentialsSignin"
-              ? "Invalid email or password"
-              : result.error,
-          variant: "destructive",
-        });
+        toast.error(
+          result.error === "CredentialsSignin"
+            ? "Invalid email or password"
+            : result.error,
+        );
       } else if (result?.url) {
         router.push("/dashboard");
       } else {
-        console.error("Unexpected result:", result);
-        toast({
-          title: "Error",
-          description: "An unexpected error occurred",
-          variant: "destructive",
-        });
+        toast.error("An unexpected error occurred");
       }
     } catch (error) {
       console.error("Sign in error:", error);
-      toast({
-        title: "Error",
-        description: "An unexpected error occurred",
-        variant: "destructive",
-      });
+      toast.error("An unexpected error occurred");
     } finally {
       setIsLoading(false);
     }

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 // import { useRouter } from "next/navigation";
-import { useToast } from "../../../@/components/ui/use-toast";
+import toast from "react-hot-toast";
 import TournamentBracket from "../../../components/TournamentBracket";
 import { Button } from "../../../@/components/ui/button";
 import {
@@ -24,7 +24,6 @@ export default function TournamentPage({ params }) {
   const [error, setError] = useState(null);
   // const [registering, setRegistering] = useState(false);
   // const router = useRouter();
-  const { toast } = useToast();
 
   useEffect(() => {
     loadTournamentData();
@@ -38,11 +37,7 @@ export default function TournamentPage({ params }) {
       setError(null);
     } catch (err) {
       setError(err.message || "Failed to load tournament");
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to load tournament data",
-      });
+      toast.success("Failed to load tournament data");
     } finally {
       setLoading(false);
     }

@@ -15,7 +15,7 @@ import { Input } from "../../../@/components/ui/input";
 import { useState } from "react";
 import axios from "axios";
 import { teamSchema } from "../../../model/Schema/teamSchema";
-import { useToast } from "../../../@/components/ui/use-toast";
+import toast from "react-hot-toast";
 
 export default function CreateTeamForm() {
   const [teamname, setTeamname] = useState("");
@@ -27,8 +27,6 @@ export default function CreateTeamForm() {
   const [players, setPlayers] = useState("");
   // const [requests, setRequests] = useState("");
   const [participantCount, setParticipantCount] = useState("");
-
-  const { toast } = useToast();
 
   const form = useForm({
     resolver: zodResolver(teamSchema),
@@ -71,10 +69,7 @@ export default function CreateTeamForm() {
           dataWithPlayersArray,
         );
 
-        toast({
-          title: "Success",
-          description: response.data.message,
-        });
+        toast.success(response.data.message);
 
         reset();
         setTeamname("");
@@ -88,12 +83,7 @@ export default function CreateTeamForm() {
         setParticipantCount("");
       }
     } catch (error) {
-      console.error("Error during create-team:", error);
-      toast({
-        title: "Team Creation Failed",
-        description: error.response?.data?.message || "An error occurred",
-        variant: "destructive",
-      });
+      toast.error(error.response?.data?.message || "An error occurred");
     }
   };
 

@@ -22,7 +22,7 @@ import { Input } from "../@/components/ui/input";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useToast } from "../@/components/ui/use-toast";
+import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
@@ -40,7 +40,6 @@ const teamSchema = z.object({
 export default function BracketForm() {
   const [bracketCreated, setBracketCreated] = useState(false);
   const [bracketInfo, setBracketInfo] = useState(null);
-  const { toast } = useToast();
   const router = useRouter();
 
   const bracketForm = useForm({
@@ -76,16 +75,11 @@ export default function BracketForm() {
     });
 
     if (!res.ok) {
-      toast({
-        title: "An unexpected error occurred",
-        variant: "error",
-      });
+      toast.error("An unexpected error occurred");
       return;
     }
 
-    toast({
-      title: "Bracket created successfully",
-    });
+    toast.success("Bracket created successfully");
 
     router.push("/bracket");
     return;
@@ -227,7 +221,10 @@ export default function BracketForm() {
               Add Another Team
             </Button>
             <div>
-              <Button type="submit" disabled={form.formState.isSubmitting}>
+              <Button
+                type="submit"
+                disabled={bracketForm.formState.isSubmitting}
+              >
                 Submit Teams
               </Button>
             </div>
