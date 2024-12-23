@@ -3,6 +3,8 @@ import Bracket from "../../../model/Bracket";
 import { NextResponse } from "next/server";
 import Tournament from "../../../model/Tournament";
 import { z } from "zod";
+import { InMemoryDatabase } from "brackets-memory-db";
+import { BracketsManager } from "brackets-manager";
 
 const bracketSchema = z.object({
   tournament_name: z.string().min(1),
@@ -13,6 +15,9 @@ const bracketSchema = z.object({
 });
 
 export async function POST(request) {
+  const storage = new InMemoryDatabase();
+  const manager = new BracketsManager(storage);
+
   try {
     await dbConnect();
     const body = await request.json();
@@ -28,22 +33,32 @@ export async function POST(request) {
     const { tournament_name, format, consolationFinal, grandFinalType, teams } =
       validation.data;
 
+    const tournamentId = crypto.randomUUID();
+
+    await manager.create.stage({
+      tournamentId,
+      name: tournament_name,
+      type: format,
+      seeding: teams,
+      settings: {
+        consolationFinal,
+        grandFinal: grandFinalType,
+      },
+    });
+
     const newBracket = new Bracket({
+      ...(await manager.get.tournamentData(tournamentId)),
       tournamentName: tournament_name,
       format: format,
-      BracketSize: teams.length,
-      consolationFinal,
-      grandFinalType,
-      teams,
     });
 
     await newBracket.save();
 
+    // cleanup
+    await manager.delete.tournament(tournamentId);
+
     return NextResponse.json(
-      {
-        message: "Bracket created successfully",
-        id: newBracket._id,
-      },
+      { message: "Bracket created successfully", id: newBracket._id },
       { status: 201 },
     );
   } catch (error) {

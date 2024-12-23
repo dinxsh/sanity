@@ -1,7 +1,6 @@
 import dbConnect from "../../../../lib/dbConnect";
 import Bracket from "../../../../model/Bracket";
 import { NextResponse } from "next/server";
-import mockBrackets from "./mockBrackets";
 
 export async function GET(request, { params }) {
   const { id } = params;

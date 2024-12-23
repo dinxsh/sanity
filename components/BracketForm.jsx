@@ -227,7 +227,7 @@ export default function BracketForm() {
               Add Another Team
             </Button>
             <div>
-              <Button type="submit" disabled={form.formState.isSubmitting}>
+              <Button type="submit" disabled={teamForm.formState.isSubmitting}>
                 Submit Teams
               </Button>
             </div>

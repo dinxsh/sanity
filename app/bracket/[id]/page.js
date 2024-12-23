@@ -40,8 +40,7 @@ const BracketTemplate = () => {
   }
 
   // Destructure the bracket data once it's loaded
-  const { tournamentName, format, consolationFinal, grandFinalType, teams } =
-    bracket;
+  const { tournamentName, format, participant } = bracket;
 
   return (
     <section className="px-5 xl:px-[10%] mt-[7.6875rem]">
@@ -50,7 +49,7 @@ const BracketTemplate = () => {
           {tournamentName}
         </h2>
         <p className="text-xl">
-          {teams.length} Teams{" "}
+          {participant.length} Teams{" "}
           <span className="text-lg">
             {format === "single_elimination"
               ? "Single Elimination"
@@ -61,7 +60,7 @@ const BracketTemplate = () => {
         </p>
       </header>
       {/* The commented-out bracket grid is not needed for now */}
-      {/* <Bracket id={id} /> */}
+      <Bracket id={id} />
     </section>
   );
 };
