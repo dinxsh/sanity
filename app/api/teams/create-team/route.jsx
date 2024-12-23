@@ -1,10 +1,16 @@
 import dbConnect from "../../../../lib/dbConnect";
+import { getServerSession } from "next-auth";
 import { teamSchema } from "../../../../model/Schema/teamSchema";
 import { TeamModel } from "../../../../model/Team";
 import UserModel from "../../../../model/User";
 
 export async function POST(request) {
   await dbConnect();
+
+  const session = await getServerSession({ req: request, res: response }, authOptions);
+  if (!session || !session.user) {
+    return new Response(JSON.stringify({ success: false, message: "Unauthorized" }), { status: 401 });
+  }
 
   try {
     // Parse JSON body from the request
