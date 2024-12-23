@@ -5,7 +5,6 @@ import { Button } from "../@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -22,9 +21,8 @@ import { Input } from "../@/components/ui/input";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useToast } from "../@/components/ui/use-toast";
+import { useToast } from "../@/hooks/use-toast";
 import { useRouter } from "next/navigation";
-import { revalidatePath } from "next/cache";
 
 const bracketSchema = z.object({
   tournament_name: z.string().min(1),
@@ -67,6 +65,15 @@ export default function BracketForm() {
   }
 
   async function onTeamSubmit(values) {
+    if (values.teams.length % 2 !== 0) {
+      toast({
+        title: "Invalid number of teams",
+        description: "Please enter an even number of teams",
+        variant: "error",
+      });
+      return;
+    }
+
     const res = await fetch("/api/brackets", {
       method: "POST",
       headers: {
@@ -78,6 +85,7 @@ export default function BracketForm() {
     if (!res.ok) {
       toast({
         title: "An unexpected error occurred",
+        description: (await res.json()).details,
         variant: "error",
       });
       return;
