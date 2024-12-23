@@ -19,7 +19,7 @@ const getData = async (slug) => {
   if (!data) {
     throw new Error("Blog post not found");
   }
-  return data;  
+  return data;
 };
 
 const components = {
@@ -41,7 +41,7 @@ const components = {
 const page = async ({ params }) => {
   const data = await getData(params.slug);
   if (!data) {
-    return <div>Blog post not found.</div>; 
+    return <div>Blog post not found.</div>;
   }
   return (
     <div className="flex flex-col items-center gap-7">

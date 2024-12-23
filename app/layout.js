@@ -6,7 +6,8 @@ import Footer from "../components/Footer";
 import AuthProvider from "../context/AuthProvider";
 import NextTopLoader from "nextjs-toploader";
 import dotenv from "dotenv";
-import { Toaster } from "react-hot-toast";
+// import { Toaster } from "react-hot-toast";
+import { Toaster } from "../@/components/ui/toaster";
 
 dotenv.config();
 
@@ -71,7 +72,8 @@ export default function RootLayout({ children }) {
             <main className="mx-auto mt-10">{children}</main>
             <Footer />
 
-            <Toaster position="bottom-right" reverseOrder={true} />
+            {/* <Toaster position="bottom-right" reverseOrder={true} /> */}
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>
