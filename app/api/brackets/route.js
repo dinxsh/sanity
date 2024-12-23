@@ -21,17 +21,27 @@ export async function POST(request) {
     await dbConnect();
     const body = await request.json();
 
-    const validation = bracketSchema.safeParse(body)
+    const validation = bracketSchema.safeParse(body);
 
     if (!validation.success) {
-      return NextResponse.json(validation.error.format(), { status: 400 })
+      return NextResponse.json(validation.error.format(), { status: 400 });
     }
 
-    console.log(validation.data)
+    console.log(validation.data);
 
-    const { tournament_name, format, consolationFinal, grandFinalType, teams } = validation.data;
+    const { tournament_name, format, consolationFinal, grandFinalType, teams } =
+      validation.data;
+
 
     const tournamentId = Math.ceil(Math.random() * 100)
+    const newBracket = new Bracket({
+      tournamentName: tournament_name,
+      format: format,
+      BracketSize: teams.length,
+      consolationFinal,
+      grandFinalType,
+      teams,
+    });
 
     await manager.create.stage({
       tournamentId,
@@ -41,12 +51,11 @@ export async function POST(request) {
       settings: {
         consolationFinal,
         grandFinalType,
-
       },
-
     })
 
     const newBracket = await manager.get.tournamentData(tournamentId)
+
 
     return NextResponse.json({
       ...newBracket
@@ -74,6 +83,7 @@ export async function POST(request) {
       error: 'Internal Server Error',
       details: error.message
     }, { status: 500 });
+
   }
 }
 

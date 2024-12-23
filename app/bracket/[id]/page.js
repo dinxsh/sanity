@@ -1,9 +1,11 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import Bracket from "../../../components/Brackets";
 
 const BracketTemplate = () => {
+
   const params = useParams();
   const { id } = params;
 

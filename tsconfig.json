@@ -18,7 +18,8 @@
       }
     ],
     "types": ["react-reconciler"],
-    "target": "ES2017"
+    "target": "ES2017",
+    "forceConsistentCasingInFileNames": true,
   },
   "include": [
     "**/*.js",
@@ -31,7 +32,8 @@
     "prisma/seed.js",
     "app/api/auth/[...nextauth]/route.js",
     "app/api/auth/[...nextauth]/options.js",
-    "app/(auth)/layout.jsx"
-, "model/User.ts"  ],
+    "app/(auth)/layout.jsx",
+    "model/User.ts"
+  ],
   "exclude": ["node_modules"]
 }
