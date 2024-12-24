@@ -1,19 +1,46 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import Bracket from "../../../components/Brackets";
 
-const BracketTemplate = async () => {
-  const params = useParams();
-  const { id } = params;
+const BracketTemplate = () => {
+  const { id } = useParams();
+  const [bracket, setBracket] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const bracket = await fetch(`/api/brackets/${id}`);
+  useEffect(() => {
+    const fetchBracket = async () => {
+      try {
+        const response = await fetch(`/api/brackets/${id}`);
+        if (!response.ok) {
+          throw new Error("Error fetching bracket");
+        }
+        const data = await response.json();
+        setBracket(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (!bracket.ok) {
-    return <div>Error fetching bracket</div>;
+    if (id) {
+      fetchBracket();
+    }
+  }, [id]);
+
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
-  const { tournamentName, format, consolationFinal, grandFinalType, teams } = await bracket.json();
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  // Destructure the bracket data once it's loaded
+  const { tournamentName, format, participant } = bracket;
 
   return (
     <section className="px-5 xl:px-[10%] mt-[7.6875rem]">
@@ -22,32 +49,18 @@ const BracketTemplate = async () => {
           {tournamentName}
         </h2>
         <p className="text-xl">
-          {teams.length} Teams{" "}
-          <span className="text-lg">({format === "single_elimination" ? "Single Elimination" : format === "double_elimination" ? "Double Elimination" : "Invalid Format"})</span>
+          {participant.length} Teams{" "}
+          <span className="text-lg">
+            {format === "single_elimination"
+              ? "Single Elimination"
+              : format === "double_elimination"
+                ? "Double Elimination"
+                : "Invalid Format"}
+          </span>
         </p>
       </header>
-      {/* <div className="mt-20 bg-white/5 p-5 rounded-xl">
-        <div
-          className="grid gap-y-4 gap-x-[4.5rem]"
-          style={{
-            gridTemplateRows: `repeat(${gridRows}, 3.75rem)`,
-            gridAutoColumns: "auto",
-          }}
-        >
-          {numOfTeams % 2 !=== 0 && <article style={{
-            gridRowStart: (numOfTeams / 2) + 1,
-            gridRowEnd: (numOfTeams / 2) + 2,
-            gridColumnStart 
-          }}></article>}
-          {Array.from({ length: Math.floor(numOfTeams / 2) }).map((_, i) => (
-            <article className="row-span-2 rounded-2xl overflow-clip" key={i}>
-              <div></div>
-              <div></div>
-            </article>
-          ))}
-        </div>
-      </div> */}
-      {/* <Bracket id={id} /> */}
+      {/* The commented-out bracket grid is not needed for now */}
+      <Bracket id={id} />
     </section>
   );
 };

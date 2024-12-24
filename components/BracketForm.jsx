@@ -5,7 +5,6 @@ import { Button } from "../@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -17,14 +16,13 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../@/components/ui/select"
-import { Input } from "../@/components/ui/input"
-import { z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useToast } from "../@/components/ui/use-toast"
-import { useRouter } from "next/navigation"
-import { revalidatePath } from 'next/cache'
+} from "../@/components/ui/select";
+import { Input } from "../@/components/ui/input";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useToast } from "../@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 
 const bracketSchema = z.object({
   tournament_name: z.string().min(1),
@@ -38,10 +36,10 @@ const teamSchema = z.object({
 });
 
 export default function BracketForm() {
-  const [bracketCreated, setBracketCreated] = useState(false)
-  const [bracketInfo, setBracketInfo] = useState(null)
-  const { toast } = useToast()
-  const router = useRouter()
+  const [bracketCreated, setBracketCreated] = useState(false);
+  const [bracketInfo, setBracketInfo] = useState(null);
+  const { toast } = useToast();
+  const router = useRouter();
 
   const bracketForm = useForm({
     resolver: zodResolver(bracketSchema),
@@ -67,6 +65,15 @@ export default function BracketForm() {
   }
 
   async function onTeamSubmit(values) {
+    if (values.teams.length % 2 !== 0) {
+      toast({
+        title: "Invalid number of teams",
+        description: "Please enter an even number of teams",
+        variant: "error",
+      });
+      return;
+    }
+
     const res = await fetch("/api/brackets", {
       method: "POST",
       headers: {
@@ -78,6 +85,7 @@ export default function BracketForm() {
     if (!res.ok) {
       toast({
         title: "An unexpected error occurred",
+        description: (await res.json()).details,
         variant: "error",
       });
       return;
@@ -85,9 +93,9 @@ export default function BracketForm() {
 
     toast({
       title: "Bracket created successfully",
-    })
+    });
 
-    router.push("/bracket")
+    router.push("/bracket");
     return;
   }
 
@@ -227,7 +235,7 @@ export default function BracketForm() {
               Add Another Team
             </Button>
             <div>
-              <Button type="submit" disabled={form.formState.isSubmitting}>
+              <Button type="submit" disabled={teamForm.formState.isSubmitting}>
                 Submit Teams
               </Button>
             </div>

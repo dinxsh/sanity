@@ -1,10 +1,9 @@
 "use client";
 import * as React from "react";
-import { Cross2Icon } from "@radix-ui/react-icons";
 import * as ToastPrimitives from "@radix-ui/react-toast";
 import { cva } from "class-variance-authority";
-
 import { cn } from "../../lib/utils";
+import { Cross2Icon } from "@radix-ui/react-icons";
 
 const ToastProvider = ToastPrimitives.Provider;
 
