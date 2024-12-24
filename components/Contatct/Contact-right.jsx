@@ -186,6 +186,7 @@ export default function ContactRightComp({ className }) {
             disabled={loading}
             type="submit"
             className="flex gap-2 items-center"
+            arial-label="send-contact-btn"
           >
             {loading ? (
               <Loader className="animate-spin" />

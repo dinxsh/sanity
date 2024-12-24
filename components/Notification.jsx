@@ -12,10 +12,8 @@ export default function NotificationBar() {
   return (
     <div>
       <Popover>
-        <PopoverTrigger>
-          <div>
-            <Inbox />
-          </div>
+        <PopoverTrigger aria-label="notification-trigger">
+          <Inbox />
         </PopoverTrigger>
         <PopoverContent className="duration-500 mt-4 border border-neutral-700 shadow-none rounded-md bg-black w-screen sm:w-fit sm:mx-12  ">
           <div>

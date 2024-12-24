@@ -202,6 +202,7 @@ const Page = () => {
                     type="submit"
                     className="w-full font-bold"
                     disabled={isSubmitting}
+                    arial-label="signup-btn"
                   >
                     {isSubmitting ? (
                       <>

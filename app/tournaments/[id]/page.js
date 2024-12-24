@@ -81,7 +81,9 @@ export default function TournamentPage({ params }) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
         <p className="text-destructive text-lg">{error}</p>
-        <Button onClick={loadTournamentData}>Retry</Button>
+        <Button onClick={loadTournamentData} arial-label="retry-btn">
+          Retry
+        </Button>
       </div>
     );
   }
@@ -120,7 +122,7 @@ export default function TournamentPage({ params }) {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.4 }}
               >
-                <Button size="lg" asChild>
+                <Button size="lg" asChild arial-label="register-now-btn">
                   <Link
                     href={`/tournaments/${tournament._id}/register`}
                     aria-label="register-now"
@@ -128,7 +130,11 @@ export default function TournamentPage({ params }) {
                     Register Now
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  arial-label="view-details-btn"
+                >
                   View Details
                 </Button>
               </motion.div>

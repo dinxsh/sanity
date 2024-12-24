@@ -15,7 +15,7 @@ import { Button } from "../../../@/components/ui/button";
 import { Input } from "../../../@/components/ui/input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useToast } from "../../../@/components/ui/use-toast";
+import { useToast } from "../../../@/hooks/use-toast";
 import { signInSchema } from "../../../model/Schema/signInSchema";
 import React, { useState } from "react";
 import {
@@ -156,6 +156,7 @@ export default function SignInForm() {
                     className="w-full  font-bold"
                     type="submit"
                     disabled={isLoading}
+                    arial-label="signin-btn"
                   >
                     {isLoading ? (
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -174,6 +175,7 @@ export default function SignInForm() {
                       variant="default"
                       className="w-full flex gap-4"
                       onClick={handleGoogleSignIn}
+                      arial-label="google-signin-btn"
                     >
                       <FaGoogle className="h-4 w-4" />
                     </Button>
@@ -182,6 +184,7 @@ export default function SignInForm() {
                       variant="default"
                       className="w-full flex gap-4"
                       onClick={handleDiscordSignIn}
+                      arial-label="discord-signin-btn"
                     >
                       <FaDiscord className="h-4 w-4" />
                     </Button>

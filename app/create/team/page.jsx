@@ -317,7 +317,9 @@ export default function CreateTeamForm() {
               />
             </div>
             <div className="flex justify-center">
-              <Button type="submit">Create</Button>
+              <Button type="submit" arial-label="team-create-btn">
+                Create
+              </Button>
             </div>
           </form>
         </Form>

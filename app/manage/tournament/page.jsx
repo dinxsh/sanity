@@ -194,6 +194,7 @@ export default function Page() {
               className="p-3 bg-green-400 rounded-md text-white"
               onClick={addParticipant}
               disabled={loading}
+              arial-label="add-participant-btn"
             >
               {loading ? "Adding..." : "+Add Participant"}
             </button>
@@ -221,6 +222,7 @@ export default function Page() {
               className="p-3 bg-green-400 rounded-md text-white"
               onClick={handleCreateStage}
               disabled={loading}
+              arial-label="create-new-stage-btn"
             >
               {loading ? "Creating..." : "+Create new stage"}
             </button>
@@ -238,6 +240,7 @@ export default function Page() {
               className="p-3 bg-blue-400 rounded-md text-white"
               onClick={handleEnableRegistration}
               disabled={loading}
+              arial-label="enable-registration-btn"
             >
               {loading ? "Enabling..." : "Enable Registration"}
             </button>

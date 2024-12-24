@@ -93,7 +93,11 @@ const Navbar = () => {
           href="https://discord.com/invite/rUYVa93Svr"
           aria-label="join-community"
         >
-          <Button variant="outline" className="px-5 rounded-md">
+          <Button
+            variant="outline"
+            className="px-5 rounded-md"
+            arial-label="join-community-btn"
+          >
             Join Community
           </Button>
         </Link>
@@ -104,10 +108,8 @@ const Navbar = () => {
       <div className="lg:hidden flex gap-8 items-center  transition-all">
         <NotificationBar />
         <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="outline">
-              <AlignJustify />
-            </Button>
+          <SheetTrigger>
+            <AlignJustify aria-label="nav-toggle-mob" />
           </SheetTrigger>
           <SheetContent className="flex flex-col items-start justify-start bg-black">
             <SheetHeader>
@@ -135,7 +137,11 @@ const Navbar = () => {
                 href="https://discord.com/invite/rUYVa93Svr"
                 aria-label="join-community"
               >
-                <Button variant="link" className="px-5 -ml-5 text-lg underline">
+                <Button
+                  variant="link"
+                  className="px-5 -ml-5 text-lg underline"
+                  arial-label="join-community-btn"
+                >
                   Join Community
                 </Button>
               </Link>

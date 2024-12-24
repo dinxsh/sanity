@@ -104,7 +104,11 @@ const VerifyAccount = () => {
                   />
                 </CardContent>
                 <CardFooter>
-                  <Button className="font-bold" type="submit">
+                  <Button
+                    className="font-bold"
+                    type="submit"
+                    arial-label="submit-btn"
+                  >
                     Submit
                   </Button>
                 </CardFooter>

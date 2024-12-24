@@ -105,6 +105,7 @@ const TeamFinder = () => {
         <Button
           onClick={() => router.push("/create/team")}
           className="w-1/5 flex gap-2 items-center"
+          arial-label="create-team-btn"
         >
           <PlusCircle className="size-4" />
           <p>Create Team</p>
@@ -135,37 +136,3 @@ const TeamFinder = () => {
 };
 
 export default TeamFinder;
-{
-  /* <div className="max-w-7xl mx-auto">
-<div className="flex gap-4 mb-4 ">
-  <input
-    className=" outline-none py-2 px-4 rounded-md bg-[#222124] text-sm w-4/5 "
-    onChange={(e) => handleTeamSearch(e.target.value)}
-    placeholder="Search team "
-  />
-  <Button onClick={() => router.push("/create/team")} className="w-1/5">
-    Create Team
-  </Button>
-</div>
-
-<div className="flex flex-col  md:flex-row mx-auto ">
-  <div className="max-h-[100vh] pt-5 transition-all overflow-y-scroll flex flex-col gap-12  no-scrollbar transition-all border-0 w-3/4">
-    {filteredTeams.length > 0 ? (
-      filteredTeams.map((team, index) => (
-        <TeamCard key={index} team={team} />
-      ))
-    ) : (
-      <p>No teams found. Try creating one!</p>
-    )}
-  </div>
-
-  <div className=" mx-auto border-2 w-1/4">
-    <FiltersSidebar
-      filters={filters}
-      setFilters={setFilters}
-      onReset={handleResetFilters}
-    />
-  </div>
-</div>
-</div> */
-}
