@@ -191,6 +191,7 @@ export default function SignInForm() {
                     <Link
                       href="/sign-up"
                       className="hover:text-blue-800 underline transition-all "
+                      aria-label="signup-btn"
                     >
                       Sign up
                     </Link>

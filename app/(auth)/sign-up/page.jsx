@@ -218,6 +218,7 @@ const Page = () => {
                     <Link
                       href="/sign-in"
                       className="hover:text-blue-800 underline transition-all "
+                      aria-label="signin-btn"
                     >
                       Sign in
                     </Link>

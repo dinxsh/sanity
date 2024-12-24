@@ -49,6 +49,7 @@ export default async function page({ searchParams }) {
                 <Link
                   href={`/games/${game._id}`}
                   className="relative h-64 w-full rounded-xl hover:scale-105 transition-all"
+                  aria-label="game-id-page"
                 >
                   <Image
                     src={game.gameBannerPhoto}

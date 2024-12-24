@@ -219,7 +219,7 @@ export default function ContactRightComp({ className }) {
       <div className="sm:hidden justify-center mt-8 flex flex-wrap gap-4">
         {socialLinks.map((e, i) => {
           return (
-            <Link href={e.link} key={i}>
+            <Link href={e.link} key={i} aria-label={`${e.title}-social}`}>
               <e.icon className=" size-4" />
             </Link>
           );

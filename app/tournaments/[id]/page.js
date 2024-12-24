@@ -121,7 +121,10 @@ export default function TournamentPage({ params }) {
                 transition={{ delay: 0.4 }}
               >
                 <Button size="lg" asChild>
-                  <Link href={`/tournaments/${tournament._id}/register`}>
+                  <Link
+                    href={`/tournaments/${tournament._id}/register`}
+                    aria-label="register-now"
+                  >
                     Register Now
                   </Link>
                 </Button>
