@@ -14,7 +14,14 @@ export async function POST(request) {
   }
 
   const userId = session.user._id; // Extract user ID from the session
-  const { teamId } = await request.json();
+  const { teamId, playerId } = await request.json();
+
+  if (!teamId || !playerId) {
+    return new Response(
+      JSON.stringify({ success: false, message: "Team ID and Player ID are required" }),
+      { status: 400 }
+    );
+  }
 
   await dbConnect();
 
@@ -28,24 +35,27 @@ export async function POST(request) {
       );
     }
 
-    // Check if the user has already requested to join
-    if (team.requests.includes(userId)) {
+    // Check if the authenticated user is a member of the team
+    const isPlayerInTeam = team.players.some((player) => player.toString() === userId);
+    if (!isPlayerInTeam) {
       return new Response(
-        JSON.stringify({ success: false, message: "You have already requested to join this team" }),
-        { status: 400 }
+        JSON.stringify({ success: false, message: "Forbidden: You are not a member of this team" }),
+        { status: 403 }
       );
     }
 
-    // Add the user to the team's requests
-    team.requests.push(userId);
-    await team.save();
+    // Add the new player to the team
+    if (!team.players.includes(playerId)) {
+      team.players.push(playerId);
+      await team.save();
+    }
 
     return new Response(
-      JSON.stringify({ success: true, message: "Join request sent successfully" }),
+      JSON.stringify({ success: true, message: "Player added successfully" }),
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error making join request:", error);
+    console.error("Error adding player:", error);
     return new Response(
       JSON.stringify({ success: false, message: "Server error" }),
       { status: 500 }
