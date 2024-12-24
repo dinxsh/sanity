@@ -6,10 +6,9 @@ import Organizer from "../../../../model/Organizer";
 
 export async function GET(request, { params }) {
   await dbConnect();
+  const { id } = await params;
 
   try {
-    const id = params.id;
-
     // Ensure all models are registered
     Games;
     Organizer;
@@ -23,6 +22,7 @@ export async function GET(request, { params }) {
       .lean();
 
     if (tournament) {
+      console.log(tournament);
       return NextResponse.json(tournament);
     } else {
       return NextResponse.json(

@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
+import React from "react";
 import { useEffect, useState } from "react";
 // import { useRouter } from "next/navigation";
-import { useToast } from "../../../@/components/ui/use-toast";
+import { useToast } from "../../../@/hooks/use-toast";
 import TournamentBracket from "../../../components/TournamentBracket";
 import { Button } from "../../../@/components/ui/button";
 import {
@@ -25,15 +26,18 @@ export default function TournamentPage({ params }) {
   // const [registering, setRegistering] = useState(false);
   // const router = useRouter();
   const { toast } = useToast();
+  const { id } = React.use(params);
 
   useEffect(() => {
-    loadTournamentData();
-  });
+    if (id) {
+      loadTournamentData(); // Trigger fetching only if `id` is available
+    }
+  }, [id]);
 
   const loadTournamentData = async () => {
     try {
       setLoading(true);
-      const data = await fetchTournamentData(params.id);
+      const data = await fetchTournamentData(id);
       setTournament(data);
       setError(null);
     } catch (err) {
@@ -86,139 +90,179 @@ export default function TournamentPage({ params }) {
     );
   }
 
+  const totalPrize = tournament.prize.reduce(
+    (sum, prize) => sum + prize.amount,
+    0,
+  );
+
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence>
       <div className="container mx-auto px-4 py-10">
-        {tournament && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            {/* Tournament Header */}
-            <div className="mb-10 text-center">
-              <motion.h1
-                className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2 }}
-              >
-                {tournament.title}
-              </motion.h1>
-              <motion.p
-                className="text-muted-foreground mb-6"
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.3 }}
-              >
-                {tournament.description}
-              </motion.p>
-              <motion.div
-                className="flex justify-center gap-4"
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.4 }}
-              >
-                <Button size="lg" asChild>
-                  <Link href={`/tournaments/${tournament._id}/register`}>
-                    Register Now
-                  </Link>
-                </Button>
-                <Button size="lg" variant="outline">
-                  View Details
-                </Button>
-              </motion.div>
+        {/* Tournament Banner */}
+        <div className="mb-6">
+          <img
+            src={tournament.gameId.gameBannerPhoto}
+            alt={tournament.gameId.name}
+            className="w-full h-64 object-cover rounded-lg shadow-lg"
+          />
+        </div>
+        {/* Tournament Header */}
+        <div className="mb-10 text-center">
+          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            {tournament.tournamentName}
+          </h1>
+          <p className="text-muted-foreground mb-6 text-lg text-bold">
+            {tournament.gameType}
+          </p>
+          <div className="flex justify-center gap-4">
+            <Button size="lg" asChild>
+              <Link href={`/tournaments/${tournament._id}/register`}>
+                Register Now
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline">
+              View Details
+            </Button>
+          </div>
+        </div>
+
+        {/* Tournament Info Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Total Prize Pool</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-2xl font-bold text-primary">{totalPrize}</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Participants</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-2xl font-bold text-primary">
+                {tournament.registeredNumber}
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Slots</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-2xl font-bold text-primary">
+                {tournament.slots}
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Tournament Game */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Game</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center justify-around gap-4">
+              <div className="flex flex-col items-center gap-2">
+                <p className="text-4xl font-bold text-primary text-justify px-6">
+                  {tournament.gameId.name}
+                </p>
+                <p className="text-muted-foreground text-center">Game</p>
+              </div>
+              <img
+                src={tournament.gameId.gameBannerPhoto}
+                alt={tournament.gameId.name}
+                className="h-auto w-auto rounded-xl  shadow-lg"
+              />
             </div>
+          </CardContent>
+        </Card>
 
-            {/* Tournament Info Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">Prize Pool</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-2xl font-bold text-primary">
-                    {tournament.prizePool}
-                  </p>
-                </CardContent>
-              </Card>
+        {/* Tournament Dates */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Card className="mt-6">
+            <CardHeader>
+              <CardTitle className="text-lg">Tournament Dates</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-2xl font-bold text-primary text-center">
+                {new Date(tournament.tournamentDates.started).toDateString()} -{" "}
+                {new Date(tournament.tournamentDates.ended).toDateString()}
+              </p>
+            </CardContent>
+          </Card>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">Participants</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-2xl font-bold text-primary">
-                    {tournament.participants}
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">Status</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary">
-                    {tournament.status}
-                  </span>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Tournament Bracket */}
-            <Card className="mb-10">
-              <CardHeader>
-                <CardTitle>Tournament Bracket</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <TournamentBracket
-                  matches={tournament.matches}
-                  roundNames={tournament.roundNames}
+          {/* Tournament Organizer */}
+          <Card className="mt-6">
+            <CardHeader>
+              <CardTitle className="text-lg">Organizer</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-4 justify-center">
+                <img
+                  src={tournament.organizerId.bannerPhoto}
+                  alt={tournament.organizerId.orgName}
+                  className="h-16 w-16 rounded-full"
                 />
-              </CardContent>
-            </Card>
+                <div>
+                  <p className="text-lg font-bold text-primary">
+                    {tournament.organizerId.orgName}
+                  </p>
+                  <p className="text-muted-foreground">Organizer</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
-            {/* Rules and Information */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Tournament Rules</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-                    {tournament?.rules?.map((rule, index) => (
-                      <li key={index}>{rule}</li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>Schedule</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {tournament &&
-                      tournament?.schedule?.map((event, index) => (
-                        <div
-                          key={index}
-                          className="flex justify-between items-center"
-                        >
-                          <span className="text-muted-foreground">
-                            {event.stage}
-                          </span>
-                          <span className="text-primary">{event.date}</span>
-                        </div>
-                      ))}
-                  </div>
-                </CardContent>
-              </Card>
+        {/* Tournament Prize Pool */}
+        <Card className="mt-6">
+          <CardHeader>
+            <CardTitle className="text-lg">Prize Pool</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="w-full overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-400 ">
+                <thead>
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Rank
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Amount
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-inherit divide-y divide-gray-500">
+                  {tournament.prize.map((prize) => (
+                    <tr key={prize.rank}>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
+                        {prize.rank}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
+                        {prize.amount} INR
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-          </motion.div>
-        )}
+          </CardContent>
+        </Card>
+
+        {/* Tournament Bracket */}
+        <Card className="mt-6">
+          <CardHeader>
+            <CardTitle className="text-lg">Tournament Bracket</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <TournamentBracket />
+          </CardContent>
+        </Card>
       </div>
     </AnimatePresence>
   );
