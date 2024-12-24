@@ -1,23 +1,28 @@
 import dbConnect from "../../../../lib/dbConnect";
-import { getServerSession } from "next-auth";
 import { teamSchema } from "../../../../model/Schema/teamSchema";
 import { TeamModel } from "../../../../model/Team";
 import UserModel from "../../../../model/User";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../../../lib/authOptions";
+import { NextResponse } from "next/server";
 
 export async function POST(request) {
-  await dbConnect();
-
-  const session = await getServerSession({ req: request, res: response }, authOptions);
+  
+  // Get session from next-auth using NextResponse for the App Directory
+  const session = await getServerSession(authOptions);
+  
+  // Ensure the session is valid
   if (!session || !session.user) {
-    return new Response(JSON.stringify({ success: false, message: "Unauthorized" }), { status: 401 });
+    return NextResponse.json(
+      { success: false, message: "Unauthorized" },
+      { status: 401 }
+    );
   }
-
   try {
-    // Parse JSON body from the request
     const { teamname, game, role, rank, server, language, players } =
-      await request.json();
-
-    // Zod validation
+    await request.json();
+    
+    // Validate the data using the Zod schema
     const parsedData = teamSchema.parse({
       teamname,
       game,
@@ -27,49 +32,35 @@ export async function POST(request) {
       language,
       players,
     });
+    
+    await dbConnect();
 
-    // Fetch ObjectIds for the players from the UserModel
+    // Validate users exist for the team players
     const playerUsernames = parsedData.players.map((player) => player.trim());
     const users = await UserModel.find({ username: { $in: playerUsernames } });
 
     if (users.length !== playerUsernames.length) {
-      return Response.json(
-        {
-          success: false,
-          message: "Some usernames do not exist.",
-        },
-        { status: 400 },
+      return NextResponse.json(
+        { success: false, message: "Some usernames do not exist." },
+        { status: 400 }
       );
     }
 
-    // Extract ObjectIds from the found users
     const playerIds = users.map((user) => user._id);
 
-    // Create the team with ObjectIds in the players array
-    const formattedData = {
-      ...parsedData,
-      players: playerIds,
-    };
-
+    // Create a new team with the validated and formatted data
+    const formattedData = { ...parsedData, players: playerIds };
     const team = await TeamModel.create(formattedData);
 
-    return Response.json(
-      {
-        success: true,
-        message: "Team created successfully.",
-        team,
-      },
-      { status: 201 },
+    return NextResponse.json(
+      { success: true, message: "Team created successfully.", team },
+      { status: 201 }
     );
   } catch (error) {
     console.error("Error creating team:", error);
-    return Response.json(
-      {
-        success: false,
-        message: "Error creating team",
-        error: error.message,
-      },
-      { status: 500 },
+    return NextResponse.json(
+      { success: false, message: "Error creating team", error: error.message },
+      { status: 500 }
     );
   }
 }
