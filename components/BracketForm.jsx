@@ -193,7 +193,9 @@ export default function BracketForm() {
               )}
             />
             <div className="col-span-2">
-              <Button type="submit">Create Bracket</Button>
+              <Button type="submit" arial-label="create-bracket-btn">
+                Create Bracket
+              </Button>
             </div>
           </form>
         </Form>
@@ -231,11 +233,16 @@ export default function BracketForm() {
               onClick={() =>
                 teamForm.setValue("teams", [...teamForm.watch("teams"), ""])
               }
+              arial-label="add-another-team-btn"
             >
               Add Another Team
             </Button>
             <div>
-              <Button type="submit" disabled={teamForm.formState.isSubmitting}>
+              <Button
+                type="submit"
+                disabled={teamForm.formState.isSubmitting}
+                arial-label="submit-team-btn"
+              >
                 Submit Teams
               </Button>
             </div>

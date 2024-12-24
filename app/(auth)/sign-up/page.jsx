@@ -202,6 +202,7 @@ const Page = () => {
                     type="submit"
                     className="w-full font-bold"
                     disabled={isSubmitting}
+                    arial-label="signup-btn"
                   >
                     {isSubmitting ? (
                       <>
@@ -218,6 +219,7 @@ const Page = () => {
                     <Link
                       href="/sign-in"
                       className="hover:text-blue-800 underline transition-all "
+                      aria-label="signin-btn"
                     >
                       Sign in
                     </Link>

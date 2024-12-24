@@ -131,6 +131,7 @@ export const SkeletonThree = () => {
       href="https://discord.com/invite/AB2vCdyw"
       target="__blank"
       className="relative flex gap-10  h-full group/image border-b"
+      aria-label="discord-btn"
     >
       <div className="w-full  mx-auto bg-transparent dark:bg-transparent group h-full">
         <div

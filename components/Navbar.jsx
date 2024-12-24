@@ -51,7 +51,11 @@ const Navbar = () => {
       <div className="flex gap-20">
         {/* Logo */}
         <div className="flex items-center">
-          <Link href="/" className="flex items-center gap-2">
+          <Link
+            href="/"
+            className="flex items-center gap-2"
+            aria-label="home-page"
+          >
             <Image
               src="/sanity_esports_logo.jpg"
               alt="logo"
@@ -74,6 +78,7 @@ const Navbar = () => {
               className={`font-medium hover:text-foreground/90 transition-all
                 ${isActive(pathname, item.href) ? "text-foreground" : "text-foreground/60"}
               `}
+              aria-label={`${item.href}-nav-item`}
             >
               {item.title}
             </Link>
@@ -84,8 +89,15 @@ const Navbar = () => {
       {/* buttons */}
       <div className="hidden lg:flex items-center pt-2 gap-4 transition-all">
         <NotificationBar />
-        <Link href="https://discord.com/invite/rUYVa93Svr">
-          <Button variant="outline" className="px-5 rounded-md">
+        <Link
+          href="https://discord.com/invite/rUYVa93Svr"
+          aria-label="join-community"
+        >
+          <Button
+            variant="outline"
+            className="px-5 rounded-md"
+            arial-label="join-community-btn"
+          >
             Join Community
           </Button>
         </Link>
@@ -96,10 +108,8 @@ const Navbar = () => {
       <div className="lg:hidden flex gap-8 items-center  transition-all">
         <NotificationBar />
         <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="outline">
-              <AlignJustify />
-            </Button>
+          <SheetTrigger>
+            <AlignJustify aria-label="nav-toggle-mob" />
           </SheetTrigger>
           <SheetContent className="flex flex-col items-start justify-start bg-black">
             <SheetHeader>
@@ -115,6 +125,7 @@ const Navbar = () => {
                     key={index}
                     href={item.href}
                     className="font-medium text-lg"
+                    aria-label={`${item.title}-nav-item`}
                   >
                     {item.title}
                   </Link>
@@ -122,8 +133,15 @@ const Navbar = () => {
               </nav>
             </div>
             <SheetFooter className="mt-10">
-              <Link href="https://discord.com/invite/rUYVa93Svr">
-                <Button variant="link" className="px-5 -ml-5 text-lg underline">
+              <Link
+                href="https://discord.com/invite/rUYVa93Svr"
+                aria-label="join-community"
+              >
+                <Button
+                  variant="link"
+                  className="px-5 -ml-5 text-lg underline"
+                  arial-label="join-community-btn"
+                >
                   Join Community
                 </Button>
               </Link>

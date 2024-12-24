@@ -42,7 +42,11 @@ const TournamentPage = () => {
           <div className="relative">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="flex gap-2">
+                <Button
+                  variant="outline"
+                  className="flex gap-2"
+                  arial-label="tournament-filter-btn"
+                >
                   Filter
                   <ListFilter className="w-4 h-4 mb-0.5" />
                 </Button>
@@ -101,6 +105,7 @@ const TournamentPage = () => {
                   variant="ghost"
                   onClick={clearFilters}
                   className="w-full  transition-colors"
+                  arial-label="tournament-clear-filter-btn"
                 >
                   Clear Filters
                 </Button>

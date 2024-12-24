@@ -56,7 +56,9 @@ const TeamCard = ({ team }) => {
       </div>
 
       <div>
-        <Button className="w-full">Request to Join</Button>
+        <Button className="w-full" arial-label="request-to-join-btn">
+          Request to Join
+        </Button>
       </div>
     </div>
   );

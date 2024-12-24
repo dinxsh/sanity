@@ -41,7 +41,11 @@ const BracketList = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {brackets.map((bracket) => (
-            <Link href={`/bracket/${bracket._id}`} key={bracket._id}>
+            <Link
+              href={`/bracket/${bracket._id}`}
+              key={bracket._id}
+              aria-label="bracket-id-page"
+            >
               <div className="border p-4 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer">
                 {bracket.bracketImage && (
                   <div className="relative w-full h-40 mb-2">

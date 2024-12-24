@@ -46,7 +46,11 @@ const page = async ({ params }) => {
   return (
     <div className="flex flex-col items-center gap-7">
       <h1 className="relative flex flex-row items-center">
-        <Link href="/blog" className="absolute mt-2 left-[-128px]">
+        <Link
+          href="/blog"
+          className="absolute mt-2 left-[-128px]"
+          aria-label="blog-redirect"
+        >
           <ArrowLeft />
         </Link>
         <span className="block mt-2 text-3xl font-bold leading-8 tracking-tight text-center sm:text-4xl">
