@@ -34,7 +34,6 @@ export default function CreateTeamForm() {
 
   const onSubmit = async (formData) => {
     try {
-
       const response = await axios.post("/api/teams/create-team", formData);
 
       toast({
@@ -153,7 +152,7 @@ export default function CreateTeamForm() {
                   <FormItem>
                     <FormLabel>Players</FormLabel>
                     <FormControl>
-                      <Input 
+                      <Input
                         placeholder="player1, player2, player3..."
                         {...field}
                         helperText="Enter player names separated by commas"
