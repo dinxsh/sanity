@@ -115,7 +115,8 @@ export default function Page() {
   const handleIconUpload = (event) => {
     const file = event.target.files[0];
     if (validateImageFile(file)) {
-      setTournamentIcon(URL.createObjectURL(file));
+      const objectURL = URL.createObjectURL(file);
+      setTournamentIcon(objectURL);
     } else {
       alert("Please select a valid image file");
     }
@@ -124,7 +125,8 @@ export default function Page() {
   const handleBannerUpload = (event) => {
     const file = event.target.files[0];
     if (validateImageFile(file)) {
-      setTournamentBanner(URL.createObjectURL(file));
+      const objectURL = URL.createObjectURL(file);
+      setTournamentBanner(objectURL);
     } else {
       alert("Please select a valid image file");
     }
