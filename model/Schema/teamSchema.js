@@ -19,8 +19,19 @@ export const teamSchema = z.object({
   language: z
     .string()
     .min(4, { message: "Language must be at least 4 characters long" }),
-
   players: z
-    .array(z.string())
-    .min(1, { message: "Team must have at least one player" }),
+    .union([
+      // Handle string input (from frontend form)
+      z.string().transform((val) =>
+        typeof val === "string"
+          ? val
+              .split(",")
+              .map((s) => s.trim())
+              .filter((s) => s !== "")
+          : val,
+      ),
+      // Handle array input (for direct API calls)
+      z.array(z.string()),
+    ])
+    .transform((val) => (Array.isArray(val) ? val : [val])),
 });

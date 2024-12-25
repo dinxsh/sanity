@@ -9,7 +9,7 @@ export async function POST(request) {
   if (!session || !session.user) {
     return new Response(
       JSON.stringify({ success: false, message: "Unauthorized" }),
-      { status: 401 }
+      { status: 401 },
     );
   }
 
@@ -18,8 +18,11 @@ export async function POST(request) {
 
   if (!teamId || !playerId) {
     return new Response(
-      JSON.stringify({ success: false, message: "Team ID and Player ID are required" }),
-      { status: 400 }
+      JSON.stringify({
+        success: false,
+        message: "Team ID and Player ID are required",
+      }),
+      { status: 400 },
     );
   }
 
@@ -31,16 +34,21 @@ export async function POST(request) {
     if (!team) {
       return new Response(
         JSON.stringify({ success: false, message: "Team not found" }),
-        { status: 404 }
+        { status: 404 },
       );
     }
 
     // Check if the authenticated user is a member of the team
-    const isPlayerInTeam = team.players.some((player) => player.toString() === userId);
+    const isPlayerInTeam = team.players.some(
+      (player) => player.toString() === userId,
+    );
     if (!isPlayerInTeam) {
       return new Response(
-        JSON.stringify({ success: false, message: "Forbidden: You are not a member of this team" }),
-        { status: 403 }
+        JSON.stringify({
+          success: false,
+          message: "Forbidden: You are not a member of this team",
+        }),
+        { status: 403 },
       );
     }
 
@@ -52,13 +60,13 @@ export async function POST(request) {
 
     return new Response(
       JSON.stringify({ success: true, message: "Player added successfully" }),
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("Error adding player:", error);
     return new Response(
       JSON.stringify({ success: false, message: "Server error" }),
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
