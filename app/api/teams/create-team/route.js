@@ -7,37 +7,31 @@ import { authOptions } from "../../../../lib/authOptions";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-  
-  // Get session from next-auth using NextResponse for the App Directory
   const session = await getServerSession(authOptions);
   
-  // Ensure the session is valid
   if (!session || !session.user) {
     return NextResponse.json(
       { success: false, message: "Unauthorized" },
       { status: 401 }
     );
   }
+
   try {
-    const { teamname, game, role, rank, server, language, players } =
-    await request.json();
+    const requestData = await request.json();
     
-    // Validate the data using the Zod schema
-    const parsedData = teamSchema.parse({
-      teamname,
-      game,
-      role,
-      rank,
-      server,
-      language,
-      players,
-    });
+    const parsedData = teamSchema.parse(requestData);
     
     await dbConnect();
 
-    // Validate users exist for the team players
-    const playerUsernames = parsedData.players.map((player) => player.trim());
-    const users = await UserModel.find({ username: { $in: playerUsernames } });
+    // Ensure players is always an array of strings
+    const playerUsernames = Array.isArray(parsedData.players) 
+      ? parsedData.players 
+      : [parsedData.players];
+
+    
+    const users = await UserModel.find({ 
+      username: { $in: playerUsernames.map(p => p.trim()) } 
+    });
 
     if (users.length !== playerUsernames.length) {
       return NextResponse.json(
@@ -49,7 +43,11 @@ export async function POST(request) {
     const playerIds = users.map((user) => user._id);
 
     // Create a new team with the validated and formatted data
-    const formattedData = { ...parsedData, players: playerIds };
+    const formattedData = { 
+      ...parsedData,
+      players: playerIds
+    };
+
     const team = await TeamModel.create(formattedData);
 
     return NextResponse.json(
