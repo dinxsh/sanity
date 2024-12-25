@@ -24,7 +24,7 @@ import {
   CardTitle,
 } from "../../../@/components/ui/card";
 
-import { useToast } from "../../../@/components/ui/use-toast";
+import { useToast } from "../../../@/hooks/use-toast";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
