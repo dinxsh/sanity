@@ -260,7 +260,7 @@ export default function TournamentPage({ params }) {
             <CardTitle className="text-lg">Tournament Bracket</CardTitle>
           </CardHeader>
           <CardContent>
-            <TournamentBracket />
+            <TournamentBracket id={id} />
           </CardContent>
         </Card>
       </div>
