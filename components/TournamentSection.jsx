@@ -108,6 +108,7 @@ export default function TournamentSection({ filters }) {
               href={`/tournaments/${tournament._id}`}
               className=""
               prefetch={true} // prefetch the tournament page
+              aria-label="tournament-redirect-btn"
             >
               <TournamentCard {...tournament} />
             </Link>

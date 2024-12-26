@@ -67,6 +67,7 @@ export default function GamePage({ params }) {
           <Button
             className="flex items-center gap-2 px-2 py-1 md:px-4 md:py-2 font-medium text- text-white bg-indigo-500 hover:bg-indigo-600 rounded-md active:scale-90 transition-all"
             onClick={handleClick}
+            arial-label="fav-btn"
           >
             Favourite
             {isFavourite ? (
@@ -93,7 +94,11 @@ export default function GamePage({ params }) {
           <div className="relative">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="flex gap-2">
+                <Button
+                  variant="outline"
+                  className="flex gap-2"
+                  arial-label="filter-btn"
+                >
                   Filter
                   <ListFilter className="w-4 h-4 mb-0.5" />
                 </Button>
@@ -152,6 +157,7 @@ export default function GamePage({ params }) {
                   variant="ghost"
                   onClick={clearFilters}
                   className="w-full rounded transition-colors"
+                  arial-label="clear-filter-btn"
                 >
                   Clear Filters
                 </Button>

@@ -62,6 +62,7 @@ export default function CompleteProfilePage() {
                 <button
                   key={idx}
                   type="button"
+                  arial-label="complete-profile-btn"
                   className={`px-2 py-2 text-sm md:px-4 md:text-base rounded-xl transition-all
                     ${
                       selectedExpLevel === button
@@ -149,7 +150,11 @@ export default function CompleteProfilePage() {
           </div>
 
           <div className="flex justify-end items-end">
-            <Button type="submit" className="px-4 py-2">
+            <Button
+              type="submit"
+              className="px-4 py-2"
+              arial-label="create-profile-submit-btn"
+            >
               Submit
             </Button>
           </div>

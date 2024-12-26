@@ -6,7 +6,6 @@ import Footer from "../components/Footer";
 import AuthProvider from "../context/AuthProvider";
 import NextTopLoader from "nextjs-toploader";
 import dotenv from "dotenv";
-// import { Toaster } from "react-hot-toast";
 import { Toaster } from "../@/components/ui/toaster";
 
 dotenv.config();
@@ -59,7 +58,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <AuthProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body className={helvetica.className}>
           <ThemeProvider
             attribute="class"
@@ -71,8 +70,6 @@ export default function RootLayout({ children }) {
             <Navbar />
             <main className="mx-auto mt-10">{children}</main>
             <Footer />
-
-            {/* <Toaster position="bottom-right" reverseOrder={true} /> */}
             <Toaster />
           </ThemeProvider>
         </body>

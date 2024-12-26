@@ -16,6 +16,7 @@ const FiltersSidebar = ({ filters, setFilters, onReset }) => {
             type="button"
             className="transition-all"
             onClick={onReset}
+            arial-label="reset-btn"
           >
             Reset
           </Button>
@@ -78,7 +79,7 @@ const FiltersSidebar = ({ filters, setFilters, onReset }) => {
           </select>
         </div>
 
-        <Button type="button" className="w-full mt-5">
+        <Button type="button" className="w-full mt-5" arial-label="apply-btn">
           Apply
         </Button>
       </form>

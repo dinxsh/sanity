@@ -11,6 +11,7 @@ const BracketPage = () => {
         <Link
           href="/bracket/create"
           className={`ml-auto ${buttonVariants({ variant: "default" })}`}
+          aria-label="bracket-create-redirect"
         >
           Create a bracket
         </Link>

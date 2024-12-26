@@ -85,7 +85,9 @@ export default function TournamentPage({ params }) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
         <p className="text-destructive text-lg">{error}</p>
-        <Button onClick={loadTournamentData}>Retry</Button>
+        <Button onClick={loadTournamentData} arial-label="retry-btn">
+          Retry
+        </Button>
       </div>
     );
   }
@@ -98,6 +100,7 @@ export default function TournamentPage({ params }) {
   return (
     <AnimatePresence>
       <div className="container mx-auto px-4 py-10">
+
         {/* Tournament Banner */}
         <div className="mb-6">
           <img
@@ -125,6 +128,8 @@ export default function TournamentPage({ params }) {
             </Button>
           </div>
         </div>
+
+
 
         {/* Tournament Info Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">

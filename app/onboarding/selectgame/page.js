@@ -78,6 +78,7 @@ export default function SelectGamesPage() {
                     type="submit"
                     variant="outline"
                     className="w-full px-4 py-2 rounded"
+                    arial-label="onboarding-selectgame-btn"
                   >
                     Submit
                   </Button>
