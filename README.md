@@ -1,4 +1,4 @@
-## Sanity 
+## Sanity
 
 tournament management platform
 
