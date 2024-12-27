@@ -16,6 +16,7 @@ const TournamentPage = () => {
     entryFee: "",
     mode: "",
     status: "",
+    gameId: "",
   });
 
   const handleFilterChange = (e) => {
@@ -28,6 +29,7 @@ const TournamentPage = () => {
       entryFee: "",
       mode: "",
       status: "",
+      gameId: "",
     });
   };
 
@@ -53,6 +55,23 @@ const TournamentPage = () => {
               </DropdownMenuTrigger>
 
               <DropdownMenuContent className="w-56 bg-primary">
+                {/* Game Filter - Updated to use gameId */}
+                <div className="mb-4 p-2">
+                  <label className="block text-sm font-medium mb-2">Game</label>
+                  <select
+                    name="gameId"
+                    value={filters.gameId}
+                    onChange={handleFilterChange}
+                    className="w-full px-2 py-1 bg-primary border"
+                  >
+                    <option value="">All Games</option>
+                    <option value="676d205ad9a2b1079a937312">Valorant</option>
+                    <option value="676d205ad9a2b1079a937316">CS:GO</option>
+                    <option value="676d205ad9a2b1079a937320">BGMI</option>
+                    <option value="676d205ad9a2b1079a937317">Fortnite</option>
+                  </select>
+                </div>
+
                 <div className="mb-4 p-2">
                   <label className="block text-sm font-medium mb-2">
                     Entry Fee
@@ -61,20 +80,21 @@ const TournamentPage = () => {
                     name="entryFee"
                     value={filters.entryFee}
                     onChange={handleFilterChange}
-                    className="w-full  px-2 py-1 bg-primary border"
+                    className="w-full px-2 py-1 bg-primary border"
                   >
                     <option value="">All</option>
                     <option value="free">Free</option>
                     <option value="paid">Paid</option>
                   </select>
                 </div>
+
                 <div className="mb-4 p-2">
                   <label className="block text-sm font-medium mb-2">Mode</label>
                   <select
                     name="mode"
                     value={filters.mode}
                     onChange={handleFilterChange}
-                    className="w-full  px-2 py-1 bg-primary border"
+                    className="w-full px-2 py-1 bg-primary border"
                   >
                     <option value="">All</option>
                     <option value="solo">Solo</option>
@@ -82,6 +102,7 @@ const TournamentPage = () => {
                     <option value="squad">Squad</option>
                   </select>
                 </div>
+
                 <div className="mb-4 p-2">
                   <label className="block text-sm font-medium mb-2">
                     Status
@@ -90,7 +111,7 @@ const TournamentPage = () => {
                     name="status"
                     value={filters.status}
                     onChange={handleFilterChange}
-                    className="w-full  px-2 py-1 bg-primary border"
+                    className="w-full px-2 py-1 bg-primary border"
                   >
                     <option value="">All</option>
                     <option value="open">Open</option>
@@ -104,7 +125,7 @@ const TournamentPage = () => {
                 <Button
                   variant="ghost"
                   onClick={clearFilters}
-                  className="w-full  transition-colors"
+                  className="w-full transition-colors"
                   arial-label="tournament-clear-filter-btn"
                 >
                   Clear Filters
