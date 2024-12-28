@@ -122,6 +122,23 @@ const TeamFinder = () => {
           <h1 className="text-3xl ml-4 mb-14 font-semibold tracking-tight">
             Team Finder
           </h1>
+          <div className=" w-11/12 max-w-7xl mx-auto">
+            <div className="flex gap-4 mb-4 ">
+              <input
+                className=" outline-none py-2 px-4 rounded-md bg-[#222124] text-sm w-4/5 "
+                onChange={(e) => handleTeamSearch(e.target.value)}
+                placeholder="Search team "
+              />
+              <Button
+                onClick={() => router.push("/create/team")}
+                className="w-1/5 flex gap-2 items-center"
+                arial-label="create-team-btn"
+              >
+                <PlusCircle className="size-4" />
+                <p>Create Team</p>
+              </Button>
+            </div>
+          </div>
 
           <div className="mx-5 p-2 grid gap-5 grid-cols-1 lg:grid-cols-10 overflow-hidden transition-all">
             <Card className="mt-5 lg:mt-0 lg:ml-5 col-span-1 lg:col-span-7 transition-all">
