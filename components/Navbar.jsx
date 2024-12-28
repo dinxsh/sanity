@@ -89,16 +89,13 @@ const Navbar = () => {
       {/* buttons */}
       <div className="hidden lg:flex items-center pt-2 gap-4 transition-all">
         <NotificationBar />
-        <Link
-          href="https://discord.com/invite/rUYVa93Svr"
-          aria-label="join-community"
-        >
+        <Link href="/sign-up" aria-label="join-community">
           <Button
             variant="outline"
-            className="px-5 rounded-md"
+            className="bg-primary hover:bg-primary-hover border border-neutral-700"
             arial-label="join-community-btn"
           >
-            Join Community
+            Sign Up
           </Button>
         </Link>
         <ModeToggle />
@@ -132,17 +129,18 @@ const Navbar = () => {
                 ))}
               </nav>
             </div>
-            <SheetFooter className="mt-10">
+            <SheetFooter className="mt-10 w-full">
               <Link
-                href="https://discord.com/invite/rUYVa93Svr"
+                href="/sign-up"
                 aria-label="join-community"
+                className="w-full"
               >
                 <Button
-                  variant="link"
-                  className="px-5 -ml-5 text-lg underline"
+                  variant="outline"
+                  className="bg-primary hover:bg-primary-hover border border-neutral-700 w-full "
                   arial-label="join-community-btn"
                 >
-                  Join Community
+                  Sign Up
                 </Button>
               </Link>
             </SheetFooter>
