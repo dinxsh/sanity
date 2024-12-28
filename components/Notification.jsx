@@ -1,4 +1,4 @@
-import { Check, Inbox, Megaphone, X } from "lucide-react";
+import { Bell, Check, Inbox, Megaphone, X } from "lucide-react";
 import {
   Popover,
   PopoverContent,
@@ -13,7 +13,7 @@ export default function NotificationBar() {
     <div>
       <Popover>
         <PopoverTrigger aria-label="notification-trigger">
-          <Inbox />
+          <Bell />
         </PopoverTrigger>
         <PopoverContent className="duration-500 mt-4 border border-neutral-700 shadow-none rounded-md bg-black w-screen sm:w-fit sm:mx-12  ">
           <div>
@@ -25,7 +25,7 @@ export default function NotificationBar() {
                 return (
                   <div
                     key={e.id}
-                    className={`${e.marked_as_read ? "opacity-50" : null} flex justify-between items-center`}
+                    className={`${e.marked_as_read ? "opacity-50" : null}`}
                   >
                     <div className="flex gap-2 w-fit h-fit ">
                       <Avatar>
@@ -42,11 +42,6 @@ export default function NotificationBar() {
                           {new Date(e.timestamp).toLocaleDateString()}
                         </p>
                       </div>
-                    </div>
-
-                    <div className=" w-fit flex gap-2">
-                      <Check className="text-green-700 cursor-pointer" />
-                      <X className="text-red-600 cursor-pointer" />
                     </div>
                   </div>
                 );
