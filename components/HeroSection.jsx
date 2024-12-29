@@ -4,7 +4,8 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import FaqSection from "./FaqSection";
+import FeatureSectionGrid from "./FeatureSection/FeatureSectionGrid";
 
 export default function HeroSection() {
   return (
@@ -19,7 +20,6 @@ export default function HeroSection() {
           <p className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             &#10024; Discover new heights{" "}
           </p>
-          <ArrowRight className="size-4" />
         </div>
 
         <h1 className="text-5xl md:text-6xl font-bold leading-tight">
@@ -35,16 +35,20 @@ export default function HeroSection() {
         </p>
 
         <div className="flex items-center justify-center gap-4 pt-4">
-          <Button
-            size="lg"
-            className="bg-primary hover:bg-primary-hover"
-            arial-label="get-started-btn"
-          >
-            Get Started
-          </Button>
-          <Button size="lg" variant="outline" arial-label="learn-more-btn">
-            Learn More
-          </Button>
+          <Link href="#feature-section" passHref>
+            <Button
+              size="lg"
+              className="bg-primary hover:bg-primary-hover"
+              aria-label="get-started-btn"
+            >
+              Get Started
+            </Button>
+          </Link>
+          <Link href="#faq-section" passHref>
+            <Button size="lg" variant="outline" aria-label="learn-more-btn">
+              Learn More
+            </Button>
+          </Link>
         </div>
       </div>
 
