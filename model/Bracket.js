@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const participantSchema = new Schema({
-  id: Number,
+  id: { type: mongoose.Schema.Types.ObjectId },
   name: String,
   tournament_id: String,
 });
@@ -13,11 +13,11 @@ const matchSchema = new Schema({
   id: Number,
   number: Number,
   opponent1: {
-    id: Number,
+    id: { type: mongoose.Schema.Types.ObjectId },
     position: Number,
   },
   opponent2: {
-    id: Number,
+    id: { type: mongoose.Schema.Types.ObjectId },
     position: Number,
   },
   round_id: Number,
