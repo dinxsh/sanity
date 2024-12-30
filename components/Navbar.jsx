@@ -17,7 +17,9 @@ import {
 import { AlignJustify } from "lucide-react";
 import { usePathname } from "next/navigation";
 import NotificationBar from "../components/Notification";
+import { useSession } from "next-auth/react";
 const Navbar = () => {
+  const session = useSession();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -89,15 +91,27 @@ const Navbar = () => {
       {/* buttons */}
       <div className="hidden lg:flex items-center pt-2 gap-4 transition-all">
         <NotificationBar />
-        <Link href="/sign-up" aria-label="join-community">
-          <Button
-            variant="outline"
-            className="bg-primary hover:bg-primary-hover border border-neutral-700"
-            arial-label="join-community-btn"
-          >
-            Sign Up
-          </Button>
-        </Link>
+        {session.status === "authenticated" ? (
+          <Link href="/" aria-label="join-community">
+            <Button
+              variant="outline"
+              className="bg-primary hover:bg-primary-hover border border-neutral-700"
+              arial-label="join-community-btn"
+            >
+              Get Started
+            </Button>
+          </Link>
+        ) : (
+          <Link href="/sign-in" aria-label="join-community">
+            <Button
+              variant="outline"
+              className="bg-primary hover:bg-primary-hover border border-neutral-700"
+              arial-label="join-community-btn"
+            >
+              Sign In
+            </Button>
+          </Link>
+        )}
         <ModeToggle />
       </div>
 
