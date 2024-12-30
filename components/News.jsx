@@ -62,7 +62,7 @@ const News = () => {
           {articles.map((article, index) => (
             <div
               key={index}
-              className="flex flex-col  justify-between border border-gray-700 shadow-md border-b-0 bg-gray-800 dark:border-gray-600 my-10 mx-5  "
+              className="flex flex-col  justify-between border border-gray-700 shadow-md border-b-0 bg-gray-800 my-10 mx-5"
             >
               <div className="">
                 <NewsItem

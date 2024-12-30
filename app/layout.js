@@ -1,6 +1,5 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import { ThemeProvider } from "../components/theme-provider";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import AuthProvider from "../context/AuthProvider";
@@ -61,18 +60,11 @@ export default function RootLayout({ children }) {
     <AuthProvider>
       <html lang="en" suppressHydrationWarning>
         <body className={helvetica.className}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <NextTopLoader />
-            <Navbar />
-            <main className="mx-auto mt-10">{children}</main>
-            <Footer />
-            <Toaster />
-          </ThemeProvider>
+          <NextTopLoader />
+          <Navbar />
+          <main className="mx-auto mt-10">{children}</main>
+          <Footer />
+          <Toaster />
           <Analytics />
         </body>
       </html>

@@ -53,7 +53,7 @@ export default function Footer() {
           </div>
 
           {/* desc */}
-          <div className="mt-5 max-w-sm leading-relaxed font-medium text-gray-600 dark:text-gray-400">
+          <div className="mt-5 max-w-sm leading-relaxed font-medium text-gray-600">
             <p>
               Sanity Gaming covers every single aspect of esports community.
               Which a gamer desires we aim to connect organizers with players.
@@ -84,7 +84,7 @@ export default function Footer() {
         {/* Important links */}
         <div className="flex flex-col gap-6 ml-1">
           <h1 className="text-2xl font-semibold">Important Links</h1>
-          <div className="flex flex-col gap-4 font-medium text-gray-600 dark:text-gray-400">
+          <div className="flex flex-col gap-4 font-medium text-gray-600">
             <Link
               href="https://discord.com/invite/rUYVa93Svr"
               className="hover:underline"
@@ -103,7 +103,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t mt-20 py-10 text-xs md:text-sm text-center text-gray-600 dark:text-gray-400 transition-all">
+      <div className="border-t mt-20 py-10 text-xs md:text-sm text-center text-gray-600 transition-all">
         Built and maintained by Sanity Gaming - © 2024
       </div>
     </div>

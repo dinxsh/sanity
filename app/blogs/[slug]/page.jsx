@@ -65,7 +65,7 @@ const page = async ({ params }) => {
         priority
         className="object-cover border rounded-lg"
       />
-      <div className="mt-3 prose prose-xl prose-blue dark:prose-invert prose-li:marker:text-primary">
+      <div className="mt-3 prose prose-xl prose-blue prose-li:marker:text-primary">
         <PortableText value={data.content} components={components} />
       </div>
     </div>
