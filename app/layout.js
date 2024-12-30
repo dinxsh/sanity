@@ -7,6 +7,7 @@ import AuthProvider from "../context/AuthProvider";
 import NextTopLoader from "nextjs-toploader";
 import dotenv from "dotenv";
 import { Toaster } from "../@/components/ui/toaster";
+import { Analytics } from "@vercel/analytics/next";
 
 dotenv.config();
 
@@ -72,6 +73,7 @@ export default function RootLayout({ children }) {
             <Footer />
             <Toaster />
           </ThemeProvider>
+          <Analytics />
         </body>
       </html>
     </AuthProvider>

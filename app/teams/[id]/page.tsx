@@ -34,10 +34,16 @@ const TeamDetails = async ({ params }: any) => {
               >
                 <p>{req}</p>
                 <div className=" flex items-center justify-center gap-2">
-                  <button className="border border-zinc-200/20 rounded-full p-1">
+                  <button
+                    type="button"
+                    className="border border-zinc-200/20 rounded-full p-1"
+                  >
                     <X className="text-red-600 size-5" />
                   </button>
-                  <button className="border border-zinc-200/20 rounded-full p-1">
+                  <button
+                    type="button"
+                    className="border border-zinc-200/20 rounded-full p-1"
+                  >
                     <Check className="text-green-600 size-5" />{" "}
                   </button>
                 </div>
@@ -77,7 +83,7 @@ const TeamDetails = async ({ params }: any) => {
 
           <div className="md:row-start-3 md:col-start-2 size-full border rounded-sm font-mono p-5 flex gap-2 border-zinc-200/20 ">
             <p>Players:</p>
-            {team.players.map((p) => (
+            {team.players.map((p: any) => (
               <p key={p}>{p.username}</p>
             ))}
           </div>

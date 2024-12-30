@@ -6,8 +6,12 @@ export default async function Home() {
   return (
     <main className="">
       <HeroSection />
-      <FeatureSection />
-      <FaqSection />
+      <div id="feature-section">
+        <FeatureSection />
+      </div>
+      <div id="faq-section">
+        <FaqSection />
+      </div>
     </main>
   );
 }
