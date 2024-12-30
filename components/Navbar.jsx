@@ -44,7 +44,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`sticky top-0 z-50 py-4 px-5 xl:px-[10%] flex items-center justify-between bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all
+      className={`sticky top-0 z-50 py-4 px-5 xl:px-[10%] flex items-center justify-between bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 
       ${scrolled ? "border-b border-neutral-700" : ""}
     `}
     >
@@ -63,14 +63,14 @@ const Navbar = () => {
               width={30}
               className="rounded"
             />
-            <h1 className="text-2xl font-semibold tracking-tight mt-1">
+            <h1 className="text-2xl lg:text-xl xl:text-2xl font-semibold tracking-tight mt-1">
               Sanity Gaming
             </h1>
           </Link>
         </div>
 
         {/* links */}
-        <nav className="hidden lg:flex flex-row items-center pt-2 gap-10 transition-all">
+        <nav className="hidden lg:flex flex-row items-center pt-2 gap-6 xl:gap-10 transition-all">
           {navLinks.map((item, index) => (
             <Link
               key={index}
