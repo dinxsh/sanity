@@ -2,7 +2,11 @@
 
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "../../../@/components/ui/alert";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 
 function ErrorContent() {

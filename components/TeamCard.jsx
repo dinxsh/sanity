@@ -4,11 +4,12 @@ import React from "react";
 import { MdLeaderboard } from "react-icons/md";
 import { Button } from "./ui/button";
 import { Separator } from "../@/components/ui/separator";
+import Link from "next/link";
 
 const TeamCard = ({ team }) => {
   return (
     <div className="flex  flex-col gap-6 bg-[#0E1728] rounded-lg  p-6 mx-auto ">
-      <div>
+      <Link href={`/teams/${team._id}`}>
         <Image
           src={team.image || "/static-team-logo.png"}
           width={500}
@@ -17,7 +18,7 @@ const TeamCard = ({ team }) => {
           className="rounded-lg w-full h-36"
         />
         <p className="text-2xl font-bold mt-2">{team.teamname}</p>
-      </div>
+      </Link>
 
       <div className="flex gap-4 flex-wrap">
         <div className="flex gap-2 items-center text-gray-400">
@@ -46,7 +47,7 @@ const TeamCard = ({ team }) => {
       <div className="flex justify-between flex-wrap">
         <div className="flex gap-2 items-center text-gray-400">
           <Users />
-          <span className="block">{team.players.join(" , ")}</span>
+          <span className="block">{team.players}</span>
         </div>
 
         <div className="flex gap-2 items-center text-gray-400">
@@ -56,7 +57,9 @@ const TeamCard = ({ team }) => {
       </div>
 
       <div>
-        <Button className="w-full">Request to Join</Button>
+        <Button className="w-full" arial-label="request-to-join-btn">
+          Request to Join
+        </Button>
       </div>
     </div>
   );

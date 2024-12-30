@@ -26,6 +26,7 @@ const NewsItem = ({ title, description, url, urlToImage }) => {
           className="bg-white text-black font-semibold hover:bg-tertiary transition-all text-[15px] px-4 py-2"
           href={url}
           target="_blank"
+          aria-label="read-article"
         >
           Read Article
         </Link>

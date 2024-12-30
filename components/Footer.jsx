@@ -36,7 +36,11 @@ export default function Footer() {
         <div className="flex flex-col">
           {/* logo */}
           <div>
-            <Link href="/" className="flex items-center gap-2">
+            <Link
+              href="/"
+              className="flex items-center gap-2"
+              aria-label="home-page"
+            >
               <Image
                 src="/sanity_esports_logo.jpg"
                 alt="logo"
@@ -65,6 +69,7 @@ export default function Footer() {
                 href={item.link}
                 target="_blank"
                 className="hover:scale-110 transition-all duration-300"
+                aria-label={`${item.title}-icon`}
               >
                 {/* <item.icon /> */}
                 <item.icon
@@ -83,10 +88,15 @@ export default function Footer() {
             <Link
               href="https://discord.com/invite/rUYVa93Svr"
               className="hover:underline"
+              aria-label="join-community"
             >
               Join Community
             </Link>
-            <Link href="/contact" className="hover:underline">
+            <Link
+              href="/contact"
+              className="hover:underline"
+              aria-label="contact-btn"
+            >
               Contact
             </Link>
           </div>

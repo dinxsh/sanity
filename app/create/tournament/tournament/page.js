@@ -144,6 +144,7 @@ export default function Page() {
                         : "bg-slate-500 hover:bg-slate-600"
                     }`}
                     onClick={() => setSelectedPlatform(platform)}
+                    arial-label="platform-btn"
                   >
                     {platform}
                   </button>
@@ -216,6 +217,7 @@ export default function Page() {
                 type="submit"
                 className={`px-6 py-2 rounded-md  ${isSubmitting ? "bg-blue-300" : "bg-blue-600 hover:bg-blue-700"} transition-colors duration-300`}
                 disabled={isSubmitting}
+                arial-label="create-tournament-btn"
               >
                 {isSubmitting ? "Creating..." : "Create Tournament"}
               </button>
@@ -223,6 +225,7 @@ export default function Page() {
                 type="button"
                 className="px-6 py-2 rounded-md text-white bg-red-600 hover:bg-red-700 transition-colors duration-300"
                 onClick={handleReset}
+                arial-label="reset-btn"
               >
                 Reset
               </button>

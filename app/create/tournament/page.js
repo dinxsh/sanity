@@ -115,7 +115,8 @@ export default function Page() {
   const handleIconUpload = (event) => {
     const file = event.target.files[0];
     if (validateImageFile(file)) {
-      setTournamentIcon(URL.createObjectURL(file));
+      const objectURL = URL.createObjectURL(file);
+      setTournamentIcon(objectURL);
     } else {
       alert("Please select a valid image file");
     }
@@ -124,7 +125,8 @@ export default function Page() {
   const handleBannerUpload = (event) => {
     const file = event.target.files[0];
     if (validateImageFile(file)) {
-      setTournamentBanner(URL.createObjectURL(file));
+      const objectURL = URL.createObjectURL(file);
+      setTournamentBanner(objectURL);
     } else {
       alert("Please select a valid image file");
     }
@@ -338,7 +340,9 @@ export default function Page() {
             Prize Configuration{" "}
             <span className="text-foreground/50 text-sm">ⓘ</span>
           </h3>
-          <Button className="px-4 py-2 rounded">Add Prize</Button>
+          <Button arial-label="add-prize-btn" className="px-4 py-2 rounded">
+            Add Prize
+          </Button>
         </div>
 
         {/* Rules */}
@@ -351,13 +355,20 @@ export default function Page() {
             className="w-fit bg-foreground/5 p-2 rounded mb-2 text-sm"
             placeholder="Enter Rule"
           />
-          <Button className="px-4 py-2 rounded w-fit">Add Rule</Button>
+          <Button
+            arial-label="add-rule-btn"
+            className="px-4 py-2 rounded w-fit"
+          >
+            Add Rule
+          </Button>
         </div>
 
         {/* Sponsors */}
         <div className="mt-8">
           <h3 className="text-xl font-semibold mb-4">Sponsors</h3>
-          <Button className=" px-4 py-2 rounded">Add Sponsor</Button>
+          <Button arial-label="add-sponsor-btn" className=" px-4 py-2 rounded">
+            Add Sponsor
+          </Button>
         </div>
 
         {/* Game Configuration */}
@@ -389,7 +400,9 @@ export default function Page() {
               />
             </div>
           </div>
-          <Button className="mt-4 px-4 py-2">Add Game Config</Button>
+          <Button arial-label="add-game-config-btn" className="mt-4 px-4 py-2">
+            Add Game Config
+          </Button>
         </div>
 
         {/* Tournament Configuration */}
@@ -466,7 +479,10 @@ export default function Page() {
               />
             </div>
           </div>
-          <Button className="mt-4 px-4 py-2 rounded">
+          <Button
+            arial-label="add-tournament-config-btn"
+            className="mt-4 px-4 py-2 rounded"
+          >
             Add Tournament Config
           </Button>
         </div>
@@ -477,6 +493,7 @@ export default function Page() {
             type="submit"
             className={`mt-10 px-6 py-2 rounded-md font-semibold text-white ${isSubmitting ? "bg-blue-500" : "bg-blue-600 hover:bg-blue-700"} transition-colors duration-300`}
             disabled={isSubmitting}
+            arial-label="team-create-btn"
           >
             {isSubmitting ? "Creating..." : "Create Tournament"}
           </button>

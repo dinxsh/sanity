@@ -34,7 +34,7 @@ export default function ContactLeftComp({ className }) {
         <div className="flex gap-4">
           {socialLinks.map((e, i) => {
             return (
-              <Link href={e.link} key={i}>
+              <Link href={e.link} key={i} aria-label={`${e.title}-social`}>
                 <e.icon className="invert size-6" />
               </Link>
             );

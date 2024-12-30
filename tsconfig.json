@@ -3,7 +3,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "noEmit": true,
     "incremental": true,
     "module": "esnext",
@@ -17,9 +17,12 @@
         "name": "next"
       }
     ],
-    "types": ["react-reconciler"]
+    "types": ["react-reconciler"],
+    "target": "ES2017",
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
+    "**/*.js",
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
@@ -29,7 +32,8 @@
     "prisma/seed.js",
     "app/api/auth/[...nextauth]/route.js",
     "app/api/auth/[...nextauth]/options.js",
-    "app/(auth)/layout.jsx"
+    "app/(auth)/layout.jsx",
+    "model/User.ts"
   ],
   "exclude": ["node_modules"]
 }

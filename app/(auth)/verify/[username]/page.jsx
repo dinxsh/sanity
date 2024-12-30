@@ -10,7 +10,7 @@ import {
   FormMessage,
 } from "../../../../@/components/ui/form";
 import { Input } from "../../../../@/components/ui/input";
-import { useToast } from "../../../../@/components/ui/use-toast";
+import { useToast } from "../../../../@/hooks/use-toast";
 import { verifySchema } from "../../../../model/Schema/verifySchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
@@ -104,7 +104,11 @@ const VerifyAccount = () => {
                   />
                 </CardContent>
                 <CardFooter>
-                  <Button className="font-bold" type="submit">
+                  <Button
+                    className="font-bold"
+                    type="submit"
+                    arial-label="submit-btn"
+                  >
                     Submit
                   </Button>
                 </CardFooter>

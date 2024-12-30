@@ -30,6 +30,7 @@ export default function TournamentSection({ filters }) {
 
     fetchTournaments();
   }, []);
+
   if (isLoading)
     return (
       <div className="flex gap-10 mt-16">
@@ -78,23 +79,15 @@ export default function TournamentSection({ filters }) {
         : "";
 
     if (filters?.entryFee && filters.entryFee !== entryFee) return false;
-
     if (filters?.mode && filters.mode.toUpperCase() !== tournament.gameType)
       return false;
     if (filters?.status && filters.status !== status.toLowerCase())
       return false;
+    if (filters?.gameId && filters.gameId !== tournament.gameId?._id)
+      return false;
+
     return true;
   });
-
-  function getStatus(dates) {
-    const now = new Date();
-    const startDate = new Date(dates.started);
-    const endDate = new Date(dates.ended);
-
-    if (now < startDate) return "Open";
-    if (now >= startDate && now <= endDate) return "Live";
-    return "Completed";
-  }
 
   return (
     <div className="mt-16 pb-20 flex">
@@ -107,7 +100,8 @@ export default function TournamentSection({ filters }) {
               key={tournament._id}
               href={`/tournaments/${tournament._id}`}
               className=""
-              prefetch={true} // prefetch the tournament page
+              prefetch={true}
+              aria-label="tournament-redirect-btn"
             >
               <TournamentCard {...tournament} />
             </Link>
@@ -116,6 +110,16 @@ export default function TournamentSection({ filters }) {
       )}
     </div>
   );
+}
+
+function getStatus(dates) {
+  const now = new Date();
+  const startDate = new Date(dates.started);
+  const endDate = new Date(dates.ended);
+
+  if (now < startDate) return "Open";
+  if (now >= startDate && now <= endDate) return "Live";
+  return "Completed";
 }
 
 function TournamentCard({
@@ -128,17 +132,7 @@ function TournamentCard({
   gameId,
   organizerId,
 }) {
-  const getStatus = () => {
-    const now = new Date();
-    const startDate = new Date(tournamentDates.started);
-    const endDate = new Date(tournamentDates.ended);
-
-    if (now < startDate) return "Open";
-    if (now >= startDate && now <= endDate) return "Live";
-    return "Completed";
-  };
-
-  const status = getStatus();
+  const status = getStatus(tournamentDates);
   const entryFee =
     prize && prize.length > 0
       ? prize[0].amount === 0
