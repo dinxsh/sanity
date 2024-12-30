@@ -9,7 +9,7 @@ import { Vortex } from "../@/components/ui/vortex";
 export default function HeroSection() {
   return (
     <motion.section
-      className="container mx-auto px-4 py-20"
+      className="container mx-auto px-4 lg:py-20"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.4 }}
@@ -63,7 +63,7 @@ export default function HeroSection() {
           src="/hero.jpg"
           height={1000}
           width={1200}
-          className="rounded-2xl shadow-2xl mx-auto"
+          className="rounded-2xl shadow-2xl mx-auto w-11/12 md:w-3/4"
           alt="Sanity Esports Hero"
           priority
         />
