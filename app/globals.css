@@ -4,6 +4,9 @@
 html {
   scroll-behavior: smooth;
 }
+.container {
+  overflow: hidden;
+}
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;

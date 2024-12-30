@@ -4,8 +4,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import FaqSection from "./FaqSection";
-import FeatureSectionGrid from "./FeatureSection/FeatureSectionGrid";
+import { Vortex } from "../@/components/ui/vortex";
 
 export default function HeroSection() {
   return (
@@ -15,42 +14,44 @@ export default function HeroSection() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.4 }}
     >
-      <div className="text-center max-w-4xl mx-auto space-y-6">
-        <div className="flex items-center  gap-2 w-fit mx-auto px-4 py-1.5  rounded-full text-sm font-medium border border-neutral-700">
-          <p className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            &#10024; Discover new heights{" "}
+      <Vortex>
+        <div className="text-center max-w-4xl mx-auto space-y-6">
+          <div className="flex items-center  gap-2 w-fit mx-auto px-4 py-1.5  rounded-full text-sm font-medium border border-neutral-700">
+            <p className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              &#10024; Discover new heights{" "}
+            </p>
+          </div>
+
+          <h1 className="text-5xl md:text-6xl font-bold leading-tight">
+            Level Up Your Esports Journey with{" "}
+            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              Sanity Esports
+            </span>
+          </h1>
+
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            The Go-To Esports Platform at the intersection of esports and mental
+            well-being
           </p>
+
+          <div className="flex items-center justify-center gap-4 pt-4">
+            <Link href="#feature-section" passHref>
+              <Button
+                size="lg"
+                className="bg-primary hover:bg-primary-hover"
+                aria-label="get-started-btn"
+              >
+                Get Started
+              </Button>
+            </Link>
+            <Link href="#faq-section" passHref>
+              <Button size="lg" variant="outline" aria-label="learn-more-btn">
+                Learn More
+              </Button>
+            </Link>
+          </div>
         </div>
-
-        <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-          Level Up Your Esports Journey with{" "}
-          <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            Sanity Esports
-          </span>
-        </h1>
-
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          The Go-To Esports Platform at the intersection of esports and mental
-          well-being
-        </p>
-
-        <div className="flex items-center justify-center gap-4 pt-4">
-          <Link href="#feature-section" passHref>
-            <Button
-              size="lg"
-              className="bg-primary hover:bg-primary-hover"
-              aria-label="get-started-btn"
-            >
-              Get Started
-            </Button>
-          </Link>
-          <Link href="#faq-section" passHref>
-            <Button size="lg" variant="outline" aria-label="learn-more-btn">
-              Learn More
-            </Button>
-          </Link>
-        </div>
-      </div>
+      </Vortex>
 
       <motion.div
         className="mt-20"
