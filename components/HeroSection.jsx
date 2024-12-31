@@ -17,21 +17,20 @@ export default function HeroSection() {
       <Vortex>
         <div className="text-center max-w-4xl mx-auto space-y-6">
           <div className="flex items-center  gap-2 w-fit mx-auto px-4 py-1.5  rounded-full text-sm font-medium border border-neutral-700">
-            <p className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              &#10024; Discover new heights{" "}
+            <p className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-white">
+              Discover new heights{" "}
             </p>
           </div>
 
           <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-            Level Up Your Esports Journey with{" "}
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Sanity Esports
+            Manage your gaming competitions{" "}
+            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-white">
+              with the right tools
             </span>
           </h1>
 
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            The Go-To Esports Platform at the intersection of esports and mental
-            well-being
+            Sanity is a suite of powerful tools for organizers, agencies, studios and publishers to manage and showcase their tournaments.  
           </p>
 
           <div className="flex items-center justify-center gap-4 pt-4">
@@ -39,9 +38,9 @@ export default function HeroSection() {
               <Button
                 size="lg"
                 className="bg-primary hover:bg-primary-hover"
-                aria-label="get-started-btn"
+                aria-label="host-tournament-btn"
               >
-                Get Started
+                Host a Tournament
               </Button>
             </Link>
             <Link href="#faq-section" passHref>
