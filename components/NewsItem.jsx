@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const NewsItem = ({ title, description, url, urlToImage }) => {
   return (
-    <div className="flex flex-col justify-between border border-gray-700 rounded-lg shadow-md bg-gray-800 dark:border-gray-600 pb-4 cursor-pointer group relative transition-all">
+    <div className="flex flex-col justify-between border border-gray-700 rounded-lg shadow-md bg-gray-800 pb-4 cursor-pointer group relative transition-all">
       <div className="h-full w-full">
         <Image
           src={urlToImage}

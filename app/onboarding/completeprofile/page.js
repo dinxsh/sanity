@@ -67,7 +67,7 @@ export default function CompleteProfilePage() {
                     ${
                       selectedExpLevel === button
                         ? "bg-blue-500 text-white"
-                        : "bg-gray-200 dark:bg-gray-800"
+                        : "bg-gray-200"
                     }  
                   `}
                   onClick={() => handleExpLevelButtonClick(button)}
@@ -106,11 +106,9 @@ export default function CompleteProfilePage() {
                 className="block w-full px-2 py-2.5 rounded-md border text-sm bg-transparent"
                 placeholder="select gender"
               >
-                <option value="" className="dark:bg-background">
-                  Select Gender
-                </option>
+                <option value="">Select Gender</option>
                 {genderOptions.map((item, idx) => (
-                  <option key={idx} value={item} className="dark:bg-background">
+                  <option key={idx} value={item}>
                     {item}
                   </option>
                 ))}

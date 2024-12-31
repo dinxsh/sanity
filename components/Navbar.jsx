@@ -3,7 +3,6 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { ModeToggle } from "./ModeToggle";
 import { Button } from "../components/ui/button";
 import {
   Sheet,
@@ -65,7 +64,7 @@ const Navbar = () => {
               width={30}
               className="rounded"
             />
-            <h1 className="text-2xl lg:text-xl xl:text-2xl font-semibold tracking-tight mt-1">
+            <h1 className="text-2xl lg:text-xl font-bold tracking-normal mt-1">
               Sanity Gaming
             </h1>
           </Link>
@@ -89,47 +88,31 @@ const Navbar = () => {
       </div>
 
       {/* buttons */}
-      <div className="hidden lg:flex items-center pt-2 gap-4 transition-all">
+      <div className="hidden lg:flex lg:items-center pt-2 gap-4 transition-all">
         <NotificationBar />
-        {session.status === "authenticated" ? (
-          <Link href="/" aria-label="join-community">
-            <Button
-              variant="outline"
-              className="bg-primary hover:bg-primary-hover border border-neutral-700"
-              arial-label="join-community-btn"
-            >
-              Get Started
-            </Button>
-          </Link>
-        ) : (
-          <Link href="/sign-in" aria-label="join-community">
-            <Button
-              variant="outline"
-              className="bg-primary hover:bg-primary-hover border border-neutral-700"
-              arial-label="join-community-btn"
-            >
-              Sign In
-            </Button>
-          </Link>
-        )}
-        <ModeToggle />
+        <Link href="/sign-up" aria-label="join-community">
+          <Button
+            variant="outline"
+            className="bg-primary hover:bg-primary-hover border border-neutral-700"
+            arial-label="join-community-btn"
+          >
+            Sign Up
+          </Button>
+        </Link>
       </div>
 
       {/* mobile nav menu */}
-      <div className="lg:hidden flex gap-8 items-center  transition-all">
+      <div className="lg:hidden flex flex-row gap-8 items-center transition-all">
         <NotificationBar />
         <Sheet>
           <SheetTrigger>
-            <AlignJustify aria-label="nav-toggle-mob" />
+            <AlignJustify aria-label="nav-toggle-mob" className="size-7" />
           </SheetTrigger>
           <SheetContent className="flex flex-col items-start justify-start bg-black">
             <SheetHeader>
-              <SheetTitle>
-                <ModeToggle />
-              </SheetTitle>
-              <SheetDescription></SheetDescription>
+              <SheetTitle>Contents</SheetTitle>
             </SheetHeader>
-            <div className="grid gap-4 mt-10">
+            <div className="grid gap-4 mt-2">
               <nav className="flex flex-col gap-4">
                 {navLinks.map((item, index) => (
                   <Link
