@@ -24,7 +24,7 @@ import {
   CardTitle,
 } from "../../../@/components/ui/card";
 
-import { useToast } from "../../../@/components/ui/use-toast";
+import { useToast } from "../../../@/hooks/use-toast";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -202,6 +202,7 @@ const Page = () => {
                     type="submit"
                     className="w-full font-bold"
                     disabled={isSubmitting}
+                    arial-label="signup-btn"
                   >
                     {isSubmitting ? (
                       <>
@@ -218,6 +219,7 @@ const Page = () => {
                     <Link
                       href="/sign-in"
                       className="hover:text-blue-800 underline transition-all "
+                      aria-label="signin-btn"
                     >
                       Sign in
                     </Link>

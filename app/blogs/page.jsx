@@ -86,8 +86,14 @@ const page = async () => {
                 <Button
                   asChild
                   className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+                  arial-label="read-more-btn"
                 >
-                  <Link href={`/blogs/${item.currentSlug}`}>Read More</Link>
+                  <Link
+                    href={`/blogs/${item.currentSlug}`}
+                    aria-label="read-more"
+                  >
+                    Read More
+                  </Link>
                 </Button>
               </CardContent>
             </Card>

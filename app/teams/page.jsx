@@ -11,6 +11,12 @@ import {
   CardHeader,
   CardTitle,
 } from "../../@/components/ui/card";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../../@/components/ui/tabs";
 import { Button } from "../../@/components/ui/button";
 import { PacmanLoader } from "react-spinners";
 import { Plus, PlusCircle } from "lucide-react";
@@ -30,6 +36,7 @@ const TeamFinder = () => {
         const response = await axios.get("/api/teams/get-teams");
         if (response.data.success) {
           setTeams(response.data.teams);
+          console.log(response.data.teams);
           setFilteredTeams(response.data.teams); // Initialize filtered teams
         } else if (response.status === 401) {
           router.push("/auth/login");
@@ -95,77 +102,83 @@ const TeamFinder = () => {
   }
 
   return (
-    <div className=" w-11/12 max-w-7xl mx-auto">
-      <div className="flex gap-4 mb-4 ">
-        <input
-          className=" outline-none py-2 px-4 rounded-md bg-[#222124] text-sm w-4/5 "
-          onChange={(e) => handleTeamSearch(e.target.value)}
-          placeholder="Search team "
-        />
-        <Button
-          onClick={() => router.push("/create/team")}
-          className="w-1/5 flex gap-2 items-center"
+    <Tabs defaultValue="team_finder" className="w-full">
+      <TabsList className="grid w-[400px] mx-auto grid-cols-2 border border-zinc-200/20">
+        <TabsTrigger
+          className="data-[state=active]:bg-white data-[state=active]:text-black"
+          value="team_finder"
         >
-          <PlusCircle className="size-4" />
-          <p>Create Team</p>
-        </Button>
-      </div>
+          Team Finder
+        </TabsTrigger>
+        <TabsTrigger
+          className="data-[state=active]:bg-white data-[state=active]:text-black"
+          value="my_teams"
+        >
+          My Teams
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value="team_finder" className="">
+        <div className="px-5 md:px-10 xl:px-[12%] min-h-[70vh] transition-all">
+          <h1 className="text-3xl ml-4 mb-14 font-semibold tracking-tight">
+            Team Finder
+          </h1>
+          <div className=" w-11/12 max-w-7xl mx-auto">
+            <div className="flex gap-4 mb-4 ">
+              <input
+                className=" outline-none py-2 px-4 rounded-md bg-[#222124] text-sm w-4/5 "
+                onChange={(e) => handleTeamSearch(e.target.value)}
+                placeholder="Search team "
+              />
+              <Button
+                onClick={() => router.push("/create/team")}
+                className="w-1/5 flex gap-2 items-center"
+                arial-label="create-team-btn"
+              >
+                <PlusCircle className="size-4" />
+                <p>Create Team</p>
+              </Button>
+            </div>
+          </div>
 
-      <div className="flex flex-col md:flex-row gap-12">
-        <div className="md:w-1/3 lg:w-1/4">
-          <FiltersSidebar
-            filters={filters}
-            setFilters={setFilters}
-            onReset={handleResetFilters}
-          />
-        </div>
+          <div className="mx-5 p-2 grid gap-5 grid-cols-1 lg:grid-cols-10 overflow-hidden transition-all">
+            <Card className="mt-5 lg:mt-0 lg:ml-5 col-span-1 lg:col-span-7 transition-all">
+              <CardHeader className="flex flex-col gap-5">
+                <CardTitle className="flex items-center justify-between">
+                  <h2 className="text-2xl">Find Team</h2>
+                  <Button onClick={() => router.push("/create/team")}>
+                    Create Team
+                  </Button>
+                </CardTitle>
+              </CardHeader>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-12 mx-auto  ">
-          {filteredTeams.length > 0 ? (
-            filteredTeams.map((team, index) => (
-              <TeamCard key={index} team={team} />
-            ))
-          ) : (
-            <p>No teams found. Try creating one!</p>
-          )}
+              <CardContent className="min-h-80 lg:h-full border-t pt-5 transition-all">
+                {filteredTeams.length > 0 ? (
+                  filteredTeams.map((team, index) => (
+                    <TeamCard key={index} team={team} />
+                  ))
+                ) : (
+                  <p>No teams found. Try creating one!</p>
+                )}
+              </CardContent>
+            </Card>
+
+            <FiltersSidebar
+              filters={filters}
+              setFilters={setFilters}
+              onReset={handleResetFilters}
+            />
+          </div>
         </div>
-      </div>
-    </div>
+      </TabsContent>
+      <TabsContent value="my_teams">
+        <div className="px-5 md:px-10 xl:px-[12%] min-h-[70vh] transition-all">
+          <h1 className="text-3xl ml-4 mb-14 font-semibold tracking-tight">
+            My Teams
+          </h1>
+        </div>
+      </TabsContent>
+    </Tabs>
   );
 };
 
 export default TeamFinder;
-{
-  /* <div className="max-w-7xl mx-auto">
-<div className="flex gap-4 mb-4 ">
-  <input
-    className=" outline-none py-2 px-4 rounded-md bg-[#222124] text-sm w-4/5 "
-    onChange={(e) => handleTeamSearch(e.target.value)}
-    placeholder="Search team "
-  />
-  <Button onClick={() => router.push("/create/team")} className="w-1/5">
-    Create Team
-  </Button>
-</div>
-
-<div className="flex flex-col  md:flex-row mx-auto ">
-  <div className="max-h-[100vh] pt-5 transition-all overflow-y-scroll flex flex-col gap-12  no-scrollbar transition-all border-0 w-3/4">
-    {filteredTeams.length > 0 ? (
-      filteredTeams.map((team, index) => (
-        <TeamCard key={index} team={team} />
-      ))
-    ) : (
-      <p>No teams found. Try creating one!</p>
-    )}
-  </div>
-
-  <div className=" mx-auto border-2 w-1/4">
-    <FiltersSidebar
-      filters={filters}
-      setFilters={setFilters}
-      onReset={handleResetFilters}
-    />
-  </div>
-</div>
-</div> */
-}

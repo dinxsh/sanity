@@ -41,7 +41,10 @@ const FaqsCard = ({ faqsList, idx }) => {
       className="border border-border rounded-lg overflow-hidden hover:border-primary/50 transition-colors"
       onClick={() => setIsOpen(!isOpen)}
     >
-      <button className="w-full px-6 py-4 flex items-center justify-between text-left">
+      <button
+        className="w-full px-6 py-4 flex items-center justify-between text-left"
+        arial-label="faq-btn"
+      >
         <h3 className="font-semibold text-lg">{faqsList.title}</h3>
         <span className="text-primary">
           {isOpen ? <FaMinus /> : <FaPlus />}

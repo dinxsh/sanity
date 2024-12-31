@@ -183,6 +183,7 @@ export default function RegisterPage({ params }) {
           <button
             type="submit"
             className="w-full bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+            arial-label="tournament-id-register-btn"
           >
             Register
           </button>

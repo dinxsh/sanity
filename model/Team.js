@@ -8,7 +8,13 @@ const TeamSchema = new mongoose.Schema({
   rank: { type: String, required: true },
   server: { type: String, required: true },
   language: { type: String, required: true },
-  players: [{ type: String, required: true }],
+  players: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "UserModel",
+      required: true,
+    },
+  ],
   requests: [
     {
       type: mongoose.Schema.Types.ObjectId,

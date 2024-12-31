@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import axiosRetry from "axios-retry";
 import NewsItem from "./NewsItem";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
@@ -9,6 +10,8 @@ const News = () => {
   const [esportsNews, setEsportsNews] = useState([]);
   const [gamingNews, setGamingNews] = useState([]);
   const [tournamentNews, setTournamentNews] = useState([]);
+
+  axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
 
   useEffect(() => {
     const fetchNews = async (category, setter) => {

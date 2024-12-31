@@ -15,11 +15,22 @@ import {
   FormMessage,
 } from "../../@/components/ui/form";
 import { Input } from "../../@/components/ui/input";
-import { Mail, PhoneCall, UserRoundCog } from "lucide-react";
+import {
+  ArrowBigRight,
+  Loader,
+  Mail,
+  Pen,
+  PhoneCall,
+  UserRoundCog,
+} from "lucide-react";
 import { Textarea } from "../../@/components/ui/textarea";
 import { BiSupport } from "react-icons/bi";
 import Link from "next/link";
 import { socialLinks } from "../Footer";
+import { sendContactEmail } from "../../app/action/sendContactEmail";
+
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
   fullName: z
@@ -31,25 +42,42 @@ const formSchema = z.object({
   message: z
     .string({ message: "Give some sort of message" })
     .min(3, { message: "Make it little longer" }),
+  subject: z
+    .string({ message: "Give some sort of message" })
+    .min(3, { message: "Make it little longer" }),
 });
 
 export default function ContactRightComp({ className }) {
+  const [loading, setLoading] = useState(false);
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       fullName: "",
       email: "",
       message: "",
+      subject: "",
     },
   });
 
   async function handleFormSubmission(data) {
     try {
-      console.log(data);
+      setLoading(true);
+      const res = await sendContactEmail(
+        data.fullName,
+        data.email,
+        data.message,
+        data.subject,
+      );
+      if (res.status !== 200) throw new Error(res.message);
+      toast.success(res.message);
     } catch (error) {
-      console.log(error);
+      toast.error(error.message);
+    } finally {
+      form.reset();
+      setLoading(false);
     }
   }
+
   return (
     <div className={cn(className, "bg-black p-4 md:p-12 ")}>
       <p className="text-2xl font-bold tracking-wider ">GET IN TOUCH</p>
@@ -75,6 +103,30 @@ export default function ContactRightComp({ className }) {
                     <UserRoundCog className="size-4" />
                     <Input
                       placeholder="Sanity Gaming"
+                      {...field}
+                      className="outline-0 border-0"
+                    />
+                  </div>
+                </FormControl>
+
+                <FormMessage className="text-red-500" />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="subject"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-gray-300 font-bold">
+                  Subject
+                </FormLabel>
+                <FormControl>
+                  <div className="flex gap-2 items-center border-2 border-neutral-700 rounded-md px-4">
+                    <Pen className="size-4" />
+                    <Input
+                      placeholder="Collbaration"
                       {...field}
                       className="outline-0 border-0"
                     />
@@ -130,7 +182,21 @@ export default function ContactRightComp({ className }) {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button
+            disabled={loading}
+            type="submit"
+            className="flex gap-2 items-center"
+            arial-label="send-contact-btn"
+          >
+            {loading ? (
+              <Loader className="animate-spin" />
+            ) : (
+              <>
+                <p>Send</p>
+                <ArrowBigRight className="size-4" />
+              </>
+            )}
+          </Button>
         </form>
       </Form>
 
@@ -154,7 +220,7 @@ export default function ContactRightComp({ className }) {
       <div className="sm:hidden justify-center mt-8 flex flex-wrap gap-4">
         {socialLinks.map((e, i) => {
           return (
-            <Link href={e.link} key={i}>
+            <Link href={e.link} key={i} aria-label={`${e.title}-social}`}>
               <e.icon className=" size-4" />
             </Link>
           );
