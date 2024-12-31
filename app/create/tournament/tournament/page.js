@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { platforms, timezones } from "./data";
 import { games } from "../../../games/data/index";
+import { toast } from "sonner";
 
 export default function Page() {
   const [selectedPlatform, setSelectedPlatform] = useState("");
@@ -48,11 +49,14 @@ export default function Page() {
       setParticipantType("");
       setSelectedTimezone("");
       setSize("");
+      toast.success(response.data.message);
     } catch (error) {
       if (error.response) {
         setErrorMessage(error.response.data.message);
+        toast.error(error.message);
       } else {
         setErrorMessage("An error occurred. Please try again.");
+        toast.error("An error occurred. Please try again.");
       }
     } finally {
       setIsSubmitting(false);

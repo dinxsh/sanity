@@ -15,7 +15,6 @@ import { Button } from "../../../@/components/ui/button";
 import { Input } from "../../../@/components/ui/input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useToast } from "../../../@/hooks/use-toast";
 import { signInSchema } from "../../../model/Schema/signInSchema";
 import React, { useState } from "react";
 import {
@@ -30,19 +29,19 @@ import { FaDiscord, FaGoogle } from "react-icons/fa";
 import { Loader2 } from "lucide-react";
 import { delay } from "framer-motion";
 import Image from "next/image";
+import { toast } from "sonner";
 
 export default function SignInForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm({
+    resolver: zodResolver(signInSchema),
     defaultValues: {
       identifier: "",
       password: "",
     },
   });
-
-  const { toast } = useToast();
 
   const onSubmit = async (data) => {
     setIsLoading(true);
@@ -52,34 +51,11 @@ export default function SignInForm() {
         email: data.identifier,
         password: data.password,
       });
-
-      if (result?.error) {
-        console.error("Sign in error:", result.error);
-        toast({
-          title: "Error",
-          description:
-            result.error === "CredentialsSignin"
-              ? "Invalid email or password"
-              : result.error,
-          variant: "destructive",
-        });
-      } else if (result?.url) {
-        router.push("/dashboard");
-      } else {
-        console.error("Unexpected result:", result);
-        toast({
-          title: "Error",
-          description: "An unexpected error occurred",
-          variant: "destructive",
-        });
-      }
+      //need to add the backend verification for sign-in.
+      toast.success("Welcome Back!");
+      router.push("/dashboard");
     } catch (error) {
-      console.error("Sign in error:", error);
-      toast({
-        title: "Error",
-        description: "An unexpected error occurred",
-        variant: "destructive",
-      });
+      toast.error("Failed to signin check the credentials");
     } finally {
       setIsLoading(false);
     }

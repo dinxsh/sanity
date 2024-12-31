@@ -21,8 +21,8 @@ import { Input } from "../@/components/ui/input";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useToast } from "../@/hooks/use-toast";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const bracketSchema = z.object({
   tournament_name: z.string().min(1),
@@ -38,7 +38,6 @@ const teamSchema = z.object({
 export default function BracketForm() {
   const [bracketCreated, setBracketCreated] = useState(false);
   const [bracketInfo, setBracketInfo] = useState(null);
-  const { toast } = useToast();
   const router = useRouter();
 
   const bracketForm = useForm({
@@ -66,11 +65,7 @@ export default function BracketForm() {
 
   async function onTeamSubmit(values) {
     if (values.teams.length % 2 !== 0) {
-      toast({
-        title: "Invalid number of teams",
-        description: "Please enter an even number of teams",
-        variant: "error",
-      });
+      toast.error("Please enter an even number of teams");
       return;
     }
 
@@ -83,17 +78,11 @@ export default function BracketForm() {
     });
 
     if (!res.ok) {
-      toast({
-        title: "An unexpected error occurred",
-        description: (await res.json()).details,
-        variant: "error",
-      });
+      toast.error("Verfy the data and try again");
       return;
     }
 
-    toast({
-      title: "Bracket created successfully",
-    });
+    toast.success("Bracket created successfully");
 
     router.push("/bracket");
     return;

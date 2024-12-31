@@ -10,7 +10,6 @@ import {
   FormMessage,
 } from "../../../../@/components/ui/form";
 import { Input } from "../../../../@/components/ui/input";
-import { useToast } from "../../../../@/hooks/use-toast";
 import { verifySchema } from "../../../../model/Schema/verifySchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
@@ -26,14 +25,15 @@ import {
   CardTitle,
 } from "../../../../@/components/ui/card";
 import Image from "next/image";
+import { toast } from "sonner";
 
 const VerifyAccount = () => {
   const router = useRouter();
   const params = useParams();
-  const { toast } = useToast();
 
   const form = useForm({
     resolver: zodResolver(verifySchema),
+    code: null,
   });
 
   const onSubmit = async (data) => {
@@ -42,21 +42,10 @@ const VerifyAccount = () => {
         username: params.username,
         code: data.code,
       });
-
-      toast({
-        title: "Success",
-        description: response.data.message,
-      });
+      toast.success(response.data.message);
       router.replace("/sign-in");
     } catch (error) {
-      console.error("Error in sign-up of user", error);
-      const axiosError = AxiosError;
-      let errorMessage = axiosError.response?.data.message;
-      toast({
-        title: "Signup failed",
-        description: errorMessage,
-        variant: "destructive",
-      });
+      toast.error(error.response.data.message);
     }
   };
 

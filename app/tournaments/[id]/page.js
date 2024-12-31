@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 // import { useRouter } from "next/navigation";
-import { useToast } from "../../../@/hooks/use-toast";
 import TournamentBracket from "../../../components/TournamentBracket";
 import { Button } from "../../../@/components/ui/button";
 import {
@@ -17,6 +16,7 @@ import {
   registerForTournament,
 } from "../../../lib/api/tournament";
 import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 export default function TournamentPage({ params }) {
   const [tournament, setTournament] = useState(null);
@@ -24,7 +24,6 @@ export default function TournamentPage({ params }) {
   const [error, setError] = useState(null);
   // const [registering, setRegistering] = useState(false);
   // const router = useRouter();
-  const { toast } = useToast();
 
   useEffect(() => {
     loadTournamentData();
@@ -38,35 +37,23 @@ export default function TournamentPage({ params }) {
       setError(null);
     } catch (err) {
       setError(err.message || "Failed to load tournament");
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to load tournament data",
-      });
     } finally {
       setLoading(false);
     }
   };
 
-  // const handleRegister = async () => {
-  //   try {
-  //     setRegistering(true);
-  //     await registerForTournament(params.id);
-  //     toast({
-  //       title: "Success",
-  //       description: "Successfully registered for tournament"
-  //     });
-  //     router.refresh();
-  //   } catch (err) {
-  //     toast({
-  //       variant: "destructive",
-  //       title: "Error",
-  //       description: err.message || "Failed to register for tournament"
-  //     });
-  //   } finally {
-  //     setRegistering(false);
-  //   }
-  // };
+  const handleRegister = async () => {
+    try {
+      setRegistering(true);
+      await registerForTournament(params.id);
+      toast.success("Registered for tournament successfully");
+      router.refresh();
+    } catch (err) {
+      toast.error(err.message || "Failed to register for tournament");
+    } finally {
+      setRegistering(false);
+    }
+  };
 
   if (loading) {
     return (

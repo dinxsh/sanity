@@ -14,11 +14,9 @@ import {
 import { Input } from "../../../@/components/ui/input";
 import axios from "axios";
 import { teamSchema } from "../../../model/Schema/teamSchema";
-import { useToast } from "../../../@/hooks/use-toast";
+import { toast } from "sonner";
 
 export default function CreateTeamForm() {
-  const { toast } = useToast();
-
   const form = useForm({
     resolver: zodResolver(teamSchema),
     defaultValues: {
@@ -35,20 +33,10 @@ export default function CreateTeamForm() {
   const onSubmit = async (formData) => {
     try {
       const response = await axios.post("/api/teams/create-team", formData);
-
-      toast({
-        title: "Success",
-        description: response.data.message,
-      });
-
+      toast.success(response.data.message);
       form.reset();
     } catch (error) {
-      console.error("Error during create-team:", error);
-      toast({
-        title: "Team Creation Failed",
-        description: error.response?.data?.message || "An error occurred",
-        variant: "destructive",
-      });
+      toast.error(error.response.data.message);
     }
   };
 
@@ -155,7 +143,6 @@ export default function CreateTeamForm() {
                       <Input
                         placeholder="player1, player2, player3..."
                         {...field}
-                        helperText="Enter player names separated by commas"
                       />
                     </FormControl>
                     <FormMessage className="text-red-500" />

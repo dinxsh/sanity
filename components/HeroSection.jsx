@@ -30,7 +30,8 @@ export default function HeroSection() {
           </h1>
 
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Sanity is a suite of powerful tools for organizers, agencies, studios and publishers to manage and showcase their tournaments.  
+            Sanity is a suite of powerful tools for organizers, agencies,
+            studios and publishers to manage and showcase their tournaments.
           </p>
 
           <div className="flex items-center justify-center gap-4 pt-4">
