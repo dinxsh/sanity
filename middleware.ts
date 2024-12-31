@@ -4,9 +4,11 @@ import { getToken } from "next-auth/jwt";
 // Define protected routes that require authentication
 const protectedRoutes = [
   "/dashboard",
-  "/tournaments",
-  // '/teams',
+  // "/tournaments",
+  "/teams",
   "/profile",
+  "/bracket/create",
+  "/create/tournament",
 ];
 
 // Define auth routes that should redirect to dashboard if authenticated

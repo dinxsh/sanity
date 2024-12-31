@@ -21,7 +21,6 @@ export default async function Page({ searchParams }) {
     gameData = await response.json();
   } catch (error) {
     console.error("Fetch error:", error);
-    errorMessage = "Failed to load games. Please try again later.";
   }
 
   const filters = [

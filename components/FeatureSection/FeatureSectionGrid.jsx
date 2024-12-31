@@ -57,7 +57,9 @@ export default function FeaturesSectionGrid() {
         <div className="grid grid-cols-1 lg:grid-cols-6 mt-12 border rounded-md">
           {features.map((feature) => (
             <FeatureCard key={feature.title} className={feature.className}>
-              <FeatureTitle>{feature.title}</FeatureTitle>
+              <FeatureTitle className="text-white">
+                {feature.title}
+              </FeatureTitle>
               <FeatureDescription>{feature.description}</FeatureDescription>
               <div className=" h-full w-full">{feature.skeleton}</div>
             </FeatureCard>
@@ -109,7 +111,7 @@ export const SkeletonOne = () => {
             alt="header"
             width={1000}
             height={1000}
-            className="full rounded-sm"
+            className="full rounded-sm "
             draggable="false"
           />
         </div>
@@ -235,7 +237,6 @@ export const SkeletonTwo = () => {
           </motion.div>
         ))}
       </div>
-
       <div className="absolute left-0 z-[100] inset-y-0 w-20 bg-gradient-to-r from-white  to-transparent  h-full pointer-events-none" />
       <div className="absolute right-0 z-[100] inset-y-0 w-20 bg-gradient-to-l from-white  to-transparent h-full pointer-events-none" />
     </div>
