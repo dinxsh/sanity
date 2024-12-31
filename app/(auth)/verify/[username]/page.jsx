@@ -33,7 +33,9 @@ const VerifyAccount = () => {
 
   const form = useForm({
     resolver: zodResolver(verifySchema),
-    code: null,
+    defaultValues: {
+      code: null,
+    },
   });
 
   const onSubmit = async (data) => {
