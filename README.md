@@ -16,9 +16,8 @@ Sanity is your go-to open-source tool for managing esports platforms efficiently
 
 ## 🛠 Tech Stack
 
-- **Backend**: Node.js, Express, MongoDB
+- **Backend**: Next.js, MongoDB
 - **Frontend**: React, Tailwind CSS
-- **Realtime**: Socket.io
 
 ## 📖 Getting Started
 
