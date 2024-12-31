@@ -7,8 +7,6 @@
 
 Sanity is your go-to open-source tool for managing esports platforms efficiently. Built with scalability and performance in mind, it seamlessly integrates game data, user profiles, and event management for a streamlined experience.
 
----
-
 ## 🚀 Features
 
 - **Player & Team Management**: Effortlessly manage esports teams and player profiles.
@@ -21,8 +19,6 @@ Sanity is your go-to open-source tool for managing esports platforms efficiently
 - **Backend**: Node.js, Express, MongoDB
 - **Frontend**: React, Tailwind CSS
 - **Realtime**: Socket.io
-
----
 
 ## 📖 Getting Started
 
@@ -45,8 +41,6 @@ npm install
 npm start
 ```
 
----
-
 ## 💡 Contributing
 
 We ❤️ contributors! Here’s how you can help:
@@ -59,25 +53,17 @@ We ❤️ contributors! Here’s how you can help:
 
 Read our [Contributing Guidelines](CONTRIBUTING.md) for more details.
 
----
-
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
-
----
 
 ## 🌟 Show Your Support
 
 Give us a ⭐️ on GitHub to show your love and keep this project growing!
 
----
-
 ## 📬 Contact
 
-Have questions or suggestions? Open an issue or reach out on [LinkedIn](https://www.linkedin.com/in/dinesh).
-
----
+Have questions or suggestions? Open an issue or reach out on [Discord](https://discord.gg/Sp95NkwRdw).
 
 ### Useful Links
 
