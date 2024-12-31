@@ -65,7 +65,7 @@ const Navbar = () => {
               className="rounded"
             />
             <h1 className="text-2xl lg:text-xl font-bold tracking-normal mt-1">
-              Sanity Gaming
+              Sanity
             </h1>
           </Link>
         </div>
