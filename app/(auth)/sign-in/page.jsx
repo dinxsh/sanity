@@ -51,7 +51,9 @@ export default function SignInForm() {
       toast.success(response.data.message);
       router.push("/dashboard");
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(
+        error.response.data?.message || "An error occurred, try again",
+      );
     } finally {
       setIsLoading(false);
     }
