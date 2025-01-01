@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function RegisterPage({ params }) {
   const {
@@ -28,29 +29,13 @@ export default function RegisterPage({ params }) {
       );
 
       if (response.status === 200) {
-        // toast({
-        //   title: "Success",
-        //   description: "Registration successful!",
-        //   variant: "success",
-        // });
-        alert("Registration successful");
+        toast.success("Registration successfull");
         router.push(`/tournaments/${params.id}`);
       } else {
-        // toast({
-        //   title: "Error",
-        //   description: "Registration failed. Please try again.",
-        //   variant: "destructive",
-        // });
-        alert("Registration failed. Please try again.");
+        toast.error("Registration failed. Please try again.");
       }
     } catch (error) {
-      console.error("Registration error:", error);
-      // toast({
-      //   title: "Error",
-      //   description: "An error occurred. Please try again.",
-      //   variant: "destructive",
-      // });
-      alert("Registration failed. Please try again.");
+      toast.error("Registration failed. Please try again.");
     }
   };
 

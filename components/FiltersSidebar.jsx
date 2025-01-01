@@ -79,7 +79,7 @@ const FiltersSidebar = ({ filters, setFilters, onReset }) => {
           </select>
         </div>
 
-        <Button type="button" className="w-full mt-5" arial-label="apply-btn">
+        <Button type="submit" className="w-full mt-5" arial-label="apply-btn">
           Apply
         </Button>
       </form>
