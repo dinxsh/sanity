@@ -48,8 +48,8 @@ export default function SignInForm() {
     setIsLoading(true);
     try {
       const response = await axios.post("/api/sign-in", data);
-      toast.success(response.data.message);
       router.push("/dashboard");
+      toast.success(response.data.message);
     } catch (error) {
       toast.error(
         error.response.data?.message || "An error occurred, try again",
