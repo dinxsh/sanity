@@ -3,9 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-
+import { PacmanLoader } from "react-spinners";
 export default function TournamentSection({ filters }) {
   const [tournaments, setTournaments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -31,41 +29,13 @@ export default function TournamentSection({ filters }) {
     fetchTournaments();
   }, []);
 
-  if (isLoading)
+  if (isLoading) {
     return (
-      <div className="flex gap-10 mt-16">
-        <SkeletonTheme
-          baseColor="#202020"
-          highlightColor="#444"
-          height={400}
-          width={288}
-        >
-          <p>
-            <Skeleton />
-          </p>
-        </SkeletonTheme>
-        <SkeletonTheme
-          baseColor="#202020"
-          highlightColor="#444"
-          height={400}
-          width={288}
-        >
-          <p>
-            <Skeleton />
-          </p>
-        </SkeletonTheme>
-        <SkeletonTheme
-          baseColor="#202020"
-          highlightColor="#444"
-          height={400}
-          width={288}
-        >
-          <p>
-            <Skeleton />
-          </p>
-        </SkeletonTheme>
+      <div className="flex w-full h-screen justify-center items-center">
+        <PacmanLoader color="white" />
       </div>
     );
+  }
   if (error) return <div>Error: {error}</div>;
 
   // Apply filters
