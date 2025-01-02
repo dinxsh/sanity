@@ -1,4 +1,3 @@
-import { Bell } from "lucide-react";
 import {
   Popover,
   PopoverContent,
@@ -8,12 +7,16 @@ import { Avatar, AvatarFallback, AvatarImage } from "../@/components/ui/avatar";
 import { Separator } from "../@/components/ui/separator";
 
 import demoData from "../lib/notification-demo.json";
+import { FaBell } from "react-icons/fa";
 export default function NotificationBar() {
   return (
     <div className="relative">
       <Popover>
-        <PopoverTrigger aria-label="notification-trigger">
-          <Bell className="size-6" />
+        <PopoverTrigger
+          aria-label="notification-trigger"
+          className="flex justify-center"
+        >
+          <FaBell className="size-6" />
         </PopoverTrigger>
         <PopoverContent className="duration-500 mt-5 border border-neutral-700 shadow-none rounded-md bg-black w-[400px] h-[330px] overflow-auto ">
           <div>
