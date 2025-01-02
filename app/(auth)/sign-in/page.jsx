@@ -2,7 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 import { signIn } from "next-auth/react";
 import {
   Form,
@@ -47,13 +46,20 @@ export default function SignInForm() {
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      const response = await axios.post("/api/sign-in", data);
-      router.push("/dashboard");
-      toast.success(response.data.message);
+      const result = await signIn("credentials", {
+        redirect: false, // Prevent default redirect behavior
+        email: data.email,
+        password: data.password,
+      });
+
+      if (result?.error) {
+        toast.error(result.error || "An error occurred, try again");
+      } else {
+        router.push("/dashboard"); // Navigate manually after success
+        toast.success("Welcome back!");
+      }
     } catch (error) {
-      toast.error(
-        error.response.data?.message || "An error occurred, try again",
-      );
+      toast.error("An unexpected error occurred");
     } finally {
       setIsLoading(false);
     }
