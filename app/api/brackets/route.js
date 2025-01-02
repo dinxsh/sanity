@@ -1,4 +1,5 @@
 import dbConnect from "../../../lib/dbConnect";
+import mongoose from "mongoose";
 import Bracket from "../../../model/Bracket";
 import { TeamModel } from "../../../model/Team";
 import { NextResponse } from "next/server";
@@ -23,7 +24,6 @@ export async function POST(request) {
   try {
     await dbConnect();
     const body = await request.json();
-
     const validation = bracketSchema.safeParse(body);
 
     if (!validation.success) {
@@ -33,7 +33,7 @@ export async function POST(request) {
     const { tournament_name, format, consolationFinal, grandFinalType, teams } =
       validation.data;
 
-    const tournamentId = crypto.randomUUID();
+    const tournamentId = new mongoose.Types.ObjectId();
 
     await manager.create.stage({
       tournamentId,
@@ -46,9 +46,16 @@ export async function POST(request) {
       },
     });
 
+    const participants = teams.map((team, index) => ({
+      id: new mongoose.Types.ObjectId(),
+      name: team,
+      tournament_id: tournamentId,
+    }));
+
     const newBracket = new Bracket({
       ...(await manager.get.tournamentData(tournamentId)),
       tournamentName: tournament_name,
+      participant: participants,
       format: format,
     });
 
