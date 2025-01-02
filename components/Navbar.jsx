@@ -16,11 +16,15 @@ import {
 import { AlignJustify } from "lucide-react";
 import { usePathname } from "next/navigation";
 import NotificationBar from "../components/Notification";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import UserProfile from "../components/UserProfile";
+import { LogoutButton } from "./LogoutButton";
+import { BiExit } from "react-icons/bi";
+
 const Navbar = () => {
   const session = useSession();
   const [scrolled, setScrolled] = useState(false);
-
+  console.log(session);
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
@@ -69,64 +73,46 @@ const Navbar = () => {
             </h1>
           </Link>
         </div>
-
-        {/* links */}
-        <nav className="hidden lg:flex flex-row items-center pt-2 gap-6 xl:gap-10 transition-all">
-          {navLinks.map((item, index) => (
-            <Link
-              key={index}
-              href={item.href}
-              className={`font-medium hover:text-foreground/90 transition-all
+      </div>
+      {/* links */}
+      <nav className="hidden lg:flex flex-row items-center pt-2 gap-6 xl:gap-10 transition-all">
+        {navLinks.map((item, index) => (
+          <Link
+            key={index}
+            href={item.href}
+            className={`font-medium hover:text-foreground/90 transition-all
                 ${isActive(pathname, item.href) ? "text-foreground" : "text-foreground/60"}
               `}
-              aria-label={`${item.href}-nav-item`}
-            >
-              {item.title}
-            </Link>
-          ))}
-        </nav>
-      </div>
+            aria-label={`${item.href}-nav-item`}
+          >
+            {item.title}
+          </Link>
+        ))}
+      </nav>
 
       {/* buttons */}
       <div className="hidden lg:flex lg:items-center pt-2 gap-4 transition-all">
-        <NotificationBar />
-        {session.status !== "authenticated" ? (
-          <Link href="/sign-in" aria-label="join-community">
+        {session.data ? (
+          <div className="flex flex-row justify-start space-x-4">
+            <NotificationBar />
+            <UserProfile />
+          </div>
+        ) : (
+          <Link href="/sign-up" aria-label="join-community">
             <Button
               variant="outline"
               className="bg-primary hover:bg-primary-hover border border-neutral-700"
               arial-label="join-community-btn"
             >
-              Sign In
+              Sign Up
             </Button>
           </Link>
-        ) : (
-          <>
-            <Link href="/tournaments" aria-label="join-community">
-              <Button
-                variant="outline"
-                className="bg-primary hover:bg-primary-hover border border-neutral-700"
-                arial-label="join-community-btn"
-              >
-                Get Started
-              </Button>
-            </Link>
-
-            <Button
-              variant="outline"
-              className="bg-transparent"
-              arial-label="logout-btn"
-              onClick={() => signOut()}
-            >
-              Logout
-            </Button>
-          </>
         )}
       </div>
 
       {/* mobile nav menu */}
       <div className="lg:hidden flex flex-row gap-8 items-center transition-all">
-        <NotificationBar />
+        {session.data && <NotificationBar />}
         <Sheet>
           <SheetTrigger>
             <AlignJustify aria-label="nav-toggle-mob" className="size-7" />
@@ -149,20 +135,29 @@ const Navbar = () => {
                 ))}
               </nav>
             </div>
-            <SheetFooter className="mt-10 w-full">
-              <Link
-                href="/sign-up"
-                aria-label="join-community"
-                className="w-full"
-              >
-                <Button
-                  variant="outline"
-                  className="bg-primary hover:bg-primary-hover border border-neutral-700 w-full "
-                  arial-label="join-community-btn"
+            <SheetFooter className="mt-2 w-full items-center flex justify-center">
+              {session.data ? (
+                <div className="w-full flex">
+                  <LogoutButton>
+                    <BiExit className="text-red-400 w-5 h-5 mr-2" />
+                    <span>Logout</span>
+                  </LogoutButton>
+                </div>
+              ) : (
+                <Link
+                  href="/sign-in"
+                  aria-label="join-community"
+                  className="w-full"
                 >
-                  Sign Up
-                </Button>
-              </Link>
+                  <Button
+                    variant="outline"
+                    className="bg-primary hover:bg-primary-hover border border-neutral-700 w-full "
+                    arial-label="join-community-btn"
+                  >
+                    SignIn
+                  </Button>
+                </Link>
+              )}
             </SheetFooter>
           </SheetContent>
         </Sheet>
@@ -197,9 +192,5 @@ const navLinks = [
   {
     title: "News",
     href: "/news",
-  },
-  {
-    title: "Contact",
-    href: "/contact",
   },
 ];

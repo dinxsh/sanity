@@ -2,7 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 import { signIn } from "next-auth/react";
 import {
   Form,
@@ -52,17 +51,12 @@ export default function SignInForm() {
         password: data.password,
         redirect: false,
       });
-
-      if (response?.error) {
-        toast("Username / Password mismatched");
-      } else {
-        window.location.href = response?.url || "/tournaments";
-      }
-      toast.success(response.data.message);
+      console.log(response);
+      if (!response.ok) throw new Error();
+      window.location.href = response?.url || "/tournaments";
+      toast.success("Successfull Signup");
     } catch (error) {
-      toast.error(
-        error.response.data?.message || "An error occurred, try again",
-      );
+      toast.error("Username / Password mismatched");
     } finally {
       setIsLoading(false);
     }

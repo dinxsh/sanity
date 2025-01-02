@@ -8,6 +8,7 @@ export async function POST(request: Request) {
     const { identifier, password } = await request.json();
 
     const existingUser = await UserModel.findOne({ email: identifier });
+    console.log(existingUser);
     if (!existingUser) {
       return Response.json(
         {
@@ -30,7 +31,10 @@ export async function POST(request: Request) {
     }
 
     return Response.json(
-      { success: true, message: "Welcome Back!" },
+      {
+        success: true,
+        message: `Welcome Back! ${existingUser.username}`,
+      },
       { status: 200 },
     );
   } catch (error) {
