@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Bracket from "../../../components/Brackets";
+import { PacmanLoader } from "react-spinners";
 
 const BracketTemplate = () => {
   const { id } = useParams();
@@ -32,7 +33,11 @@ const BracketTemplate = () => {
   }, [id]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex w-full h-screen justify-center items-center">
+        <PacmanLoader color="white" />
+      </div>
+    );
   }
 
   if (error) {

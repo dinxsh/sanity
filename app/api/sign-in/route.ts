@@ -33,7 +33,7 @@ export async function POST(request: Request) {
     return Response.json(
       {
         success: true,
-        message: `Welcome Back! ${existingUser.username}`
+        message: `Welcome Back! ${existingUser.username}`,
       },
       { status: 200 },
     );

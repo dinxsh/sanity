@@ -15,7 +15,7 @@ import {
   fetchTournamentData,
   registerForTournament,
 } from "../../../lib/api/tournament";
-import { Loader2 } from "lucide-react";
+import { PacmanLoader } from "react-spinners";
 import { toast } from "sonner";
 
 export default function TournamentPage({ params }) {
@@ -57,9 +57,8 @@ export default function TournamentPage({ params }) {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-        <p className="text-muted-foreground">Loading tournament details...</p>
+      <div className="flex w-full h-screen justify-center items-center">
+        <PacmanLoader color="white" />
       </div>
     );
   }
