@@ -18,7 +18,7 @@ const BracketList = () => {
           throw new Error("Failed to fetch brackets");
         }
         const data = await response.json();
-        setBrackets(data);
+        setBrackets(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error("Error fetching brackets:", error);
         setError("Failed to load brackets. Please try again later.");
