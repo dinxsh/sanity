@@ -53,7 +53,7 @@ export default function SignInForm() {
       });
       console.log(response);
       if (!response.ok) throw new Error();
-      window.location.href = response?.url || "/dashboard";
+      window.location.href = response?.url || "/tournaments";
       toast.success("Successfull Signup");
     } catch (error) {
       toast.error("Username / Password mismatched");
