@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import capa from "../app/assets/pexels.jpeg";
-import { Figma } from "lucide-react";
+import { Dice1, Dice2, Dice3 } from "lucide-react";
 
 const BlogOffer = () => {
   return (
@@ -23,7 +23,7 @@ const BlogOffer = () => {
 
         <div className="flex flex-row gap-3">
           <div className="pt-1">
-            <Figma />
+            <Dice1 />
           </div>
           <div className="flex flex-col gap-1">
             <span className="text-lg font-bold">Latest News</span>
@@ -34,7 +34,7 @@ const BlogOffer = () => {
         </div>
         <div className="flex flex-row gap-3">
           <div className="pt-1">
-            <Figma />
+            <Dice2 />
           </div>
           <div className="flex flex-col gap-1">
             <span className="text-lg font-bold">Expert blogs</span>
@@ -45,7 +45,7 @@ const BlogOffer = () => {
         </div>
         <div className="flex flex-row gap-3">
           <div className="pt-1">
-            <Figma />
+            <Dice3 />
           </div>
           <div className="flex flex-col gap-1">
             <span className="text-lg font-bold">Community Engagement</span>
