@@ -20,6 +20,7 @@ module.exports = {
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "#4F46E5", // Indigo
+          light: "#6C63FF",
           foreground: "hsl(var(--primary-foreground))",
           hover: "#4338CA",
         },
