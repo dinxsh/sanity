@@ -30,6 +30,7 @@ import { Loader2 } from "lucide-react";
 import { delay } from "framer-motion";
 import Image from "next/image";
 import { toast } from "sonner";
+import axios from "axios";
 
 export default function SignInForm() {
   const router = useRouter();
@@ -46,16 +47,13 @@ export default function SignInForm() {
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      const result = await signIn("credentials", {
-        redirect: false,
-        email: data.identifier,
-        password: data.password,
-      });
-      //need to add the backend verification for sign-in.
-      toast.success("Welcome Back!");
+      const response = await axios.post("/api/sign-in", data);
       router.push("/dashboard");
+      toast.success(response.data.message);
     } catch (error) {
-      toast.error("Failed to signin check the credentials");
+      toast.error(
+        error.response.data?.message || "An error occurred, try again",
+      );
     } finally {
       setIsLoading(false);
     }
@@ -98,7 +96,7 @@ export default function SignInForm() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-base font-bold text-zinc-300">
-                          Email or Username
+                          Email
                         </FormLabel>
                         <Input
                           className="text-base border-zinc-400/10"
