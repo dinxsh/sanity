@@ -39,7 +39,7 @@ export default function SignInForm() {
   const form = useForm({
     resolver: zodResolver(signInSchema),
     defaultValues: {
-      identifier: "",
+      email: "",
       password: "",
     },
   });
@@ -47,8 +47,17 @@ export default function SignInForm() {
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      const response = await axios.post("/api/sign-in", data);
-      router.push("/dashboard");
+      const response = await signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      });
+
+      if (response?.error) {
+        toast("Username / Password mismatched");
+      } else {
+        window.location.href = response?.url || "/tournaments";
+      }
       toast.success(response.data.message);
     } catch (error) {
       toast.error(
@@ -91,7 +100,7 @@ export default function SignInForm() {
               <form onSubmit={form.handleSubmit(onSubmit)}>
                 <CardContent className="space-y-5">
                   <FormField
-                    name="identifier"
+                    name="email"
                     control={form.control}
                     render={({ field }) => (
                       <FormItem>
