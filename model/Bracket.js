@@ -2,9 +2,17 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const participantSchema = new Schema({
-  id: Number,
+  id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "TeamModel",
+    required: true,
+  },
   name: String,
-  tournament_id: String,
+  tournament_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Tournament",
+    required: true,
+  },
 });
 
 const matchSchema = new Schema({
@@ -33,7 +41,11 @@ const roundSchema = new Schema({
 });
 
 const stageSchema = new Schema({
-  id: Number,
+  id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Tournament",
+    required: true,
+  },
   name: String,
   number: Number,
   settings: {
