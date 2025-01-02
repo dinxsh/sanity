@@ -44,7 +44,7 @@ export async function middleware(request: NextRequest) {
   try {
     // Redirect authenticated users trying to access auth routes to dashboard
     if (token && isAuthRoute) {
-      // return NextResponse.redirect(new URL("/dashboard", request.url));
+      return NextResponse.redirect(new URL("/dashboard", request.url));
     }
 
     // Redirect unauthenticated users trying to access protected routes to sign-in

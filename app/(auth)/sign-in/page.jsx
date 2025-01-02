@@ -38,7 +38,7 @@ export default function SignInForm() {
   const form = useForm({
     resolver: zodResolver(signInSchema),
     defaultValues: {
-      identifier: "",
+      email: "",
       password: "",
     },
   });
@@ -46,20 +46,17 @@ export default function SignInForm() {
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      const result = await signIn("credentials", {
-        redirect: false, // Prevent default redirect behavior
+      const response = await signIn("credentials", {
         email: data.email,
         password: data.password,
+        redirect: false,
       });
-
-      if (result?.error) {
-        toast.error(result.error || "An error occurred, try again");
-      } else {
-        router.push("/dashboard"); // Navigate manually after success
-        toast.success("Welcome back!");
-      }
+      console.log(response);
+      if (!response.ok) throw new Error();
+      window.location.href = response?.url || "/tournaments";
+      toast.success("Successfull Signup");
     } catch (error) {
-      toast.error("An unexpected error occurred");
+      toast.error("Username / Password mismatched");
     } finally {
       setIsLoading(false);
     }
@@ -97,7 +94,7 @@ export default function SignInForm() {
               <form onSubmit={form.handleSubmit(onSubmit)}>
                 <CardContent className="space-y-5">
                   <FormField
-                    name="identifier"
+                    name="email"
                     control={form.control}
                     render={({ field }) => (
                       <FormItem>

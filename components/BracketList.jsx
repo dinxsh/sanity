@@ -37,7 +37,6 @@ const BracketList = () => {
         <PacmanLoader color="white" />
       </div>
     );
-
   if (error) return <div className="pt-3">Error: {error}</div>;
 
   return (
