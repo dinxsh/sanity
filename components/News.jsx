@@ -4,18 +4,21 @@ import axios from "axios";
 import axiosRetry from "axios-retry";
 import NewsItem from "./NewsItem";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { PacmanLoader } from "react-spinners";
 
 const News = () => {
   const [latestNews, setLatestNews] = useState([]);
   const [esportsNews, setEsportsNews] = useState([]);
   const [gamingNews, setGamingNews] = useState([]);
   const [tournamentNews, setTournamentNews] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
 
   useEffect(() => {
     const fetchNews = async (category, setter) => {
       try {
+        setIsLoading(true);
         const response = await axios.get(
           `https://gnews.io/api/v4/search?q=${category}&lang=en&country=us&max=10&apikey=81a4b76d35bd5ea98535a29f90daa9fa`,
         );
@@ -23,6 +26,7 @@ const News = () => {
           (article) => article.image,
         );
         setter(articlesWithImages);
+        setIsLoading(false);
       } catch (error) {
         console.error(`Error fetching ${category} news:`, error);
       }
@@ -47,40 +51,47 @@ const News = () => {
       slider.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
-
   const renderNewsSlider = (title, articles, category) => (
-    <div className="mb-16 mt-2">
-      <div className="uppercase text-white text-center text-2xl md:text-3xl h-fit font-semibold ">
+    <div className="mb-16 mt-2 h-fit">
+      {/* Title Section */}
+      <div className="uppercase text-white text-center text-2xl md:text-3xl h-fit font-semibold flex justify-center items-center">
         {title}
       </div>
 
-      <div>
-        <div
-          ref={sliderRefs[category]}
-          className="grid grid-cols-1 p-2 m-2 md:grid-cols-2 md:p-1 md:m-1 "
-        >
-          {articles.map((article, index) => (
-            <div
-              key={index}
-              className="flex flex-col  justify-between border border-gray-700 shadow-md border-b-0 bg-gray-800 my-10 mx-5"
-            >
-              <div className="">
-                <NewsItem
-                  title={article.title}
-                  description={article.description}
-                  url={article.url}
-                  urlToImage={article.image}
-                />
+      {/* Content Section */}
+      <div className="w-full flex justify-center mt-4 h-fit">
+        {isLoading ? (
+          <div className="flex justify-center items-center h-40">
+            <PacmanLoader color="white" />
+          </div>
+        ) : (
+          <div
+            ref={sliderRefs[category]}
+            className="grid grid-cols-1 p-2 m-2 md:grid-cols-2 md:p-1 md:m-1 w-full max-w-6xl"
+          >
+            {articles.map((article, index) => (
+              <div
+                key={index}
+                className="flex flex-col justify-between rounded-lg border border-gray-700 shadow-md bg-gray-800 my-10 mx-5"
+              >
+                <div className="w-full h-fit">
+                  <NewsItem
+                    title={article.title}
+                    description={article.description}
+                    url={article.url}
+                    urlToImage={article.image}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 
   return (
-    <div className="container px-2 h-fit ">
+    <div className="container px-2 h-fit">
       {renderNewsSlider("Latest News", latestNews, "latestNews")}
       {renderNewsSlider("Esports", esportsNews, "esportsNews")}
       {renderNewsSlider("Gaming News", gamingNews, "gamingNews")}
