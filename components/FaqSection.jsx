@@ -32,15 +32,14 @@ export default function FaqSection() {
         </div>
       </motion.div>
       <div className="flex justify-center items-center">
-        <Button
-          variant="destructive"
-          className="flex items-center bg-gray-500 text-white font-bold rounded hover:bg-gray-500/90 transition-all duration-300"
-          icon={<FaArrowUp19 />}
-          size="sm"
+        <button
+          className="px-8 py-2 rounded-full relative bg-slate-700 text-white text-sm hover:shadow-2xl hover:shadow-white/[0.1] transition duration-200 border border-slate-600"
           onClick={() => window.scrollTo(0, 0)}
         >
-          Up
-        </Button>
+          <span className="absolute inset-x-0 h-px w-1/2 mx-auto -bottom-px shadow-2xl  bg-gradient-to-r from-transparent via-teal-500 to-transparent" />
+          <div className="absolute inset-x-0 h-px w-1/2 mx-auto -top-px shadow-2xl  bg-gradient-to-r from-transparent via-teal-500 to-transparent" />
+          <span className="relative z-20">Scroll to top</span>
+        </button>
       </div>
     </>
   );
