@@ -24,7 +24,7 @@ import { BiExit } from "react-icons/bi";
 const Navbar = () => {
   const session = useSession();
   const [scrolled, setScrolled] = useState(false);
-  console.log(session);
+
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
@@ -92,27 +92,29 @@ const Navbar = () => {
 
       {/* buttons */}
       <div className="hidden lg:flex lg:items-center pt-2 gap-4 transition-all">
-        {session.data ? (
-          <div className="flex flex-row justify-start space-x-4">
-            <NotificationBar />
-            <UserProfile />
-          </div>
-        ) : (
-          <Link href="/sign-up" aria-label="join-community">
-            <Button
-              variant="outline"
-              className="bg-primary hover:bg-primary-hover border border-neutral-700"
-              arial-label="join-community-btn"
-            >
-              Sign Up
-            </Button>
-          </Link>
-        )}
+        {
+          (session.status = "authenticated" ? (
+            <div className="flex flex-row justify-start space-x-4 h-9">
+              <NotificationBar />
+              <UserProfile />
+            </div>
+          ) : (
+            <Link href="/sign-up" aria-label="join-community">
+              <Button
+                variant="outline"
+                className="bg-primary hover:bg-primary-hover border border-neutral-700"
+                arial-label="join-community-btn"
+              >
+                Sign Up
+              </Button>
+            </Link>
+          ))
+        }
       </div>
 
       {/* mobile nav menu */}
       <div className="lg:hidden flex flex-row gap-8 items-center transition-all">
-        {session.data && <NotificationBar />}
+        {(session.status = "authenticated" && <NotificationBar />)}
         <Sheet>
           <SheetTrigger>
             <AlignJustify aria-label="nav-toggle-mob" className="size-7" />
@@ -136,28 +138,30 @@ const Navbar = () => {
               </nav>
             </div>
             <SheetFooter className="mt-2 w-full items-center flex justify-center">
-              {session.data ? (
-                <div className="w-full flex">
-                  <LogoutButton>
-                    <BiExit className="text-red-400 w-5 h-5 mr-2" />
-                    <span>Logout</span>
-                  </LogoutButton>
-                </div>
-              ) : (
-                <Link
-                  href="/sign-in"
-                  aria-label="join-community"
-                  className="w-full"
-                >
-                  <Button
-                    variant="outline"
-                    className="bg-primary hover:bg-primary-hover border border-neutral-700 w-full "
-                    arial-label="join-community-btn"
+              {
+                (session.status = "authenticated" ? (
+                  <div className="w-full flex">
+                    <LogoutButton>
+                      <BiExit className="text-red-400 w-5 h-5 mr-2" />
+                      <span>Logout</span>
+                    </LogoutButton>
+                  </div>
+                ) : (
+                  <Link
+                    href="/sign-in"
+                    aria-label="join-community"
+                    className="w-full"
                   >
-                    SignIn
-                  </Button>
-                </Link>
-              )}
+                    <Button
+                      variant="outline"
+                      className="bg-primary hover:bg-primary-hover border border-neutral-700 w-full "
+                      arial-label="join-community-btn"
+                    >
+                      SignIn
+                    </Button>
+                  </Link>
+                ))
+              }
             </SheetFooter>
           </SheetContent>
         </Sheet>
