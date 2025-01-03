@@ -4,8 +4,11 @@ import axios from "axios";
 import { platforms, timezones } from "./tournament/data";
 import { Button } from "../../../@/components/ui/button";
 import { toast } from "sonner";
+import { FaArrowLeftLong } from "react-icons/fa6";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
+  const router = useRouter();
   const [selectedPlatform, setSelectedPlatform] = useState("");
   const [participantType, setParticipantType] = useState("");
   const [selectedTimezone, setSelectedTimezone] = useState("");
@@ -139,12 +142,25 @@ export default function Page() {
   return (
     <div className="min-h-screen py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-semibold mb-8">Create New Tournament</h2>
+        <div className="text-center flex items-center justify-center border-b pb-4">
+          <Button
+            variant="ghost"
+            onClick={() => {
+              router.push("/tournaments");
+            }}
+            className="mr-auto"
+          >
+            <FaArrowLeftLong className="size-5" />
+          </Button>
+          <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight absolute left-1/2 transform -translate-x-1/2">
+            Create Tournament
+          </h2>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="md:col-span-1">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 mt-8">
+          <div className="md:col-span-2">
             <label htmlFor="icon-upload" className="block">
-              <div className="h-40 bg-foreground/5 flex flex-col items-center justify-center cursor-pointer rounded-lg relative overflow-hidden">
+              <div className="h-40 bg-foreground/5 flex flex-col items-center justify-center cursor-pointer rounded-lg relative overflow-hidden border">
                 {tournamentIcon ? (
                   <img
                     src={tournamentIcon}
@@ -169,9 +185,9 @@ export default function Page() {
               onChange={handleIconUpload}
             />
           </div>
-          <div className="md:col-span-3">
+          <div className="md:col-span-2">
             <label htmlFor="banner-upload" className="block">
-              <div className="h-40 bg-foreground/5 flex flex-col items-center justify-center cursor-pointer rounded-lg relative overflow-hidden">
+              <div className="h-40 bg-foreground/5 flex flex-col items-center justify-center cursor-pointer rounded-lg relative overflow-hidden border">
                 {tournamentBanner ? (
                   <img
                     src={tournamentBanner}

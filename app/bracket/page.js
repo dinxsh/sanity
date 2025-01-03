@@ -11,8 +11,9 @@ const BracketPage = () => {
   const session = useSession();
   const router = useRouter();
   return (
-    <div className="min-h-[70vh] px-7">
-      <div className="border-b pb-4 px-4 flex justify-end">
+    <div className="px-[5%] xl:px-[12%] min-h-[70vh] transition-all">
+      <div className="mt-20 flex flex-row justify-between border-b pb-[10px]">
+        <h2 className="text-2xl font-bold mb-4">Existing Brackets</h2>
         <Button
           className={`ml-auto ${buttonVariants({ variant: "default" })}`}
           disabled={session.status !== "authenticated"}
