@@ -24,7 +24,7 @@ import { BiExit } from "react-icons/bi";
 const Navbar = () => {
   const session = useSession();
   const [scrolled, setScrolled] = useState(false);
-  console.log(session);
+
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
@@ -92,7 +92,7 @@ const Navbar = () => {
 
       {/* buttons */}
       <div className="hidden lg:flex lg:items-center pt-2 gap-4 transition-all">
-        {session.data ? (
+        {session.status == "authenticated" ? (
           <div className="flex flex-row justify-start space-x-4">
             <NotificationBar />
             <UserProfile />
@@ -112,7 +112,7 @@ const Navbar = () => {
 
       {/* mobile nav menu */}
       <div className="lg:hidden flex flex-row gap-8 items-center transition-all">
-        {session.data && <NotificationBar />}
+        {session.status == "authenticated" && <NotificationBar />}
         <Sheet>
           <SheetTrigger>
             <AlignJustify aria-label="nav-toggle-mob" className="size-7" />
@@ -136,8 +136,8 @@ const Navbar = () => {
               </nav>
             </div>
             <SheetFooter className="mt-2 w-full items-center flex justify-center">
-              {session.data ? (
-                <div className="w-full flex">
+              {session.status == "authenticated" ? (
+                <div className="w-full flex items-center justify-center">
                   <LogoutButton>
                     <BiExit className="text-red-400 w-5 h-5 mr-2" />
                     <span>Logout</span>
