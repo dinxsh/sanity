@@ -30,7 +30,7 @@ const BracketTemplate = () => {
     };
 
     fetchBracket();
-  }, []);
+  }, [id]);
 
   if (loading) {
     return <div>Loading...</div>;
