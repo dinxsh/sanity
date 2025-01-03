@@ -1,38 +1,70 @@
-## Sanity
+# Sanity
 
-tournament management platform
+![GitHub Repo Stars](https://img.shields.io/github/stars/dinxsh/sanity?style=flat-square)
+![GitHub Issues](https://img.shields.io/github/issues/dinxsh/sanity?style=flat-square)
+![License](https://img.shields.io/github/license/dinxsh/sanity?style=flat-square)
+![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen?style=flat-square)
 
-### Setup
+Sanity is your go-to open-source tool for managing esports platforms efficiently. Built with scalability and performance in mind, it seamlessly integrates game data, user profiles, and event management for a streamlined experience.
 
-First, run the development server:
+## 🚀 Features
+
+- **Player & Team Management**: Effortlessly manage esports teams and player profiles.
+- **Tournament Insights**: Track and manage tournaments with real-time updates.
+- **Custom Integrations**: Plug-and-play modules for extended functionality.
+- **Scalable Backend**: Designed for high-load environments with performance optimizations.
+
+## 🛠 Tech Stack
+
+- **Backend**: Next.js, MongoDB
+- **Frontend**: React, Tailwind CSS
+
+## 📖 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/)
+- [MongoDB](https://www.mongodb.com/)
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone the repo
+git clone https://github.com/dinxsh/sanity.git
+cd sanity
+
+# Install dependencies
+npm install
+
+# Start the server
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 💡 Contributing
 
-You can edit the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+We ❤️ contributors! Here’s how you can help:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature-xyz`.
+3. Commit your changes: `git commit -m 'Add feature xyz'`.
+4. Push to the branch: `git push origin feature-xyz`.
+5. Open a pull request.
 
-## Learn More
+Read our [Contributing Guidelines](CONTRIBUTING.md) for more details.
 
-To learn more about Next.js, take a look at the following resources:
+## 📄 License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project is licensed under the [MIT License](LICENSE).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 🌟 Show Your Support
 
-## Deploy on Vercel
+Give us a ⭐️ on GitHub to show your love and keep this project growing!
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the Next.js creators.
+## 📬 Contact
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Have questions or suggestions? Open an issue or reach out on [Discord](https://discord.gg/Sp95NkwRdw).
+
+### Useful Links
+
+- [Documentation](https://github.com/dinxsh/sanity/wiki)
+- [Issue Tracker](https://github.com/dinxsh/sanity/issues)

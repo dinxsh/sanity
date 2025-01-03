@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 export default function FeatureSection() {
   return (
     <motion.div
-      className="mt-24 mx-10"
+      className="mt-4 lg:mt-10 mx-10"
       viewport={{ once: true }}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}

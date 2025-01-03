@@ -2,7 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 import { signIn } from "next-auth/react";
 import {
   Form,
@@ -15,7 +14,6 @@ import { Button } from "../../../@/components/ui/button";
 import { Input } from "../../../@/components/ui/input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useToast } from "../../../@/hooks/use-toast";
 import { signInSchema } from "../../../model/Schema/signInSchema";
 import React, { useState } from "react";
 import {
@@ -30,56 +28,35 @@ import { FaDiscord, FaGoogle } from "react-icons/fa";
 import { Loader2 } from "lucide-react";
 import { delay } from "framer-motion";
 import Image from "next/image";
+import { toast } from "sonner";
+import axios from "axios";
 
 export default function SignInForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm({
+    resolver: zodResolver(signInSchema),
     defaultValues: {
-      identifier: "",
+      email: "",
       password: "",
     },
   });
 
-  const { toast } = useToast();
-
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      const result = await signIn("credentials", {
-        redirect: false,
-        email: data.identifier,
+      const response = await signIn("credentials", {
+        email: data.email,
         password: data.password,
+        redirect: false,
       });
-
-      if (result?.error) {
-        console.error("Sign in error:", result.error);
-        toast({
-          title: "Error",
-          description:
-            result.error === "CredentialsSignin"
-              ? "Invalid email or password"
-              : result.error,
-          variant: "destructive",
-        });
-      } else if (result?.url) {
-        router.push("/dashboard");
-      } else {
-        console.error("Unexpected result:", result);
-        toast({
-          title: "Error",
-          description: "An unexpected error occurred",
-          variant: "destructive",
-        });
-      }
+      console.log(response);
+      if (!response.ok) throw new Error();
+      window.location.href = response?.url || "/tournaments";
+      toast.success("Successfull Signup");
     } catch (error) {
-      console.error("Sign in error:", error);
-      toast({
-        title: "Error",
-        description: "An unexpected error occurred",
-        variant: "destructive",
-      });
+      toast.error("Username / Password mismatched");
     } finally {
       setIsLoading(false);
     }
@@ -117,12 +94,12 @@ export default function SignInForm() {
               <form onSubmit={form.handleSubmit(onSubmit)}>
                 <CardContent className="space-y-5">
                   <FormField
-                    name="identifier"
+                    name="email"
                     control={form.control}
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-base font-bold text-zinc-300">
-                          Email or Username
+                          Email
                         </FormLabel>
                         <Input
                           className="text-base border-zinc-400/10"

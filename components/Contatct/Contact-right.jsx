@@ -28,9 +28,8 @@ import { BiSupport } from "react-icons/bi";
 import Link from "next/link";
 import { socialLinks } from "../Footer";
 import { sendContactEmail } from "../../app/action/sendContactEmail";
-
 import { useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   fullName: z
