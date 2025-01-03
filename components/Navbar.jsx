@@ -93,7 +93,7 @@ const Navbar = () => {
       {/* buttons */}
       <div className="hidden lg:flex lg:items-center pt-2 gap-4 transition-all">
         {
-          (session.status = "authenticated" ? (
+          (session.status == "authenticated" ? (
             <div className="flex flex-row justify-start space-x-4 h-9">
               <NotificationBar />
               <UserProfile />
@@ -114,7 +114,7 @@ const Navbar = () => {
 
       {/* mobile nav menu */}
       <div className="lg:hidden flex flex-row gap-8 items-center transition-all">
-        {(session.status = "authenticated" && <NotificationBar />)}
+        {(session.status == "authenticated" && <NotificationBar />)}
         <Sheet>
           <SheetTrigger>
             <AlignJustify aria-label="nav-toggle-mob" className="size-7" />
@@ -139,7 +139,7 @@ const Navbar = () => {
             </div>
             <SheetFooter className="mt-2 w-full items-center flex justify-center">
               {
-                (session.status = "authenticated" ? (
+                (session.status == "authenticated" ? (
                   <div className="w-full flex">
                     <LogoutButton>
                       <BiExit className="text-red-400 w-5 h-5 mr-2" />
