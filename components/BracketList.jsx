@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { PacmanLoader } from "react-spinners";
 
 const BracketList = () => {
   const [brackets, setBrackets] = useState([]);
@@ -18,7 +19,7 @@ const BracketList = () => {
           throw new Error("Failed to fetch brackets");
         }
         const data = await response.json();
-        setBrackets(data);
+        setBrackets(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error("Error fetching brackets:", error);
         setError("Failed to load brackets. Please try again later.");
@@ -30,7 +31,12 @@ const BracketList = () => {
     fetchBrackets();
   }, []);
 
-  if (isLoading) return <div className="pt-3">Loading brackets...</div>;
+  if (isLoading)
+    return (
+      <div className="flex w-full h-screen justify-center items-center">
+        <PacmanLoader color="white" />
+      </div>
+    );
   if (error) return <div className="pt-3">Error: {error}</div>;
 
   return (

@@ -1,5 +1,3 @@
-"use client";
-
 import { cn } from "../../@/lib/utils";
 import Image from "next/image";
 import createGlobe from "cobe";
@@ -15,23 +13,21 @@ export default function FeaturesSectionGrid() {
       description:
         "Organize and manage your own esports tournaments with ease using our intuitive interface.",
       skeleton: <SkeletonOne />,
-      className:
-        "col-span-1 lg:col-span-4 border-b lg:border-r dark:border-neutral-800",
+      className: "col-span-1 lg:col-span-4 border-b lg:border-r",
     },
     {
       title: "Most Games Included",
       description:
         "Join tournaments and play across a wide range of popular games.",
       skeleton: <SkeletonTwo />,
-      className: "border-b col-span-1 lg:col-span-2 dark:border-neutral-800",
+      className: "border-b col-span-1 lg:col-span-2",
     },
     {
       title: "Join Our Discord Community",
       description:
         "Connect with fellow gamers, stay updated and participate in exclusive events by joining our Discord community.",
       skeleton: <SkeletonThree />,
-      className:
-        "col-span-1 lg:col-span-3 lg:border-r  dark:border-neutral-800",
+      className: "col-span-1 lg:col-span-3 lg:border-r ",
     },
     {
       title: "Global Esports Community",
@@ -44,19 +40,19 @@ export default function FeaturesSectionGrid() {
 
   return (
     <div className="relative z-20 pt-5 pb-5 lg:py-20 max-w-6xl mx-auto">
-      <div className="md:px-8">
+      <div className="px-8">
         <h4 className="text-3xl lg:text-5xl lg:leading-tight max-w-5xl mx-auto text-center tracking-tight font-medium text-white">
           Unlike any other Esports platform
         </h4>
 
-        <p className="text-sm lg:text-base  max-w-2xl  my-4 mx-auto text-neutral-500 text-center font-normal dark:text-neutral-300">
+        <p className="text-sm lg:text-base  max-w-2xl  my-4 mx-auto text-neutral-500 text-center font-normal">
           Sanity Gaming covers every single aspect of esports community. Which a
           gamer desires we aim to connect organizers with players.
         </p>
       </div>
 
       <div className="relative ">
-        <div className="grid grid-cols-1 lg:grid-cols-6 mt-12 border rounded-md border-neutral-800">
+        <div className="grid grid-cols-1 lg:grid-cols-6 mt-12 border rounded-md">
           {features.map((feature) => (
             <FeatureCard key={feature.title} className={feature.className}>
               <FeatureTitle className="text-white">
@@ -82,7 +78,7 @@ const FeatureCard = ({ children, className }) => {
 
 const FeatureTitle = ({ children }) => {
   return (
-    <p className=" max-w-5xl mx-auto text-left tracking-tight text-white dark:text-white text-xl md:text-2xl md:leading-snug">
+    <p className=" max-w-5xl mx-auto text-left tracking-tight text-black text-xl md:text-2xl md:leading-snug">
       {children}
     </p>
   );
@@ -93,8 +89,8 @@ const FeatureDescription = ({ children }) => {
     <p
       className={cn(
         "text-sm md:text-base  max-w-4xl text-left mx-auto",
-        "text-neutral-500 text-center font-normal dark:text-neutral-300",
-        "text-left max-w-sm mx-0 md:text-sm my-2 mb-4",
+        "text-neutral-500 text-center font-normal",
+        "text-left max-w-sm mx-0 md:text-sm my-2",
       )}
     >
       {children}
@@ -104,8 +100,8 @@ const FeatureDescription = ({ children }) => {
 
 export const SkeletonOne = () => {
   return (
-    <div className="relative flex py-8 px-2 gap-10 h-full ">
-      <div className="w-full  p-5  mx-auto bg-white dark:bg-neutral-900 shadow-2xl group h-full">
+    <div className="relative flex py-8 px-2 gap-10 h-full">
+      <div className="w-full  p-5  mx-auto bg-white shadow-2xl group h-full">
         <div className="flex flex-1 w-full h-full flex-col space-y-2  ">
           {/* TODO */}
           <Image
@@ -119,8 +115,8 @@ export const SkeletonOne = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-0 z-40 inset-x-0 h-60 bg-gradient-to-t from-black via-white via-black to-transparent w-full pointer-events-none" />
-      <div className="absolute top-0 z-40 inset-x-0 h-60 bg-gradient-to-b frfrom-black via-transparent to-transparent w-full pointer-events-none" />
+      <div className="absolute bottom-0 z-40 inset-x-0 h-60 bg-gradient-to-t from-white via-white to-transparent w-full pointer-events-none" />
+      <div className="absolute top-0 z-40 inset-x-0 h-60 bg-gradient-to-b from-whitevia-transparent to-transparent w-full pointer-events-none" />
     </div>
   );
 };
@@ -135,7 +131,7 @@ export const SkeletonThree = () => {
       className="relative flex gap-10  h-full group/image border-b"
       aria-label="discord-btn"
     >
-      <div className="w-full  mx-auto bg-transparent dark:bg-transparent group h-full">
+      <div className="w-full  mx-auto bg-transparent group h-full">
         <div
           className="flex flex-1 w-full h-full flex-col space-y-2 relative"
           onMouseEnter={() => setShowLogo(true)}
@@ -203,7 +199,7 @@ export const SkeletonTwo = () => {
             }}
             whileHover="whileHover"
             whileTap="whileTap"
-            className="rounded-xl -mr-4 mt-4 p-1 bg-neutral-800 border-neutral-700 border border-neutral-100 flex-shrink-0 overflow-hidden"
+            className="rounded-xl -mr-4 mt-4 p-1 bg-white border border-neutral-100 flex-shrink-0 overflow-hidden"
           >
             <Image
               src={image}
@@ -226,7 +222,7 @@ export const SkeletonTwo = () => {
             variants={imageVariants}
             whileHover="whileHover"
             whileTap="whileTap"
-            className="rounded-xl -mr-4 p-1 bg-white dark:bg-neutral-800 dark:border-neutral-700 border border-neutral-100 flex-shrink-0 overflow-hidden"
+            className="rounded-xl -mr-4 p-1 bg-white border border-neutral-100 flex-shrink-0 overflow-hidden"
           >
             <Image
               src={image}
@@ -239,16 +235,15 @@ export const SkeletonTwo = () => {
           </motion.div>
         ))}
       </div>
-
-      <div className="absolute left-0 z-[100] inset-y-0 w-20 bg-gradient-to-r from-black to-transparent  h-full pointer-events-none" />
-      <div className="absolute right-0 z-[100] inset-y-0 w-20 bg-gradient-to-l from-black  to-transparent h-full pointer-events-none" />
+      <div className="absolute left-0 z-[100] inset-y-0 w-20 bg-gradient-to-r from-white  to-transparent  h-full pointer-events-none" />
+      <div className="absolute right-0 z-[100] inset-y-0 w-20 bg-gradient-to-l from-white  to-transparent h-full pointer-events-none" />
     </div>
   );
 };
 
 export const SkeletonFour = () => {
   return (
-    <div className="h-60 md:h-60  flex flex-col items-center relative bg-transparent dark:bg-transparent mt-10">
+    <div className="h-60 md:h-60  flex flex-col items-center relative bg-transparent mt-10">
       <Globe className="absolute -right-10 md:-right-20 -bottom-80 md:-bottom-72" />
     </div>
   );

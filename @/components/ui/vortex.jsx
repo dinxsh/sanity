@@ -1,4 +1,3 @@
-"use client";
 import { cn } from "../../lib/utils";
 import { createNoise3D } from "simplex-noise";
 import { motion } from "framer-motion";

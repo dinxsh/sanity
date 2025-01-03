@@ -9,6 +9,7 @@ const protectedRoutes = [
   "/profile",
   "/bracket/create",
   "/create/tournament",
+  "/bracket",
 ];
 
 // Define auth routes that should redirect to dashboard if authenticated

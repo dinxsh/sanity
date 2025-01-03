@@ -43,7 +43,7 @@ const page = async () => {
           return (
             <Card
               key={idx}
-              className="flex flex-col justify-between border border-gray-700 rounded-lg shadow-md bg-gray-800 dark:border-gray-600"
+              className="flex flex-col justify-between border border-gray-700 rounded-lg shadow-md bg-gray-800"
             >
               <CardHeader>
                 <Image

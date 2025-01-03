@@ -1,6 +1,6 @@
 "use server";
 import { resend } from "../../lib/resend";
-import ContactEmailTemplate from "../../components/Contatct/Contatc-email-format";
+import ContactEmailTemplate from "../../components/Contatct/Contact-email-format";
 
 export async function sendContactEmail(username, fromEmail, message, subject) {
   try {

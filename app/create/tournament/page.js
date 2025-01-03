@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { platforms, timezones } from "./tournament/data";
 import { Button } from "../../../@/components/ui/button";
+import { toast } from "sonner";
 
 export default function Page() {
   const [selectedPlatform, setSelectedPlatform] = useState("");
@@ -67,6 +68,7 @@ export default function Page() {
       !size
     ) {
       setErrorMessage("Please fill out all fields.");
+      toast.error("Please fill out all fields.");
       setIsSubmitting(false);
       return;
     }
@@ -82,12 +84,14 @@ export default function Page() {
     try {
       const response = await axios.post("/api/tournaments", formData);
       setSuccessMessage(response.data.message);
+      toast.success(response.data.message);
       setTournamentName("");
       setSelectedPlatform("");
       setParticipantType("");
       setSelectedTimezone("");
       setSize("");
     } catch (error) {
+      toast.error(error.response.data.message);
       if (error.response) {
         setErrorMessage(error.response.data.message);
       } else {
