@@ -23,6 +23,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 const bracketSchema = z.object({
   tournament_name: z.string().min(1),
@@ -36,9 +37,9 @@ const teamSchema = z.object({
 });
 
 export default function BracketForm() {
+  const router = useRouter();
   const [bracketCreated, setBracketCreated] = useState(false);
   const [bracketInfo, setBracketInfo] = useState(null);
-  const router = useRouter();
 
   const bracketForm = useForm({
     resolver: zodResolver(bracketSchema),
@@ -90,6 +91,20 @@ export default function BracketForm() {
 
   return (
     <div className="bg-card border p-6 rounded-md max-w-[80%] mx-auto">
+      <div className="text-center flex items-center justify-center border-b pb-4 mb-4">
+        <Button
+          variant="ghost"
+          onClick={() => {
+            router.push("/bracket");
+          }}
+          className="mr-auto"
+        >
+          <FaArrowLeftLong className="size-5" />
+        </Button>
+        <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight absolute left-1/2 transform -translate-x-1/2">
+          Create Bracket
+        </h2>
+      </div>
       {!bracketCreated ? (
         <Form {...bracketForm}>
           <form
@@ -101,7 +116,7 @@ export default function BracketForm() {
               name="tournament_name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Tournament Name</FormLabel>
+                  <FormLabel className="text-base">Tournament Name</FormLabel>
                   <FormControl>
                     <Input {...field} placeholder="Tournament Name" />
                   </FormControl>
@@ -113,7 +128,7 @@ export default function BracketForm() {
               name="format"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Format</FormLabel>
+                  <FormLabel className="text-base">Format</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -140,7 +155,7 @@ export default function BracketForm() {
               name="consolationFinal"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Consolation Final</FormLabel>
+                  <FormLabel className="text-base">Consolation Final</FormLabel>
                   <Select
                     onValueChange={(value) => field.onChange(value === "true")}
                     defaultValue={field.value.toString()}
@@ -163,7 +178,7 @@ export default function BracketForm() {
               name="grandFinalType"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Grand Final Type</FormLabel>
+                  <FormLabel className="text-base">Grand Final Type</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -205,7 +220,9 @@ export default function BracketForm() {
                 name={`teams.${index}`}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Team {index + 1}</FormLabel>
+                    <FormLabel className="text-base">
+                      Team {index + 1}
+                    </FormLabel>
                     <FormControl>
                       <Input
                         {...field}

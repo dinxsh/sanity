@@ -15,8 +15,11 @@ import { Input } from "../../../@/components/ui/input";
 import axios from "axios";
 import { teamSchema } from "../../../model/Schema/teamSchema";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 export default function CreateTeamForm() {
+  const router = useRouter();
   const form = useForm({
     resolver: zodResolver(teamSchema),
     defaultValues: {
@@ -42,16 +45,27 @@ export default function CreateTeamForm() {
 
   return (
     <div className="flex justify-center items-center">
-      <div className="w-3/4 p-8 space-y-8 rounded-lg shadow-md border">
-        <div className="text-center">
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+      <div className="w-3/4 p-8 space-y-4 rounded-lg shadow-md border">
+        <div className="text-center flex items-center justify-center border-b pb-4">
+          <Button
+            variant="ghost"
+            onClick={() => {
+              router.push("/teams");
+            }}
+            className="mr-auto"
+          >
+            <FaArrowLeftLong className="size-5" />
+          </Button>
+          <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight absolute left-1/2 transform -translate-x-1/2">
             Create Team
           </h2>
-          <p className="mt-2 mb-4 text-sm">
+        </div>
+
+        <div className="text-center">
+          <p className="mb-4 text-base tracking-wide">
             Create your team and start competing
           </p>
         </div>
-
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="grid gap-4 grid-cols-1 md:grid-cols-2">

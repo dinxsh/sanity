@@ -10,8 +10,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../../components/ui/dropdown-menu";
+import { useRouter } from "next/navigation";
 
 const TournamentPage = () => {
+  const router = useRouter();
   const [filters, setFilters] = useState({
     entryFee: "",
     mode: "",
@@ -38,10 +40,10 @@ const TournamentPage = () => {
       {/* Tournaments */}
       <div className="mt-20 flex flex-col">
         {/* title */}
-        <div className="flex justify-between items-center pb-[20px] border-b-[1px] border-tertiary">
+        <div className="flex justify-between items-center pb-[10px] border-b-[1px] border-tertiary">
           <h1 className="text-4xl font-semibold">Tournaments</h1>
 
-          <div className="relative">
+          <div className="relative flex flex-row space-x-2">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
@@ -126,6 +128,13 @@ const TournamentPage = () => {
                 </Button>
               </DropdownMenuContent>
             </DropdownMenu>
+            <Button
+              onClick={() => {
+                router.push("/create/tournament");
+              }}
+            >
+              Create
+            </Button>
           </div>
         </div>
 

@@ -62,7 +62,9 @@ export default function TournamentSection({ filters }) {
   return (
     <div className="mt-16 pb-20 flex">
       {filteredTournaments.length === 0 ? (
-        <div>No tournaments match the current filters.</div>
+        <div className="h-full w-full flex justify-center items-center">
+          No tournaments match the current filters.
+        </div>
       ) : (
         <div className="flex flex-wrap gap-10">
           {filteredTournaments.map((tournament) => (
