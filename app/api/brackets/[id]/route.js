@@ -3,7 +3,7 @@ import Bracket from "../../../../model/Bracket";
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
-  const { id } = params;
+  const { id } = await params;
   console.log("Fetching bracket with ID:", id);
   try {
     await dbConnect();

@@ -3,33 +3,34 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Bracket from "../../../components/Brackets";
+import NewBracket from "../../../components/NewBracket";
 
 const BracketTemplate = () => {
-  const { id } = useParams();
   const [bracket, setBracket] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchBracket = async () => {
+      setLoading(true);
       try {
-        const response = await fetch(`/api/brackets/${id}`);
+        const response = await fetch("/api/brackets/" + id);
         if (!response.ok) {
-          throw new Error("Error fetching bracket");
+          throw new Error("Failed to fetch brackets");
         }
         const data = await response.json();
         setBracket(data);
-      } catch (err) {
-        setError(err.message);
+      } catch (error) {
+        console.error("Error fetching brackets:", error);
+        setError("Failed to load brackets. Please try again later.");
       } finally {
         setLoading(false);
       }
     };
 
-    if (id) {
-      fetchBracket();
-    }
-  }, [id]);
+    fetchBracket();
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -40,27 +41,27 @@ const BracketTemplate = () => {
   }
 
   // Destructure the bracket data once it's loaded
-  const { tournamentName, format, participant } = bracket;
+  const { tournamentName, format, participant, round } = bracket;
+  console.log(bracket);
 
   return (
-    <section className="px-5 xl:px-[10%] mt-[7.6875rem]">
-      <header aria-labelledby="tournament_heading">
+    <section className="px-5 xl:px-[10%] mt-[7.6875rem] ">
+      <header aria-labelledby="tournament_heading flex flex-col gap-5">
         <h2 className="font-black text-3xl" id="tournament_heading">
           {tournamentName}
         </h2>
-        <p className="text-xl">
-          {participant.length} Teams{" "}
-          <span className="text-lg">
-            {format === "single_elimination"
-              ? "Single Elimination"
-              : format === "double_elimination"
-                ? "Double Elimination"
-                : "Invalid Format"}
-          </span>
-        </p>
+        <p className="text-xl">{participant.length} Teams </p>
+        <span className="text-xl text-gray-400">
+          {format === "single_elimination"
+            ? "Single Elimination"
+            : format === "double_elimination"
+              ? "Double Elimination"
+              : "Invalid Format"}
+        </span>
       </header>
       {/* The commented-out bracket grid is not needed for now */}
-      <Bracket id={id} />
+      {/* <Bracket id={id} /> */}
+      <NewBracket participant={participant} />
     </section>
   );
 };
