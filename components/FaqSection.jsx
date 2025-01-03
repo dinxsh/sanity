@@ -1,34 +1,48 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { FaPlus, FaMinus } from "react-icons/fa6";
+import { FaPlus, FaMinus, FaArrowUp19 } from "react-icons/fa6";
 import { motion } from "framer-motion";
+import { Button } from "./ui/button";
 
 export default function FaqSection() {
   return (
-    <motion.div
-      className="container mx-auto px-4 py-20"
-      viewport={{ once: true }}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ type: "easIn", duration: 0.5, delay: 0.6 }}
-    >
-      <div className="text-center max-w-3xl mx-auto mb-12">
-        <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-          Frequently Asked Questions
-        </h2>
-        <p className="text-muted-foreground">
-          Need help with something? Here are some of the most common questions
-          we get.
-        </p>
-      </div>
+    <>
+      <motion.div
+        className="container mx-auto px-4 py-20"
+        viewport={{ once: true }}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ type: "easIn", duration: 0.5, delay: 0.6 }}
+      >
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-muted-foreground">
+            Need help with something? Here are some of the most common questions
+            we get.
+          </p>
+        </div>
 
-      <div className="max-w-2xl mx-auto space-y-4">
-        {faqsList.map((item, idx) => (
-          <FaqsCard key={idx} idx={idx} faqsList={item} />
-        ))}
+        <div className="max-w-2xl mx-auto space-y-4">
+          {faqsList.map((item, idx) => (
+            <FaqsCard key={idx} idx={idx} faqsList={item} />
+          ))}
+        </div>
+      </motion.div>
+      <div className="flex justify-center items-center">
+        <Button
+          variant="destructive"
+          className="flex items-center bg-gray-500 text-white font-bold rounded hover:bg-gray-500/90 transition-all duration-300"
+          icon={<FaArrowUp19 />}
+          size="sm"
+          onClick={() => window.scrollTo(0, 0)}
+        >
+          Up
+        </Button>
       </div>
-    </motion.div>
+    </>
   );
 }
 
